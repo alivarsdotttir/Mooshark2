@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mooshark2", "Mooshark2\Mooshark2.csproj", "{521E18AB-62F4-488F-8022-6B0B3F3A8055}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mooshark2.Tests", "Mooshark2.Tests\Mooshark2.Tests.csproj", "{EEA6524D-3819-4667-8AAF-F8D195684882}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{521E18AB-62F4-488F-8022-6B0B3F3A8055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{521E18AB-62F4-488F-8022-6B0B3F3A8055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{521E18AB-62F4-488F-8022-6B0B3F3A8055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{521E18AB-62F4-488F-8022-6B0B3F3A8055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEA6524D-3819-4667-8AAF-F8D195684882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEA6524D-3819-4667-8AAF-F8D195684882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEA6524D-3819-4667-8AAF-F8D195684882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEA6524D-3819-4667-8AAF-F8D195684882}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
