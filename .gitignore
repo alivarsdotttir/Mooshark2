@@ -211,6 +211,9 @@ FakesAssemblies/
 # GhostDoc plugin setting file
 *.GhostDoc.xml
 
+# Microsoft Azure ApplicationInsights config file
+ApplicationInsights.config
+
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 
