@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mooshark2.Models.ViewModels;
+using Mooshark2.Services;
 
 namespace Mooshark2.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+        private CourseService courseService = new CourseService(); 
         public ActionResult Index()
         {
-            return View();
+            var viewModel = courseService.getAllCourses();
+
+            return View(viewModel);
         }
 
         public ActionResult createCourse()

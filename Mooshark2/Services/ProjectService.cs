@@ -18,11 +18,5 @@ namespace Mooshark2.Services
         }
 
 
-        public List<Course> getAllCourses()
-        {
-            var courses = (from x in db.Courses
-                           select x ).ToList(); 
-            return courses;
-        } 
     }
 }
