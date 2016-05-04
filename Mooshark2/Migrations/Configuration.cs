@@ -1,3 +1,7 @@
+using Microsoft.AspNet.Identity.EntityFramework;
+using Mooshark2.Models.DAL;
+
+
 namespace Mooshark2.Migrations
 {
     using System;
@@ -15,6 +19,17 @@ namespace Mooshark2.Migrations
         protected override void Seed(Mooshark2.Models.DAL.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
+
+            /*
+            context.Roles.AddOrUpdate(r => r.Name,
+                new IdentityRole { Name = "Admin" },
+                new IdentityRole { Name = "Teacher" },
+                new IdentityRole { Name = "Student" });
+            */
+            
+            context.Users.AddOrUpdate( new ApplicationUser { UserName = "admin", Email = "admin@admin.is", PasswordHash = "Admin.123",
+                                       EmailConfirmed  = false, PhoneNumberConfirmed  = false, TwoFactorEnabled = false, LockoutEnabled = true,
+                                       AccessFailedCount = 0});
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
