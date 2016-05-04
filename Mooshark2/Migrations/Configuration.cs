@@ -1,3 +1,6 @@
+using Mooshark2.Models.DAL;
+
+
 namespace Mooshark2.Migrations
 {
     using System;
@@ -9,7 +12,7 @@ namespace Mooshark2.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Mooshark2.Models.DAL.ApplicationDbContext context)

@@ -9,7 +9,7 @@ namespace Mooshark2.Models.DAL
     {
         protected override void Seed(ApplicationDbContext context)
         {
-          
+     
         }
     }
 }

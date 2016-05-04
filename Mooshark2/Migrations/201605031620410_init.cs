@@ -2,12 +2,13 @@ namespace Mooshark2.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
+
     public partial class init : DbMigration
     {
         public override void Up()
         {
-            CreateTable(
+            /*CreateTable(
                 "dbo.Courses",
                 c => new
                     {
@@ -28,29 +29,30 @@ namespace Mooshark2.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserID)
                 .ForeignKey("dbo.Courses", t => t.CourseID, cascadeDelete: true)
                 .Index(t => t.UserID)
-                .Index(t => t.CourseID);
-            
+                .Index(t => t.CourseID);*/
+
             CreateTable(
                 "dbo.AspNetUsers",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Email = c.String(maxLength: 256),
-                        EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(),
-                        SecurityStamp = c.String(),
-                        PhoneNumber = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
-                    })
+                c => new {
+                    Id = c.String(nullable : false, maxLength : 128),
+                    Email = c.String(maxLength : 256),
+                    EmailConfirmed = c.Boolean(nullable : false),
+                    PasswordHash = c.String(),
+                    SecurityStamp = c.String(),
+                    PhoneNumber = c.String(),
+                    PhoneNumberConfirmed = c.Boolean(nullable : false),
+                    TwoFactorEnabled = c.Boolean(nullable : false),
+                    LockoutEndDateUtc = c.DateTime(),
+                    LockoutEnabled = c.Boolean(nullable : false),
+                    AccessFailedCount = c.Int(nullable : false),
+                    UserName = c.String(nullable : false, maxLength : 256),
+                    SSN = c.String(nullable : true, maxLength : 256),
+                    FullName = c.String(nullable: true, maxLength: 256),
+                })
                 .PrimaryKey(t => t.Id)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
-            
-            CreateTable(
+                .Index(t => t.UserName, unique : true, name : "UserNameIndex");
+
+            /*CreateTable(
                 "dbo.AspNetUserClaims",
                 c => new
                     {
@@ -242,6 +244,7 @@ namespace Mooshark2.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.CourseStudents");
             DropTable("dbo.Courses");
+        }*/
         }
     }
 }
