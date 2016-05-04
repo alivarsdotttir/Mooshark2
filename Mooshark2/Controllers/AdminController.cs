@@ -13,5 +13,20 @@ namespace Mooshark2.Controllers
         {
             return View();
         }
+
+        public ActionResult createCourse()
+        {
+            return View(); 
+        }
+
+        public ActionResult createUser()
+        {
+            return View(); 
+        }
+
+        public ActionResult edit()
+        {
+            return View(); 
+        }
     }
 }
