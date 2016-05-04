@@ -3,5 +3,32 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
+<link href="~/Content/Site.css" rel="stylesheet" />
+<h2>Teacher View</h2>
+<div class="row">
+    <div class="col-md-5">
+        <section>
+            <div>
+                <table>
+                    <caption>Ungraded Assignments</caption>
+                    <thead>
+                        <tr>
+                            <th>Course</th>
+                            <th>Assignment</th>
+                            <th>Deadline</th>
+                            <th>Group</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach()
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-7">
+        <section id="socialLoginForm">
+            <p> Hello World</p>
+        </section>
+    </div>
+</div>

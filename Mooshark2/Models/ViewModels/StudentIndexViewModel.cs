@@ -4,10 +4,12 @@ using System.Linq;
 using System.Web;
 using Mooshark2.Models.Entities;
 
+
 namespace Mooshark2.Models.ViewModels
 {
-    public class AdminIndexViewModel
+    public class StudentIndexViewModel
     {
-        public List<Course> courses;
+        List<Project> upcomingProjects;
+        List<Course> coursesForStudents;
     }
 }
