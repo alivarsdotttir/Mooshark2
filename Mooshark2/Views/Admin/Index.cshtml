@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/Site.css" rel="stylesheet" />
+<h2>Admin View</h2>
+<div class="row">
+    <div class="col-md-5">
+        <section>
+            <div>
+            @Html.ActionLink("Create Course", "createCourse", "Admin", null, new { @class = "AdminButtons" })
+            </div>
+            <div>
+                @Html.ActionLink("Create User", "createUser", "Admin", null, new { @class = "AdminButtons "})
+            </div>
+            <div>
+                @Html.ActionLink("Edit", "edit", "Admin", null, new { @class = "AdminButtons" })
+            </div>
+        </section>
+    </div>
+    <div class="col-md-7">
+        <section id="socialLoginForm">
+            <p> Hello World</p>
+        </section>
+    </div>
+</div>
