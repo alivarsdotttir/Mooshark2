@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Mooshark2.Models;
+using Mooshark2.Models.DAL;
 
 namespace Mooshark2
 {

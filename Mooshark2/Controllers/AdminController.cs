@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mooshark2.Models.ViewModels;
-using Mooshark2.Services;
+using Mooshark2.Service;
 
 namespace Mooshark2.Controllers
 {
