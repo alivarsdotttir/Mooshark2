@@ -49,9 +49,9 @@ namespace Mooshark2.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "User name")]
         //[EmailAddress]
-        public string UserName { get; set; }
+        public string userName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -71,7 +71,7 @@ namespace Mooshark2.Models
 
         [Required]
         [Display(Name = "User Name")]
-        public string UserName { get; set; }
+        public string userName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
