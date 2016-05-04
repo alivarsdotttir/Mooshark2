@@ -1,7 +1,9 @@
-﻿
+﻿@model Mooshark2.Models.DAL.ApplicationUser
 @{
-    ViewBag.Title = "createUser";
+    ViewBag.Title = "Create User";
 }
 
-<h2>createUser</h2>
+@{
+    Html.RenderPartial("UserForm");
+}
 
