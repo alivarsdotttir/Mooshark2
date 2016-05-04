@@ -26,9 +26,18 @@ textarea {
 h2 {
     margin: 50px; 
 }
+
 .AdminButtons {
     background-color: #753bbd;
     color: white; 
-    padding: 20px 30px; 
-    margin: 30px;     
+    padding: 15px 30px;
+    margin: 10%;      
+}
+    
+#buttons {
+    float: left; 
+}
+
+#edit {
+    margin: 0px 0px 0px 40px; 
 }
