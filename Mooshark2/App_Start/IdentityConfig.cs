@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Mooshark2.Models;
+using Mooshark2.Models.DAL;
+
 
 namespace Mooshark2
 {
