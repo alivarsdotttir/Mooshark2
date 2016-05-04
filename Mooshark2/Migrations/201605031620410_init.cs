@@ -7,7 +7,7 @@ namespace Mooshark2.Migrations
     {
         public override void Up()
         {
-            /*CreateTable(
+            CreateTable(
                 "dbo.Courses",
                 c => new
                     {
@@ -28,7 +28,7 @@ namespace Mooshark2.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserID)
                 .ForeignKey("dbo.Courses", t => t.CourseID, cascadeDelete: true)
                 .Index(t => t.UserID)
-                .Index(t => t.CourseID);*/
+                .Index(t => t.CourseID);
             
             CreateTable(
                 "dbo.AspNetUsers",

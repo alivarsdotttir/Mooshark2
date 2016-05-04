@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+h2 {
+    margin: 50px; 
+}
+.AdminButtons {
+    background-color: #753bbd;
+    color: white; 
+    padding: 20px 30px; 
+    margin: 30px;     
+}
