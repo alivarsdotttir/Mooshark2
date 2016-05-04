@@ -44,12 +44,19 @@ namespace Mooshark2.Controllers
                 newUser.UserName = model.UserName;
                 newUser.PasswordHash = model.PasswordHash;
 
+                newUser.EmailConfirmed = false;
+                newUser.PhoneNumberConfirmed = false;
+                newUser.TwoFactorEnabled = false;
+                newUser.LockoutEnabled = true;
+                newUser.AccessFailedCount = 0;
+
                 db.Users.Add(newUser); 
+                // Kastar null exception, veit ekki af hverju. Þarf aðstoð. 
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit()
+        public ActionResult EditUser()
         {
             return View(); 
         }

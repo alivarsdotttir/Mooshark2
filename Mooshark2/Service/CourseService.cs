@@ -17,9 +17,9 @@ namespace Mooshark2.Service
         }
 
 
-        public List<Course> getAllCourses()
+        public IEnumerable<Course> getAllCourses()
         {
-            var courses = (from x in db.Courses
+            IEnumerable<Course> courses = (from x in db.Courses
                            select x).ToList();
             return courses;
         }
