@@ -11,6 +11,32 @@ namespace Mooshark2.Controllers
         // GET: Student
         public ActionResult Index()
         {
+
+
+            return View();
+        }
+
+
+        public ActionResult Course()
+        {
+            return View();
+        }
+
+
+        public ActionResult Details()
+        {
+            return View();
+        }
+
+
+        public ActionResult Submit()
+        {
+            return View();
+        }
+
+
+        public ActionResult SubmisssionDetails()
+        {
             return View();
         }
     }
