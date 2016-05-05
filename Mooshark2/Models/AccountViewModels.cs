@@ -65,6 +65,14 @@ namespace Mooshark2.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Full name")]
+        public string FullName { get; set; }
+
+        [Required]
+        [Display(Name = "SSN")]
+        public string SSN { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
