@@ -64,5 +64,22 @@ namespace Mooshark2.Services
                            select x) as IEnumerable<Course>;
             return courses;
         }
+
+        public Course getCourseById(int id)
+        {
+            Course course = (from x in db.Courses
+                             where id == x.ID
+                             select x).SingleOrDefault();
+            return course; 
+        }
+
+        public IEnumerable<ApplicationUser> getTeachersForCourse(int courseId)
+        {
+            var teachers = (from x in db.CourseTeachers
+                            join y in db.Users on x.UserID equals y.Id
+                            where x.CourseID == courseId
+                            select x) as IEnumerable<ApplicationUser>;
+            return teachers; 
+        }
     }
 }
