@@ -1,3 +1,4 @@
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Mooshark2.Models.DAL;
 using Mooshark2.Models.Entities;
@@ -32,6 +33,7 @@ namespace Mooshark2.Migrations
             //    );
             //
 
+
             /* context.Users.AddOrUpdate(new ApplicationUser
              {
                  UserName = "admin",
@@ -46,11 +48,32 @@ namespace Mooshark2.Migrations
                  SSN = "0101660169"
              });*/
 
+/*
+            context.Users.AddOrUpdate(new ApplicationUser
+
+            /*context.Users.AddOrUpdate(new ApplicationUser
+            {
+                UserName = "admin",
+                Email = "admin@admin.is",
+                PasswordHash = "A.dmin123",
+                EmailConfirmed = false,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                LockoutEnabled = true,
+                AccessFailedCount = 0,
+                FullName = "Admin Adminsson",
+                SSN = "0101660169"
+
+            });
+            });*/
+
+
             /*
             context.Courses.AddOrUpdate(new Course { Active = true, Name = "Forritun 1" } );
             context.Courses.AddOrUpdate(new Course { Active = true, Name = "Gagnaskipan" });
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Reiknirit" });
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });*/
+
 
             /* context.Users.AddOrUpdate(new ApplicationUser
              {
@@ -64,10 +87,35 @@ namespace Mooshark2.Migrations
                  AccessFailedCount = 0
              });*/
 
+/*
+            context.Users.AddOrUpdate(new ApplicationUser
+
+
+            /*context.Users.AddOrUpdate(new ApplicationUser
+
+            {
+                UserName = "admin",
+                Email = "admin@admin.is",
+                PasswordHash = "Admin.1234",
+                EmailConfirmed = false,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                LockoutEnabled = true,
+                AccessFailedCount = 0
+            });
+*/
+
+
+
+            
 
             //8e052276 - b8a1 - 4d64 - ba81 - 796da1b0122c
+
             /*context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
             
+
+            context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
+
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Stýrikerfi" });
 
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 1 });
@@ -75,9 +123,15 @@ namespace Mooshark2.Migrations
             context.Projects.AddOrUpdate(new Project { Name = "Lab 1", Deadline = DateTime.Now, Graded = true, Visibility = true, CourseID = 2 });
             context.Projects.AddOrUpdate(new Project { Name = "Lab 2", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 2 });
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 3 });
-            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });
+            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });*/
 
-        }*/
+
+        /*}
+
+            //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            //UserManager.AddToRole("55908c7a-30a8-4bcd-aad4-cb96829e7c34", "Admin");
+        }
+
 
             /*context.Users.AddOrUpdate(new ApplicationUser
                 {
@@ -93,6 +147,12 @@ namespace Mooshark2.Migrations
                     SSN = "0101660169"
                 });*/
 
+
         }
+
+
+        }
+
+
     }
-}
+

@@ -302,12 +302,11 @@
     <Content Include="Views\Adminlol\Index.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
-    <Content Include="Views\Adminlol\UserForm.cshtml" />
+    <Content Include="Views\Admin\UserForm.cshtml" />
     <Content Include="Views\Adminlol\CreateUser.cshtml" />
     <Content Include="Views\Adminlol\EditUser.cshtml" />
-    <Content Include="Views\Adminlol\CreateCourse.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\CreateCourse.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />
