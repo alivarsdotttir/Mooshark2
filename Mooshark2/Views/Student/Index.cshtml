@@ -1,7 +1,48 @@
-﻿@model Mooshark2.Models.ViewModels.StudentIndexViewModel
+﻿@using Microsoft.Ajax.Utilities
+@model Mooshark2.Models.ViewModels.StudentIndexViewModel
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
+<div id="studentUpcomingProjectsTable">
+    <table>
+        <caption>Upcoming projects</caption>
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Assignment</th>
+                <th>Deadline</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in Model.upcomingProjects)
+            {
+                <tr>
+                    <td><!--Html.DisplayNameFor(model => project.CourseName)--></td>
+                    <td>@Html.DisplayNameFor(model => project.Name)</td>
+                    <td>@Html.DisplayNameFor(model => project.Deadline)</td>
+                    <td><!--Html.DisplayNameFor(model => project.isGroupProject)--></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div id="studentCourseList">
+    <h3>Courses</h3>
+    <ul>
+        @foreach(var course in Model.coursesForStudents) {
+            <li>@Html.DisplayNameFor(model => course.Name)</li>
+        }
+    </ul>
+</div>
+
+<div id="StudentPepp">
+    <p>Welcome to MOOSHARK<br/>
+        May the odds be ever in you favour<br/>
+        If you need some extra motivation:<br/>
+    <a href="somelink">#PEPP</a></p>
+</div>
