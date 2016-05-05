@@ -4191,12 +4191,20 @@ textarea.input-group-sm > .input-group-btn > .btn {
   margin-bottom: 0;
 }
 
-.navbar-brand {
+.navbar-main {
   float: left;
   padding: 15px 15px;
   font-size: 18px;
   line-height: 20px;
 }
+
+.navbar-main img{
+    vertical-align:text-top;
+    height: 50px;
+    width: 50px;
+}
+
+
 
 .navbar-brand:hover,
 .navbar-brand:focus {
