@@ -32,19 +32,19 @@ namespace Mooshark2.Migrations
             //    );
             //
 
-            context.Users.AddOrUpdate(new ApplicationUser
-            {
-                UserName = "admin",
-                Email = "admin@admin.is",
-                PasswordHash = "A.dmin123",
-                EmailConfirmed = false,
-                PhoneNumberConfirmed = false,
-                TwoFactorEnabled = false,
-                LockoutEnabled = true,
-                AccessFailedCount = 0,
-                FullName = "Admin Adminsson",
-                SSN = "0101660169"
-            });
+            /* context.Users.AddOrUpdate(new ApplicationUser
+             {
+                 UserName = "admin",
+                 Email = "admin@admin.is",
+                 PasswordHash = "A.dmin123",
+                 EmailConfirmed = false,
+                 PhoneNumberConfirmed = false,
+                 TwoFactorEnabled = false,
+                 LockoutEnabled = true,
+                 AccessFailedCount = 0,
+                 FullName = "Admin Adminsson",
+                 SSN = "0101660169"
+             });*/
 
             /*
             context.Courses.AddOrUpdate(new Course { Active = true, Name = "Forritun 1" } );
@@ -52,21 +52,21 @@ namespace Mooshark2.Migrations
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Reiknirit" });
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });*/
 
-            context.Users.AddOrUpdate(new ApplicationUser
-            {
-                UserName = "admin",
-                Email = "admin@admin.is",
-                PasswordHash = "Admin.1234",
-                EmailConfirmed = false,
-                PhoneNumberConfirmed = false,
-                TwoFactorEnabled = false,
-                LockoutEnabled = true,
-                AccessFailedCount = 0
-            });
+            /* context.Users.AddOrUpdate(new ApplicationUser
+             {
+                 UserName = "admin",
+                 Email = "admin@admin.is",
+                 PasswordHash = "Admin.1234",
+                 EmailConfirmed = false,
+                 PhoneNumberConfirmed = false,
+                 TwoFactorEnabled = false,
+                 LockoutEnabled = true,
+                 AccessFailedCount = 0
+             });*/
 
 
             //8e052276 - b8a1 - 4d64 - ba81 - 796da1b0122c
-            context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
+            /*context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
             
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Stýrikerfi" });
 
@@ -77,21 +77,22 @@ namespace Mooshark2.Migrations
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 3 });
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });
 
+        }*/
+
+            /*context.Users.AddOrUpdate(new ApplicationUser
+                {
+                    UserName = "admin",
+                    Email = "admin@admin.is",
+                    PasswordHash = "Admin.123",
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0,
+                    FullName = "Admin Adminsson",
+                    SSN = "0101660169"
+                });*/
+
         }
-
-        /*context.Users.AddOrUpdate(new ApplicationUser
-            {
-                UserName = "admin",
-                Email = "admin@admin.is",
-                PasswordHash = "Admin.123",
-                EmailConfirmed = false,
-                PhoneNumberConfirmed = false,
-                TwoFactorEnabled = false,
-                LockoutEnabled = false,
-                AccessFailedCount = 0,
-                FullName = "Admin Adminsson",
-                SSN = "0101660169"
-            });*/
-
     }
 }
