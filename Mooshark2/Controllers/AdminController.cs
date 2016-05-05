@@ -52,11 +52,12 @@ namespace Mooshark2.Controllers
                 {
                     //villa, fail 0 or 1
                 }*/
+                
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit()
+        public ActionResult EditUser()
         {
             return View();
         }

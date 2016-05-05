@@ -11,8 +11,8 @@ namespace Mooshark2.Controllers
 {
     public class StudentController : Controller
     {
-        //private ApplicationDbContext db;
-        //private CourseService courseService = new CourseService();
+        private ApplicationDbContext db;
+        private CourseService courseService = new CourseService();
         // GET: Student
         public ActionResult Index()
         {

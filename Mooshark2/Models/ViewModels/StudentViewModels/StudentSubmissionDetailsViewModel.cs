@@ -7,7 +7,7 @@ using Mooshark2.Models.Entities;
 
 namespace Mooshark2.Models.ViewModels
 {
-    public class StudentSubmissionDetails
+    public class StudentSubmissionDetailsViewModel
     {
         Project currentProject;
         Submission currentSubmission;

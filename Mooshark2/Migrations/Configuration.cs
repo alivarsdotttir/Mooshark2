@@ -22,6 +22,20 @@ namespace Mooshark2.Migrations
         {
             //  This method will be called after migrating to the latest version.
 
+<<<<<<< HEAD
+=======
+            /*
+            context.Roles.AddOrUpdate(r => r.Name,
+                new IdentityRole { Name = "Admin" },
+                new IdentityRole { Name = "Teacher" },
+                new IdentityRole { Name = "Student" });
+            */
+            
+            context.Users.AddOrUpdate( new ApplicationUser { UserName = "admin", Email = "admin@admin.is", PasswordHash = "Admin.123",
+                                       EmailConfirmed  = false, PhoneNumberConfirmed  = false, TwoFactorEnabled = false, LockoutEnabled = false,
+                                       AccessFailedCount = 0});
+
+>>>>>>> adbd9e9f18c7046fcfde1cd6becb760c8c8f8212
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
