@@ -19,10 +19,21 @@ namespace Mooshark2.Services
             db = new ApplicationDbContext();
         }
 
-        public IEnumerable<Project> getUpcomingProjects(string studentID)
+        public IEnumerable<Project> getUpcomingProjects(IEnumerable<Course> studentCourses)
         {
-
-            return null;
+            if (!studentCourses.Any())
+            {
+                IEnumerable<Project> upcomingProjects = null;
+                foreach (Course course in studentCourses)
+                {
+                    upcomingProjects = upcomingProjects.Concat(from x in db.Projects
+                                                               where x.CourseID == course.ID && DateTime.Now < x.Deadline
+                                                               select x) as IEnumerable<Project>;
+                }
+                return upcomingProjects;
+            }
+            else
+                return null; 
         }
     }
 }

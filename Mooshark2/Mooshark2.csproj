@@ -304,13 +304,13 @@
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\Admin\UserForm.cshtml" />
     <Content Include="Views\Admin\CreateUser.cshtml" />
-    <Content Include="Views\Admin\CreateCourse.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Courses\Delete.cshtml" />
     <Content Include="Views\Courses\Details.cshtml" />
     <Content Include="Views\Courses\Edit.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\RedirectToAction\CreateCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

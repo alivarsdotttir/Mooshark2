@@ -7,7 +7,7 @@ using Mooshark2.Models.DAL;
 using Mooshark2.Services;
 using Microsoft.AspNet.Identity;
 using Mooshark2.Services;
-
+using Mooshark2.Models.ViewModels; 
 
 namespace Mooshark2.Controllers
 {
@@ -20,8 +20,11 @@ namespace Mooshark2.Controllers
         {
             string userId = User.Identity.GetUserId();
             var studentCourses = courseService.getCoursesForStudent(userId);
-            //var projectsToTurnIn = courseService.getUpcomingProjects(userId); 
-            return View();
+            var upcomingProjects = projectService.getUpcomingProjects(studentCourses);
+
+            StudentIndexViewModel model = new StudentIndexViewModel(upcomingProjects, studentCourses); 
+             
+            return View(model);
         }
 
 
