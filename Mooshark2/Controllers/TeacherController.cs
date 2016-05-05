@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Mooshark2.Service;
+using Mooshark2.Services;
 using Mooshark2.Models.DAL;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
@@ -20,7 +20,7 @@ namespace Mooshark2.Controllers
         {
             var userId =User.Identity.GetUserId();
             var viewModel = courseService.getCoursesForTeacher(userId);
-            return View();
+            return View(viewModel);
         }
 
         public ActionResult Course()

@@ -6,7 +6,7 @@ using Mooshark2.Models.DAL;
 using Mooshark2.Models.Entities;
 
 
-namespace Mooshark2.Service
+namespace Mooshark2.Services
 {
     public class CourseService
     {

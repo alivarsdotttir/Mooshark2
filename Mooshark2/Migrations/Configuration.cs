@@ -51,7 +51,31 @@ namespace Mooshark2.Migrations
 
 
             //8e052276 - b8a1 - 4d64 - ba81 - 796da1b0122c
+            context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
+            context.Courses.AddOrUpdate(new Course { Active = false, Name = "Stýrikerfi" });
+
+            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 1 });
+            context.Projects.AddOrUpdate(new Project { Name = "Project 2", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 1 });
+            context.Projects.AddOrUpdate(new Project { Name = "Lab 1", Deadline = DateTime.Now, Graded = true, Visibility = true, CourseID = 2 });
+            context.Projects.AddOrUpdate(new Project { Name = "Lab 2", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 2 });
+            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 3 });
+            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });
+
         }
+
+        /*context.Users.AddOrUpdate(new ApplicationUser
+            {
+                UserName = "admin",
+                Email = "admin@admin.is",
+                PasswordHash = "Admin.123",
+                EmailConfirmed = false,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                LockoutEnabled = false,
+                AccessFailedCount = 0,
+                FullName = "Admin Adminsson",
+                SSN = "0101660169"
+            });*/
 
     }
 }
