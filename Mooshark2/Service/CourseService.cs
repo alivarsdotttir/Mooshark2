@@ -26,7 +26,6 @@ namespace Mooshark2.Service
         //public List<Course> GetAllCourses()
 
         public IEnumerable<Course> GetAllCourses()
-        public IEnumerable<Course> getAllCourses()
 
 
         {
@@ -46,6 +45,8 @@ namespace Mooshark2.Service
             else {
                 return false;
             }
+        }
+
 
         public IEnumerable<Course> getCoursesForStudent(string studentID)
         {
