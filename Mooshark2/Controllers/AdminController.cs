@@ -8,7 +8,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Mooshark2.Models.DAL;
 using Mooshark2.Models.Entities;
 using Mooshark2.Models.ViewModels;
-using Mooshark2.Service;
+using Mooshark2.Services;
 
 namespace Mooshark2.Controllers
 {
