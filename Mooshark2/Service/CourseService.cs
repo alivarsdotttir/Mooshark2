@@ -16,14 +16,24 @@ namespace Mooshark2.Service
             db = new ApplicationDbContext();
         }
 
+
         public object ApplicationUser { get; private set; }
 
-        public List<Course> getAllCourses()
+        //public List<Course> getAllCourses()
+
+        //public IEnumerable<Course> getAllCourses()
+
+        //public List<Course> GetAllCourses()
+
+        public IEnumerable<Course> getAllCourses()
+
+
         {
-            var courses = (from x in db.Courses
+            IEnumerable<Course> courses = (from x in db.Courses
                            select x).ToList();
             return courses;
         }
+
 
         public IEnumerable<Course> getCoursesForTeacher(ApplicationUser Teacher)
         {
@@ -33,5 +43,6 @@ namespace Mooshark2.Service
                            select x) as IEnumerable<Course>;
             return courses;
         }
+
     }
 }

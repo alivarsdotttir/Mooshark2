@@ -28,6 +28,7 @@ namespace Mooshark2.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
+
         }
 
         public ApplicationSignInManager SignInManager
@@ -153,7 +154,7 @@ namespace Mooshark2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.userName, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.userName, Email = model.Email, SSN = model.SSN, FullName = model.FullName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -484,4 +485,6 @@ namespace Mooshark2.Controllers
         }
         #endregion
     }
+
+   
 }
