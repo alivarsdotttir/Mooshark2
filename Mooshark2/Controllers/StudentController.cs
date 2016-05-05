@@ -62,19 +62,30 @@ namespace Mooshark2.Controllers
                 StudentDetailsViewModel model = new StudentDetailsViewModel(project, subprojects, submissions);
                 return View(model); 
             }
-            //returns an error message, ID invalid
+            //returns an error message, ID invalid, no project chosen
             return View();
         }
 
 
-        public ActionResult Submit()
+        public ActionResult Submit(int? id)
         {
+            if(id != null)
+            {
+                var subproject = projectService.getSubprojectById(id.Value);
+                return View(subproject); 
+            }
+            //error message, no subproject chosen, ID is invalid
             return View();
         }
 
 
-        public ActionResult SubmisssionDetails()
+        public ActionResult SubmisssionDetails(int? id)
         {
+            if(id != null)
+            {
+                var submission = projectService.getSubmissionById(id.Value);
+                return View(submission); 
+            }
             return View();
         }
     }

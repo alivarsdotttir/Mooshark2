@@ -28,6 +28,7 @@ namespace Mooshark2.Services
                 {
                     upcomingProjects = upcomingProjects.Concat(from x in db.Projects
                                                                where x.CourseID == course.ID && DateTime.Now < x.Deadline && x.Visibility == true
+                                                               orderby x.Deadline ascending
                                                                select x) as IEnumerable<Project>;
                 }
                 return upcomingProjects;
@@ -66,6 +67,23 @@ namespace Mooshark2.Services
                                                    where subprojectID == x.SubprojectID
                                                    select x) as IEnumerable<Submission>;
             return submissions; 
+        }
+
+        public Subproject getSubprojectById(int subprojectID)
+        {
+            Subproject subproject = (from x in db.Subprojects
+                                     where subprojectID == x.ID
+                                     select x).SingleOrDefault();
+
+            return subproject;
+        }
+
+        public Submission getSubmissionById(int submissionID)
+        {
+            Submission submission = (from x in db.Submissions
+                                     where submissionID == x.ID
+                                     select x).SingleOrDefault();
+            return submission; 
         }
     }
 }
