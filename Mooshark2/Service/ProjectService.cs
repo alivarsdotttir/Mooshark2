@@ -18,5 +18,11 @@ namespace Mooshark2.Services
         {
             db = new ApplicationDbContext();
         }
+
+        public IEnumerable<Project> getUpcomingProjects(string studentID)
+        {
+
+            return null;
+        }
     }
 }
