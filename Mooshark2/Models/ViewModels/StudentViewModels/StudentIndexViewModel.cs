@@ -9,8 +9,8 @@ namespace Mooshark2.Models.ViewModels
 {
     public class StudentIndexViewModel
     {
-        private IEnumerable<Project> upcomingProjects;
-        private IEnumerable<Course> coursesForStudents;
+        public IEnumerable<Project> upcomingProjects;
+        public IEnumerable<Course> coursesForStudents;
 
         public StudentIndexViewModel(IEnumerable<Project> p, IEnumerable<Course> c)
         {

@@ -224,6 +224,7 @@
     <Compile Include="Models\ViewModels\StudentViewModels\StudentDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentViewModels\StudentIndexViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentViewModels\StudentSubmissionDetailsViewModel.cs" />
+    <Compile Include="Models\ViewModels\TeacherViewModels\TeacherCourseVieweModel.cs" />
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherDetailsViewmodel.cs" />
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherGradeStudentViewmodel.cs" />
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherIndexViewmodel.cs" />
@@ -306,7 +307,15 @@
     <Content Include="Views\Adminlol\CreateUser.cshtml" />
     <Content Include="Views\Adminlol\EditUser.cshtml" />
     <Content Include="Views\Admin\CreateCourse.cshtml" />
+    <Content Include="Views\Courses\Create.cshtml" />
+    <Content Include="Views\Courses\Delete.cshtml" />
+    <Content Include="Views\Courses\Details.cshtml" />
+    <Content Include="Views\Courses\Edit.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Student\Course.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Student\Submit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />
