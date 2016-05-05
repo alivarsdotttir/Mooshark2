@@ -26,9 +26,17 @@ namespace Mooshark2.Service
 
         {
             IEnumerable<Course> courses = (from x in db.Courses
-                           select x).ToList();
+                                            select x).ToList();
             return courses;
         }
 
+        public IEnumerable<Course> getCoursesForStudent(string studentID)
+        {
+            var courses = (from x in db.CourseStudents
+                           join y in db.Courses on x.CourseID equals y.ID
+                           where studentID == x.UserID
+                           select x) as IEnumerable<Course>;
+            return courses; 
+        }
     }
 }

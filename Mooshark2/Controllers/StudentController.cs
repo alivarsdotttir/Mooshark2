@@ -5,18 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using Mooshark2.Models.DAL;
 using Mooshark2.Service;
-
+using Microsoft.AspNet.Identity;
 
 namespace Mooshark2.Controllers
 {
     public class StudentController : Controller
     {
-        private ApplicationDbContext db;
         private CourseService courseService = new CourseService();
-        // GET: Student
+        //private ProjectService 
+        
         public ActionResult Index()
         {
-
+            string userId = User.Identity.GetUserId();
+            var studentCourses = courseService.getCoursesForStudent(userId);
+            //var projectsToTurnIn = courseService.getUpcomingProjects(userId); 
             return View();
         }
 
