@@ -26,7 +26,7 @@ namespace Mooshark2.Controllers
         [HttpGet]
         public ActionResult CreateCourse()
         {
-            return View("CreateCourse"); 
+            return View(); 
         }
 
         [HttpPost]
