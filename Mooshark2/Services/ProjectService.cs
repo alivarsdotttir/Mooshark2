@@ -69,6 +69,7 @@ namespace Mooshark2.Services
             return submissions; 
         }
 
+
         public Subproject getSubprojectById(int subprojectID)
         {
             Subproject subproject = (from x in db.Subprojects
@@ -83,7 +84,25 @@ namespace Mooshark2.Services
             Submission submission = (from x in db.Submissions
                                      where submissionID == x.ID
                                      select x).SingleOrDefault();
-            return submission; 
+            return submission;
+        }
+
+
+        public IEnumerable<Project> getUngradedProjects(string teacherID)
+        {
+            IEnumerable<Project> ungradedProjects = (from x in db.Projects
+                                                  join y in db.CourseTeachers on x.CourseID equals y.CourseID
+                                                  where y.UserID == teacherID && x.Graded == false
+                                                  select x) as IEnumerable<Project>;
+            return ungradedProjects;
+        }
+
+        public IEnumerable<Project> getProjectsFromCourse(int courseID)
+        {
+            IEnumerable<Project> projectsFromCourse = (from x in db.Projects
+                                                        where x.CourseID == courseID
+                                                        select x) as IEnumerable<Project>;
+            return projectsFromCourse;
         }
     }
 }
