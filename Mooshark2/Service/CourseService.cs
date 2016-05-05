@@ -35,11 +35,11 @@ namespace Mooshark2.Service
         }
 
 
-        public IEnumerable<Course> getCoursesForTeacher(ApplicationUser Teacher)
+        public IEnumerable<Course> getCoursesForTeacher(string teacherID)
         {
             var courses = (from x in db.CourseTeachers
                            join y in db.Courses on x.CourseID equals y.ID
-                           where x.UserID == Teacher.Id
+                           where x.UserID == teacherID
                            select x) as IEnumerable<Course>;
             return courses;
         }

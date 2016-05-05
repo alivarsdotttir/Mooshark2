@@ -18,8 +18,8 @@ namespace Mooshark2.Controllers
         // GET: Teacher
         public ActionResult Index()
         {
-            /*var Id = Membership.FindUsersByName(User.Identity.GetUserId());
-            var viewModel = courseService.getCoursesForTeacher();*/
+            var userId =User.Identity.GetUserId();
+            var viewModel = courseService.getCoursesForTeacher(userId);
             return View();
         }
 
