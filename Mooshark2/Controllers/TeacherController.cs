@@ -14,13 +14,16 @@ namespace Mooshark2.Controllers
     {
         private ApplicationDbContext db;
         private CourseService courseService = new CourseService();
+        private ProjectService projectService = new ProjectService();
         
         // GET: Teacher
         public ActionResult Index()
         {
-            var userId =User.Identity.GetUserId();
-            var viewModel = courseService.getCoursesForTeacher(userId);
-            return View(viewModel);
+            string userId =User.Identity.GetUserId();
+            var ungradedProjects = projectService.getUngradedProjects(userId);
+            var teacherCourses = courseService.getCoursesForTeacher(userId);
+            
+            return View();
         }
 
         public ActionResult Course()

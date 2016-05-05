@@ -67,5 +67,14 @@ namespace Mooshark2.Services
                                                    select x) as IEnumerable<Submission>;
             return submissions; 
         }
+
+        public IEnumerable<Project> getUngradedProjects(string teacherID)
+        {
+            IEnumerable<Project> ungradedProjects = (from x in db.Projects
+                                                  join y in db.CourseTeachers on x.CourseID equals y.CourseID
+                                                  where y.UserID == teacherID && x.Graded == false
+                                                  select x) as IEnumerable<Project>;
+            return ungradedProjects;
+        }
     }
 }
