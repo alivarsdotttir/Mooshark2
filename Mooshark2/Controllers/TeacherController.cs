@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Mooshark2.Service;
 using Mooshark2.Models.DAL;
+using System.Web.Security;
+using Microsoft.AspNet.Identity;
 
 namespace Mooshark2.Controllers
 {
@@ -12,9 +14,12 @@ namespace Mooshark2.Controllers
     {
         private ApplicationDbContext db;
         private CourseService courseService = new CourseService();
+        
         // GET: Teacher
         public ActionResult Index()
         {
+            /*var Id = Membership.FindUsersByName(User.Identity.GetUserId());
+            var viewModel = courseService.getCoursesForTeacher();*/
             return View();
         }
 
