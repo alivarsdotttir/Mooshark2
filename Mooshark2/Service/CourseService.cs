@@ -16,10 +16,14 @@ namespace Mooshark2.Service
             db = new ApplicationDbContext();
         }
 
+        //public List<Course> getAllCourses()
+
+        //public IEnumerable<Course> getAllCourses()
 
         //public List<Course> GetAllCourses()
 
-        public IEnumerable<Course> GetAllCourses()
+        public IEnumerable<Course> getAllCourses()
+
         {
             IEnumerable<Course> courses = (from x in db.Courses
                            select x).ToList();
