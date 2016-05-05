@@ -67,7 +67,7 @@ namespace Mooshark2.Migrations
 
             //8e052276 - b8a1 - 4d64 - ba81 - 796da1b0122c
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
-            */
+            
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Stýrikerfi" });
 
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 1 });
