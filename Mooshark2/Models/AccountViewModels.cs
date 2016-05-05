@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
 
 namespace Mooshark2.Models
 {
@@ -78,7 +80,7 @@ namespace Mooshark2.Models
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "User Name")]
+        [Display(Name = "User name")]
         public string userName { get; set; }
 
         [Required]
@@ -89,9 +91,13 @@ namespace Mooshark2.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-    }
+
+        [Required]
+        [Display(Name = "User role")]
+        public string Role { get; set; }
+    } 
 
     public class ResetPasswordViewModel
     {
@@ -108,7 +114,7 @@ namespace Mooshark2.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
