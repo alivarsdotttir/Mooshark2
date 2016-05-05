@@ -10,7 +10,15 @@ namespace Mooshark2.Models.ViewModels
 {
     public class StudentCourseViewModel
     {
-        List<Project> projectsForCourse;
-        List<ApplicationUser> teacherForCourse;
+        Course course; 
+        IEnumerable<Project> projectsForCourse;
+        IEnumerable<ApplicationUser> teacherForCourse;
+
+        public StudentCourseViewModel(Course c, IEnumerable<Project> p, IEnumerable<ApplicationUser> t) 
+        {
+            course = c;
+            projectsForCourse = p;
+            teacherForCourse = t; 
+        }
     }
 }

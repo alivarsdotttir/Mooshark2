@@ -27,13 +27,45 @@ namespace Mooshark2.Services
                 foreach (Course course in studentCourses)
                 {
                     upcomingProjects = upcomingProjects.Concat(from x in db.Projects
-                                                               where x.CourseID == course.ID && DateTime.Now < x.Deadline
+                                                               where x.CourseID == course.ID && DateTime.Now < x.Deadline && x.Visibility == true
                                                                select x) as IEnumerable<Project>;
                 }
                 return upcomingProjects;
             }
             else
                 return null; 
+        }
+
+        public IEnumerable<Project> getProjectsForCourse(int courseID)
+        {
+            IEnumerable<Project> projects = (from x in db.Projects
+                                             where x.CourseID == courseID && x.Visibility == true && DateTime.Now < x.Deadline
+                                             select x) as IEnumerable<Project>;
+            return projects; 
+        }
+
+        public Project getProjectById(int projectID)
+        {
+            Project project = (from x in db.Projects
+                               where projectID == x.ID
+                               select x).SingleOrDefault(); 
+            return project; 
+        }
+
+        public IEnumerable<Subproject> getSubprojects(int projectID)
+        {
+            IEnumerable<Subproject> subprojects = (from x in db.Subprojects
+                                                   where projectID == x.ProjectID
+                                                   select x) as IEnumerable<Subproject>;
+            return subprojects; 
+        }
+
+        public IEnumerable<Submission> getSubmissions(int subprojectID)
+        {
+            IEnumerable<Submission> submissions = (from x in db.Submissions
+                                                   where subprojectID == x.SubprojectID
+                                                   select x) as IEnumerable<Submission>;
+            return submissions; 
         }
     }
 }

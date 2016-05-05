@@ -7,7 +7,8 @@ using Mooshark2.Models.DAL;
 using Mooshark2.Services;
 using Microsoft.AspNet.Identity;
 using Mooshark2.Services;
-using Mooshark2.Models.ViewModels; 
+using Mooshark2.Models.ViewModels;
+using Mooshark2.Models.Entities;
 
 namespace Mooshark2.Controllers
 {
@@ -28,14 +29,40 @@ namespace Mooshark2.Controllers
         }
 
 
-        public ActionResult Course()
+        public ActionResult Course(int? id)
         {
+            if(id != null)
+            {
+                var course = courseService.getCourseById(id.Value); 
+                var projects = projectService.getProjectsForCourse(id.Value);
+                var teachers = courseService.getTeachersForCourse(id.Value);
+
+                StudentCourseViewModel model = new StudentCourseViewModel(course, projects, teachers);
+
+                return View(model); 
+            }
+            //Returns an error message, ID invalid 
             return View();
         }
 
 
-        public ActionResult Details()
+        public ActionResult Details(int? id)
         {
+            if(id != null)
+            {
+                var project = projectService.getProjectById(id.Value);
+                var subprojects = projectService.getSubprojects(id.Value);
+
+                IEnumerable<Submission> submissions = null; 
+                foreach(Subproject sub in subprojects)
+                {
+                    submissions = submissions.Concat(projectService.getSubmissions(sub.ID)); 
+                }
+
+                StudentDetailsViewModel model = new StudentDetailsViewModel(project, subprojects, submissions);
+                return View(model); 
+            }
+            //returns an error message, ID invalid
             return View();
         }
 
