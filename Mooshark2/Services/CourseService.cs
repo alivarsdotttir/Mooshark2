@@ -26,8 +26,6 @@ namespace Mooshark2.Services
         //public List<Course> GetAllCourses()
 
         public IEnumerable<Course> GetAllCourses()
-
-
         {
             IEnumerable<Course> courses = (from x in db.Courses
                                             select x).ToList();
