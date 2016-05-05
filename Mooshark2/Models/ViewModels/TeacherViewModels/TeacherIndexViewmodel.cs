@@ -8,7 +8,13 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
 {
     public class TeacherIndexViewmodel
     {
-        List<Project> ungradedProjects;
-        List<Course> coursesForTeacher;
+        IEnumerable<Project> ungradedProjects;
+        IEnumerable<Course> coursesForTeacher;
+
+        public TeacherIndexViewmodel(IEnumerable<Project>u, IEnumerable<Course>c)
+        {
+            ungradedProjects = u;
+            coursesForTeacher = c;
+        }  
     }
 }
