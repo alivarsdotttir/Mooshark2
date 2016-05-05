@@ -1,2 +1,38 @@
 ﻿@model Mooshark2.Models.ViewModels.StudentCourseViewModel
 
+<div id="studentCourseProjectsTable">
+    <table>
+        <caption>Upcoming projects</caption>
+        <thead>
+        <tr>
+            <th>Course</th>
+            <th>Assignment</th>
+            <th>Deadline</th>
+            <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach(var project in Model.projectsForCourse) {
+            <tr>
+                <td>@Html.DisplayNameFor(model => Model.course)</td>
+                <td>@Html.DisplayNameFor(model => project.Name)</td>
+                <td>@Html.DisplayNameFor(model => project.Deadline)</td>
+                <td><!--Html.DisplayNameFor(model => project.isGroupProject)--></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+<div id="studentCourseTeacherList">
+    <h3>Teacher</h3>
+    <ul>
+        @foreach(var course in Model.teacherForCourse) {
+            <li>@Html.DisplayNameFor(model => course.FullName)</li>
+        }
+    </ul>
+</div>
+
+<div id="backToMainButton">
+    @Html.ActionLink("Back to Main", "Index")
+</div>
