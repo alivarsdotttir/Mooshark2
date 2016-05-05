@@ -45,6 +45,7 @@ namespace Mooshark2.Controllers
 
         public ActionResult CreateProject()
         {
+
             return View();
         }
 
@@ -53,8 +54,14 @@ namespace Mooshark2.Controllers
             return View();
         }
 
-        public ActionResult ProjectDetails()
+        public ActionResult ProjectDetails(int? id)
         {
+            if(id != null)
+            {
+
+                return View();
+            }
+            //Returns an error message, ID invalid 
             return View();
         }
 
