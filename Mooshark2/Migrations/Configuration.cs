@@ -32,7 +32,22 @@ namespace Mooshark2.Migrations
             //    );
             //
 
-            /*context.Courses.AddOrUpdate(new Course { Active = true, Name = "Forritun 1" } );
+            context.Users.AddOrUpdate(new ApplicationUser
+            {
+                UserName = "admin",
+                Email = "admin@admin.is",
+                PasswordHash = "A.dmin123",
+                EmailConfirmed = false,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                LockoutEnabled = true,
+                AccessFailedCount = 0,
+                FullName = "Admin Adminsson",
+                SSN = "0101660169"
+            });
+
+            /*
+            context.Courses.AddOrUpdate(new Course { Active = true, Name = "Forritun 1" } );
             context.Courses.AddOrUpdate(new Course { Active = true, Name = "Gagnaskipan" });
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Reiknirit" });
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });*/
@@ -52,6 +67,7 @@ namespace Mooshark2.Migrations
 
             //8e052276 - b8a1 - 4d64 - ba81 - 796da1b0122c
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
+            */
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Stýrikerfi" });
 
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 1 });
