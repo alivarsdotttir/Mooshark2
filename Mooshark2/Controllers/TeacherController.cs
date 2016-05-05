@@ -20,7 +20,7 @@ namespace Mooshark2.Controllers
         {
             var userId =User.Identity.GetUserId();
             var viewModel = courseService.getCoursesForTeacher(userId);
-            return View();
+            return View(viewModel);
         }
 
         public ActionResult Course()

@@ -40,5 +40,19 @@ namespace Mooshark2.Migrations
 
         }
 
+        /*context.Users.AddOrUpdate(new ApplicationUser
+            {
+                UserName = "admin",
+                Email = "admin@admin.is",
+                PasswordHash = "Admin.123",
+                EmailConfirmed = false,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                LockoutEnabled = false,
+                AccessFailedCount = 0,
+                FullName = "Admin Adminsson",
+                SSN = "0101660169"
+            });*/
+
     }
 }
