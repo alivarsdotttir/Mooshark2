@@ -12,54 +12,61 @@ using Mooshark2.Service;
 
 namespace Mooshark2.Controllers
 {
-    public class AdminController : BaseController
+    public class AdminController : Controller
     {
-
+        private ApplicationDbContext db; 
+        private CourseService courseService = new CourseService(); 
         public ActionResult Index()
         {
-            var viewModel = courseService.GetAllCourses();
+            var viewModel = courseService.getAllCourses();
 
             return View(viewModel);
         }
 
+        [HttpGet]
         public ActionResult CreateCourse()
+        {
+            return View(); 
+        }
+
+        [HttpPost]
+        public ActionResult CreateCourse(Course course)
         {
             return View();
         }
 
+        [HttpGet]
         public ActionResult CreateUser()
         {
             ApplicationUser model = new ApplicationUser();
-            return View(model);
+            return View(model); 
         }
-
 
         [HttpPost]
         public ActionResult CreateUser(ApplicationUser model)
         {
-            if (ModelState.IsValid)
-            {
-                //ApplicationUser newUser = new ApplicationUser();
+            if(ModelState.IsValid) {
+                ApplicationUser newUser = new ApplicationUser();
 
-                /*newUser.Email = model.Email;
+                newUser.Email = model.Email;
                 newUser.UserName = model.UserName;
-                newUser.PasswordHash = model.PasswordHash;*/
+                newUser.PasswordHash = model.PasswordHash;
 
-                db.Users.Add(model);
-                var success = db.SaveChanges();
+                newUser.EmailConfirmed = false;
+                newUser.PhoneNumberConfirmed = false;
+                newUser.TwoFactorEnabled = false;
+                newUser.LockoutEnabled = true;
+                newUser.AccessFailedCount = 0;
 
-                /*if (success == fail)
-                {
-                    //villa, fail 0 or 1
-                }*/
-                
+                db.Users.Add(newUser); 
+                // Kastar null exception, veit ekki af hverju. Þarf aðstoð. 
             }
             return RedirectToAction("Index");
         }
 
         public ActionResult EditUser()
         {
-            return View();
+            return View(); 
         }
     }
 }
