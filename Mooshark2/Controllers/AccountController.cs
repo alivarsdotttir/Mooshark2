@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -6,16 +7,18 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Mooshark2.Models;
 using Mooshark2.Models.DAL;
+using Mooshark2.Services;
 
 
 namespace Mooshark2.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -137,12 +140,16 @@ namespace Mooshark2.Controllers
             }
         }
 
-        //
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //                                                                       REGISTER FOR ADMIN
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------------
         // GET: /Account/Register
         //[Authorize(Roles = "Administrators")]
         [AllowAnonymous]
         public ActionResult Register()
         {
+            var roles = userService.GetRoleList();
+            ViewBag.Roles = roles;
             return View();
         }
 
@@ -157,10 +164,18 @@ namespace Mooshark2.Controllers
             {
                 var user = new ApplicationUser { UserName = model.userName, Email = model.Email, SSN = model.SSN, FullName = model.FullName };
                 var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                //userManager.AddToRole(user.Id, model.Role);
+
+
+
+                if(result.Succeeded) {
+
+                    UserManager.AddToRole(user.Id, model.Role);
+
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -169,8 +184,12 @@ namespace Mooshark2.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+                else {
+                    ViewBag.Roles = userService.GetRoleList();
+                }
                 AddErrors(result);
             }
+
 
             // If we got this far, something failed, redisplay form
             return View(model);
