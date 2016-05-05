@@ -32,7 +32,7 @@ namespace Mooshark2.Migrations
             //    );
             //
 
-           context.Roles.AddOrUpdate(r => r.Name,
+          context.Roles.AddOrUpdate(r => r.Name,
                 new IdentityRole { Name = "Admin" },
                 new IdentityRole { Name = "Teacher" },
                 new IdentityRole { Name = "Student" });
@@ -52,8 +52,8 @@ namespace Mooshark2.Migrations
                 SSN = "0101660169"
             });
 
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            UserManager.AddToRole("df807f84-f401-43fc-b7ff-5b8c03fdfd3c", "Admin");
+            /*var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            UserManager.AddToRole("df807f84-f401-43fc-b7ff-5b8c03fdfd3c", "Admin");*/
 
         }
     }
