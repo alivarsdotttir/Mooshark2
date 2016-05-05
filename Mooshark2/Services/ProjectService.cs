@@ -11,7 +11,7 @@ namespace Mooshark2.Services
 {
     public class ProjectService
     {
-        private ApplicationDbContext db;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
 
         public ProjectService()
