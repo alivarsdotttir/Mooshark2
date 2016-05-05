@@ -139,6 +139,7 @@ namespace Mooshark2.Controllers
 
         //
         // GET: /Account/Register
+        //[Authorize(Roles = "Administrators")]
         [AllowAnonymous]
         public ActionResult Register()
         {
