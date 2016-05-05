@@ -12,7 +12,7 @@ using Mooshark2.Services;
 
 namespace Mooshark2.Controllers
 {
-    public class RedirectToAction :  BaseController
+    public class AdminController :  BaseController
     {
         //private ApplicationDbContext db; 
         private CourseService courseService = new CourseService(); 
@@ -26,7 +26,8 @@ namespace Mooshark2.Controllers
         [HttpGet]
         public ActionResult CreateCourse()
         {
-            return View("CreateCourse"); 
+            var model = new Course();
+            return View(model); 
         }
 
         [HttpPost]
@@ -39,7 +40,7 @@ namespace Mooshark2.Controllers
                 return View(course);
             }
         }
-
+/*
         [HttpGet]
         public ActionResult CreateUser()
         {
@@ -68,7 +69,7 @@ namespace Mooshark2.Controllers
             }
             return RedirectToAction("Index");
         }
-
+*/
         public ActionResult EditUser()
         {
             return View(); 
