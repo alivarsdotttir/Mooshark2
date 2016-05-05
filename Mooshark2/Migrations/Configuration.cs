@@ -1,10 +1,10 @@
-using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Mooshark2.Models.DAL;
+using Mooshark2.Models.Entities;
 
 
 namespace Mooshark2.Migrations
 {
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -20,7 +20,7 @@ namespace Mooshark2.Migrations
 
         protected override void Seed(Mooshark2.Models.DAL.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            //  This method will be called after migrating to the latest version
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
@@ -32,29 +32,13 @@ namespace Mooshark2.Migrations
             //    );
             //
 
-          /*context.Roles.AddOrUpdate(r => r.Name,
-                new IdentityRole { Name = "Admin" },
-                new IdentityRole { Name = "Teacher" },
-                new IdentityRole { Name = "Student" });
+            context.Courses.AddOrUpdate(new Course { Active = true, Name = "Forritun 1" } );
+            context.Courses.AddOrUpdate(new Course { Active = true, Name = "Gagnaskipan" });
+            context.Courses.AddOrUpdate(new Course { Active = false, Name = "Reiknirit" });
+            context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
 
-
-            context.Users.AddOrUpdate(new ApplicationUser
-            {
-                UserName = "admin",
-                Email = "admin@admin.is",
-                PasswordHash = "Admin.123",
-                EmailConfirmed = false,
-                PhoneNumberConfirmed = false,
-                TwoFactorEnabled = false,
-                LockoutEnabled = false,
-                AccessFailedCount = 0,
-                FullName = "Admin Adminsson",
-                SSN = "0101660169"
-            });*/
-
-            /*var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            UserManager.AddToRole("df807f84-f401-43fc-b7ff-5b8c03fdfd3c", "Admin");*/
 
         }
+
     }
 }

@@ -22,13 +22,24 @@ namespace Mooshark2.Service
 
         //public List<Course> GetAllCourses()
 
-        public IEnumerable<Course> getAllCourses()
-
+        public IEnumerable<Course> GetAllCourses()
         {
             IEnumerable<Course> courses = (from x in db.Courses
                            select x).ToList();
             return courses;
         }
 
+
+        public bool ServiceCreateCourse(Course course)
+        {
+            if(db.Courses.Any(x => x.Name != course.Name)) {
+                db.Courses.Add(course);
+                db.SaveChanges();
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
 }

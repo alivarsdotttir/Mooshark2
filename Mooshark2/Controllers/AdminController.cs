@@ -12,13 +12,13 @@ using Mooshark2.Service;
 
 namespace Mooshark2.Controllers
 {
-    public class AdminController : Controller
+    public class RedirectToAction :  BaseController
     {
-        private ApplicationDbContext db; 
+        //private ApplicationDbContext db; 
         private CourseService courseService = new CourseService(); 
         public ActionResult Index()
         {
-            var viewModel = courseService.getAllCourses();
+            var viewModel = courseService.GetAllCourses();
 
             return View(viewModel);
         }
@@ -32,7 +32,12 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult CreateCourse(Course course)
         {
-            return View();
+            if(courseService.ServiceCreateCourse(course)) {
+                return RedirectToAction("Index");
+            }
+            else {
+                return View(course);
+            }
         }
 
         [HttpGet]

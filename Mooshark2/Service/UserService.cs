@@ -7,5 +7,6 @@ namespace Mooshark2.Service
 {
     public class UserService
     {
+
     }
 }
