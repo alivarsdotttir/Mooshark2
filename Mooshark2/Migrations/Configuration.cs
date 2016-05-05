@@ -32,11 +32,26 @@ namespace Mooshark2.Migrations
             //    );
             //
 
+            context.Users.AddOrUpdate(new ApplicationUser
+            {
+                UserName = "admin",
+                Email = "admin@admin.is",
+                PasswordHash = "A.dmin123",
+                EmailConfirmed = false,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                LockoutEnabled = true,
+                AccessFailedCount = 0,
+                FullName = "Admin Adminsson",
+                SSN = "0101660169"
+            });
+
+            /*
             context.Courses.AddOrUpdate(new Course { Active = true, Name = "Forritun 1" } );
             context.Courses.AddOrUpdate(new Course { Active = true, Name = "Gagnaskipan" });
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Reiknirit" });
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
-
+            */
 
         }
 
