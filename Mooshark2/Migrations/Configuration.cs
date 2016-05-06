@@ -86,8 +86,8 @@ namespace Mooshark2.Migrations
             //context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "6f47d062-a626-45a1-aad4-4957e1c1ebbd", CourseID = 1 });
             //context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "f9c37f8b-7133-4f32-ab2d-d85676d5eb90", CourseID = 1 });
 
-            context.Subprojects.AddOrUpdate(new Subproject { Name = "First part", Description = "This is the first part", ProjectID = 7, Weight = 50 });
-            context.Subprojects.AddOrUpdate( new Subproject { Name = "Second part", Description = "This is the second part", ProjectID = 7, Weight = 50 });
+            //context.Subprojects.AddOrUpdate(new Subproject { Name = "First part", Description = "This is the first part", ProjectID = 7, Weight = 50 });
+            //context.Subprojects.AddOrUpdate( new Subproject { Name = "Second part", Description = "This is the second part", ProjectID = 7, Weight = 50 });
         }
 
 

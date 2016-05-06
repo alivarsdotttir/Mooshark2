@@ -19,7 +19,7 @@
                 {
                     <tr>
                         <td>@Model.course.Name</td>
-                        <td>@project.Name</td>
+                        <td>@Html.ActionLink(project.Name, "Details", new { id = project.ID })</td>
                         <td>@project.Deadline</td>
                         <td>@*project.isGroupProject*@</td>
                     </tr>
