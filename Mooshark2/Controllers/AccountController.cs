@@ -85,6 +85,17 @@ namespace Mooshark2.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    if(User.IsInRole("Admin")) {
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    else if (User.IsInRole("Teacher"))
+                    {
+                        return RedirectToAction("Index", "Teacher");
+                    }
+                    else if (User.IsInRole("Student"))
+                    {
+                        return RedirectToAction("Index", "Student");
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -144,7 +155,7 @@ namespace Mooshark2.Controllers
         //                                                                       REGISTER FOR ADMIN
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
         // GET: /Account/Register
-        //[Authorize(Roles = "Administrators")]
+        //[Authorize(Roles = "Admin")]
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -157,6 +168,7 @@ namespace Mooshark2.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
+        //[Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -164,10 +176,6 @@ namespace Mooshark2.Controllers
             {
                 var user = new ApplicationUser { UserName = model.userName, Email = model.Email, SSN = model.SSN, FullName = model.FullName };
                 var result = await UserManager.CreateAsync(user, model.Password);
-
-                //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-                //userManager.AddToRole(user.Id, model.Role);
-
 
 
                 if(result.Succeeded) {
@@ -182,7 +190,7 @@ namespace Mooshark2.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Admin");
                 }
                 else {
                     ViewBag.Roles = userService.GetRoleList();

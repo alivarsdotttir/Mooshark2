@@ -19,6 +19,20 @@ namespace Mooshark2.Services
             //db = new ApplicationDbContext();
         }
 
+        public bool ServiceCreatProject(Project project)
+        {
+            if (db.Projects.Any(x => x.Name != project.Name))
+            {
+                db.Projects.Add(project);
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public IEnumerable<Project> getUpcomingProjects(IEnumerable<Course> studentCourses)
         {
             if (!studentCourses.Any())
@@ -104,5 +118,11 @@ namespace Mooshark2.Services
                                                         select x) as IEnumerable<Project>;
             return projectsFromCourse;
         }
+
+        /*public IEnumerable<Subproject> getProjectDescription()
+        {
+           IEnumerable<Subproject>projectDescription = (from x in db.Subprojects 
+                                                         where x.Description == )
+        }*/
     }
 }

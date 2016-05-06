@@ -8,6 +8,7 @@ using Mooshark2.Models.DAL;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Mooshark2.Models.ViewModels.TeacherViewModels;
+using Mooshark2.Models.Entities;
 
 namespace Mooshark2.Controllers
 {
@@ -43,18 +44,62 @@ namespace Mooshark2.Controllers
            
         }
 
+
+        //GET
+        [HttpGet]
         public ActionResult CreateProject()
         {
+            var project = new Project();
+            return View(project);
+        }
+
+
+        //POST
+        [HttpPost]
+        public ActionResult CreateProject(Project project)
+        {
+            if (projectService.ServiceCreatProject(project)) {
+                return RedirectToAction("Index");
+            }
+            else {
+                return View(project);
+            }
+
             return View();
         }
 
-        public ActionResult EditProject()
+        //GET
+        [HttpGet]
+        public ActionResult EditProject(int? id)
         {
-            return View();
+            Project project = db.Projects.Find(id.Value);
+            return View(project);
         }
 
-        public ActionResult ProjectDetails()
+        //POST
+        [HttpPost]
+        public ActionResult EditProject(Project project)
         {
+            if(ModelState.IsValid)
+            {
+                db.Entry(project).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(project);
+        }
+
+        public ActionResult ProjectDetails(int? id)
+        {
+            if(id != null)
+            {
+                var project = projectService.getProjectById(id.Value);
+                var subprojects = projectService.getSubprojects(id.Value);
+                //var description = 
+                return View();
+            }
+            //Returns an error message, ID invalid 
             return View();
         }
 
@@ -63,8 +108,15 @@ namespace Mooshark2.Controllers
             return View();
         }
 
-        public ActionResult SubmissionDetails()
+        public ActionResult SubmissionDetails(int? id)
         {
+            if (id != null)
+            {
+                var submission = projectService.getSubmissionById(id.Value);
+                return View(submission);
+            }
+
+            return View();
             return View();
         }
     }

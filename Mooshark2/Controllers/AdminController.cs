@@ -12,6 +12,7 @@ using Mooshark2.Services;
 
 namespace Mooshark2.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class AdminController :  BaseController
     {
         //private ApplicationDbContext db; 
