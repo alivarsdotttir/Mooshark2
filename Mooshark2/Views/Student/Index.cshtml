@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
 }
 
+
 <div class="row">
     <div id="studentUpcomingProjectsTable" class="col-md-8">
         <table class="table table-bordered table-striped">
@@ -18,25 +19,23 @@
             </thead>
             <tbody>
                 @foreach (var project in Model.upcomingProjects)
-            {
+                {
                     <tr>
                         <td>@project.Course</td>
-                    <td>@project.Name</td>
-                    <td>@project.Deadline</td>
-                    <td><!--project.isGroupProject--></td>
-                </tr>
+                        <td>@project.Name</td>
+                        <td>@project.Deadline</td>
+                        <td><!--Html.DisplayNameFor(model => project.isGroupProject)--></td>
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
 
-    <div id="studentCourseList"class="col-md-4">
+    <div id="studentCourseList" class="col-md-4">
         <h3>Courses</h3>
         <ul>
-            @foreach (var course in Model.coursesForStudents)
-            {
-                <li>@course.Name</li>
-            }
+            @foreach(var course in Model.coursesForStudents) {
+                <li>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</li>
         </ul>
     </div>
 </div>

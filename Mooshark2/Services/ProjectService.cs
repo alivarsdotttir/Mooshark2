@@ -16,21 +16,7 @@ namespace Mooshark2.Services
 
         public ProjectService()
         {
-            //db = new ApplicationDbContext();
-        }
-
-        public bool ServiceCreatProject(Project project)
-        {
-            if (db.Projects.Any(x => x.Name != project.Name))
-            {
-                db.Projects.Add(project);
-                db.SaveChanges();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            db = new ApplicationDbContext();
         }
 
 
@@ -56,25 +42,6 @@ namespace Mooshark2.Services
             }
             return upcomingProjects;
         }
-
-
-        /*public IEnumerable<Project> getUpcomingProjects(IEnumerable<Course> studentCourses)
-        {
-            //if (!studentCourses.Any())
-           // {
-                IEnumerable<Project> upcomingProjects = null;
-                foreach (Course course in studentCourses)
-                {
-                    upcomingProjects = upcomingProjects.Concat(from x in db.Projects
-                                                               where x.CourseID == course.ID && DateTime.Now < x.Deadline && x.Visibility == true
-                                                               orderby x.Deadline ascending
-                                                               select x) as IEnumerable<Project>;
-                }
-                return upcomingProjects;
-            }
-           else
-                return null;
-        }*/
 
         public IEnumerable<Project> getProjectsForCourse(int courseID)
         {
@@ -143,6 +110,7 @@ namespace Mooshark2.Services
                                                         select x) as IEnumerable<Project>;
             return projectsFromCourse;
         }
+<<<<<<< HEAD
 
         
         public IEnumerable<Submission> getStudentsBestSubmission(string userID)
@@ -166,5 +134,7 @@ namespace Mooshark2.Services
                                                         select x) as IEnumerable<ApplicationUser>;
             return submitedStudents;
         }
+=======
+>>>>>>> b578b4a16fda4e8854a1625332ba33456daeb414
     }
 }

@@ -55,12 +55,12 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult CreateProject(Project project)
         {
-            if (projectService.ServiceCreatProject(project)) {
+            /*if (projectService.ServiceCreateProject(project)) {
                 return RedirectToAction("Index");
             }
             else {
                 return View(project);
-            }
+            }*/
 
             return View();
         }
