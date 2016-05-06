@@ -51,17 +51,17 @@ namespace Mooshark2.Migrations
             context.Projects.AddOrUpdate(new Project { Name = "Lab 1", Deadline = DateTime.Now, Graded = true, Visibility = true, CourseID = 2 });
             context.Projects.AddOrUpdate(new Project { Name = "Lab 2", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 2 });
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 3 });
-<<<<<<< HEAD
+
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });
             */
-=======
-            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });*/
+
+            //context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });*/
 
 
        // }
 
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            UserManager.AddToRole("258502b5-f20a-4e56-87bc-8acd6a405db0", "Admin");
+            //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            //UserManager.AddToRole("258502b5-f20a-4e56-87bc-8acd6a405db0", "Admin");
         //}
 
 
@@ -79,7 +79,6 @@ namespace Mooshark2.Migrations
                     SSN = "0101660169"
                 });*/
 
->>>>>>> ab3bce45acc57916b99c5fc62cceff5b06b617a0
 
             // add course-teacher connections
             //context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "6f47d062-a626-45a1-aad4-4957e1c1ebbd", CourseID = 1 });
