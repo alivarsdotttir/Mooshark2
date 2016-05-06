@@ -7,20 +7,20 @@
 <div class="row">
     <div id="buttons">
         <div>
-            @Html.ActionLink("CreateCourse", "createCourse", "RedirectToAction", null, new { @class = "AdminButtons" })
+            @Html.ActionLink("Create course", "CreateCourse", "Admin", null, new { @class = "AdminButtons" })
 
         </div>
         <!--<br/>-->
         <!--<br/>-->
 
         <div>
-            @Html.ActionLink("Create User", "createUser", "RedirectToAction", null, new { @class = "AdminButtons" })
+            @Html.ActionLink("Create user", "register", "Account", null, new { @class = "AdminButtons" })
         </div>
 
         <!--<br/>-->
 
         <div>
-            @Html.ActionLink("Edit", "edit", "RedirectToAction", null, new { @class = "AdminButtons", @id = "edit" })
+            @Html.ActionLink("Edit", "Edit", "Admin", null, new { @class = "AdminButtons", @id = "edit" })
         </div>
     </div>
 

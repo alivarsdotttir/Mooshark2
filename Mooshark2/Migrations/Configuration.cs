@@ -126,11 +126,11 @@ namespace Mooshark2.Migrations
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });*/
 
 
-        /*}
+       // }
 
-            //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            //UserManager.AddToRole("55908c7a-30a8-4bcd-aad4-cb96829e7c34", "Admin");
-        }
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            UserManager.AddToRole("258502b5-f20a-4e56-87bc-8acd6a405db0", "Admin");
+        //}
 
 
             /*context.Users.AddOrUpdate(new ApplicationUser
