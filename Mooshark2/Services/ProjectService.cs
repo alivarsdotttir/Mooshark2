@@ -16,21 +16,7 @@ namespace Mooshark2.Services
 
         public ProjectService()
         {
-            //db = new ApplicationDbContext();
-        }
-
-        public bool ServiceCreatProject(Project project)
-        {
-            if (db.Projects.Any(x => x.Name != project.Name))
-            {
-                db.Projects.Add(project);
-                db.SaveChanges();
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            db = new ApplicationDbContext();
         }
 
 
@@ -56,25 +42,6 @@ namespace Mooshark2.Services
             }
             return upcomingProjects;
         }
-
-
-        /*public IEnumerable<Project> getUpcomingProjects(IEnumerable<Course> studentCourses)
-        {
-            //if (!studentCourses.Any())
-           // {
-                IEnumerable<Project> upcomingProjects = null;
-                foreach (Course course in studentCourses)
-                {
-                    upcomingProjects = upcomingProjects.Concat(from x in db.Projects
-                                                               where x.CourseID == course.ID && DateTime.Now < x.Deadline && x.Visibility == true
-                                                               orderby x.Deadline ascending
-                                                               select x) as IEnumerable<Project>;
-                }
-                return upcomingProjects;
-            }
-           else
-                return null;
-        }*/
 
         public IEnumerable<Project> getProjectsForCourse(int courseID)
         {
@@ -144,10 +111,28 @@ namespace Mooshark2.Services
             return projectsFromCourse;
         }
 
-        /*public IEnumerable<Subproject> getProjectDescription()
+        
+        public IEnumerable<Submission> getStudentsBestSubmission(string userID)
         {
-           IEnumerable<Subproject>projectDescription = (from x in db.Subprojects 
-                                                         where x.Description == )
-        }*/
+             IEnumerable<Submission> bestSubmission = (from x in db.Groups
+                                                        join y in db.ProjectGroups on x.ID equals y.GroupID
+                                                        join z in db.Subprojects on y.ProjectID equals z.ProjectID
+                                                        join w in db.Submissions on z.ID equals w.SubprojectID
+                                                        where x.UserID == userID && w.Accepted == true || x.UserID == userID
+                                                        select x).Last() as IEnumerable<Submission>;   
+            return bestSubmission;
+        }
+
+        public IEnumerable<ApplicationUser> getSubmitedStudents(string userID)
+        {
+            IEnumerable<ApplicationUser>submitedStudents = ( from x in db.Groups
+                                                        join y in db.ProjectGroups on x.ID equals y.GroupID
+                                                        join z in db.Subprojects on y.ProjectID equals z.ProjectID
+                                                        join w in db.Submissions on z.ID equals w.SubprojectID
+                                                        where x.UserID == userID && w.ID != null
+                                                        select x) as IEnumerable<ApplicationUser>;
+            return submitedStudents;
+        }
+
     }
 }

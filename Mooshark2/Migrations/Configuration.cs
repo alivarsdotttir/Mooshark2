@@ -21,11 +21,13 @@ namespace Mooshark2.Migrations
 
         protected override void Seed(Mooshark2.Models.DAL.ApplicationDbContext context)
         {
-            context.Roles.AddOrUpdate(r => r.Name,
-            new IdentityRole { Name = "Admin" },
-            new IdentityRole { Name = "Teacher" },
-            new IdentityRole { Name = "Student" }
-            );
+            //context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2016, 6, 9, 0, 0, 0), Graded = false, Visibility = true, CourseID = 1 } );
+            /* context.Roles.AddOrUpdate(r => r.Name,
+             new IdentityRole { Name = "Admin" },
+             new IdentityRole { Name = "Teacher" },
+             new IdentityRole { Name = "Student" }
+             );
+             */
             //  This method will be called after migrating to the latest version
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
@@ -38,6 +40,85 @@ namespace Mooshark2.Migrations
             //    );
             //
 
+            /* context.Users.AddOrUpdate(new ApplicationUser
+             {
+                 UserName = "admin",
+                 Email = "admin@admin.is",
+                 PasswordHash = "A.dmin123",
+                 EmailConfirmed = false,
+                 PhoneNumberConfirmed = false,
+                 TwoFactorEnabled = false,
+                 LockoutEnabled = true,
+                 AccessFailedCount = 0,
+                 FullName = "Admin Adminsson",
+                 SSN = "0101660169"
+             });*/
+
+            /*
+                        context.Users.AddOrUpdate(new ApplicationUser
+
+                        /*context.Users.AddOrUpdate(new ApplicationUser
+                        {
+                            UserName = "admin",
+                            Email = "admin@admin.is",
+                            PasswordHash = "A.dmin123",
+                            EmailConfirmed = false,
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            LockoutEnabled = true,
+                            AccessFailedCount = 0,
+                            FullName = "Admin Adminsson",
+                            SSN = "0101660169"
+
+                        });
+                        });*/
+
+
+            /*
+            context.Courses.AddOrUpdate(new Course { Active = true, Name = "Forritun 1" } );
+            context.Courses.AddOrUpdate(new Course { Active = true, Name = "Gagnaskipan" });
+            context.Courses.AddOrUpdate(new Course { Active = false, Name = "Reiknirit" });
+            context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });*/
+
+
+            /* context.Users.AddOrUpdate(new ApplicationUser
+             {
+                 UserName = "admin",
+                 Email = "admin@admin.is",
+                 PasswordHash = "Admin.1234",
+                 EmailConfirmed = false,
+                 PhoneNumberConfirmed = false,
+                 TwoFactorEnabled = false,
+                 LockoutEnabled = true,
+                 AccessFailedCount = 0
+             });*/
+
+
+            //context.Users.AddOrUpdate(new ApplicationUser
+
+            //context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "715c163e-4ec8-49c9-82b7-8ad262242d26", CourseID = 1 });
+            //context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "715c163e-4ec8-49c9-82b7-8ad262242d26", CourseID = 2 });
+
+            /*context.Users.AddOrUpdate(new ApplicationUser
+
+            {
+                UserName = "admin",
+                Email = "admin@admin.is",
+                PasswordHash = "Admin.1234",
+                EmailConfirmed = false,
+                PhoneNumberConfirmed = false,
+                TwoFactorEnabled = false,
+                LockoutEnabled = true,
+                AccessFailedCount = 0
+            });
+*/
+
+
+
+
+
+            //8e052276 - b8a1 - 4d64 - ba81 - 796da1b0122c
+            
             /*context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
             
 
@@ -55,6 +136,10 @@ namespace Mooshark2.Migrations
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });
             */
 
+            // }
+            /*
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            UserManager.AddToRole("258502b5-f20a-4e56-87bc-8acd6a405db0", "Admin");*/
             //context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });*/
 
 
@@ -62,6 +147,7 @@ namespace Mooshark2.Migrations
 
             //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             //UserManager.AddToRole("258502b5-f20a-4e56-87bc-8acd6a405db0", "Admin");
+
             //}
 
 
