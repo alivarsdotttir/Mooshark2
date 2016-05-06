@@ -15,8 +15,6 @@ namespace Mooshark2.Controllers
     //[Authorize(Roles = "Admin")]
     public class AdminController :  BaseController
     {
-        //private ApplicationDbContext db; 
-        private CourseService courseService = new CourseService(); 
         public ActionResult Index()
         {
             var viewModel = courseService.GetAllCourses();
