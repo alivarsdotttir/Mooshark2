@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Mooshark2.Models.DAL;
 using Mooshark2.Models.Entities;
+using Mooshark2.Models.ViewModels.AdminViewModels;
 
 
 namespace Mooshark2.Services
@@ -34,10 +35,14 @@ namespace Mooshark2.Services
         }
 
 
-        public bool ServiceCreateCourse(Course course)
+        public bool ServiceCreateCourse(AdminCourseViewModel model)
         {
-            if(db.Courses.Any(x => x.Name != course.Name)) {
-                db.Courses.Add(course);
+            if(db.Courses.Any(x => x.Name != model.Course.Name)) {
+                db.Courses.Add(model.Course);
+                /*foreach(var i in model.TeacherList) {
+                    db.CourseTeachers.(i.Id, model.Course.ID);
+                    db.CourseTeachers.
+                }*/
                 db.SaveChanges();
                 return true;
             }
