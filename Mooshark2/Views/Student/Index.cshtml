@@ -1,8 +1,10 @@
-﻿@using Microsoft.Ajax.Utilities
+﻿@using System.Activities.Statements
+@using Microsoft.Ajax.Utilities
 @model Mooshark2.Models.ViewModels.StudentViewModels.StudentIndexViewModel
 @{
     ViewBag.Title = "Index";
 }
+
 
 <div class="row">
     <div id="studentUpcomingProjectsTable" class="col-md-8">
@@ -17,7 +19,9 @@
                 </tr>
             </thead>
             <tbody>
+
                 @foreach (var project in Model.upcomingProjects) {
+
                     <tr>
                         <td>@project.Course</td>
                         <td>@project.Name</td>
@@ -29,11 +33,11 @@
         </table>
     </div>
 
-    <div id="studentCourseList"class="col-md-4">
+    <div id="studentCourseList" class="col-md-4">
         <h3>Courses</h3>
         <ul>
-            @foreach (var course in Model.coursesForStudents) {
-                <li>@course.Name</li>
+            @foreach(var course in Model.coursesForStudents) {
+                <li>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</li>
             }
         </ul>
     </div>

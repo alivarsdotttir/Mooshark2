@@ -12,11 +12,8 @@ using Mooshark2.Models.Entities;
 
 namespace Mooshark2.Controllers
 {
-    public class TeacherController : Controller
+    public class TeacherController : BaseController
     {
-        private ApplicationDbContext db;
-        private CourseService courseService = new CourseService();
-        private ProjectService projectService = new ProjectService();
 
         // GET: Teacher
         public ActionResult Index()
@@ -58,12 +55,12 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult CreateProject(Project project)
         {
-            if (projectService.ServiceCreatProject(project)) {
+            /*if (projectService.ServiceCreateProject(project)) {
                 return RedirectToAction("Index");
             }
             else {
                 return View(project);
-            }
+            }*/
 
             return View();
         }
@@ -96,8 +93,9 @@ namespace Mooshark2.Controllers
             {
                 var project = projectService.getProjectById(id.Value);
                 var subprojects = projectService.getSubprojects(id.Value);
-                //var description = 
-                return View();
+
+                TeacherDetailsViewmodel model = new TeacherDetailsViewmodel(project, subprojects);
+                return View(model);
             }
             //Returns an error message, ID invalid 
             return View();
@@ -105,7 +103,13 @@ namespace Mooshark2.Controllers
 
         public ActionResult Submissions()
         {
-            return View();
+            string userId = User.Identity.GetUserId();
+            var students = projectService.getSubmitedStudents(userId);
+            var mostRecentSubmission = projectService.getStudentsBestSubmission(userId);
+
+            TeacherSubmitsViewmodels model = new TeacherSubmitsViewmodels(mostRecentSubmission, students);
+
+            return View(model);
         }
 
         public ActionResult SubmissionDetails(int? id)
@@ -115,8 +119,6 @@ namespace Mooshark2.Controllers
                 var submission = projectService.getSubmissionById(id.Value);
                 return View(submission);
             }
-
-            return View();
             return View();
         }
     }
