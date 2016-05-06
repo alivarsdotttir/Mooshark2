@@ -1,42 +1,43 @@
 ﻿@model Mooshark2.Models.ViewModels.StudentViewModels.StudentCourseViewModel
 
-<div id="studentCourseProjectsTable">
-    <table>
-        <caption>Upcoming projects</caption>
-        <thead>
-        <tr>
-            <th>Course</th>
-            <th>Assignment</th>
-            <th>Deadline</th>
-            <th>Type</th>
-        </tr>
-        </thead>
-        <tbody>
-        @if (Model.projectsForCourse != null)
-        {
-        foreach (var project in Model.projectsForCourse)
-        {
+<div class="row">
+    <div id="studentCourseProjectsTable" class="col-md-8">
+        <table class="table table-bordered table-striped" >
+            <caption>Upcoming projects</caption>
+            <thead>
             <tr>
-                <td>@Html.DisplayNameFor(model => Model.course)</td>
-                <td>@Html.DisplayNameFor(model => project.Name)</td>
-                <td>@Html.DisplayNameFor(model => project.Deadline)</td>
-                <td><!--Html.DisplayNameFor(model => project.isGroupProject)--></td>
+                <th>Course</th>
+                <th>Assignment</th>
+                <th>Deadline</th>
+                <th>Type</th>
             </tr>
-        }
-        }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+            @if (Model.projectsForCourse != null)
+            {
+                foreach (var project in Model.projectsForCourse)
+                {
+                    <tr>
+                        <td>@Model.course.Name</td>
+                        <td>@Html.ActionLink(project.Name, "Details", new { id = project.ID })</td>
+                        <td>@project.Deadline</td>
+                        <td>@*project.isGroupProject*@</td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
 
-<div id="studentCourseTeacherList">
-    <h3>Teacher</h3>
-    <ul>
-        @foreach(var teacher in Model.teacherForCourse) {
-            <li>@Html.DisplayNameFor(model => teacher.FullName)</li>
-        }
-    </ul>
+    <div id="studentCourseTeacherList" class="col-md-4">
+        <h3>Teacher</h3>
+        <ul>
+            @foreach(var teacher in Model.teacherForCourse) {
+                <li>@Html.DisplayNameFor(model => teacher.FullName)</li>
+            }
+        </ul>
+    </div>
 </div>
-
 <div id="backToMainButton">
     @Html.ActionLink("Back to Main", "Index")
 </div>

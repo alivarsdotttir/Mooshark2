@@ -7,15 +7,17 @@
 @*<h2>@Html.DisplayNameFor(Model.currentProject)</h2>*@
 <div class="container">
     <ul class="nav nav-tabs">
-        @for(int i = 0; i < Model.subprojects.Count(); i++) {
-            <li><a href="#part @i+1">Part @i+1</a></li>
+        @if(Model.subprojects != null && Model.subprojects.Any()) {
+            for(int i = 0; i < Model.subprojects.Count(); i++) {
+                <li><a href="#part @i+1">Part @i+1</a></li>
+            }
         }
     </ul>
 
     <div class="tab-content">
         <div class="tab-pane fade in active">
-            @foreach (var subproject in Model.subprojects) {
-                <h3>@Html.DisplayNameFor(model => subproject)</h3>
+            @foreach(var subproject in Model.subprojects) {
+                <h3>@subproject.Name</h3>
                 <p>@subproject.Description</p>
             }
         </div>

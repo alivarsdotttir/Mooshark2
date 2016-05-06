@@ -85,5 +85,26 @@ namespace Mooshark2.Services
                             select x) as IEnumerable<ApplicationUser>;
             return teachers; 
         }
+
+        public IEnumerable<Course> getCoursesForMultipleProjects(IEnumerable<Project> projects)
+        {
+            IEnumerable<Course> courses = null; 
+            foreach(Project project in projects)
+            {
+                if(courses == null)
+                {
+                    courses = (from x in db.Courses
+                               where x.ID == project.CourseID
+                               select x) as IEnumerable<Course>; 
+                }
+                else
+                {
+                    courses = courses.Concat(from x in db.Courses
+                                             where x.ID == project.CourseID
+                                             select x) as IEnumerable<Course>;
+                }
+            }
+            return courses; 
+        }
     }
 }
