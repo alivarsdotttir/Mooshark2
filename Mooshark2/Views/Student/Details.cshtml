@@ -1,0 +1,35 @@
+﻿@model Mooshark2.Models.ViewModels.StudentDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@*<h2>@Html.DisplayNameFor(Model.currentProject)</h2>*@
+<div class="container">
+    <ul class="nav nav-tabs">
+        @for(int i = 0; i < Model.subprojects.Count(); i++) {
+            <li><a href="#part @i+1">Part @i+1</a></li>
+        }
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade in active">
+            @foreach (var subproject in Model.subprojects) {
+                <h3>@Html.DisplayNameFor(model => subproject.Name)</h3>
+                <p>@subproject.Description</p>
+            }
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    $(".nav-tabs a").click(function(){
+        $(this).tab('show');
+    });
+});
+</script>
