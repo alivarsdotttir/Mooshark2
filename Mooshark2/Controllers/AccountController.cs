@@ -186,8 +186,8 @@ namespace Mooshark2.Controllers
                 }
                 else {
                     ViewBag.Roles = userService.GetRoleList();
+                    AddErrors(result);
                 }
-                AddErrors(result);
             }
 
 
