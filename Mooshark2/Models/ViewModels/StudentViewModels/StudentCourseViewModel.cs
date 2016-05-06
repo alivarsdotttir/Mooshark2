@@ -6,13 +6,13 @@ using System.Web;
 using Mooshark2.Models.DAL;
 
 
-namespace Mooshark2.Models.ViewModels
+namespace Mooshark2.Models.ViewModels.StudentViewModels
 {
     public class StudentCourseViewModel
     {
-        Course course; 
-        IEnumerable<Project> projectsForCourse;
-        IEnumerable<ApplicationUser> teacherForCourse;
+        public Course course; 
+        public IEnumerable<Project> projectsForCourse;
+        public IEnumerable<ApplicationUser> teacherForCourse;
 
         public StudentCourseViewModel(Course c, IEnumerable<Project> p, IEnumerable<ApplicationUser> t) 
         {

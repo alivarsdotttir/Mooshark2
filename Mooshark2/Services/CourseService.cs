@@ -19,11 +19,6 @@ namespace Mooshark2.Services
 
         public object ApplicationUser { get; private set; }
 
-        //public List<Course> getAllCourses()
-
-        //public IEnumerable<Course> getAllCourses()
-
-        //public List<Course> GetAllCourses()
 
         public IEnumerable<Course> GetAllCourses()
         {
@@ -48,9 +43,9 @@ namespace Mooshark2.Services
 
         public IEnumerable<Course> getCoursesForStudent(string studentID)
         {
-            var courses = (from x in db.CourseStudents
-                           join y in db.Courses on x.CourseID equals y.ID
-                           where studentID == x.UserID
+            var courses = (from x in db.Courses
+                           join y in db.CourseStudents on x.ID equals y.CourseID
+                           where studentID == y.UserID
                            select x) as IEnumerable<Course>;
             return courses; 
         }
@@ -58,9 +53,9 @@ namespace Mooshark2.Services
 
         public IEnumerable<Course> getCoursesForTeacher(string teacherID)
         {
-            var courses = (from x in db.CourseTeachers
-                           join y in db.Courses on x.CourseID equals y.ID
-                           where x.UserID == teacherID
+            var courses = (from x in db.Courses
+                           join y in db.CourseTeachers on x.ID equals y.CourseID
+                           where y.UserID == teacherID
                            select x) as IEnumerable<Course>;
             return courses;
         }
@@ -75,9 +70,9 @@ namespace Mooshark2.Services
 
         public IEnumerable<ApplicationUser> getTeachersForCourse(int courseId)
         {
-            var teachers = (from x in db.CourseTeachers
-                            join y in db.Users on x.UserID equals y.Id
-                            where x.CourseID == courseId
+            var teachers = (from x in db.Users
+                            join y in db.CourseTeachers on x.Id equals y.UserID
+                            where y.CourseID == courseId
                             select x) as IEnumerable<ApplicationUser>;
             return teachers; 
         }

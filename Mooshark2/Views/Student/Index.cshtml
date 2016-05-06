@@ -1,43 +1,44 @@
 ﻿@using Microsoft.Ajax.Utilities
-@model Mooshark2.Models.ViewModels.StudentIndexViewModel
+@model Mooshark2.Models.ViewModels.StudentViewModels.StudentIndexViewModel
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<div id="studentUpcomingProjectsTable">
-    <table>
-        <caption>Upcoming projects</caption>
-        <thead>
-            <tr>
-                <th>Course</th>
-                <th>Assignment</th>
-                <th>Deadline</th>
-                <th>Type</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var project in Model.upcomingProjects)
-            {
+<div class="row">
+    <div id="studentUpcomingProjectsTable" class="col-md-8">
+        <table class="table table-bordered table-striped" >
+            <caption>Upcoming projects</caption>
+            <thead>
                 <tr>
-                    <td><!--Html.DisplayNameFor(model => project.CourseName)--></td>
-                    <td>@Html.DisplayNameFor(model => project.Name)</td>
-                    <td>@Html.DisplayNameFor(model => project.Deadline)</td>
-                    <td><!--Html.DisplayNameFor(model => project.isGroupProject)--></td>
+                    <th>Course</th>
+                    <th>Assignment</th>
+                    <th>Deadline</th>
+                    <th>Type</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var project in Model.upcomingProjects)
+                {
+                    <tr>
+                        <td>@project.Course</td>
+                        <td>@project.Name</td>
+                        <td>@project.Deadline</td>
+                        <td><!--Html.DisplayNameFor(model => project.isGroupProject)--></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-<div id="studentCourseList">
-    <h3>Courses</h3>
-    <ul>
-        @foreach(var course in Model.coursesForStudents) {
-            <li>@Html.DisplayNameFor(model => course.Name)</li>
-        }
-    </ul>
+    <div id="studentCourseList" class="col-md-4">
+        <h3>Courses</h3>
+        <ul>
+            @foreach(var course in Model.coursesForStudents) {
+                <li>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</li>
+            }
+        </ul>
+    </div>
 </div>
 
 <div id="StudentPepp">

@@ -21,20 +21,25 @@ namespace Mooshark2.Services
 
         public IEnumerable<Project> getUpcomingProjects(IEnumerable<Course> studentCourses)
         {
-            if (!studentCourses.Any())
+            IEnumerable<Project> upcomingProjects = null;
+
+            foreach (Course course in studentCourses)
             {
-                IEnumerable<Project> upcomingProjects = null;
-                foreach (Course course in studentCourses)
+                if (upcomingProjects == null)
                 {
-                    upcomingProjects = upcomingProjects.Concat(from x in db.Projects
-                                                               where x.CourseID == course.ID && DateTime.Now < x.Deadline && x.Visibility == true
-                                                               orderby x.Deadline ascending
-                                                               select x) as IEnumerable<Project>;
+                    upcomingProjects = (from x in db.Projects
+                                        where x.CourseID == course.ID && DateTime.Now < x.Deadline && x.Visibility == true
+                                        select x) as IEnumerable<Project>;
                 }
-                return upcomingProjects;
+                else {
+                        upcomingProjects = upcomingProjects.Concat(from x in db.Projects
+                                                                   where x.CourseID == course.ID && DateTime.Now < x.Deadline && x.Visibility == true
+                                                                   orderby x.Deadline ascending
+                                                                   select x) as IEnumerable<Project>;
+                }
+                
             }
-            else
-                return null; 
+            return upcomingProjects;
         }
 
         public IEnumerable<Project> getProjectsForCourse(int courseID)

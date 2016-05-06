@@ -219,6 +219,7 @@
     <Compile Include="Models\Entities\Subproject.cs" />
     <Compile Include="Models\DAL\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\AdminViewModels\AdminCourseViewModel.cs" />
     <Compile Include="Models\ViewModels\AdminViewModels\AdminIndexViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentViewModels\StudentCourseViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentViewModels\StudentDetailsViewModel.cs" />
@@ -315,7 +316,10 @@
     <Content Include="Views\Admin\EditUser.cshtml" />
     <Content Include="Views\Student\Course.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Student\Details.cshtml" />
     <Content Include="Views\Student\Submit.cshtml" />
+    <Content Include="Views\Admin\CourseView.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />
