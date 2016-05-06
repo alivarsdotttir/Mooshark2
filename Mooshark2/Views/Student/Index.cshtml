@@ -19,17 +19,15 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var project in Model.upcomingProjects)
-                {
-                    foreach (var courses in Model.coursesForProjects)
-                    {
-                        <tr>
-                            <td>@courses.Name</td>
-                            <td>@project.Name</td>
-                            <td>@project.Deadline</td>
-                            <td><!--Html.DisplayNameFor(model => project.isGroupProject)--></td>
-                        </tr>
-                    }
+
+                @foreach (var project in Model.upcomingProjects) {
+
+                    <tr>
+                        <td>@project.Course</td>
+                        <td>@Html.ActionLink(project.Name, "Details", project.ID )</td>
+                        <td>@project.Deadline</td>
+                        <td><!--project.isGroupProject--></td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -38,8 +36,7 @@
     <div id="studentCourseList" class="col-md-4">
         <h3>Courses</h3>
         <ul>
-            @foreach (var course in Model.coursesForStudents)
-            {
+            @foreach(var course in Model.coursesForStudents) {
                 <li>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</li>
             }
         </ul>
