@@ -10,10 +10,11 @@ namespace Mooshark2.Services
 {
     public class CourseService
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db =  new ApplicationDbContext();
+
         public CourseService()
         {
-            db = new ApplicationDbContext();
+            //db = new ApplicationDbContext();
         }
 
 
