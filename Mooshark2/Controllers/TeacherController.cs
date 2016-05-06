@@ -114,7 +114,6 @@ namespace Mooshark2.Controllers
             }
 
             return View();
-            return View();
         }
     }
 

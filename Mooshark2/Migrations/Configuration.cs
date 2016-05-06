@@ -21,7 +21,7 @@ namespace Mooshark2.Migrations
 
         protected override void Seed(Mooshark2.Models.DAL.ApplicationDbContext context)
         {
-            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2016, 6, 9, 0, 0, 0), Graded = false, Visibility = true, CourseID = 1 } );
+            //context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2016, 6, 9, 0, 0, 0), Graded = false, Visibility = true, CourseID = 1 } );
             /* context.Roles.AddOrUpdate(r => r.Name,
              new IdentityRole { Name = "Admin" },
              new IdentityRole { Name = "Teacher" },
@@ -81,23 +81,24 @@ namespace Mooshark2.Migrations
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });*/
 
 
-            /* context.Users.AddOrUpdate(new ApplicationUser
-             {
-                 UserName = "admin",
-                 Email = "admin@admin.is",
-                 PasswordHash = "Admin.1234",
-                 EmailConfirmed = false,
-                 PhoneNumberConfirmed = false,
-                 TwoFactorEnabled = false,
-                 LockoutEnabled = true,
-                 AccessFailedCount = 0
-             });*/
+            /*             context.Users.AddOrUpdate(new ApplicationUser
+                         {
+                             UserName = "teacher",
+                             Email = "teacher@teacher.is",
+                             PasswordHash = "Teacher.1234",
+                             EmailConfirmed = false,
+                             PhoneNumberConfirmed = false,
+                             TwoFactorEnabled = false,
+                             LockoutEnabled = true,
+                             AccessFailedCount = 0
+                         });*/
 
-
-            //context.Users.AddOrUpdate(new ApplicationUser
-
-            //context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "715c163e-4ec8-49c9-82b7-8ad262242d26", CourseID = 1 });
-            //context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "715c163e-4ec8-49c9-82b7-8ad262242d26", CourseID = 2 });
+            /*
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            UserManager.AddToRole("82252f05-fd4d-44bb-a72c-108a9c896223", "Teacher");
+            context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "82252f05-fd4d-44bb-a72c-108a9c896223", CourseID = 1 });
+            */
+           // context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "82252f05-fd4d-44bb-a72c-108a9c896223", CourseID = 2 });
 
             /*context.Users.AddOrUpdate(new ApplicationUser
 
@@ -118,7 +119,7 @@ namespace Mooshark2.Migrations
 
 
             //8e052276 - b8a1 - 4d64 - ba81 - 796da1b0122c
-            
+
             /*context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
             
 
@@ -126,7 +127,7 @@ namespace Mooshark2.Migrations
 
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Stýrikerfi" });
             */
-            
+
             //context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2017, 3, 9, 16, 5, 7, 123), Graded = false, Visibility = true, CourseID = 1 });
             /*context.Projects.AddOrUpdate(new Project { Name = "Project 2", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 1 });
             context.Projects.AddOrUpdate(new Project { Name = "Lab 1", Deadline = DateTime.Now, Graded = true, Visibility = true, CourseID = 2 });

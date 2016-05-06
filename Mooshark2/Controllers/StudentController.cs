@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using Mooshark2.Models.DAL;
 using Mooshark2.Services;
 using Microsoft.AspNet.Identity;
-using Mooshark2.Services;
 using Mooshark2.Models.ViewModels;
 using Mooshark2.Models.Entities;
 using Mooshark2.Models.ViewModels.StudentViewModels;
@@ -21,8 +20,9 @@ namespace Mooshark2.Controllers
             string userId = User.Identity.GetUserId();
             var studentCourses = courseService.getCoursesForStudent(userId);
             var upcomingProjects = projectService.getUpcomingProjects(studentCourses);
+            var coursesForProjects = courseService.getCoursesForMultipleProjects(upcomingProjects); 
 
-            StudentIndexViewModel model = new StudentIndexViewModel(upcomingProjects, studentCourses); 
+            StudentIndexViewModel model = new StudentIndexViewModel(upcomingProjects, coursesForProjects, studentCourses); 
              
             return View(model);
         }
@@ -55,7 +55,13 @@ namespace Mooshark2.Controllers
                 IEnumerable<Submission> submissions = null; 
                 foreach(Subproject sub in subprojects)
                 {
-                    submissions = submissions.Concat(projectService.getSubmissions(sub.ID)); 
+                    if (submissions == null)
+                    {
+                        submissions = projectService.getSubmissions(sub.ID);
+                    }
+                    else {
+                        submissions = submissions.Concat(projectService.getSubmissions(sub.ID));
+                    }
                 }
 
                 StudentDetailsViewModel model = new StudentDetailsViewModel(project, subprojects, submissions);
