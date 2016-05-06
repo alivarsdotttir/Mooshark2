@@ -39,6 +39,8 @@ namespace Mooshark2.Controllers
                 return View(course);
             }
         }
+
+
 /*
         [HttpGet]
         public ActionResult CreateUser()
