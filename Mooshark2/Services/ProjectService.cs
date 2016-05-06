@@ -110,7 +110,7 @@ namespace Mooshark2.Services
                                                         select x) as IEnumerable<Project>;
             return projectsFromCourse;
         }
-<<<<<<< HEAD
+
 
         
         public IEnumerable<Submission> getStudentsBestSubmission(string userID)
@@ -134,7 +134,6 @@ namespace Mooshark2.Services
                                                         select x) as IEnumerable<ApplicationUser>;
             return submitedStudents;
         }
-=======
->>>>>>> b578b4a16fda4e8854a1625332ba33456daeb414
+
     }
 }
