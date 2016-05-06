@@ -12,10 +12,9 @@ using Mooshark2.Services;
 
 namespace Mooshark2.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class AdminController :  BaseController
     {
-        //private ApplicationDbContext db; 
-        private CourseService courseService = new CourseService(); 
         public ActionResult Index()
         {
             var viewModel = courseService.GetAllCourses();
@@ -40,6 +39,8 @@ namespace Mooshark2.Controllers
                 return View(course);
             }
         }
+
+
 /*
         [HttpGet]
         public ActionResult CreateUser()

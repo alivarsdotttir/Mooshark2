@@ -6,16 +6,15 @@ using System.Web.Mvc;
 using Mooshark2.Models.DAL;
 using Mooshark2.Services;
 using Microsoft.AspNet.Identity;
-using Mooshark2.Services;
 using Mooshark2.Models.ViewModels;
 using Mooshark2.Models.Entities;
+using Mooshark2.Models.ViewModels.StudentViewModels;
+
 
 namespace Mooshark2.Controllers
 {
-    public class StudentController : Controller
+    public class StudentController : BaseController
     {
-        private CourseService courseService = new CourseService();
-        private ProjectService projectService = new ProjectService();
         
         public ActionResult Index()
         {

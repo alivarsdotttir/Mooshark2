@@ -82,10 +82,22 @@ namespace Mooshark2.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.userName, model.Password, model.RememberMe, shouldLockout: false);
+            var user = await UserManager.FindAsync(model.userName, model.Password);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    if(UserManager.IsInRole(user.Id, "Admin")) {
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    else if (UserManager.IsInRole(user.Id, "Teacher")) {
+                        return RedirectToAction("Index", "Teacher");
+                    }
+                    else if(UserManager.IsInRole(user.Id, "Student")) {
+                        return RedirectToAction("Index", "Student");
+                    }
+                    else {
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -144,7 +156,7 @@ namespace Mooshark2.Controllers
         //                                                                       REGISTER FOR ADMIN
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
         // GET: /Account/Register
-        //[Authorize(Roles = "Administrators")]
+        //[Authorize(Roles = "Admin")]
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -157,6 +169,7 @@ namespace Mooshark2.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
+        //[Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -164,10 +177,6 @@ namespace Mooshark2.Controllers
             {
                 var user = new ApplicationUser { UserName = model.userName, Email = model.Email, SSN = model.SSN, FullName = model.FullName };
                 var result = await UserManager.CreateAsync(user, model.Password);
-
-                //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-                //userManager.AddToRole(user.Id, model.Role);
-
 
 
                 if(result.Succeeded) {
@@ -182,7 +191,7 @@ namespace Mooshark2.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Admin");
                 }
                 else {
                     ViewBag.Roles = userService.GetRoleList();
