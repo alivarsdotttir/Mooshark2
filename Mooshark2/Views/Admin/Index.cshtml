@@ -1,26 +1,27 @@
 ﻿@model IEnumerable<Mooshark2.Models.Entities.Course>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Home Page";
 }
-<link href="~/Content/Site.css" rel="stylesheet" />
-<h2>Admin View</h2>
+<link href="~/Content/Site.css" rel="stylesheet"/>
+
+<h2>Main Page - Admin</h2>
 <div class="row">
     <div id="buttons">
         <div>
-            @Html.ActionLink("Create course", "CreateCourse", "Admin", null, new { @class = "AdminButtons" })
+            @* @Html.ActionLink("Create course", "CreateCourse", "Admin", null, new { @class = "AdminButtons" })*@
+            @Html.ActionLink("Create course", "CreateCourse", "Admin", null)
 
         </div>
-        <!--<br/>-->
-        <!--<br/>-->
+
 
         <div>
-            @Html.ActionLink("Create user", "register", "Account", null, new { @class = "AdminButtons" })
+             @Html.ActionLink("Create user", "register", "Account", null, new { @class = "AdminButtons" })
         </div>
 
-        <!--<br/>-->
 
         <div>
-            @Html.ActionLink("Edit", "Edit", "Admin", null, new { @class = "AdminButtons", @id = "edit" })
+            @* @Html.ActionLink("Edit", "Edit", "Admin", null, new { @class = "AdminButtons", @id = "edit" })*@
+            @Html.ActionLink("Edit", "Edit", "Admin", null, new {@id = "edit" })
         </div>
     </div>
 
