@@ -28,6 +28,7 @@ namespace Mooshark2.Services
                 {
                     upcomingProjects = upcomingProjects.Concat(from x in db.Projects
                                                                where x.CourseID == course.ID && DateTime.Now < x.Deadline && x.Visibility == true
+                                                               orderby x.Deadline ascending
                                                                select x) as IEnumerable<Project>;
                 }
                 return upcomingProjects;
@@ -68,6 +69,25 @@ namespace Mooshark2.Services
             return submissions; 
         }
 
+
+        public Subproject getSubprojectById(int subprojectID)
+        {
+            Subproject subproject = (from x in db.Subprojects
+                                     where subprojectID == x.ID
+                                     select x).SingleOrDefault();
+
+            return subproject;
+        }
+
+        public Submission getSubmissionById(int submissionID)
+        {
+            Submission submission = (from x in db.Submissions
+                                     where submissionID == x.ID
+                                     select x).SingleOrDefault();
+            return submission;
+        }
+
+
         public IEnumerable<Project> getUngradedProjects(string teacherID)
         {
             IEnumerable<Project> ungradedProjects = (from x in db.Projects
@@ -75,6 +95,14 @@ namespace Mooshark2.Services
                                                   where y.UserID == teacherID && x.Graded == false
                                                   select x) as IEnumerable<Project>;
             return ungradedProjects;
+        }
+
+        public IEnumerable<Project> getProjectsFromCourse(int courseID)
+        {
+            IEnumerable<Project> projectsFromCourse = (from x in db.Projects
+                                                        where x.CourseID == courseID
+                                                        select x) as IEnumerable<Project>;
+            return projectsFromCourse;
         }
     }
 }
