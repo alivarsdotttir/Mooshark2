@@ -88,15 +88,15 @@ namespace Mooshark2.Controllers
                     if(User.IsInRole("Admin")) {
                         return RedirectToAction("Index", "Admin");
                     }
-                    else if (User.IsInRole("Teacher"))
-                    {
+                    else if (User.IsInRole("Teacher")) {
                         return RedirectToAction("Index", "Teacher");
                     }
-                    else if (User.IsInRole("Student"))
-                    {
+                    else if(User.IsInRole("Student")) {
                         return RedirectToAction("Index", "Student");
                     }
-                    return RedirectToLocal(returnUrl);
+                    else {
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
