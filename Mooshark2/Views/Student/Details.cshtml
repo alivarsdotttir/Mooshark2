@@ -1,4 +1,4 @@
-﻿@model Mooshark2.Models.ViewModels.StudentDetailsViewModel
+﻿@model Mooshark2.Models.ViewModels.StudentViewModels.StudentDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -15,7 +15,7 @@
     <div class="tab-content">
         <div class="tab-pane fade in active">
             @foreach (var subproject in Model.subprojects) {
-                <h3>@Html.DisplayNameFor(model => subproject.Name)</h3>
+                <h3>@Html.DisplayNameFor(model => subproject)</h3>
                 <p>@subproject.Description</p>
             }
         </div>
