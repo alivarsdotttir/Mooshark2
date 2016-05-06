@@ -13,10 +13,8 @@ using Mooshark2.Models.ViewModels.StudentViewModels;
 
 namespace Mooshark2.Controllers
 {
-    public class StudentController : Controller
+    public class StudentController : BaseController
     {
-        private CourseService courseService = new CourseService();
-        private ProjectService projectService = new ProjectService();
         
         public ActionResult Index()
         {
