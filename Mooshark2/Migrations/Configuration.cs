@@ -21,7 +21,7 @@ namespace Mooshark2.Migrations
 
         protected override void Seed(Mooshark2.Models.DAL.ApplicationDbContext context)
         {
-            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2016, 6, 9, 0, 0, 0), Graded = false, Visibility = true, CourseID = 1 } );
+            //context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2016, 6, 9, 0, 0, 0), Graded = false, Visibility = true, CourseID = 1 } );
             /* context.Roles.AddOrUpdate(r => r.Name,
              new IdentityRole { Name = "Admin" },
              new IdentityRole { Name = "Teacher" },

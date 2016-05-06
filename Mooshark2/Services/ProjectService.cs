@@ -110,7 +110,10 @@ namespace Mooshark2.Services
                                                         select x) as IEnumerable<Project>;
             return projectsFromCourse;
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7a9dad1d548fd5507d27369a9d03a73382ad811a
 
         
         public IEnumerable<Submission> getStudentsBestSubmission(string userID)
