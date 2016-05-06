@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using Mooshark2.Models.DAL;
@@ -33,10 +34,13 @@ namespace Mooshark2.Services
         {
             if(db.Courses.Any(x => x.Name != model.Course.Name)) {
                 db.Courses.Add(model.Course);
-                /*foreach(var i in model.TeacherList) {
-                    db.CourseTeachers.(i.Id, model.Course.ID);
-                    db.CourseTeachers.
-                }*/
+                foreach(var i in model.TeacherList) {
+                    db.CourseTeachers.AddOrUpdate(new CourseTeacher { CourseID = model.Course.ID, UserID = i.Id});
+                }
+                foreach (var i in model.StudentList)
+                {
+                    db.CourseStudents.AddOrUpdate(new CourseStudent { CourseID = model.Course.ID, UserID = i.Id });
+                }
                 db.SaveChanges();
                 return true;
             }

@@ -27,11 +27,13 @@ namespace Mooshark2.Controllers
         [HttpGet]
         public ActionResult CreateCourse()
         {
-            var model = new Course();
-            var teachers = userService.GetAllTeachers();
-            ViewBag.Teachers = teachers;
+            ViewBag.Teachers = userService.GetAllTeachers();
+            //ViewBag.Students = userService.GetAllStudents();
+            //Course course = new Course(); 
 
-            return View(model); 
+            //AdminCourseViewModel model = new AdminCourseViewModel();
+
+            return View(); 
         }
 
 
@@ -43,6 +45,8 @@ namespace Mooshark2.Controllers
             }
             else {
                 ViewBag.Teachers = userService.GetAllTeachers();
+                //ViewBag.Students = userService.GetAllStudents();
+
                 return View(model);
             }
         }
