@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Mooshark2.Models.ViewModels;
 using Mooshark2.Models.Entities;
 using Mooshark2.Models.ViewModels.StudentViewModels;
+using System.Threading.Tasks;
+using System.IO;
 
 namespace Mooshark2.Controllers
 {
@@ -81,6 +83,36 @@ namespace Mooshark2.Controllers
             }
             //error message, no subproject chosen, ID is invalid
             return View();
+        }
+        [HttpPost]
+        public async Task<JsonResult> UploadHomeReport(string id)
+        {
+            try
+            {
+                foreach (string file in Request.Files)
+                {
+                    var fileContent = Request.Files[file];
+                    if (fileContent != null && fileContent.ContentLength > 0)
+                    {
+                        // get a stream
+                        var stream = fileContent.InputStream;
+                        // and optionally write the file to disk
+                        var fileName = Path.GetFileName(file);
+                        var path = Path.Combine(Server.MapPath("~/App_Data/Images"), fileName);
+                        /*using (var fileStream = File.Create(path))
+                        {
+                            stream.CopyTo(fileStream);
+                        }*/
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                //Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return Json("Upload failed");
+            }
+
+            return Json("File uploaded successfully");
         }
 
 
