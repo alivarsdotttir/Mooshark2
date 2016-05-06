@@ -6,7 +6,7 @@ using System.Web;
 using Mooshark2.Models.DAL;
 
 
-namespace Mooshark2.Models.ViewModels
+namespace Mooshark2.Models.ViewModels.StudentViewModels
 {
     public class StudentCourseViewModel
     {

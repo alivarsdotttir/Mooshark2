@@ -33,121 +33,25 @@ namespace Mooshark2.Migrations
             //    );
             //
 
-
-            /* context.Users.AddOrUpdate(new ApplicationUser
-             {
-                 UserName = "admin",
-                 Email = "admin@admin.is",
-                 PasswordHash = "A.dmin123",
-                 EmailConfirmed = false,
-                 PhoneNumberConfirmed = false,
-                 TwoFactorEnabled = false,
-                 LockoutEnabled = true,
-                 AccessFailedCount = 0,
-                 FullName = "Admin Adminsson",
-                 SSN = "0101660169"
-             });*/
-
-/*
-            context.Users.AddOrUpdate(new ApplicationUser
-
-            /*context.Users.AddOrUpdate(new ApplicationUser
-            {
-                UserName = "admin",
-                Email = "admin@admin.is",
-                PasswordHash = "A.dmin123",
-                EmailConfirmed = false,
-                PhoneNumberConfirmed = false,
-                TwoFactorEnabled = false,
-                LockoutEnabled = true,
-                AccessFailedCount = 0,
-                FullName = "Admin Adminsson",
-                SSN = "0101660169"
-
-            });
-            });*/
-
-
-            /*
-            context.Courses.AddOrUpdate(new Course { Active = true, Name = "Forritun 1" } );
-            context.Courses.AddOrUpdate(new Course { Active = true, Name = "Gagnaskipan" });
-            context.Courses.AddOrUpdate(new Course { Active = false, Name = "Reiknirit" });
-            context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });*/
-
-
-            /* context.Users.AddOrUpdate(new ApplicationUser
-             {
-                 UserName = "admin",
-                 Email = "admin@admin.is",
-                 PasswordHash = "Admin.1234",
-                 EmailConfirmed = false,
-                 PhoneNumberConfirmed = false,
-                 TwoFactorEnabled = false,
-                 LockoutEnabled = true,
-                 AccessFailedCount = 0
-             });*/
-
-/*
-            context.Users.AddOrUpdate(new ApplicationUser
-
-
-            /*context.Users.AddOrUpdate(new ApplicationUser
-
-            {
-                UserName = "admin",
-                Email = "admin@admin.is",
-                PasswordHash = "Admin.1234",
-                EmailConfirmed = false,
-                PhoneNumberConfirmed = false,
-                TwoFactorEnabled = false,
-                LockoutEnabled = true,
-                AccessFailedCount = 0
-            });
-*/
-
-
-
-            
-
-            //8e052276 - b8a1 - 4d64 - ba81 - 796da1b0122c
-
             /*context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
             
 
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
 
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Stýrikerfi" });
-
+            */
+            /*
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 1 });
             context.Projects.AddOrUpdate(new Project { Name = "Project 2", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 1 });
             context.Projects.AddOrUpdate(new Project { Name = "Lab 1", Deadline = DateTime.Now, Graded = true, Visibility = true, CourseID = 2 });
             context.Projects.AddOrUpdate(new Project { Name = "Lab 2", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 2 });
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 3 });
-            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });*/
+            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });
+            */
 
-
-        /*}
-
-            //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            //UserManager.AddToRole("55908c7a-30a8-4bcd-aad4-cb96829e7c34", "Admin");
-        }
-
-
-            /*context.Users.AddOrUpdate(new ApplicationUser
-                {
-                    UserName = "admin",
-                    Email = "admin@admin.is",
-                    PasswordHash = "Admin.123",
-                    EmailConfirmed = false,
-                    PhoneNumberConfirmed = false,
-                    TwoFactorEnabled = false,
-                    LockoutEnabled = false,
-                    AccessFailedCount = 0,
-                    FullName = "Admin Adminsson",
-                    SSN = "0101660169"
-                });*/
-
-
+            // add course-teacher connections
+            //context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "6f47d062-a626-45a1-aad4-4957e1c1ebbd", CourseID = 1 });
+            //context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "f9c37f8b-7133-4f32-ab2d-d85676d5eb90", CourseID = 1 });
         }
 
 
