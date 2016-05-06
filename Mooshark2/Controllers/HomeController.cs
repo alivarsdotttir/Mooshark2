@@ -10,21 +10,22 @@ namespace Mooshark2.Controllers
     {
         public ActionResult Index()
         {
+
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            else if (User.IsInRole("Teacher"))
+            {
+                return RedirectToAction("Index", "Teacher");
+            }
+            else if (User.IsInRole("Student"))
+            {
+                return RedirectToAction("Index", "Student");
+            }
+
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

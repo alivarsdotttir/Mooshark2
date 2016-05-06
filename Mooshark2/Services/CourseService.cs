@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using Mooshark2.Models.DAL;
 using Mooshark2.Models.Entities;
+using Mooshark2.Models.ViewModels.AdminViewModels;
 
 
 namespace Mooshark2.Services
@@ -28,10 +30,17 @@ namespace Mooshark2.Services
         }
 
 
-        public bool ServiceCreateCourse(Course course)
+        public bool ServiceCreateCourse(AdminCourseViewModel model)
         {
-            if(db.Courses.Any(x => x.Name != course.Name)) {
-                db.Courses.Add(course);
+            if(db.Courses.Any(x => x.Name != model.Course.Name)) {
+                db.Courses.Add(model.Course);
+                foreach(var i in model.TeacherList) {
+                    db.CourseTeachers.AddOrUpdate(new CourseTeacher { CourseID = model.Course.ID, UserID = i.Id});
+                }
+                foreach (var i in model.StudentList)
+                {
+                    db.CourseStudents.AddOrUpdate(new CourseStudent { CourseID = model.Course.ID, UserID = i.Id });
+                }
                 db.SaveChanges();
                 return true;
             }
@@ -75,6 +84,27 @@ namespace Mooshark2.Services
                             where y.CourseID == courseId
                             select x) as IEnumerable<ApplicationUser>;
             return teachers; 
+        }
+
+        public IEnumerable<Course> getCoursesForMultipleProjects(IEnumerable<Project> projects)
+        {
+            IEnumerable<Course> courses = null; 
+            foreach(Project project in projects)
+            {
+                if(courses == null)
+                {
+                    courses = (from x in db.Courses
+                               where x.ID == project.CourseID
+                               select x) as IEnumerable<Course>; 
+                }
+                else
+                {
+                    courses = courses.Concat(from x in db.Courses
+                                             where x.ID == project.CourseID
+                                             select x) as IEnumerable<Course>;
+                }
+            }
+            return courses; 
         }
     }
 }

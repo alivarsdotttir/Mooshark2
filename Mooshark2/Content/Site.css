@@ -28,16 +28,16 @@ h2 {
 }
 
 .AdminButtons {
+    color: white;
     background-color: #753bbd;
-    color: white; 
-    padding: 15px 30px;
-    margin: 10%;      
+    border-color: black;
+    margin: 4px;   
+}
+
+.AdminButtons:hover {
+    background-color: purple;
 }
     
 #buttons {
     float: left; 
-}
-
-#edit {
-    margin: 0px 0px 0px 40px; 
 }
