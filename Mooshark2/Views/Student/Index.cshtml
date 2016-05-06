@@ -21,13 +21,14 @@
             <tbody>
 
                 @foreach (var project in Model.upcomingProjects) {
-
+                    foreach (var course in Model.coursesForProjects) {
                     <tr>
-                        <td>@project.Course</td>
-                        <td>@Html.ActionLink(project.Name, "Details", project.ID )</td>
+                        <td>@course.Name</td>
+                        <td>@Html.ActionLink(project.Name, "Details", project.ID)</td>
                         <td>@project.Deadline</td>
                         <td><!--project.isGroupProject--></td>
                     </tr>
+                    }
                 }
             </tbody>
         </table>
