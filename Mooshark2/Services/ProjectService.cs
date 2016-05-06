@@ -19,6 +19,7 @@ namespace Mooshark2.Services
             db = new ApplicationDbContext();
         }
 
+
         public IEnumerable<Project> getUpcomingProjects(IEnumerable<Course> studentCourses)
         {
             IEnumerable<Project> upcomingProjects = null;
@@ -32,12 +33,12 @@ namespace Mooshark2.Services
                                         select x) as IEnumerable<Project>;
                 }
                 else {
-                        upcomingProjects = upcomingProjects.Concat(from x in db.Projects
-                                                                   where x.CourseID == course.ID && DateTime.Now < x.Deadline && x.Visibility == true
-                                                                   orderby x.Deadline ascending
-                                                                   select x) as IEnumerable<Project>;
+                    upcomingProjects = upcomingProjects.Concat(from x in db.Projects
+                                                               where x.CourseID == course.ID && DateTime.Now < x.Deadline && x.Visibility == true
+                                                               orderby x.Deadline ascending
+                                                               select x) as IEnumerable<Project>;
                 }
-                
+
             }
             return upcomingProjects;
         }

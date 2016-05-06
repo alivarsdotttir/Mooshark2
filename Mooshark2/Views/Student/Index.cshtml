@@ -7,7 +7,7 @@
 
 <div class="row">
     <div id="studentUpcomingProjectsTable" class="col-md-8">
-        <table class="table table-bordered table-striped" >
+        <table class="table table-bordered table-striped">
             <caption>Upcoming projects</caption>
             <thead>
                 <tr>
@@ -36,7 +36,6 @@
         <ul>
             @foreach(var course in Model.coursesForStudents) {
                 <li>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</li>
-            }
         </ul>
     </div>
 </div>
@@ -45,5 +44,5 @@
     <p>Welcome to MOOSHARK<br/>
         May the odds be ever in you favour<br/>
         If you need some extra motivation:<br/>
-    <a href="somelink">#PEPP</a></p>
+    <a href="https://www.youtube.com/watch?v=qR3rK0kZFkg">#PEPP</a></p>
 </div>

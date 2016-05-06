@@ -12,11 +12,8 @@ using Mooshark2.Models.Entities;
 
 namespace Mooshark2.Controllers
 {
-    public class TeacherController : Controller
+    public class TeacherController : BaseController
     {
-        private ApplicationDbContext db;
-        private CourseService courseService = new CourseService();
-        private ProjectService projectService = new ProjectService();
 
         // GET: Teacher
         public ActionResult Index()
