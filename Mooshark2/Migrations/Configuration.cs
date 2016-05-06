@@ -45,9 +45,9 @@ namespace Mooshark2.Migrations
 
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Stýrikerfi" });
             */
-            /*
-            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 1 });
-            context.Projects.AddOrUpdate(new Project { Name = "Project 2", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 1 });
+            
+            //context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2017, 3, 9, 16, 5, 7, 123), Graded = false, Visibility = true, CourseID = 1 });
+            /*context.Projects.AddOrUpdate(new Project { Name = "Project 2", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 1 });
             context.Projects.AddOrUpdate(new Project { Name = "Lab 1", Deadline = DateTime.Now, Graded = true, Visibility = true, CourseID = 2 });
             context.Projects.AddOrUpdate(new Project { Name = "Lab 2", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 2 });
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 3 });
@@ -58,11 +58,11 @@ namespace Mooshark2.Migrations
             //context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 4 });*/
 
 
-       // }
+            // }
 
             //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             //UserManager.AddToRole("258502b5-f20a-4e56-87bc-8acd6a405db0", "Admin");
-        //}
+            //}
 
 
             /*context.Users.AddOrUpdate(new ApplicationUser
@@ -86,7 +86,7 @@ namespace Mooshark2.Migrations
         }
 
 
-        }
+    }
 
 
     }
