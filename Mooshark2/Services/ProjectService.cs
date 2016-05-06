@@ -11,12 +11,12 @@ namespace Mooshark2.Services
 {
     public class ProjectService
     {
-        private ApplicationDbContext db;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
 
         public ProjectService()
         {
-            db = new ApplicationDbContext();
+            //db = new ApplicationDbContext();
         }
 
         public IEnumerable<Project> getUpcomingProjects(IEnumerable<Course> studentCourses)
