@@ -8,6 +8,7 @@ using Mooshark2.Models.DAL;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Mooshark2.Models.ViewModels.TeacherViewModels;
+using Mooshark2.Models.Entities;
 
 namespace Mooshark2.Controllers
 {
@@ -45,6 +46,18 @@ namespace Mooshark2.Controllers
 
         public ActionResult CreateProject()
         {
+            var model = new Project();
+            return View(model);
+        }
+
+        public ActionResult CreateProject(Project project)
+        {
+            if (projectService.ServiceCreatProject(project)) {
+                return RedirectToAction("Index");
+            }
+            else {
+                return View(project);
+            }
 
             return View();
         }
@@ -58,7 +71,9 @@ namespace Mooshark2.Controllers
         {
             if(id != null)
             {
-
+                var project = projectService.getProjectById(id.Value);
+                var subprojects = projectService.getSubprojects(id.Value);
+                //var description = 
                 return View();
             }
             //Returns an error message, ID invalid 
@@ -70,8 +85,15 @@ namespace Mooshark2.Controllers
             return View();
         }
 
-        public ActionResult SubmissionDetails()
+        public ActionResult SubmissionDetails(int? id)
         {
+            if (id != null)
+            {
+                var submission = projectService.getSubmissionById(id.Value);
+                return View(submission);
+            }
+
+            return View();
             return View();
         }
     }
