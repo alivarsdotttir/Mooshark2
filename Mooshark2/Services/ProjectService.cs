@@ -119,10 +119,27 @@ namespace Mooshark2.Services
             return projectsFromCourse;
         }
 
-        /*public IEnumerable<Subproject> getProjectDescription()
+        
+        public IEnumerable<Submission> getStudentsBestSubmission(string userID)
         {
-           IEnumerable<Subproject>projectDescription = (from x in db.Subprojects 
-                                                         where x.Description == )
-        }*/
+             IEnumerable<Submission> bestSubmission = (from x in db.Groups
+                                                        join y in db.ProjectGroups on x.ID equals y.GroupID
+                                                        join z in db.Subprojects on y.ProjectID equals z.ProjectID
+                                                        join w in db.Submissions on z.ID equals w.SubprojectID
+                                                        where x.UserID == userID && w.Accepted == true || x.UserID == userID
+                                                        select x).Last() as IEnumerable<Submission>;   
+            return bestSubmission;
+        }
+
+        public IEnumerable<ApplicationUser> getSubmitedStudents(string userID)
+        {
+            IEnumerable<ApplicationUser>submitedStudents = ( from x in db.Groups
+                                                        join y in db.ProjectGroups on x.ID equals y.GroupID
+                                                        join z in db.Subprojects on y.ProjectID equals z.ProjectID
+                                                        join w in db.Submissions on z.ID equals w.SubprojectID
+                                                        where x.UserID == userID && w.ID != null
+                                                        select x) as IEnumerable<ApplicationUser>;
+            return submitedStudents;
+        }
     }
 }

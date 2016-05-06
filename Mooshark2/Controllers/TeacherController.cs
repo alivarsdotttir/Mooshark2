@@ -96,8 +96,9 @@ namespace Mooshark2.Controllers
             {
                 var project = projectService.getProjectById(id.Value);
                 var subprojects = projectService.getSubprojects(id.Value);
-                //var description = 
-                return View();
+
+                TeacherDetailsViewmodel model = new TeacherDetailsViewmodel(project, subprojects);
+                return View(model);
             }
             //Returns an error message, ID invalid 
             return View();
@@ -105,7 +106,13 @@ namespace Mooshark2.Controllers
 
         public ActionResult Submissions()
         {
-            return View();
+            string userId = User.Identity.GetUserId();
+            var students = projectService.getSubmitedStudents(userId);
+            var mostRecentSubmission = projectService.getStudentsBestSubmission(userId);
+
+            TeacherSubmitsViewmodels model = new TeacherSubmitsViewmodels(mostRecentSubmission, students);
+
+            return View(model);
         }
 
         public ActionResult SubmissionDetails(int? id)
@@ -115,8 +122,6 @@ namespace Mooshark2.Controllers
                 var submission = projectService.getSubmissionById(id.Value);
                 return View(submission);
             }
-
-            return View();
             return View();
         }
     }
