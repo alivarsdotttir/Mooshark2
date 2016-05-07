@@ -25,12 +25,15 @@ namespace Mooshark2.Services
         }
 
 
-        public IEnumerable<ApplicationUser> GetAllTeachers()
+        public List<SelectListItem> GetAllTeachers()
         {
             var allTeachers = (from user in db.Users
-                               join rid in db.Roles on user.Id equals rid.Id
+                               join rid in db.Roles on user.Id equals rid.Id // GÆTI VERIÐ VITLAUST ? hmm
                                where rid.Name.ToString() == "Teacher"
-                               select user).ToList();
+                               select user).ToList()
+                               .Select( x=> new SelectListItem {
+                                   Value = x.FullName.ToString(), Text = x.FullName
+                               }).ToList();
 
             return allTeachers;
         }

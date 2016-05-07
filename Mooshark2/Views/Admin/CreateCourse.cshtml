@@ -24,10 +24,20 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.TeacherList, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10" class="dropdown">
+                @Html.DropDownList("Teacher", (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
+            </div>
+        </div>
+
+
+
         @*<div class="form-group">
             @Html.LabelFor(m => m.TeacherList, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 <select>
+
                     MODELIÐ ER ÞAÐ SEM VIÐ ERUM AÐ FARA SETJA INNÍ EKKI DATABASEINN :-) - unnur
                     @foreach(var teacher in Model.TeacherList) {
                         <option value="name">i.FullName</option>

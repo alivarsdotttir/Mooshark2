@@ -32,18 +32,18 @@ namespace Mooshark2.Tests.Controllers
             HomeController controller = new HomeController();
 
             // Act
-<<<<<<< HEAD
+
            // ViewResult result = controller.About() as ViewResult;
 
             // Assert
            // Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-=======
+
 
            //  ViewResult result = controller.About() as ViewResult;
 
             // Assert
             //Assert.AreEqual("Your application description page.", result.ViewBag.Message);
->>>>>>> 5c35d72b38337f589b690d4ec7352dc7a32da1dc
+
         }
 
         [TestMethod]
@@ -53,17 +53,16 @@ namespace Mooshark2.Tests.Controllers
             HomeController controller = new HomeController();
 
             // Act
-<<<<<<< HEAD
+
             //ViewResult result = controller.Contact() as ViewResult;
 
             // Assert
             //Assert.IsNotNull(result);
-=======
+
             // ViewResult result = controller.Contact() as ViewResult;
 
             // Assert
             // Assert.IsNotNull(result);
->>>>>>> 5c35d72b38337f589b690d4ec7352dc7a32da1dc
         }
     }
 }
