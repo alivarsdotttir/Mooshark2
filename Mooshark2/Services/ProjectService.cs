@@ -40,7 +40,11 @@ namespace Mooshark2.Services
                 }
 
             }
-            return upcomingProjects;
+            if (upcomingProjects != null)
+            {
+                return upcomingProjects;
+            }
+            return Enumerable.Empty<Project>();
         }
 
         public IEnumerable<Project> getProjectsForCourse(int courseID)
