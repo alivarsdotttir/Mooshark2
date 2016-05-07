@@ -56,7 +56,11 @@ namespace Mooshark2.Services
                            join y in db.CourseStudents on x.ID equals y.CourseID
                            where studentID == y.UserID
                            select x) as IEnumerable<Course>;
-            return courses; 
+            if (courses != null)
+            {
+                return courses;
+            }
+            return Enumerable.Empty<Course>();
         }
 
 

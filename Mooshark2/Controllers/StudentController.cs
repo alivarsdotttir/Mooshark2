@@ -54,6 +54,8 @@ namespace Mooshark2.Controllers
             {
                 var project = projectService.getProjectById(id.Value);
                 var subprojects = projectService.getSubprojects(id.Value);
+                var courseID = project.CourseID;
+                var course = courseService.getCourseById(courseID);
 
                 IEnumerable<Submission> submissions = null; 
                 foreach(Subproject sub in subprojects)
@@ -67,7 +69,7 @@ namespace Mooshark2.Controllers
                     }
                 }
 
-                StudentDetailsViewModel model = new StudentDetailsViewModel(project, subprojects, submissions);
+                StudentDetailsViewModel model = new StudentDetailsViewModel(project, subprojects, submissions, course);
                 return View(model); 
             }
             //returns an error message, ID invalid, no project chosen
