@@ -84,7 +84,7 @@ namespace Mooshark2.Migrations
 
             // add course-teacher connections
 
-            context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "7f69729b-0d97-4a86-9493-505fbf2e693e", CourseID = 1 });
+            //context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "7f69729b-0d97-4a86-9493-505fbf2e693e", CourseID = 1 });
             //context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "e4a87126-62a5-4904-8359-61d11732dd53", CourseID = 1 });
 
             //context.Subprojects.AddOrUpdate(new Subproject { Name = "First part", Description = "This is the first part", ProjectID = 7, Weight = 50 });
