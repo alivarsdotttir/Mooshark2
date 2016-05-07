@@ -323,6 +323,7 @@
     <Content Include="Views\Admin\CreateCourse.cshtml" />
     <Content Include="Views\Teacher\Course.cshtml" />
     <Content Include="Views\Teacher\Graded.cshtml" />
+    <Content Include="Views\Teacher\create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

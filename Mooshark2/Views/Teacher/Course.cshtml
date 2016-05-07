@@ -1,4 +1,5 @@
-﻿
+﻿@using System.Activities.Statements
+@using Microsoft.Ajax.Utilities
 @model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherCourseViewModel
 @{
     ViewBag.Title = "Course";
@@ -7,8 +8,8 @@
 <link href="~/Content/Site.css" rel="stylesheet" />
 <h2>Course</h2>
     <div>
-        <table class="courseTable">
-            <caption>>nafn áfangans <!--kann ekki að láta það breytast þar sem maður notar ekki foreach lykkju--></caption>
+        <table class="table table-bordered table-striped">
+            <caption>nafn áfangans <!--kann ekki að láta það breytast þar sem maður notar ekki foreach lykkju--></caption>
             <thead>
                 <tr>
                     <th>Visability</th>
@@ -20,20 +21,23 @@
                 </tr>
             </thead>
             <tbody>
-                <!--foreach (var project in Model.courseProjects) {
-                    foreach(var course in Model.course) {-->
+                @foreach (var project in Model.courseProjects) {
                         <tr>
-                             <!--<td>project.Visability</td>
-                             <td>course.Name</td>
-                             <td>project.Name</td>
-                             <td>project.Deadline</td>
-                             <td>project.Graded</td>-->
+                             <td>@project.Visibility</td>
+                             <td></td>
+                             <td>@project.Name</td>
+                             <td>@project.Deadline</td>
+                             <td>@project.Graded</td>
                              <td><!--veit ekki hvernig ég á að ná í groups þarf ég að gera nýtt thing í courseVieweModel--></td>
                          </tr>
-                    }
-
                 }
                
             </tbody>
          </table>
+    </div>
+    <div>
+        @Html.ActionLink("Create new project", "create", "Teacher", null, new { @class = "btn btn-primary btn-lg TeacherButtons" })
+    </div>
+    <div>
+        @Html.ActionLink("Back to Main Page", "Index", "Teacher", null, new { @class = "btn btn-primary btn-lg TeacherButtons" })
     </div>
