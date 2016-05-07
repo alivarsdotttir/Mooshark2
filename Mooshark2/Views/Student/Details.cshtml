@@ -15,4 +15,9 @@
     }
 </div>
 
+<div>
+    <p>Deadline: @Model.currentProject.Deadline</p>
+    <p>Time until deadline: @((Model.currentProject.Deadline)-DateTime.Now)</p>
+</div>
+
 @Html.ActionLink("Back to course", "Course", new { id = Model.currentCourse.ID })
