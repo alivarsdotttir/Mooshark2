@@ -8,8 +8,8 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
 {
     public class TeacherDetailsViewmodel
     {
-        Project currentProject;
-        IEnumerable<Subproject> subprojects;
+        public Project currentProject;
+        public IEnumerable<Subproject> subprojects;
 
         public TeacherDetailsViewmodel(Project c, IEnumerable<Subproject> sub)
         {

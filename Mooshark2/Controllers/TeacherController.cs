@@ -20,9 +20,10 @@ namespace Mooshark2.Controllers
         {
             string userId = User.Identity.GetUserId();
             var ungradedProjects = projectService.getUngradedProjects(userId);
+            var coursesForProjects = courseService.getCoursesForMultipleProjects(ungradedProjects);
             var teacherCourses = courseService.getCoursesForTeacher(userId);
 
-            TeacherIndexViewmodel model = new TeacherIndexViewmodel(ungradedProjects, teacherCourses);
+            TeacherIndexViewmodel model = new TeacherIndexViewmodel(ungradedProjects, coursesForProjects, teacherCourses);
             return View(model);
         }
 
@@ -33,7 +34,7 @@ namespace Mooshark2.Controllers
                 var course = courseService.getCourseById(id.Value); 
                 var courseProjects = projectService.getProjectsFromCourse(id.Value);
 
-                TeacherCourseVieweModel model = new TeacherCourseVieweModel(course, courseProjects);
+                TeacherCourseViewModel model = new TeacherCourseViewModel(course, courseProjects);
                  return View(model);
             }
             //Returns an error message, ID invalid 

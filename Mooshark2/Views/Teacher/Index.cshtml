@@ -1,4 +1,6 @@
-﻿
+﻿@using System.Activities.Statements
+@using Microsoft.Ajax.Utilities
+@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherIndexViewmodel
 @{
     ViewBag.Title = "Index";
 }
@@ -9,7 +11,7 @@
     <div class="col-md-5">
         <section>
             <div>
-                <table>
+                <table class="table table-bordered table-striped">
                     <caption>Ungraded Assignments</caption>
                     <thead>
                         <tr>
@@ -20,14 +22,32 @@
                         </tr>
                     </thead>
                     <tbody>
+                      @foreach (var project in Model.ungradedProjects) {
+                          foreach (var course in Model.coursesForProjects) {
+                            <tr>
+                                <td>@course.Name</td> <!--á ég að hafa þetta líka sem actionlink??-->
+                                <td>@Html.ActionLink(project.Name, "Graded", new { id = project.ID} )</td>
+                                <td>@project.Deadline</td>
+                                <td></td>
+                            </tr>
+                          }
+                      }
                     </tbody>
                 </table>
             </div>
-        </section>
+         </section>
     </div>
     <div class="col-md-7">
         <section id="socialLoginForm">
-            <p> Hello World</p>
+            <div>
+                <h8>Courses</h8>
+                <ul>
+                    @foreach (var course in Model.coursesForTeacher)
+                    {
+                        <li>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</li>
+                    }
+                </ul>
+            </div>  
         </section>
     </div>
 </div>
