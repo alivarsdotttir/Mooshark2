@@ -30,7 +30,12 @@ h2 {
 .AdminButtons {
     color: white;
     background-color: #753bbd;
-    border-color: black;    
+    border-color: black;
+    margin: 4px;   
+}
+
+.AdminButtons:hover {
+    background-color: purple;
 }
     
 #buttons {
