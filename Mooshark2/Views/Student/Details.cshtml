@@ -8,20 +8,11 @@
 <h2>@Model.currentProject.Name</h2>
 
 <div>
-   @*<ul>
-        @if(Model.subprojects != null && Model.subprojects.Any()) {
-            for(int i = 1; i < Model.subprojects.Count(); i++) {
-                <li><a href="#tabs- @i">Part @i</a></li>
-            }
-        }
-    </ul>*@
-
-    <div>
-        @foreach(var subproject in Model.subprojects) {
-            <h3>@subproject.Name</h3>
-            <p>@subproject.Description</p>
-        }
-    </div>
+    @foreach(var subproject in Model.subprojects) {
+        <h3>@subproject.Name</h3>
+        <p>@subproject.Description</p>
+        @Html.ActionLink("Submit", "Submit", new { id = subproject.ID })
+    }
 </div>
 
 @Html.ActionLink("Back to course", "Course", new { id = Model.currentCourse.ID })
