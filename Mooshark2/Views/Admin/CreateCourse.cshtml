@@ -28,7 +28,8 @@
             @Html.LabelFor(m => m.TeacherList, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 <select>
-                    @foreach(var i in Model.TeacherList) {
+                    MODELIÐ ER ÞAÐ SEM VIÐ ERUM AÐ FARA SETJA INNÍ EKKI DATABASEINN :-) - unnur
+                    @foreach(var teacher in Model.TeacherList) {
                         <option value="name">i.FullName</option>
                     }
                 </select>
