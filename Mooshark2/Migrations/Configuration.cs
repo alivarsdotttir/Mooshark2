@@ -25,11 +25,11 @@ namespace Mooshark2.Migrations
 
 
             //context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2016, 6, 9, 0, 0, 0), Graded = false, Visibility = true, CourseID = 1 } );
-            context.Roles.AddOrUpdate(r => r.Name,
+            /*context.Roles.AddOrUpdate(r => r.Name,
              new IdentityRole { Name = "Admin" },
              new IdentityRole { Name = "Teacher" },
              new IdentityRole { Name = "Student" }
-             );
+             );*/
              
             //  This method will be called after migrating to the latest version
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
@@ -43,9 +43,9 @@ namespace Mooshark2.Migrations
             //    );
             //
 
-            /*
+            
 
-            /*
+           /* 
             context.Courses.AddOrUpdate(new Course { Active = true, Name = "Forritun 1" } );
             context.Courses.AddOrUpdate(new Course { Active = true, Name = "Gagnaskipan" });
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Reiknirit" });
@@ -62,10 +62,10 @@ namespace Mooshark2.Migrations
 
             //8e052276 - b8a1 - 4d64 - ba81 - 796da1b0122c
 
-            /*context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
+            /*context.Courses.AddOrUpdate(new Course { Active = true, Name = "Vefforritun" });
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
-            context.Courses.AddOrUpdate(new Course { Active = false, Name = "Stýrikerfi" });
-            */
+            context.Courses.AddOrUpdate(new Course { Active = false, Name = "Stýrikerfi" });*/
+            
 
             //context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2017, 3, 9, 16, 5, 7, 123), Graded = false, Visibility = true, CourseID = 1 });
             /*context.Projects.AddOrUpdate(new Project { Name = "Project 2", Deadline = DateTime.Now, Graded = false, Visibility = true, CourseID = 1 });
@@ -83,8 +83,9 @@ namespace Mooshark2.Migrations
             //UserManager.AddToRole("258502b5-f20a-4e56-87bc-8acd6a405db0", "Admin");
 
             // add course-teacher connections
-            //context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "6f47d062-a626-45a1-aad4-4957e1c1ebbd", CourseID = 1 });
-            //context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "f9c37f8b-7133-4f32-ab2d-d85676d5eb90", CourseID = 1 });
+
+            context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "7f69729b-0d97-4a86-9493-505fbf2e693e", CourseID = 1 });
+            //context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "e4a87126-62a5-4904-8359-61d11732dd53", CourseID = 1 });
 
             //context.Subprojects.AddOrUpdate(new Subproject { Name = "First part", Description = "This is the first part", ProjectID = 7, Weight = 50 });
             //context.Subprojects.AddOrUpdate( new Subproject { Name = "Second part", Description = "This is the second part", ProjectID = 7, Weight = 50 });

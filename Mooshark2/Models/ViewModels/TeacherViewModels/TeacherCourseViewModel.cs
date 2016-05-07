@@ -6,12 +6,12 @@ using System.Web;
 
 namespace Mooshark2.Models.ViewModels.TeacherViewModels
 {
-    public class TeacherCourseVieweModel
+    public class TeacherCourseViewModel
     {
-        Course course;
-        IEnumerable<Project> courseProjects;
+        public Course course;
+        public IEnumerable<Project> courseProjects;
 
-        public TeacherCourseVieweModel(Course c, IEnumerable<Project> p)
+        public TeacherCourseViewModel(Course c, IEnumerable<Project> p)
         {
             course = c;
             courseProjects = p;
