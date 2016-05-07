@@ -49,8 +49,8 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Role, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.DropDownList("Role", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")
+        <div class="col-md-10" class="dropdown">
+            @Html.DropDownList("Role", (IEnumerable<SelectListItem>)ViewBag.Roles, "- Select a Role -", new { @class = "btn btn-default dropdown-toggle" })
         </div>
     </div>
 
