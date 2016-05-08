@@ -42,13 +42,16 @@ namespace Mooshark2.Controllers
            
         }
 
-
+   
         //GET
         [HttpGet]
         public ActionResult CreateProject()
         {
             var project = new Project();
-            return View(project);
+            var subprojects = new Subproject();
+
+            TeacherCreateViewModel model = new TeacherCreateViewModel(project, subprojects);
+            return View(model);
         }
 
 
