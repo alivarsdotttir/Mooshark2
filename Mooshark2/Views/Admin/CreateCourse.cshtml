@@ -28,11 +28,14 @@
             @Html.LabelFor(model => model.TeacherList, new { @class = "col-md-2 control-label" })
             <div class="col-md-10" class="dropdown">
                 @Html.DropDownList("TeacherList", (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
+                <button type="button" class="btn btn-primary" data-toggle="button">
+                    Add another
+                </button>
             </div>
         </div>
 
         <div class="form-group">
-            <a class="btn btn-primary AdminButtons" data-toggle="model" data-target=".bootstrapmodal"><span></span>Select students</a>
+            <a class="btn btn-primary AdminButtons" data-toggle="modal" data-target=".bootstrapmodal"><span></span>Select students</a>
 
             <div class="modal fade bootstrapmodal">
                 <div class="modal-dialog">
