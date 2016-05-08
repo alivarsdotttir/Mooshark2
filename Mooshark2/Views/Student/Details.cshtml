@@ -5,19 +5,41 @@
     ViewBag.Title = "Details";
 }
 
+<link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+<script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+
 <h2>@Model.currentProject.Name</h2>
 
-<div>
-    @foreach(var subproject in Model.subprojects) {
-        <h3>@subproject.Name</h3>
-        <p>@subproject.Description</p>
-        @Html.ActionLink("Submit", "Submit", new { id = subproject.ID })
+<div id='jqxTabs'>
+    <ul style='margin-left: 20px;'>
+    @for (int i = 1; i < Model.subprojects.Count()+1; i++) {
+        <li>Tab @i</li>
     }
+    </ul>
 </div>
 
-<div>
-    <p>Deadline: @Model.currentProject.Deadline</p>
-    <p>Time until deadline: @((Model.currentProject.Deadline)-DateTime.Now)</p>
-</div>
+    <div>
+        @foreach (var subproject in Model.subprojects) {
+            <div>
+                <h3>@subproject.Name</h3>
+                <p>@subproject.Description</p>
+                @Html.ActionLink("Submit", "Submit", new { id = subproject.ID })
+            </div>
+        }
+   </div>
 
-@Html.ActionLink("Back to course", "Course", new { id = Model.currentCourse.ID })
+        <div>
+            <p>Deadline: @Model.currentProject.Deadline</p>
+            <p>Time until deadline: @((Model.currentProject.Deadline) - DateTime.Now)</p>
+        </div>
+
+        @Html.ActionLink("Back to course", "Course", new { id = Model.currentCourse.ID })
+        
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#jqxTabs').jqxTabs({ width: 550, height: 150 });
+    });
+</script>
