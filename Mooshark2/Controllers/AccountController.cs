@@ -181,7 +181,7 @@ namespace Mooshark2.Controllers
 
                 if(result.Succeeded) {
 
-                    UserManager.AddToRole(user.Id, model.Role);
+                    UserManager.AddToRole(user.Id, model.Role);                  
 
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
