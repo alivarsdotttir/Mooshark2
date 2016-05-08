@@ -61,7 +61,7 @@ namespace Mooshark2.Services
             throw new NotImplementedException();
         }
 
-        public List<SelectListItem> GetAllStudents()
+        public List<ApplicationUser> GetAllStudents()
         {
             /*var allStudents = (from user in db.Users
                                join rid in db.Roles on user.Id equals rid.Id
@@ -74,9 +74,8 @@ namespace Mooshark2.Services
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var studentRole = roleManager.FindByName("Student");
-            var allStudents = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).ToList().Select(
-                                                  x => new SelectListItem { Value = x.FullName.ToString(), Text = x.FullName })
-                                              .ToList();
+            var allStudents = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).ToList();
+
 
             return allStudents;
         }

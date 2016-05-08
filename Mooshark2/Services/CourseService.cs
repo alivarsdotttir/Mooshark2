@@ -38,7 +38,7 @@ namespace Mooshark2.Services
             }
             else {
                 db.Courses.Add(model.Course);
-                if (model.TeacherList != null) {
+                if (model.TeacherList.ToString() != "- Select a Teacher -" || model.TeacherList != null) {
                     foreach (var i in model.TeacherList) {
                         db.CourseTeachers.AddOrUpdate(new CourseTeacher { CourseID = model.Course.ID, UserID = i.Id });
                     }
@@ -46,7 +46,7 @@ namespace Mooshark2.Services
 
                 if(model.StudentList != null) {
                     foreach(var i in model.StudentList) {
-                        db.CourseStudents.AddOrUpdate(new CourseStudent { CourseID = model.Course.ID, UserID = i.Id});
+                        db.CourseStudents.AddOrUpdate(new CourseStudent { CourseID = model.Course.ID, UserID = i.Id });
                     }
                 }
                 /* foreach (var i in model.StudentList)
