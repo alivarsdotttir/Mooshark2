@@ -53,6 +53,7 @@ namespace Mooshark2.Services
                     {
                         db.CourseStudents.AddOrUpdate(new CourseStudent { CourseID = model.Course.ID, UserID = i.Id });
                     }*/
+
                 db.SaveChanges();
                 return true;
              }
