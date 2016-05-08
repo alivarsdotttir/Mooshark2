@@ -43,12 +43,36 @@
                     <div class="modal-content">
                         
                         <div class="modal-header">
-                            Hello
+                            Select students
                         </div>
                         <div class="modal-body">
-                            Lorem ipsum
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>SSN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var i in Model.StudentList)
+                                    {
+                                        <tr>
+                                            <td><input type="checkbox"/></td>
+                                            <td>@i.FullName</td>
+                                            <td>@i.Email</td>
+                                            <td>@i.SSN</td>
+                                        </tr>
+
+                                            @*<fieldset action="/MovieApp/RateMovie" class="rating" id="rateinfo" name="rateinfo">
+                                            <input type="radio" id="star10" name="rateinfo" value="10" /><label class="full" for="star10" title="10 stars"></label>*@
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                         <div class="modal-footer">
+                            <button class="btn btn-primary">submit</button>
+                            <button class="btn btn-default">cancel</button>
 
                         </div>
                     </div>

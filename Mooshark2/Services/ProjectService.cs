@@ -136,7 +136,7 @@ namespace Mooshark2.Services
                                                         join y in db.ProjectGroups on x.ID equals y.GroupID
                                                         join z in db.Subprojects on y.ProjectID equals z.ProjectID
                                                         join w in db.Submissions on z.ID equals w.SubprojectID
-                                                        where x.UserID == userID && w.ID != null
+                                                        where x.UserID == userID && w.ID != 0
                                                         select x) as IEnumerable<ApplicationUser>;
             return submitedStudents;
         }

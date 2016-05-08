@@ -28,7 +28,7 @@ namespace Mooshark2.Controllers
         public ActionResult CreateCourse()
         {
             ViewBag.Teachers = userService.GetAllTeachers();
-            //ViewBag.Students = userService.GetAllStudents();
+            ViewBag.Students = userService.GetAllStudents();
             //Course course = new Course(); 
 
             //AdminCourseViewModel model = new AdminCourseViewModel();
@@ -48,7 +48,7 @@ namespace Mooshark2.Controllers
             }
             else {
                 ViewBag.Teachers = userService.GetAllTeachers();
-                //ViewBag.Students = userService.GetAllStudents();
+                ViewBag.Students = userService.GetAllStudents();
 
                 return View(model);
             }
