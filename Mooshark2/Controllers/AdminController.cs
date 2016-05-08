@@ -40,7 +40,10 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult CreateCourse(AdminCourseViewModel model)
         {
-            if(courseService.ServiceCreateCourse(model)) {
+            bool course = courseService.ServiceCreateCourse(model);
+
+            if (course) {
+
                 return RedirectToAction("Index");
             }
             else {

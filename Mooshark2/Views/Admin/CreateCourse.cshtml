@@ -24,14 +24,34 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="">
             @Html.LabelFor(model => model.TeacherList, new { @class = "col-md-2 control-label" })
             <div class="col-md-10" class="dropdown">
-                @Html.DropDownList("Teacher", (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
+                @Html.DropDownList("TeacherList", (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
             </div>
         </div>
 
+        <div class="form-group">
+            <a class="btn btn-primary AdminButtons" data-toggle="model" data-target=".bootstrapmodal"><span></span>Select students</a>
 
+            <div class="modal fade bootstrapmodal">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+                        
+                        <div class="modal-header">
+                            Hello
+                        </div>
+                        <div class="modal-body">
+                            Lorem ipsum
+                        </div>
+                        <div class="modal-footer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         @*<div class="form-group">
             @Html.LabelFor(m => m.TeacherList, new { @class = "col-md-2 control-label" })
