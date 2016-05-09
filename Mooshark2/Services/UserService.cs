@@ -75,5 +75,14 @@ namespace Mooshark2.Services
             return allStudents;
         }
 
+        public ApplicationUser getUserById(string userId)
+        {
+            ApplicationUser user = (from x in db.Users
+                                    where x.Id == userId
+                                    select x).FirstOrDefault();
+
+            return user;
+        }
+
     }
 }

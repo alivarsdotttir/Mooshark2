@@ -90,6 +90,9 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult Submit(HttpPostedFileBase file)
         {
+            string userId = User.Identity.GetUserId();
+            var user = userService.getUserById(userId);
+            
 
             if (file.ContentLength > 0)
             {
