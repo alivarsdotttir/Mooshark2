@@ -34,7 +34,7 @@ namespace Mooshark2.Models.DAL
         public DbSet<Submission> Submissions { get; set; }
         public DbSet<Subproject> Subprojects { get; set; }
         public DbSet<ProjectSubproject> ProjectSubprojects { get; set; }
-
+        public DbSet<StudentSubmission> StudentSubmissions { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
