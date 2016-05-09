@@ -114,15 +114,22 @@ namespace Mooshark2.Controllers
         }
 
 
-        public ActionResult Submissions()
+        public ActionResult Submissions(int? subprojectID)
         {
-            string userId = User.Identity.GetUserId();
-            var students = projectService.getSubmittedStudents(userId);
-            var mostRecentSubmission = projectService.getStudentsBestSubmission(userId);
+            if(subprojectID != null) {
+                string userId = User.Identity.GetUserId();
+                var students = projectService.getStudentsThatHaveSubmitted(subprojectID.Value);
+                var mostRecentSubmission = projectService.getStudentsBestSubmission(userId);
+                var allSubmissionsForSubproject = projectService.getSubmissions(subprojectID.Value);
 
-            TeacherSubmitsViewmodels model = new TeacherSubmitsViewmodels(mostRecentSubmission, students);
+                TeacherSubmissionsViewmodel model = new TeacherSubmissionsViewmodel(allSubmissionsForSubproject,
+                    students,
+                    mostRecentSubmission);
 
-            return View(model);
+                return View(model);
+            }
+
+            return View();
         }
 
         public ActionResult SubmissionDetails(int? id)
