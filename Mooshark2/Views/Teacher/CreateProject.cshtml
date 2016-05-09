@@ -3,12 +3,8 @@
 @{
     ViewBag.Title = "CreateProject";
 }
-<script>
-            function myfunction() {
-                $("section").clone().add("section").appendTo($(".copy"));
-            }
-</script>
-<body>
+
+
     <h2>Create Project</h2>
 
     <div class="form-horizontal labelm">
@@ -25,7 +21,6 @@
             </div>
         </div>
         <section>
-            
             <div class="form-group">
                 @Html.LabelFor(model => model.subproject.Name, "Part name", new { @class = "col-md-2 contorl-la" })
                 <div>
@@ -51,11 +46,12 @@
                 </div>
             </div>-->
         </section>
-        <div class="copy">
-
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
-        <button onclick="myfunction()">New part</button>
-
+        <div>
+            @Html.ActionLink("Back to Course", "Course", "Teacher", null, new { @class = "btn btn-primary btn-lg TeacherButtons" })
+        </div>
     </div>
-</body>
+
 

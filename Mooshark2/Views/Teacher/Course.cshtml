@@ -36,7 +36,7 @@
          </table>
     </div>
     <div>
-        @Html.ActionLink("Create new project", "CreateProject", "Teacher", null, new { @class = "btn btn-primary btn-lg TeacherButtons" })
+        @Html.ActionLink("Create new project", "CreateProject", new { id = Model.course.ID }, new { @class = "btn btn-primary btn-lg TeacherButtons" })    
     </div>
     <div>
         @Html.ActionLink("Back to Main Page", "Index", "Teacher", null, new { @class = "btn btn-primary btn-lg TeacherButtons" })

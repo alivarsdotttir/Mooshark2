@@ -78,8 +78,6 @@ namespace Mooshark2.Services
             return project; 
         }
 
-<<<<<<< HEAD
-
         public bool ServiceCreateSubproject(TeacherCreateViewModel model)
         {
             if (db.Subprojects.Any(x => x.Name == model.subproject.Name))
@@ -94,12 +92,7 @@ namespace Mooshark2.Services
             }
         }
 
-    
-
-        public IEnumerable<Subproject> getSubprojects(int projectID)
-=======
        public IEnumerable<Subproject> getSubprojects(int projectID)
->>>>>>> 6a22fc59331cf2ffb91b6817968256ad1de3bddd
         {
             IEnumerable<Subproject> subprojects = (from x in db.Subprojects
                                                    where projectID == x.ProjectID

@@ -10,13 +10,13 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
     {
         public Project project;
         public Subproject subproject;
-        public IEnumerable<Subproject> subprojects;
+        //public IEnumerable<Subproject> subprojects;
         public Course course;
 
-        public TeacherCreateViewModel(Project p, IEnumerable<Subproject> s, Course c)
+        public TeacherCreateViewModel(Project p, Subproject s, Course c)
         {
             project = p;
-            subprojects = s;
+            subproject = s;
             course = c;
         }
     }
