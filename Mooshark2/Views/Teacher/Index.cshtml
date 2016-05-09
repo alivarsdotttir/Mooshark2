@@ -25,8 +25,8 @@
                       @foreach (var project in Model.ungradedProjects) {
                           foreach (var course in Model.coursesForProjects) {
                             <tr>
-                                <td>@course.Name</td> <!--á ég að hafa þetta líka sem actionlink??-->
-                                <td>@Html.ActionLink(project.Name, "Graded", new { id = project.ID} )</td>
+                                <td>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</td>
+                                <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID} )</td>
                                 <td>@project.Deadline</td>
                                 <td></td>
                             </tr>
