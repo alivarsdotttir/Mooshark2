@@ -5,49 +5,40 @@
     ViewBag.Title = "Index";
 }
 
-<link href="~/Content/Site.css" rel="stylesheet" />
+
 <h2>Teacher View</h2>
 <div class="row">
-    <div class="col-md-5">
-        <section>
-            <div>
-                <table class="table table-bordered table-striped">
-                    <caption>Ungraded Assignments</caption>
-                    <thead>
+    <div class="col-md-8">
+        <table class="table table-bordered table-striped">
+             <caption>Ungraded Assignments</caption>
+             <thead>
+                     <tr>
+                         <th>Course</th>
+                         <th>Assignment</th>
+                         <th>Deadline</th>
+                         <th>Group</th>
+                     </tr>
+             </thead>
+             <tbody>
+                   @foreach (var course in Model.coursesForProjects) {
+                        foreach (var project in Model.ungradedProjects) {
                         <tr>
-                            <th>Course</th>
-                            <th>Assignment</th>
-                            <th>Deadline</th>
-                            <th>Group</th>
+                            <td>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</td>
+                            <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID} )</td>
+                            <td>@project.Deadline</td>
+                            <td></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                      @foreach (var project in Model.ungradedProjects) {
-                          foreach (var course in Model.coursesForProjects) {
-                            <tr>
-                                <td>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</td>
-                                <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID} )</td>
-                                <td>@project.Deadline</td>
-                                <td></td>
-                            </tr>
-                          }
-                      }
-                    </tbody>
-                </table>
-            </div>
-         </section>
+                       }
+                  }
+             </tbody>
+        </table>
     </div>
-    <div class="col-md-7">
-        <section id="socialLoginForm">
-            <div>
-                <h8>Courses</h8>
-                <ul>
-                    @foreach (var course in Model.coursesForTeacher)
-                    {
-                        <li>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</li>
-                    }
-                </ul>
-            </div>  
-        </section>
+    <div class="col-md-4">
+          <h8>Courses</h8>
+           <ul>
+           @foreach (var course in Model.coursesForTeacher) {
+               <li>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</li>
+           }
+         </ul>
     </div>
 </div>
