@@ -6,6 +6,7 @@
 
 <h2>CreateCourse</h2>
 
+<script src="jquery-1.12.2.min.js"></script>
 
 @using (Html.BeginForm()) 
 {
@@ -25,14 +26,33 @@
         </div>
 
         <div class="">
-            @Html.LabelFor(model => model.TeacherList, new { @class = "col-md-2 control-label" })
             <div class="col-md-10" class="dropdown">
-                @Html.DropDownList("TeacherList", (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
-                <button type="button" class="btn btn-primary" data-toggle="button">
+                <div id="duplicater">
+                    @Html.LabelFor(model => model.TeacherList, new { @class = "col-md-2 control-label" })
+                    duplicate EVERYTHING INSIDE THIS DIV
+                    @Html.DropDownList("TeacherList", (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle", @id = "dropTeacher" })
+                </div>
+                <button id ="button" class="btn btn-primary" data-toggle="button" onclick="duplicate()">
                     Add another
                 </button>
             </div>
         </div>
+
+        <script type="text/javascript">
+            
+            document.getElementById('button').onclick = duplicate;
+
+
+            var i = 0;
+            var original = document.getElementById('duplicater');
+
+            function duplicate() {
+                var clone = original.cloneNode(true); // "deep" clone
+                clone.id = "duplicetor" + ++i; // there can only be one element with an ID
+                original.parentNode.appendChild(clone);
+            }
+            
+        </script>
 
         <div class="form-group">
             <a class="btn btn-primary AdminButtons" data-toggle="modal" data-target=".bootstrapmodal"><span></span>Select students</a>
@@ -41,41 +61,40 @@
                 <div class="modal-dialog">
 
                     <div class="modal-content">
-                        
+
                         <div class="modal-header">
                             Select students
                         </div>
-                        <div class="modal-body">
-                            <table>
-                                <thead>
+                        <form action="/Admin/CreateCourse" method="POST" >
+                            <div class="modal-body">
+
+                                <table>
+                                    <thead>
                                     <tr>
                                         <th></th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>SSN</th>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var i in ViewBag.Students)
-                                    {
+                                    </thead>
+                                    <tbody>
+                                    @foreach(var i in ViewBag.Students) {
                                         <tr>
-                                            <td><input type="checkbox"/></td>
+                                            @*<td><input type="checkbox" name="StudentList" value= @i.FullName></td>*@
+                                            <td>@Html.CheckBox("StudentList", new {Value = i, @class="checkbox"})</td>
                                             <td>@i.FullName</td>
                                             <td>@i.Email</td>
                                             <td>@i.SSN</td>
                                         </tr>
-
-                                            @*<fieldset action="/MovieApp/RateMovie" class="rating" id="rateinfo" name="rateinfo">
-                                            <input type="radio" id="star10" name="rateinfo" value="10" /><label class="full" for="star10" title="10 stars"></label>*@
                                     }
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary">submit</button>
-                            <button class="btn btn-default">cancel</button>
-
-                        </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                @Html.ActionLink("Ok", "CreateCourse", new { @class = "btn btn-success" });
+                                @Html.ActionLink("Cancel", "CreateCourse", new { @class = "btn btn-default" });
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
