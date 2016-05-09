@@ -3,12 +3,8 @@
 @{
     ViewBag.Title = "CreateProject";
 }
-<script>
-            function myfunction() {
-                $("section").clone().add("section").appendTo(document.body);
-            }
-</script>
-<body>
+
+
     <h2>Create Project</h2>
 
     <div class="form-horizontal labelm">
@@ -50,8 +46,12 @@
                 </div>
             </div>-->
         </section>
-        <button onclick="myfunction()">New part</button>
-
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+        <div>
+            @Html.ActionLink("Back to Course", "Course", "Teacher", null, new { @class = "btn btn-primary btn-lg TeacherButtons" })
+        </div>
     </div>
-</body>
+
 
