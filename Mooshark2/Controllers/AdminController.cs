@@ -55,9 +55,9 @@ namespace Mooshark2.Controllers
         }
 
 
-        public ActionResult EditUser()
+        public ActionResult Edit(Course model)
         {
-            return View(); 
+            return View(model); 
         }
     }
 }
