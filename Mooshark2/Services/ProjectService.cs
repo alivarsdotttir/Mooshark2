@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Mooshark2.Models.DAL;
-
+using Mooshark2.Models.ViewModels.TeacherViewModels;
 
 namespace Mooshark2.Services
 {
@@ -47,6 +47,21 @@ namespace Mooshark2.Services
             return Enumerable.Empty<Project>();
         }
 
+        public bool ServiceCreateProject(TeacherCreateViewModel model)
+        {
+            if (db.Projects.Any(x => x.Name == model.project.Name))
+            { 
+                return false;
+            }
+            else
+            {
+                db.Projects.Add(model.project);
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+
         public IEnumerable<Project> getProjectsForCourse(int courseID)
         {
             IEnumerable<Project> projects = (from x in db.Projects
@@ -62,6 +77,23 @@ namespace Mooshark2.Services
                                select x).SingleOrDefault(); 
             return project; 
         }
+
+
+        public bool ServiceCreateSubproject(TeacherCreateViewModel model)
+        {
+            if (db.Subprojects.Any(x => x.Name == model.subproject.Name))
+            {
+                return false;
+            }
+            else
+            {
+                db.Subprojects.Add(model.subproject);
+                db.SaveChanges();
+                return true;
+            }
+        }
+
+    
 
         public IEnumerable<Subproject> getSubprojects(int projectID)
         {

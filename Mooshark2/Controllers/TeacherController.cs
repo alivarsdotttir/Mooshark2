@@ -45,12 +45,14 @@ namespace Mooshark2.Controllers
    
         //GET
         [HttpGet]
-        public ActionResult CreateProject()
+        public ActionResult CreateProject(int? id)
         {
             var project = new Project();
-            var subprojects = new Subproject();
+            var subproject = new Subproject();
+            IEnumerable<Subproject> subprojects = new List<Subproject>();
+            var course = courseService.getCourseById(id.Value);
 
-            TeacherCreateViewModel model = new TeacherCreateViewModel(project, subprojects);
+            TeacherCreateViewModel model = new TeacherCreateViewModel(project, subprojects, course);
             return View(model);
         }
 

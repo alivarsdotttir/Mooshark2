@@ -5,7 +5,7 @@
 }
 <script>
             function myfunction() {
-                $("section").clone().add("section").appendTo(document.body);
+                $("section").clone().add("section").appendTo($(".copy"));
             }
 </script>
 <body>
@@ -25,6 +25,7 @@
             </div>
         </div>
         <section>
+            
             <div class="form-group">
                 @Html.LabelFor(model => model.subproject.Name, "Part name", new { @class = "col-md-2 contorl-la" })
                 <div>
@@ -50,6 +51,9 @@
                 </div>
             </div>-->
         </section>
+        <div class="copy">
+
+        </div>
         <button onclick="myfunction()">New part</button>
 
     </div>
