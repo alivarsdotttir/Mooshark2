@@ -38,15 +38,16 @@ namespace Mooshark2.Services
             }
             else {
                 db.Courses.Add(model.Course);
-                if (model.TeacherList.ToString() != "- Select a Teacher -" || model.TeacherList != null) {
+
+                if (model.TeacherList != null) {
                     foreach (var i in model.TeacherList) {
-                        db.CourseTeachers.AddOrUpdate(new CourseTeacher { CourseID = model.Course.ID, UserID = i.Id });
+                        db.CourseTeachers.Add(new CourseTeacher { CourseID = model.Course.ID, UserID = i.Id });
                     }
                 }
 
-                if(model.StudentList != null) {
+                if (model.StudentList != null) {
                     foreach(var i in model.StudentList) {
-                        db.CourseStudents.AddOrUpdate(new CourseStudent { CourseID = model.Course.ID, UserID = i.Id });
+                        db.CourseStudents.Add(new CourseStudent { CourseID = model.Course.ID, UserID = i.Id });
                     }
                 }
                 /* foreach (var i in model.StudentList)
