@@ -215,6 +215,7 @@
     <Compile Include="Models\Entities\InputOutput.cs" />
     <Compile Include="Models\Entities\Project.cs" />
     <Compile Include="Models\Entities\ProjectGroup.cs" />
+    <Compile Include="Models\Entities\ProjectSubproject.cs" />
     <Compile Include="Models\Entities\Submission.cs" />
     <Compile Include="Models\Entities\Subproject.cs" />
     <Compile Include="Models\DAL\IdentityModels.cs" />

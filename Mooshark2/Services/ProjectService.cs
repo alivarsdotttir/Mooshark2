@@ -78,6 +78,7 @@ namespace Mooshark2.Services
             return project; 
         }
 
+<<<<<<< HEAD
 
         public bool ServiceCreateSubproject(TeacherCreateViewModel model)
         {
@@ -96,6 +97,9 @@ namespace Mooshark2.Services
     
 
         public IEnumerable<Subproject> getSubprojects(int projectID)
+=======
+       public IEnumerable<Subproject> getSubprojects(int projectID)
+>>>>>>> 6a22fc59331cf2ffb91b6817968256ad1de3bddd
         {
             IEnumerable<Subproject> subprojects = (from x in db.Subprojects
                                                    where projectID == x.ProjectID
@@ -147,29 +151,27 @@ namespace Mooshark2.Services
             return projectsFromCourse;
         }
 
-
-
-
-        
         public IEnumerable<Submission> getStudentsBestSubmission(string userID)
         {
-             IEnumerable<Submission> bestSubmission = (from x in db.Groups
+            IEnumerable<Submission> bestSubmission = (from x in db.Groups
                                                         join y in db.ProjectGroups on x.ID equals y.GroupID
-                                                        join z in db.Subprojects on y.ProjectID equals z.ProjectID
-                                                        join w in db.Submissions on z.ID equals w.SubprojectID
+                                                        join z in db.ProjectSubprojects on y.ProjectID equals z.ProjectID
+                                                        join w in db.Submissions on z.SubprojectID equals w.SubprojectID
                                                         where x.UserID == userID && w.Accepted == true || x.UserID == userID
                                                         select x).Last() as IEnumerable<Submission>;   
+
             return bestSubmission;
         }
 
-        public IEnumerable<ApplicationUser> getSubmitedStudents(string userID)
+        public IEnumerable<ApplicationUser> getSubmittedStudents(string userID)
         {
             IEnumerable<ApplicationUser>submitedStudents = ( from x in db.Groups
                                                         join y in db.ProjectGroups on x.ID equals y.GroupID
-                                                        join z in db.Subprojects on y.ProjectID equals z.ProjectID
-                                                        join w in db.Submissions on z.ID equals w.SubprojectID
+                                                        join z in db.ProjectSubprojects on y.ProjectID equals z.ProjectID
+                                                        join w in db.Submissions on z.SubprojectID equals w.SubprojectID
                                                         where x.UserID == userID && w.ID != 0
                                                         select x) as IEnumerable<ApplicationUser>;
+
             return submitedStudents;
         }
 

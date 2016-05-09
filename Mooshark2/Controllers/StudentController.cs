@@ -69,8 +69,8 @@ namespace Mooshark2.Controllers
                     }
                 }
 
-                StudentDetailsViewModel model = new StudentDetailsViewModel(project, subprojects, submissions, course);
-                return View(model); 
+               StudentDetailsViewModel model = new StudentDetailsViewModel(project, subprojects, submissions, course);
+               return View(model); 
             }
             //returns an error message, ID invalid, no project chosen
             return View();
