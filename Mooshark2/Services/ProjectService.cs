@@ -132,7 +132,7 @@ namespace Mooshark2.Services
         }
 
 
-        public IEnumerable<Project> getUngradedProjects(string teacherID)
+        public IEnumerable<Project> getUngradedProjectsInCourse(string teacherID)
         {
             IEnumerable<Project> ungradedProjects = (from x in db.Projects
                                                   join y in db.CourseTeachers on x.CourseID equals y.CourseID
