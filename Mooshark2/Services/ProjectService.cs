@@ -118,6 +118,11 @@ namespace Mooshark2.Services
             return subproject;
         }
 
+        internal object getSubmitedStudents(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Submission getSubmissionById(int submissionID)
         {
             Submission submission = (from x in db.Submissions

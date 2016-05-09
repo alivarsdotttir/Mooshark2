@@ -40,8 +40,16 @@
                         @foreach (var course in Model )
                         { 
                             <tr>
-                                <td>@course.Name</td>
-                                <td>@course.Active</td>
+                                <td>
+                                    <a href="/Admin/Edit/@course.ID"><img alt="Edit" src="@Url.Content("~/Images/edit.png")" width="20" height="20" /></a>
+                                    @Html.ActionLink(course.Name, "Edit", course.ID)
+                                </td>
+                                <td>
+                                    @if (course.Active == true)
+                                    {
+                                        <img alt="Check" src="@Url.Content("~/Images/check.png")" width="20" height="20" />
+                                    }
+                                </td>
                             </tr>
                             
                         }

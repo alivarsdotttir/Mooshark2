@@ -216,6 +216,7 @@
     <Compile Include="Models\Entities\Project.cs" />
     <Compile Include="Models\Entities\ProjectGroup.cs" />
     <Compile Include="Models\Entities\ProjectSubproject.cs" />
+    <Compile Include="Models\Entities\StudentSubmission.cs" />
     <Compile Include="Models\Entities\Submission.cs" />
     <Compile Include="Models\Entities\Subproject.cs" />
     <Compile Include="Models\DAL\IdentityModels.cs" />
@@ -248,6 +249,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\check.png" />
+    <Content Include="Images\edit.png" />
     <Content Include="Images\group.png" />
     <Content Include="Images\moo.jpg" />
     <Content Include="Images\solo.png" />
