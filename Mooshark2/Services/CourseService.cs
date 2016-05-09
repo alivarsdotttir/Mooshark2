@@ -40,9 +40,9 @@ namespace Mooshark2.Services
                 db.Courses.Add(model.Course);
 
                 if (model.TeacherList != null) {
-                    foreach (var i in model.TeacherList) {
-                        db.CourseTeachers.Add(new CourseTeacher { CourseID = model.Course.ID, UserID = i.Id });
-                    }
+                  //  foreach (var i in model.TeacherList) {
+                        db.CourseTeachers.Add(new CourseTeacher { CourseID = model.Course.ID, UserID = model.TeacherList.Id });
+                   // }
                 }
 
                 if (model.StudentList != null) {
