@@ -3,6 +3,7 @@ using Mooshark2.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
 using Mooshark2.Models.DAL;
 using Mooshark2.Models.ViewModels.TeacherViewModels;
@@ -118,9 +119,19 @@ namespace Mooshark2.Services
             return subproject;
         }
 
-        internal object getSubmitedStudents(string userId)
+        public IEnumerable<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)
         {
-            throw new NotImplementedException();
+            IEnumerable<ApplicationUser> studentsSubmitted = (from x in db.Users
+                                        join y in db.StudentSubmissions on x.Id equals y.UserID
+                                        join z in db.Submissions on y.SubmissionID equals z.ID
+                                        where subprojectID == z.SubprojectID
+                                        select x) as IEnumerable<ApplicationUser>;
+
+            if(studentsSubmitted != null) {
+                return studentsSubmitted;
+            }
+
+            return Enumerable.Empty<ApplicationUser>();
         }
 
         public Submission getSubmissionById(int submissionID)
@@ -132,13 +143,17 @@ namespace Mooshark2.Services
         }
 
 
-        public IEnumerable<Project> getUngradedProjects(string teacherID)
+        public IEnumerable<Project> getUngradedProjectsInCourse(string teacherID)
         {
             IEnumerable<Project> ungradedProjects = (from x in db.Projects
                                                   join y in db.CourseTeachers on x.CourseID equals y.CourseID
                                                   where y.UserID == teacherID && x.Graded == false
                                                   select x) as IEnumerable<Project>;
-            return ungradedProjects;
+            if(ungradedProjects != null) {
+                return ungradedProjects;
+            }
+
+            return Enumerable.Empty<Project>();
         }
 
         public IEnumerable<Project> getProjectsFromCourse(int courseID)
@@ -146,7 +161,11 @@ namespace Mooshark2.Services
             IEnumerable<Project> projectsFromCourse = (from x in db.Projects
                                                         where x.CourseID == courseID
                                                         select x) as IEnumerable<Project>;
-            return projectsFromCourse;
+            if(projectsFromCourse != null) {
+                return projectsFromCourse;
+            }
+
+            return Enumerable.Empty<Project>();
         }
 
         public IEnumerable<Submission> getStudentsBestSubmission(string userID)
@@ -156,22 +175,13 @@ namespace Mooshark2.Services
                                                         join z in db.ProjectSubprojects on y.ProjectID equals z.ProjectID
                                                         join w in db.Submissions on z.SubprojectID equals w.SubprojectID
                                                         where x.UserID == userID && w.Accepted == true || x.UserID == userID
-                                                        select x).Last() as IEnumerable<Submission>;   
+                                                        select x).Last() as IEnumerable<Submission>;
 
-            return bestSubmission;
+            if(bestSubmission != null) {
+                return bestSubmission;
+            }
+
+            return Enumerable.Empty<Submission>();
         }
-
-        public IEnumerable<ApplicationUser> getSubmittedStudents(string userID)
-        {
-            IEnumerable<ApplicationUser>submitedStudents = ( from x in db.Groups
-                                                        join y in db.ProjectGroups on x.ID equals y.GroupID
-                                                        join z in db.ProjectSubprojects on y.ProjectID equals z.ProjectID
-                                                        join w in db.Submissions on z.SubprojectID equals w.SubprojectID
-                                                        where x.UserID == userID && w.ID != 0
-                                                        select x) as IEnumerable<ApplicationUser>;
-
-            return submitedStudents;
-        }
-
     }
 }

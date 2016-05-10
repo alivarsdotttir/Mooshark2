@@ -28,19 +28,18 @@
        <!-- <div class="form-group">-->
             @*<div class="col-md-10" >
                 <div id="duplicater" class="dropdown">*@
-                    @Html.LabelFor(model => model.TeacherList, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(model => model.Teacher, new { @class = "col-md-2 control-label" })
             <div class="col-md-10" class="dropdown">
                 @*@Html.DropDownList("Teacher", (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })*@
             </div>
-            @Html.DropDownListFor(m => m.TeacherList.Id, (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
+            @Html.DropDownListFor(m => m.Teacher.Id, (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
 
                 @*<button id ="button" class="btn btn-primary" data-toggle="button" onclick="duplicate()">
                     Add another
                 </button>*@
             @*</div>*@
         </div>
-
-   @*    <script type="text/javascript">
+        @*    <script type="text/javascript">
 
             document.getElementById('button').onclick = duplicate;
 
@@ -56,54 +55,10 @@
 
         </script>*@
 
-            <div class="form-group">
-                <a class="btn btn-primary AdminButtons" data-toggle="modal" data-target=".bootstrapmodal"><span></span>Select students</a>
-
-                <div class="modal fade bootstrapmodal">
-                    <div class="modal-dialog">
-
-                        <div class="modal-content">
-
-                            <div class="modal-header">
-                                Select students
-                            </div>
-                                <div class="modal-body">
-
-                                    <table>
-                                        <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>SSN</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach(var i in ViewBag.Students) {
-                                            <tr>
-                                                @*<td>@Html.CheckBox("StudentList", new {Value = i, @class="checkbox"})</td>*@
-                                                <td><input name="name" type="checkbox" id="@i" class="chkclass" value="@i" /></td>
-                                                <td>@i.FullName</td>
-                                                <td>@i.Email</td>
-                                                <td>@i.SSN</td>
-                                            </tr>
-                                        }
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    @Html.ActionLink("Ok", "CreateCourse", new { @class = "btn btn-success" });
-                                    @Html.ActionLink("Cancel", "CreateCourse", new { @class = "btn btn-default" });
-                                </div>
-                        </div>
-                    </div>
-                </div>
-    </div>
 
 
- 
 
-@*<div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(m => m.TeacherList, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 <select>
@@ -116,6 +71,54 @@
 
                 @* @Html.DropDownList("TeacherList", (IEnumerable<SelectListItem>)ViewBag.Teachers, "Select ...");
 
+            </div>
+        </div>*@
+
+
+
+        @*<div class="form-group">
+            <a class="btn btn-primary AdminButtons" data-toggle="modal" data-target=".bootstrapmodal"><span></span>Select students</a>
+
+            <div class="modal fade bootstrapmodal">
+                <div class="modal-dialog">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            Select students
+                        </div>
+                        <div class="modal-body">
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>SSN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var i in ViewBag.Students)
+                                    {
+                                        <tr>
+                                            <td>@Html.CheckBox("StudentList", new { Value = i, @class = "checkbox" })</td>
+                                            <td>@i.FullName</td>
+                                            <td>@i.Email</td>
+                                            <td>@i.SSN</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                            @Html.ActionLink("Cancel", "CreateCourse", new { @class = "btn btn-default" });
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>*@
 
