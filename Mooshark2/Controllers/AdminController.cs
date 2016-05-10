@@ -58,15 +58,56 @@ namespace Mooshark2.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(Course model)
+        public ActionResult Edit(int? id)
         {
-            return View(model); 
+            if(id.HasValue) {
+                int realID = id.Value;
+
+                Course course = (from item in db.Courses
+                    where item.ID == id.Value
+                    select item).SingleOrDefault();
+
+                if(course == null) {
+                    return View("NotFound");
+                }
+
+                //ViewBag.Teachers = userService.GetAllTeachersInCourse(course.ID);
+                //ViewBag.Students = userService.GetAllStudentsInCourse(course.ID);
+                ViewBag.TeachersNotInCourse = userService.GetAllTeachersNotInCourse(course.ID);
+                ViewBag.StudentsNotInCourse = userService.GetAllStudentsNotInCourse(course.ID);
+                var teachers = userService.GetAllTeachersInCourse(course.ID);
+                var students = userService.GetAllStudentsInCourse(course.ID);
+
+                AdminCourseViewModel model = new AdminCourseViewModel(course, teachers, students);
+
+                return View(model);
+            }
+            else
+            {
+                return View("NotFound");
+            }
         }
-/*
+
         [HttpPost]
-        public ActionResult Edit(Course model)
+        public ActionResult Edit(Course course)
         {
-            return View(model);
-        }*/
+            if (course != null)
+            {
+                Course model = (from item in db.Courses
+                                 where item.ID == course.ID
+                                 select item).SingleOrDefault();
+
+                model.Name = course.Name;
+                model.Active = course.Active;
+
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("NotFound");
+            }
+        }
     }
 }

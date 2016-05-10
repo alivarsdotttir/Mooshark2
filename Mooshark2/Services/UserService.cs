@@ -29,7 +29,7 @@ namespace Mooshark2.Services
         public List<SelectListItem> GetAllTeachers()
         {
             /* var allTeachers = (from user in db.Users
-                                join rid in db.Roles on user.Id equals rid.Id // GÆTI VERIÐ VITLAUST ? hmm
+                                join rid in db.Roles on user.Id equals rid.Id 
                                 where rid.Name.ToString() == "Teacher"
                                 select user).ToList()
                                 .Select( x=> new SelectListItem {
@@ -60,6 +60,30 @@ namespace Mooshark2.Services
             return allTeachers;
         }
 
+        public List<ApplicationUser> GetAllTeachersInCourse(int courseId)
+        {
+            var allTeachersInCourse = (from user in db.Users
+                join c in db.CourseTeachers on user.Id equals c.UserID
+                where c.CourseID == courseId
+                select user).ToList();
+
+            return allTeachersInCourse;
+
+        }
+
+        public List<SelectListItem> GetAllTeachersNotInCourse(int courseId)
+        {
+            var allTeachersNotInCourse = (from user in db.Users
+                join c in db.CourseTeachers on user.Id equals c.UserID
+                where c.CourseID != courseId
+                select user).ToList().Select(
+                    x => new SelectListItem { Value = x.Id, Text = x.FullName })
+                .ToList();
+
+            return allTeachersNotInCourse;
+        }
+
+
         private bool User(string id, string v)
         {
             throw new NotImplementedException();
@@ -83,6 +107,27 @@ namespace Mooshark2.Services
 
             return allStudents;
         }
+
+        public List<ApplicationUser> GetAllStudentsInCourse(int courseId)
+        {
+            var allStudentsInCourse = (from user in db.Users
+                                       join c in db.CourseStudents on user.Id equals c.UserID
+                                       where c.CourseID == courseId
+                                       select user).ToList();
+
+            return allStudentsInCourse;
+        }
+
+        public List<ApplicationUser> GetAllStudentsNotInCourse(int courseId)
+        {
+            var allStudentsNotInCourse = (from user in db.Users
+                                       join c in db.CourseStudents on user.Id equals c.UserID
+                                       where c.CourseID != courseId
+                                       select user).ToList();
+
+            return allStudentsNotInCourse;
+        }
+
 
     }
 }
