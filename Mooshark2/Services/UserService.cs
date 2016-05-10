@@ -50,8 +50,12 @@ namespace Mooshark2.Services
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var teacherRole = roleManager.FindByName("Teacher");
             var allTeachers = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList().Select(
-                                                  x => new SelectListItem { Value = x.FullName.ToString(), Text = x.FullName })
+                                                  x => new SelectListItem { Value = x.Id, Text = x.FullName })
                                               .ToList();
+
+            /*var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var teacherRole = roleManager.FindByName("Teacher");
+            var allTeachers = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();*/
 
             return allTeachers;
         }

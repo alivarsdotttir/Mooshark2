@@ -41,7 +41,7 @@ namespace Mooshark2.Controllers
         public ActionResult CreateCourse(AdminCourseViewModel model)
         {
             bool course = courseService.ServiceCreateCourse(model);
-
+            var teacherlist = model.TeacherList.Id;
             if (course) {
 
                 return RedirectToAction("Index");
