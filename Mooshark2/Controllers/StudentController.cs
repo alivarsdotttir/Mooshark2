@@ -89,14 +89,14 @@ namespace Mooshark2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit(int subprojectId, HttpPostedFileBase file)
+        public ActionResult Submit(Subproject subprojectId, HttpPostedFileBase file)
         {
             //get user who is logged in
             string userId = User.Identity.GetUserId();
             var user = userService.getUserById(userId);
 
             //get subproject, project and course
-            var subproject = projectService.getSubprojectById(subprojectId);
+            var subproject = projectService.getSubprojectById(subprojectId.ID);
             var projectId = subproject.ProjectID;
             var project = projectService.getProjectById(projectId.Value); 
             var courseId = project.CourseID;
@@ -108,7 +108,7 @@ namespace Mooshark2.Controllers
                 Submission submission = new Submission();
                 submission.Date = DateTime.Now;
                 submission.Accepted = true;  //Needs to change when test cases are implemented
-                submission.SubprojectID = subprojectId;
+                submission.SubprojectID = subprojectId.ID;
                 //TODO: Vista slóð með í database
 
                 int submissionID = projectService.createSubmission(submission);
