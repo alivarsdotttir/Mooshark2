@@ -42,7 +42,7 @@
                             <tr>
                                 <td>
                                     <a href="/Admin/Edit/@course.ID"><img alt="Edit" src="@Url.Content("~/Images/edit.png")" width="20" height="20" /></a>
-                                    @Html.ActionLink(course.Name, "Edit", course.ID)
+                                    @Html.ActionLink(course.Name, "Edit", new {id = @course.ID })
                                 </td>
                                 <td>
                                     @if (course.Active == true)
