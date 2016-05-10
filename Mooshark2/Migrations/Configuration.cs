@@ -14,6 +14,7 @@ namespace Mooshark2.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = false; 
         }
 
         protected override void Seed(Mooshark2.Models.DAL.ApplicationDbContext context)

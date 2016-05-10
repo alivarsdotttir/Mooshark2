@@ -87,7 +87,27 @@ namespace Mooshark2.Controllers
             //error message, no subproject chosen, ID is invalid
             return View();
         }
+
         [HttpPost]
+        public ActionResult Submit(Subproject model, HttpPostedFileBase file)
+        {
+            //get user who is logged in
+            string userId = User.Identity.GetUserId();
+            var user = userService.getUserById(userId); 
+
+            //
+
+            if (file.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                file.SaveAs(path);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        /*[HttpPost]
         public ActionResult Submit(HttpPostedFileBase file)
         {
             string userId = User.Identity.GetUserId();
@@ -102,7 +122,7 @@ namespace Mooshark2.Controllers
             }
 
             return RedirectToAction("Index");
-        }
+        }*/
 
 
         public ActionResult SubmisssionDetails(int? id)
