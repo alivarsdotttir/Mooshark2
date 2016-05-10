@@ -1,5 +1,9 @@
-﻿@{
+﻿@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherGradeStudentViewModel
+@{
     ViewBag.Title = "Graded";
 }
 
-<h2>Graded</h2>
+<h2>@Model.currentProject</h2>
+
+@Model.currentStudent
+@Model.currentProject.Grade
