@@ -117,7 +117,7 @@ namespace Mooshark2.Services
             var allStudents =
                 db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id))
                   .ToList()
-                  .Select(y => new AdminSelectStudentViewModel { Checked = false }).ToList();
+                  .Select(y => new AdminSelectStudentViewModel { Student = y , Checked = false }).ToList();
 
             return allStudents;
 
