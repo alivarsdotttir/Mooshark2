@@ -23,7 +23,7 @@
                    @foreach (var course in Model.coursesForProjects) {
                         foreach (var project in Model.ungradedProjects) {
                         <tr>
-                            <td>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</td>
+                            <td>@Html.ActionLink(project.CourseID, "Course", new { id = course.ID })</td>
                             <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID} )</td>
                             <td>@project.Deadline</td>
                             <td></td>
@@ -33,6 +33,7 @@
              </tbody>
         </table>
     </div>
+
     <div class="col-md-4">
           <h8>Courses</h8>
            <ul>

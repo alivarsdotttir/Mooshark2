@@ -17,6 +17,6 @@ namespace Mooshark2.Models.Entities
         public Project Project { get; set; }
 
         public int Weight { get; set; }
-
+        public int Grade { get; set; }
     }
 }

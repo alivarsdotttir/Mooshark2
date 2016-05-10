@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.Notifications;
 using Mooshark2.Models.DAL;
+using Mooshark2.Models.ViewModels.AdminViewModels;
 
 
 namespace Mooshark2.Services
@@ -108,6 +109,30 @@ namespace Mooshark2.Services
             return allStudents;
         }
 
+
+        public List<AdminSelectStudentViewModel> GetAllStudentsUsers()
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var studentRole = roleManager.FindByName("Student");
+            var allStudents =
+                db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id))
+                  .ToList()
+                  .Select(y => new AdminSelectStudentViewModel { Checked = false }).ToList();
+
+            return allStudents;
+
+        }
+
+
+        public ApplicationUser getUserById(string userId)
+        {
+            ApplicationUser user = (from x in db.Users
+                                    where x.Id == userId
+                                    select x).FirstOrDefault();
+
+            return user;
+        }
+
         public List<ApplicationUser> GetAllStudentsInCourse(int courseId)
         {
             var allStudentsInCourse = (from user in db.Users
@@ -127,7 +152,6 @@ namespace Mooshark2.Services
 
             return allStudentsNotInCourse;
         }
-
 
     }
 }
