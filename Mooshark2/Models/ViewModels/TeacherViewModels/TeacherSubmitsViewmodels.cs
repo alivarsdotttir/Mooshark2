@@ -11,6 +11,14 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
     {
         public IEnumerable<Submission> currentProjects;
         public IEnumerable<ApplicationUser> listOfSubmittedStudents;
+        private IEnumerable<Submission> mostRecentSubmission;
+        private object students;
+
+        public TeacherSubmitsViewmodels(IEnumerable<Submission> mostRecentSubmission, object students)
+        {
+            this.mostRecentSubmission = mostRecentSubmission;
+            this.students = students;
+        }
 
         public TeacherSubmitsViewmodels(IEnumerable<Submission> curr, IEnumerable<ApplicationUser>list)
         {

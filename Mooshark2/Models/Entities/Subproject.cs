@@ -11,7 +11,7 @@ namespace Mooshark2.Models.Entities
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int ProjectID { get; set; }
+        public int? ProjectID { get; set; }
 
         [ForeignKey("ProjectID")]
         public Project Project { get; set; }

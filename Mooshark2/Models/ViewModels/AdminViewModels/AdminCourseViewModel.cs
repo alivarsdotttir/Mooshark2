@@ -21,15 +21,5 @@ namespace Mooshark2.Models.ViewModels.AdminViewModels
         [Display(Name = "Students")]
         public IEnumerable<ApplicationUser> StudentList { get; set; }
 
-        
-
-      /*  public AdminCourseViewModel(IEnumerable<ApplicationUser> t, Course c,IEnumerable<ApplicationUser> s)
-        {
-            TeacherList = t;
-            Course = c;
-            StudentList = s;
-        }
-      */
-
     }
 }

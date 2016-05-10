@@ -9,7 +9,7 @@
 <h2>Course</h2>
     <div>
         <table class="table table-bordered table-striped">
-            <caption>nafn áfangans <!--kann ekki að láta það breytast þar sem maður notar ekki foreach lykkju--></caption>
+            <caption class="left">@Model.course.Name</caption>
             <thead>
                 <tr>
                     <th>Visability</th>
@@ -24,7 +24,7 @@
                 @foreach (var project in Model.courseProjects) {
                         <tr>
                              <td>@project.Visibility</td>
-                             <td></td>
+                             <td>@Model.course.Name</td>
                              <td>@project.Name</td>
                              <td>@project.Deadline</td>
                              <td>@project.Graded</td>
@@ -36,7 +36,7 @@
          </table>
     </div>
     <div>
-        @Html.ActionLink("Create new project", "create", "Teacher", null, new { @class = "btn btn-primary btn-lg TeacherButtons" })
+        @Html.ActionLink("Create new project", "CreateProject", "Teacher", null, new { @class = "btn btn-primary btn-lg TeacherButtons" })
     </div>
     <div>
         @Html.ActionLink("Back to Main Page", "Index", "Teacher", null, new { @class = "btn btn-primary btn-lg TeacherButtons" })
