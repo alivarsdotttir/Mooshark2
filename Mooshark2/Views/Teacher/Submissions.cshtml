@@ -21,8 +21,16 @@
     </thead>
     <tbody>
     <tr>
-        @foreach(var submission in Model.bestSubmissions) {
-            
+        @foreach (var students in Model.studentsThatHaveSubmitted) {
+            foreach(var submission in Model.bestSubmissions) {
+                <td>@submission.SubmissionNr</td>
+                <td>@students.FullName</td>
+                <td>C++</td>
+                <td>@submission.Accepted</td>
+                <td>@submission.Subproject.Grade</td>
+                <td></td>
+                <td></td>
+            }
         }
     </tr>
     </tbody>
