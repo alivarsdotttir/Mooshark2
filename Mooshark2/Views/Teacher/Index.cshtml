@@ -20,15 +20,18 @@
                      </tr>
              </thead>
              <tbody>
-                   @foreach (var course in Model.coursesForProjects) {
-                        foreach (var project in Model.ungradedProjects) {
+                   @foreach (var project in Model.ungradedProjects) {
                         <tr>
-                            <td>@Html.ActionLink(project.CourseID, "Course", new { id = course.ID })</td>
-                            <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID} )</td>
+                            <td>@Html.ActionLink(Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name, "Course", new { id = project.CourseID })</td>                            {
+                            <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
                             <td>@project.Deadline</td>
-                            <td></td>
+                            @if (@project.isGroupProject == true) {
+                                <td><img src="~/Images/group.png" width="15px" height="15px" /></td>
+                            }
+                            @if(@project.isGroupProject == false){ 
+                                <td><img src="~/Images/solo.png" width="15px" height="15px"/></td>
+                            }
                         </tr>
-                       }
                   }
              </tbody>
         </table>
