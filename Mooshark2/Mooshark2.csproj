@@ -206,6 +206,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\CustomHandleErrorAttribute.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entities\Course.cs" />
@@ -222,7 +223,6 @@
     <Compile Include="Models\DAL\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\AdminViewModels\AdminCourseViewModel.cs" />
-    <Compile Include="Models\ViewModels\AdminViewModels\AdminIndexViewModel.cs" />
     <Compile Include="Models\ViewModels\AdminViewModels\AdminSelectStudentViewModel.cs" />
     <Compile Include="Models\ViewModels\AdminViewModels\AdminStudentListViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentViewModels\StudentCourseViewModel.cs" />
@@ -240,6 +240,7 @@
     <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\CustomApplicationException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\aspnet-Mooshark2-20160503121327.mdf" />
@@ -338,8 +339,10 @@
     <Content Include="Views\Admin\SelectStudent.cshtml" />
     <Content Include="Views\Teacher\ProjectDetails.cshtml" />
     <Content Include="Views\Admin\StudentEditList.cshtml" />
+    <Content Include="Views\Teacher\Submissions.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\uploads\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

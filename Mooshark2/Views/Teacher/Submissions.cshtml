@@ -1,0 +1,29 @@
+﻿@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherSubmissionsViewmodel
+
+@{
+    ViewBag.Title = "Submissions";
+}
+
+<h2>Submissions</h2>
+
+<table class="table table-bordered table-striped">
+    <caption class="left">Submissions for @Model.currentSubproject.Name</caption>
+    <thead>
+    <tr>
+        <th>Submission number</th>
+        <th>Name</th>
+        <th>Language</th>
+        <th>Result</th>
+        <th>Grade</th>
+        <th>Test passed</th>
+        <th>Graded by</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        @foreach(var submission in Model.bestSubmissions) {
+            
+        }
+    </tr>
+    </tbody>
+</table>

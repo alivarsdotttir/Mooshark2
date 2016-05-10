@@ -21,5 +21,6 @@ namespace Mooshark2.Models.Entities
 
         [ForeignKey("SubmissionID")]
         public Submission Submission { get; set; }
+
     }
 }

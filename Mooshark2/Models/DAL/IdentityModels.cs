@@ -46,6 +46,5 @@ namespace Mooshark2.Models.DAL
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<Mooshark2.Models.DAL.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

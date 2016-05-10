@@ -108,6 +108,15 @@ namespace Mooshark2.Services
             return allStudents;
         }
 
+        public ApplicationUser getUserById(string userId)
+        {
+            ApplicationUser user = (from x in db.Users
+                                    where x.Id == userId
+                                    select x).FirstOrDefault();
+
+            return user;
+        }
+
         public List<ApplicationUser> GetAllStudentsInCourse(int courseId)
         {
             var allStudentsInCourse = (from user in db.Users
@@ -127,7 +136,6 @@ namespace Mooshark2.Services
 
             return allStudentsNotInCourse;
         }
-
 
     }
 }
