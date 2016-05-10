@@ -28,11 +28,11 @@
        <!-- <div class="form-group">-->
             @*<div class="col-md-10" >
                 <div id="duplicater" class="dropdown">*@
-                    @Html.LabelFor(model => model.TeacherList, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(model => model.Teacher, new { @class = "col-md-2 control-label" })
             <div class="col-md-10" class="dropdown">
                 @*@Html.DropDownList("Teacher", (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })*@
             </div>
-            @Html.DropDownListFor(m => m.TeacherList.Id, (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
+            @Html.DropDownListFor(m => m.Teacher.Id, (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
 
                 @*<button id ="button" class="btn btn-primary" data-toggle="button" onclick="duplicate()">
                     Add another
@@ -113,7 +113,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary">Save changes</button>
-                            @*@@Html.ActionLink("Cancel", "CreateCourse", new { @class = "btn btn-default" });*@
+                            @Html.ActionLink("Cancel", "CreateCourse", new { @class = "btn btn-default" });
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
                         </div>

@@ -22,4 +22,6 @@ namespace Mooshark2.Models.ViewModels.AdminViewModels
         [Display(Name = "Students")]
         public IList<AdminSelectStudentViewModel> StudentList { get; set; }
 
+    }
+
 }
