@@ -230,7 +230,7 @@
     <Compile Include="Models\ViewModels\StudentViewModels\StudentSubmissionDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherCreateViewModel.cs" />
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherCourseViewModel.cs" />
-    <Compile Include="Models\ViewModels\TeacherViewModels\TeacherDetailsViewmodel.cs" />
+    <Compile Include="Models\ViewModels\TeacherViewModels\TeacherProjectDetailsViewmodel.cs" />
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherGradeStudentViewmodel.cs" />
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherIndexViewmodel.cs" />
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherSubmitsViewmodels.cs" />
@@ -333,6 +333,7 @@
     <Content Include="Views\Teacher\Graded.cshtml" />
     <Content Include="Views\Teacher\CreateProject.cshtml" />
     <Content Include="Views\Admin\SelectStudent.cshtml" />
+    <Content Include="Views\Teacher\ProjectDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

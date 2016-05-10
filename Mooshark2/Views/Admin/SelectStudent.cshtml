@@ -31,3 +31,51 @@
 }
 
 </table>
+
+
+
+<div class="form-group">
+    <a class="btn btn-primary AdminButtons" data-toggle="modal" data-target=".bootstrapmodal"><span></span>Select students</a>
+
+    <div class="modal fade bootstrapmodal">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    Select students
+                </div>
+                <div class="modal-body">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>SSN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in ViewBag.Students)
+                            {
+                                <tr>
+                                    <td>@Html.CheckBox("StudentList", new { Value = i, @class = "checkbox" })</td>
+                                    <td>@i.FullName</td>
+                                    <td>@i.Email</td>
+                                    <td>@i.SSN</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    @*@@Html.ActionLink("Cancel", "CreateCourse", new { @class = "btn btn-default" });*@
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

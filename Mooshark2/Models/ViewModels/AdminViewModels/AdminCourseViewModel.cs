@@ -15,11 +15,11 @@ namespace Mooshark2.Models.ViewModels.AdminViewModels
         [Display(Name = "Course name")]
         public Course Course { get; set; }
 
-        [Display(Name = "Teachers")]
-        public ApplicationUser TeacherList { get; set; }
+
+        [Display(Name = "Teacher")]
+        public ApplicationUser Teacher { get; set; }
 
         [Display(Name = "Students")]
         public IList<AdminSelectStudentViewModel> StudentList { get; set; }
 
-    }
 }

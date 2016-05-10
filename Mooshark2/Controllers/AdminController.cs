@@ -29,9 +29,12 @@ namespace Mooshark2.Controllers
         {
             ViewBag.Teachers = userService.GetAllTeachers();
             ViewBag.Students = userService.GetAllStudents();
-            //Course course = new Course(); 
 
-            //AdminCourseViewModel model = new AdminCourseViewModel();
+            //Course course = new Course(); 
+            //var teachers = userService.GetAllTeachers();
+            //var students = userService.GetAllStudents();
+
+            //AdminCourseViewModel model = new AdminCourseViewModel(course, teachers, students);
 
             return View(); 
         }
@@ -41,7 +44,7 @@ namespace Mooshark2.Controllers
         public ActionResult CreateCourse(AdminCourseViewModel model)
         {
             bool course = courseService.ServiceCreateCourse(model);
-            var teacherlist = model.TeacherList.Id;
+
             if (course) {
 
                 return RedirectToAction("Index");
@@ -54,10 +57,16 @@ namespace Mooshark2.Controllers
             }
         }
 
-
+        [HttpGet]
         public ActionResult Edit(Course model)
         {
             return View(model); 
         }
+/*
+        [HttpPost]
+        public ActionResult Edit(Course model)
+        {
+            return View(model);
+        }*/
     }
 }

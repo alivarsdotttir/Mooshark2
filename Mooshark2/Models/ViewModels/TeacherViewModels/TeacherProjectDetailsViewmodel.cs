@@ -6,15 +6,17 @@ using System.Web;
 
 namespace Mooshark2.Models.ViewModels.TeacherViewModels
 {
-    public class TeacherDetailsViewmodel
+    public class TeacherProjectDetailsViewmodel
     {
         public Project currentProject;
         public IEnumerable<Subproject> subprojects;
+        public Course currentCourse;
 
-        public TeacherDetailsViewmodel(Project c, IEnumerable<Subproject> sub)
+        public TeacherProjectDetailsViewmodel(Project cuPro, IEnumerable<Subproject> sub, Course cuCo)
         {
-            currentProject = c;
+            currentProject = cuPro;
             subprojects = sub;
+            currentCourse = cuCo;
         }
             
     }
