@@ -12,6 +12,7 @@ namespace Mooshark2.Models.Entities
         public string Name { get; set; }
         public System.DateTime Deadline { get; set; }
         public bool Graded { get; set; }
+        public int Grade { get; set; }
         public bool Visibility { get; set; }
         public bool isGroupProject { get; set; }
         public int CourseID { get; set; }
