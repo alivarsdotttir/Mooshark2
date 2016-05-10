@@ -113,9 +113,54 @@ namespace Mooshark2.Controllers
         public ActionResult StudentEditList()
         {
             var allStudents = userService.GetAllStudents();
-            AdminStudentListViewModel students = new AdminStudentListViewModel(allStudents);
 
-            return View(students);
+            return View(allStudents);
+        }
+
+
+        [HttpGet]
+        public ActionResult EditStudent(string id)
+        {
+            if (id != null)
+            {
+
+                ApplicationUser student = (from item in db.Users
+                                 where item.Id == id
+                                 select item).SingleOrDefault();
+
+                if (student == null)
+                {
+                    return View("NotFound");
+                }
+
+                return View(student);
+            }
+            else
+            {
+                return View("NotFound");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditStudent(ApplicationUser student)
+        {
+            if (student != null)
+            {
+                ApplicationUser model = (from item in db.Users
+                                where item.Id == student.Id
+                                select item).SingleOrDefault();
+
+             //   model. = course.Name;
+            //    model.Active = course.Active;
+
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("NotFound");
+            }
         }
     }
 }

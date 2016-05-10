@@ -224,7 +224,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\AdminViewModels\AdminCourseViewModel.cs" />
     <Compile Include="Models\ViewModels\AdminViewModels\AdminSelectStudentViewModel.cs" />
-    <Compile Include="Models\ViewModels\AdminViewModels\AdminStudentListViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentViewModels\StudentCourseViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentViewModels\StudentDetailsViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentViewModels\StudentIndexViewModel.cs" />
@@ -340,6 +339,7 @@
     <Content Include="Views\Teacher\ProjectDetails.cshtml" />
     <Content Include="Views\Admin\StudentEditList.cshtml" />
     <Content Include="Views\Teacher\Submissions.cshtml" />
+    <Content Include="Views\Admin\EditStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
