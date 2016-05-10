@@ -1,54 +1,137 @@
-﻿@*@model Mooshark2.Models.ViewModels.AdminViewModels.AdminCourseViewModel*@
-@using Mooshark2.Models.Entities
-@model Mooshark2.Models.Entities.Course
+﻿@model Mooshark2.Models.ViewModels.AdminViewModels.AdminCourseViewModel
+@*@using Mooshark2.Models.Entities
+@model Mooshark2.Models.Entities.Course*@
 
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>@Model.Course.Name</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Course</h4>
+        <h4>Edit</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Course.ID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Course.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Course.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Course.Name, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Course.Active, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.Active)
-                    @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Course.Active)
+                    @Html.ValidationMessageFor(model => model.Course.Active, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+        <div class="container-fluid">
+            <div class="row content">
+                <div class="col-sm-5 sidenav">
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+                    <div class="form-group">
+                        <table class="table table-bordered table-striped">
+                            <caption>Teachers in course</caption>
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>SSN</th>
+                                <th>Remove</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+                            @foreach(var teacher in Model.Teachers) {
+                                <tr>
+                                    <td>
+                                        @teacher.FullName
+                                    </td>
+                                    <td>
+                                        @teacher.Email
+                                    </td>
+                                    <td>
+                                        @teacher.SSN
+                                    </td>
+                                    <td>
+                                        <a href=""><img alt="Edit" src="@Url.Content("~/Images/remove.png")" width="20" height="20"/>
+                                    </td>
+                                </tr>
+                            }
+                                
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-sm-1 sidenav">
+                </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <table class="table table-bordered table-striped">
+                                    <caption>Students in course</caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>SSN</th>
+                                            <th>Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var student in Model.StudentList)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @student.FullName
+                                                </td>
+                                                <td>
+                                                    @student.Email
+                                                </td>
+                                                <td>
+                                                    @student.SSN
+                                                </td>
+                                                <td>
+                                                    <a href=""><img alt="Edit" src="@Url.Content("~/Images/remove.png")" width="20" height="20" />
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+                }
+
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+
+                @section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }
+
