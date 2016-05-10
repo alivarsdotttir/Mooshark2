@@ -89,19 +89,36 @@ namespace Mooshark2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit(Subproject model, HttpPostedFileBase file)
+        public ActionResult Submit(int subprojectId, HttpPostedFileBase file)
         {
             //get user who is logged in
             string userId = User.Identity.GetUserId();
-            var user = userService.getUserById(userId); 
+            var user = userService.getUserById(userId);
 
-            //
+            //get subproject, project and course
+            var subproject = projectService.getSubprojectById(subprojectId);
+            var projectId = subproject.ProjectID;
+            var project = projectService.getProjectById(projectId.Value); 
+            var courseId = project.CourseID;
+            var course = courseService.getCourseById(courseId); 
 
             if (file.ContentLength > 0)
             {
+
+                Submission submission = new Submission();
+                submission.Date = DateTime.Now;
+                submission.Accepted = true;  //Needs to change when test cases are implemented
+                submission.SubprojectID = subprojectId;
+                //TODO: Vista slóð með í database
+
+                int submissionID = projectService.createSubmission(submission);
+
                 var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                var filePath = string.Format("~/App_Data/{0}/{1}/{2}/{3}/{4}", course, project, subproject, user, fileName+submissionID);
+                System.IO.Directory.CreateDirectory(filePath);
+                var path = Path.Combine(Server.MapPath(filePath), fileName);
                 file.SaveAs(path);
+
             }
 
             return RedirectToAction("Index");
