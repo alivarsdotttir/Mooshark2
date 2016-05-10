@@ -84,10 +84,10 @@ namespace Mooshark2.Services
             return courses;
         }
 
-        public Course getCourseById(int id)
+        public Course getCourseById(int? id)
         {
             Course course = (from x in db.Courses
-                             where id == x.ID
+                             where id.Value == x.ID
                              select x).SingleOrDefault();
             return course; 
         }

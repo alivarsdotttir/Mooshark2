@@ -19,7 +19,7 @@ namespace Mooshark2.Controllers
         public ActionResult Index()
         {
             string userId = User.Identity.GetUserId();
-            var ungradedProjects = projectService.getUngradedProjects(userId);
+            var ungradedProjects = projectService.getUngradedProjectsInCourse(userId);
             var coursesForProjects = courseService.getCoursesForMultipleProjects(ungradedProjects);
             var teacherCourses = courseService.getCoursesForTeacher(userId);
 
@@ -29,16 +29,16 @@ namespace Mooshark2.Controllers
 
         public ActionResult Course(int? id)
         {
-            if(id != null)
-            {
+            //if(id != null)
+            //{
                 var course = courseService.getCourseById(id.Value); 
                 var courseProjects = projectService.getProjectsFromCourse(id.Value);
 
                 TeacherCourseViewModel model = new TeacherCourseViewModel(course, courseProjects);
                  return View(model);
-            }
+            //}
             //Returns an error message, ID invalid 
-            return View();
+            //return View();
            
         }
 
@@ -47,13 +47,18 @@ namespace Mooshark2.Controllers
         [HttpGet]
         public ActionResult CreateProject(int? id)
         {
-            var project = new Project();
-            var subproject = new Subproject();
-            //IEnumerable<Subproject> subprojects = new List<Subproject>();
-            var course = courseService.getCourseById(id.Value);
+            if(id != null) { 
+                var project = new Project();
+                var subproject = new Subproject();
+                //IEnumerable<Subproject> subprojects = new List<Subproject>();
+                var course = courseService.getCourseById(id.Value);
 
-            TeacherCreateViewModel model = new TeacherCreateViewModel(project, subproject, course);
-            return View(model);
+                TeacherCreateViewModel model = new TeacherCreateViewModel(project, subproject, course);
+                return View(model);
+            }
+
+            return View();
+            
         }
 
 
@@ -109,15 +114,22 @@ namespace Mooshark2.Controllers
         }
 
 
-        public ActionResult Submissions()
+        public ActionResult Submissions(int? subprojectID)
         {
-            string userId = User.Identity.GetUserId();
-            var students = projectService.getSubmittedStudents(userId);
-            var mostRecentSubmission = projectService.getStudentsBestSubmission(userId);
+            if(subprojectID != null) {
+                string userId = User.Identity.GetUserId();
+                var students = projectService.getStudentsThatHaveSubmitted(subprojectID.Value);
+                var mostRecentSubmission = projectService.getStudentsBestSubmission(userId);
+                var allSubmissionsForSubproject = projectService.getSubmissions(subprojectID.Value);
 
-            TeacherSubmitsViewmodels model = new TeacherSubmitsViewmodels(mostRecentSubmission, students);
+                TeacherSubmissionsViewmodel model = new TeacherSubmissionsViewmodel(allSubmissionsForSubproject,
+                    students,
+                    mostRecentSubmission);
 
-            return View(model);
+                return View(model);
+            }
+
+            return View();
         }
 
         public ActionResult SubmissionDetails(int? id)
