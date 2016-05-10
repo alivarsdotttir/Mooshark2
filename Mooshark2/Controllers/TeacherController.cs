@@ -99,13 +99,15 @@ namespace Mooshark2.Controllers
             {
                 var project = projectService.getProjectById(id.Value);
                 var subprojects = projectService.getSubprojects(id.Value);
+                var currentCourse = courseService.getCourseById(id.Value);
 
-                TeacherDetailsViewmodel model = new TeacherDetailsViewmodel(project, subprojects);
+                TeacherProjectDetailsViewmodel model = new TeacherProjectDetailsViewmodel(project, subprojects, currentCourse);
                 return View(model);
             }
             //Returns an error message, ID invalid 
             return View();
         }
+
 
         public ActionResult Submissions()
         {

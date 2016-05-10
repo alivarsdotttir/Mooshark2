@@ -1,0 +1,22 @@
+﻿@using Mooshark2.Models.Entities
+@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherProjectDetailsViewmodel
+
+@{
+    ViewBag.Title = "ProjectDetails";
+}
+
+<h2>@Model.currentProject.Name</h2>
+
+@foreach(var subproject in Model.subprojects) {
+    <div>
+        <h3>@subproject.Name</h3>
+        <p>@subproject.Description</p>
+        @Html.ActionLink("Submits", "Submissions")
+        <div>
+            <p>Deadline: @Model.currentProject.Deadline</p>
+            <p>Time until deadline: @((Model.currentProject.Deadline)-DateTime.Now)</p>
+        </div>
+    </div>
+}
+
+@Html.ActionLink("Back to Course", "Course", new { id = Model.currentCourse.ID }) <!--doesn't seem to work right-->

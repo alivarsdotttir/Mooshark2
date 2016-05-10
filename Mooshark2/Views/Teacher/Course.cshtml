@@ -1,5 +1,6 @@
 ﻿@using System.Activities.Statements
 @using Microsoft.Ajax.Utilities
+@using Mooshark2.Models.Entities
 @model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherCourseViewModel
 @{
     ViewBag.Title = "Course";
@@ -24,10 +25,10 @@
                 @foreach (var project in Model.courseProjects) {
                         <tr>
                              <td>@project.Visibility</td>
-                             <td>@Model.course.Name</td>
-                             <td>@project.Name</td>
+                             <td>@Html.ActionLink(Model.course.Name, "Course", new { id = Model.course.ID })</td>
+                             <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID } ) </td>
                              <td>@project.Deadline</td>
-                             <td>@project.Graded</td>
+                             <td>@project.Graded</td><!--not finished, check again after Graded has been written-->
                              <td><!--veit ekki hvernig ég á að ná í groups þarf ég að gera nýtt thing í courseVieweModel--></td>
                          </tr>
                 }
