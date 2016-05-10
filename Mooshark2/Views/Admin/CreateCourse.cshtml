@@ -1,4 +1,5 @@
-﻿@model Mooshark2.Models.ViewModels.AdminViewModels.AdminCourseViewModel
+﻿@using Mooshark2.Models.DAL
+@model Mooshark2.Models.ViewModels.AdminViewModels.AdminCourseViewModel
 
 @{
     ViewBag.Title = "CreateCourse";
@@ -28,12 +29,20 @@
        <!-- <div class="form-group">-->
             @*<div class="col-md-10" >
                 <div id="duplicater" class="dropdown">*@
-                    @Html.LabelFor(model => model.TeacherList, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(model => model.Teacher, new { @class = "col-md-2 control-label" })
             <div class="col-md-10" class="dropdown">
-                @*@Html.DropDownList("Teacher", (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })*@
-            </div>
-            @Html.DropDownListFor(m => m.TeacherList.Id, (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
+                @Html.DropDownListFor(m => m.Teacher.Id, (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
 
+                @*<select class="btn btn-default">
+                <option value="" disabled selected>- Select a Teacher -</option>
+                @foreach(var i in Model.TeacherList) {
+                    <option class="btn btn-default" value="@i.Id">@i.FullName</option>
+                }
+            </select>*@
+
+                @*@Html.DropDownListFor(m => m.Teacher.Id, new SelectList(Model.TeacherList, "Id", "FullName"),  "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })*@
+
+            </div>
                 @*<button id ="button" class="btn btn-primary" data-toggle="button" onclick="duplicate()">
                     Add another
                 </button>*@
