@@ -19,7 +19,7 @@ namespace Mooshark2.Models.ViewModels.AdminViewModels
         public ApplicationUser TeacherList { get; set; }
 
         [Display(Name = "Students")]
-        public IEnumerable<ApplicationUser> StudentList { get; set; }
+        public IList<AdminSelectStudentViewModel> StudentList { get; set; }
 
     }
 }
