@@ -1,4 +1,9 @@
-﻿body {
+﻿@font-face {
+    font-family: 'keepcalm-medium';
+    src: url('../fonts/keepcalm-medium.ttf') format('truetype');
+}
+
+body {
     padding-top: 100px;
     padding-bottom: 20px;
 }
@@ -45,4 +50,16 @@ h2 {
 table#studentTable.table.table-bordered.table-striped {
       margin-right: -15px;
       margin-left: 210px;
+}
+
+#Mooshark {
+    font-family: keepcalm-medium;
+    font-size: 40px;
+
+}
+
+.navbar-main img {
+    vertical-align: text-top;
+    height: 70px;
+    width: 70px;
 }
