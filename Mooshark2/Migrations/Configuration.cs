@@ -1,5 +1,6 @@
 namespace Mooshark2.Migrations
 {
+    using Models.Entities;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -15,6 +16,9 @@ namespace Mooshark2.Migrations
 
         protected override void Seed(Mooshark2.Models.DAL.ApplicationDbContext context)
         {
+            context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "7f69729b - 0d97 - 4a86 - 9493 - 505fbf2e693e", CourseID = 2 });
+            context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "7f69729b - 0d97 - 4a86 - 9493 - 505fbf2e693e", CourseID = 3 });
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
