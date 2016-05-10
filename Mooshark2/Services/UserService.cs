@@ -53,6 +53,10 @@ namespace Mooshark2.Services
                                                   x => new SelectListItem { Value = x.Id, Text = x.FullName })
                                               .ToList();
 
+            /*var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var teacherRole = roleManager.FindByName("Teacher");
+            var allTeachers = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();*/
+
             return allTeachers;
         }
 
