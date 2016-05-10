@@ -1,0 +1,38 @@
+﻿@model Mooshark2.Models.ViewModels.AdminViewModels.AdminStudentListViewModel
+
+@{
+    ViewBag.Title = "StudentEditList";
+}
+
+<h2>Students</h2>
+
+    <table class="table table-bordered table-striped">
+        <caption>Students in course</caption>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>SSN</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="/Admin/EditStudent/@student.Id"><img alt="Edit" src="@Url.Content("~/Images/edit.png")" width="20" height="20"/></a>
+                        @student.FullName
+                    </td>
+                    <td>
+                        @student.Email
+                    </td>
+                    <td>
+                        @student.SSN
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+

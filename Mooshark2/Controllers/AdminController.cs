@@ -109,5 +109,13 @@ namespace Mooshark2.Controllers
                 return View("NotFound");
             }
         }
+
+        public ActionResult StudentEditList()
+        {
+            var allStudents = userService.GetAllStudents();
+            AdminStudentListViewModel students = new AdminStudentListViewModel(allStudents);
+
+            return View(students);
+        }
     }
 }
