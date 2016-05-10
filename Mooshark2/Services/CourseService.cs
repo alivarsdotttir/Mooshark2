@@ -47,11 +47,11 @@ namespace Mooshark2.Services
 
                 }
 
-                /*if (model.StudentList != null) {
-                    foreach(var i in model.StudentList) {
-                        db.CourseStudents.Add(new CourseStudent { CourseID = model.Course.ID, UserID = i.Id });
+                if (model.StudentList != null) {
+                    foreach(var i in model.StudentListCheck) {
+                        db.CourseStudents.Add(new CourseStudent { CourseID = model.Course.ID, UserID = i.Student.Id });
                     }
-                }*/
+                }
                 /* foreach (var i in model.StudentList)
                     {
                         db.CourseStudents.AddOrUpdate(new CourseStudent { CourseID = model.Course.ID, UserID = i.Id });

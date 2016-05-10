@@ -28,7 +28,7 @@ namespace Mooshark2.Controllers
         public ActionResult CreateCourse()
         {
             ViewBag.Teachers = userService.GetAllTeachers();
-            ViewBag.Students = userService.GetAllStudents();
+            var students = userService.GetAllStudentsUsers();
 
             //Course course = new Course(); 
             //var teachers = userService.GetAllTeachers();
@@ -36,7 +36,9 @@ namespace Mooshark2.Controllers
 
             //AdminCourseViewModel model = new AdminCourseViewModel(course, teachers, students);
 
-            return View(); 
+            AdminCourseViewModel model = new AdminCourseViewModel(students);
+
+            return View(model); 
         }
 
 
@@ -51,46 +53,52 @@ namespace Mooshark2.Controllers
             }
             else {
                 ViewBag.Teachers = userService.GetAllTeachers();
-                ViewBag.Students = userService.GetAllStudents();
+                var students = userService.GetAllStudentsUsers();
 
-                return View(model);
+                AdminCourseViewModel m = new AdminCourseViewModel(students);
+
+                return View(m);
             }
         }
 
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            if(id.HasValue) {
+
+                        if (id.HasValue)
+            {
                 int realID = id.Value;
-
+                
                 Course course = (from item in db.Courses
-                    where item.ID == id.Value
+                   where item.ID == id.Value
                     select item).SingleOrDefault();
-
-                if(course == null) {
-                    return View("NotFound");
-                }
-
-                //ViewBag.Teachers = userService.GetAllTeachersInCourse(course.ID);
-                //ViewBag.Students = userService.GetAllStudentsInCourse(course.ID);
+                
+                                if (course == null)
+                {
+                                        return View("NotFound");
+                                    }
+                
+                                //ViewBag.Teachers = userService.GetAllTeachersInCourse(course.ID);
+                                //ViewBag.Students = userService.GetAllStudentsInCourse(course.ID);
                 ViewBag.TeachersNotInCourse = userService.GetAllTeachersNotInCourse(course.ID);
                 ViewBag.StudentsNotInCourse = userService.GetAllStudentsNotInCourse(course.ID);
                 var teachers = userService.GetAllTeachersInCourse(course.ID);
                 var students = userService.GetAllStudentsInCourse(course.ID);
-
+                
                 AdminCourseViewModel model = new AdminCourseViewModel(course, teachers, students);
-
-                return View(model);
-            }
-            else
-            {
-                return View("NotFound");
-            }
+                
+                                return View(model);
+                            }
+                        else
+             {
+                                return View("NotFound");
+                            }
         }
 
         [HttpPost]
         public ActionResult Edit(Course course)
         {
+
             if (course != null)
             {
                 Course model = (from item in db.Courses
@@ -162,5 +170,6 @@ namespace Mooshark2.Controllers
                 return View("NotFound");
             }
         }
+
     }
 }
