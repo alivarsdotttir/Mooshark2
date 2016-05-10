@@ -32,14 +32,16 @@ namespace Mooshark2.Services
 
         public bool ServiceCreateCourse(AdminCourseViewModel model)
         {
-            if(db.Courses.Any(x => x.Name == model.Course.Name)) {
+            if (db.Courses.Any(x => x.Name == model.Course.Name))
+            {
 
                 return false;
             }
             else {
                 db.Courses.Add(model.Course);
 
-                if (model.Teacher.Id != null) {
+                if (model.Teacher.Id != null)
+                {
 
                     db.CourseTeachers.Add(new CourseTeacher { CourseID = model.Course.ID, UserID = model.Teacher.Id });
 
@@ -57,7 +59,7 @@ namespace Mooshark2.Services
 
                 db.SaveChanges();
                 return true;
-             }
+            }
         }
 
 
@@ -84,10 +86,10 @@ namespace Mooshark2.Services
             return courses;
         }
 
-        public Course getCourseById(int? id)
+        public Course getCourseById(int id)
         {
             Course course = (from x in db.Courses
-                             where id.Value == x.ID
+                             where id == x.ID
                              select x).SingleOrDefault();
             return course; 
         }
@@ -121,5 +123,7 @@ namespace Mooshark2.Services
             }
             return courses; 
         }
+
+        
     }
 }

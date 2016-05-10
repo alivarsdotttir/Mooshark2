@@ -19,7 +19,7 @@ namespace Mooshark2.Controllers
         public ActionResult Index()
         {
             string userId = User.Identity.GetUserId();
-            var ungradedProjects = projectService.getUngradedProjectsInCourse(userId);
+            var ungradedProjects = projectService.getUngradedProjects(userId);
             var coursesForProjects = courseService.getCoursesForMultipleProjects(ungradedProjects);
             var teacherCourses = courseService.getCoursesForTeacher(userId);
 
@@ -29,16 +29,17 @@ namespace Mooshark2.Controllers
 
         public ActionResult Course(int? id)
         {
-            //if(id != null)
-            //{
+
+            if(id != null)
+            {
                 var course = courseService.getCourseById(id.Value); 
                 var courseProjects = projectService.getProjectsFromCourse(id.Value);
 
                 TeacherCourseViewModel model = new TeacherCourseViewModel(course, courseProjects);
                  return View(model);
-            //}
+            }
             //Returns an error message, ID invalid 
-            //return View();
+            return View();
            
         }
 
@@ -119,12 +120,13 @@ namespace Mooshark2.Controllers
             if(subprojectID != null) {
                 string userId = User.Identity.GetUserId();
                 var students = projectService.getStudentsThatHaveSubmitted(subprojectID.Value);
-                var mostRecentSubmission = projectService.getStudentsBestSubmission(userId);
+                var bestSubmissions = projectService.getStudentsBestSubmission(userId);
                 var allSubmissionsForSubproject = projectService.getSubmissions(subprojectID.Value);
+                var subprojectName = projectService.getSubprojectById(subprojectID.Value);
 
                 TeacherSubmissionsViewmodel model = new TeacherSubmissionsViewmodel(allSubmissionsForSubproject,
                     students,
-                    mostRecentSubmission);
+                    bestSubmissions, subprojectName);
 
                 return View(model);
             }

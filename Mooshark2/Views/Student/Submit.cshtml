@@ -1,69 +1,24 @@
 ﻿@model Mooshark2.Models.Entities.Subproject
 
 
+@using (Html.BeginForm("Submit", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <!--Html.EditorFor(m => m)-->
+    @Html.HiddenFor(x => x.ID)
+    <input type="file" name="file" /><br />
 
+    <input type="submit" name="Submit" id="Submit" value="Upload" />
+}
 
+@*
 <form action="" method="post" enctype="multipart/form-data">
 
     <label for="file">Filename:</label>
     <input type="file" name="file" id="file" />
-
+    @*Html.ActionLink("Submit", "Submit", new { id = Model.ID })
     <input type="submit" />
 </form>
-
-
-
-
-
-@*
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Subproject</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ProjectID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProjectID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Weight, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-    *@
+*@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
