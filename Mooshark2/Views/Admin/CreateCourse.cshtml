@@ -41,18 +41,7 @@
             @*</div>*@
         </div>
 
-        <fieldset>
-            <legend>Students</legend>
 
-            @foreach (var i in ViewBag.Students)
-            {
-                <input type="checkbox" value="@i.Id"/>
-                <label for="@i">@i.FullName</label>
-            }
-
-            <input type="submit" value="Save Changes" class="sepH_b" />
-
-        </fieldset>
 
         @*    <script type="text/javascript">
 
@@ -149,7 +138,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" id="create" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>

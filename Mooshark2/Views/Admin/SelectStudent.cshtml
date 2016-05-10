@@ -35,7 +35,7 @@
 
 
 <div class="form-group">
-    <a class="btn btn-primary AdminButtons" data-toggle="modal" data-target=".bootstrapmodal"><span></span>Select students</a>
+    <a class="btn btn-primary AdminButtons" data-toggle="create" data-target=".bootstrapmodal"><span></span>Select students</a>
 
     <div class="modal fade bootstrapmodal">
         <div class="modal-dialog">
@@ -57,8 +57,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var i in ViewBag.Students)
-                            {
+                            @foreach(var i in ViewBag.Students) {
                                 <tr>
                                     <td>@Html.CheckBox("StudentList", new { Value = i, @class = "checkbox" })</td>
                                     <td>@i.FullName</td>
@@ -79,3 +78,17 @@
         </div>
     </div>
 </div>
+
+
+<fieldset>
+    <legend>Students</legend>
+
+    @foreach (var i in )
+            {
+        <input type="checkbox" value="@i.Id" />
+                <label for="@i">@i.FullName</label>
+    }
+
+    <input type="submit" value="Save Changes" class="sepH_b" />
+
+</fieldset>
