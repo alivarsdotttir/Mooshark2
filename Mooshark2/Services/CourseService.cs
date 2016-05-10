@@ -46,7 +46,7 @@ namespace Mooshark2.Services
                 }
 
                 if (model.StudentList != null) {
-                    foreach(var i in model.StudentList) {
+                    foreach(var i in model.StudentListCheck) {
                         db.CourseStudents.Add(new CourseStudent { CourseID = model.Course.ID, UserID = i.Student.Id });
                     }
                 }
