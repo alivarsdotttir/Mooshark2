@@ -83,8 +83,8 @@ namespace Mooshark2.Migrations
             UserManager.AddToRole("842a4227-59b8-4ff2-9aeb-4c80fe22c797", "Teacher");
             */
             
-            context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "3d08cbf7-7730-484c-9c02-3356f8cf2b1d", CourseID = 1 });
-            context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "3d08cbf7-7730-484c-9c02-3356f8cf2b1d", CourseID = 2 });
+            /*context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "3d08cbf7-7730-484c-9c02-3356f8cf2b1d", CourseID = 1 });
+            context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "3d08cbf7-7730-484c-9c02-3356f8cf2b1d", CourseID = 2 });*/
             /*
             context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "842a4227-59b8-4ff2-9aeb-4c80fe22c797", CourseID = 1});
             context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "842a4227-59b8-4ff2-9aeb-4c80fe22c797", CourseID = 2});
