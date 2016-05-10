@@ -256,6 +256,7 @@
     <Content Include="Images\edit.png" />
     <Content Include="Images\group.png" />
     <Content Include="Images\moo.jpg" />
+    <Content Include="Images\remove.png" />
     <Content Include="Images\solo.png" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
@@ -334,6 +335,7 @@
     <Content Include="Views\Teacher\Course.cshtml" />
     <Content Include="Views\Teacher\Graded.cshtml" />
     <Content Include="Views\Teacher\CreateProject.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Admin\SelectStudent.cshtml" />
     <Content Include="Views\Teacher\ProjectDetails.cshtml" />
   </ItemGroup>
