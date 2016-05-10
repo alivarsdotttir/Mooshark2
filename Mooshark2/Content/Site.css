@@ -63,3 +63,7 @@ table#studentTable.table.table-bordered.table-striped {
     height: 70px;
     width: 70px;
 }
+
+.navbar {
+    border-bottom: 6px solid #753bbd;
+}
