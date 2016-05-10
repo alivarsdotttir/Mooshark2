@@ -5,7 +5,19 @@
     ViewBag.Title = "ProjectDetails";
 }
 
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <h2>@Model.currentProject.Name</h2>
+
+<ul class="nav nav-pills">
+    @for (int i = 1; i < @Model.subprojects.Count() + 1; i++)
+    {
+        <li class="active"><a data-toggle="tab" href="#tab">Tab @i</a></li>
+    }
+</ul>
+
 
 @foreach(var subproject in Model.subprojects) {
     <div>

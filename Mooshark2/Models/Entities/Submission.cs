@@ -16,5 +16,6 @@ namespace Mooshark2.Models.Entities
         [ForeignKey("SubprojectID")]
         public Subproject Subproject { get; set; }
 
+        public int SubmissionNr { get; set; }
     }
 }

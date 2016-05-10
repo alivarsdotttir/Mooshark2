@@ -42,8 +42,7 @@
             <div>
                 <h8>Courses</h8>
                 <ul>
-                    @foreach (var course in Model.coursesForTeacher)
-                    {
+                    @foreach (var course in Model.coursesForTeacher) {
                         <li>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</li>
                     }
                 </ul>

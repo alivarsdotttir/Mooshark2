@@ -334,6 +334,7 @@
     <Content Include="Views\Teacher\CreateProject.cshtml" />
     <Content Include="Views\Admin\SelectStudent.cshtml" />
     <Content Include="Views\Teacher\ProjectDetails.cshtml" />
+    <Content Include="Views\Teacher\Submissions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />
