@@ -8,18 +8,22 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
 {
     public class TeacherCreateViewModel
     {
-        public Project project;
-        public Subproject subproject;
-        //public IEnumerable<Subproject> subprojects;
-        public Course course;
+        public Project project { get; set; }
+        public IEnumerable<Subproject> manySubprojects { get; set; }
+        public Subproject subproject { get; set; }
+        public Course course { get; set; }
         //public InputOutput inputOutput;
 
-        public TeacherCreateViewModel(Project p, Subproject s, Course c)
+        public TeacherCreateViewModel(Course c)
         {
-            project = p;
-            subproject = s;
             course = c;
             //inputOutput = i;
+        }
+
+
+        public TeacherCreateViewModel()
+        {
+            
         }
     }
 }
