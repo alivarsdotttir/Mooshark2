@@ -209,5 +209,11 @@ namespace Mooshark2.Services
             int lastSubmissionId = db.Submissions.Max(sub => sub.ID); 
             return lastSubmissionId; 
         }
+
+        public Submission getMostRecentSubmission(ApplicationUser user)
+        {
+
+            return null; 
+        }
     }
 }
