@@ -20,15 +20,14 @@
             </thead>
             <tbody>
 
-                @foreach (var project in Model.upcomingProjects) {
-                    foreach (var course in Model.coursesForProjects) {
+                @foreach (var project in Model.upcomingProjects) { 
                     <tr>
-                        <td>@course.Name</td>
+                        <td>@Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name</td>
                         <td>@Html.ActionLink(project.Name, "Details", new { id = project.ID })</td>
                         <td>@project.Deadline</td>
                         <td><!--project.isGroupProject--></td>
                     </tr>
-                    }
+                    
                 }
             </tbody>
         </table>
