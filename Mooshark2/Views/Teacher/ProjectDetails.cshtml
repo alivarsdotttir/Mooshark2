@@ -9,7 +9,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<h2>@Model.currentProject.Name</h2>
+<div class="jumbotron">
+    <h2>@Model.currentProject.Name</h2>
+    <p>Here you can read the description and submit your solution!</p>
+</div>
+
 
 <ul class="nav nav-pills">
     @for (int i = 1; i < @Model.subprojects.Count() + 1; i++)
@@ -31,4 +35,4 @@
     </div>
 }
 
-@Html.ActionLink("Back to Course", "Course", new { id = Model.currentCourse.ID }, new { @class="btn btn-default" }) <!--doesn't seem to work right-->
+@Html.ActionLink("Back to Course", "Course", new { id = Model.currentProject.CourseID }, new { @class="btn btn-default" }) <!--doesn't seem to work right-->

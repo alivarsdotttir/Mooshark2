@@ -23,5 +23,6 @@ namespace Mooshark2.Models.Entities
         public string CppFileName { get; set; }
 
         public string FilePath { get; set; }
+        public string Output { get; set; }
     }
 }

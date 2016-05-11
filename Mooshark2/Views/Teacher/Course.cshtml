@@ -1,5 +1,4 @@
-﻿
-@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherCourseViewModel
+﻿@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherCourseViewModel
 @{
     ViewBag.Title = "Course";
 }
@@ -13,37 +12,14 @@
             <table class="table table-bordered table-striped">
                 <caption class="left"></caption>
                 <thead>
-                <tr>
-                    <th>Visability</th>
-                    <th>Course</th>
-                    <th>Assignment</th>
-                    <th>Deadline</th>
-                    <th>Graded</th>
-                    <th>Group</th>
-                </tr>
-<<<<<<< HEAD
-            </thead>
-            <tbody>
-                @foreach (var project in Model.courseProjects) {
-                        <tr>
-                            <td>
-                                @if (@project.Visibility == true)
-                                {
-                                    <img alt="Visible" src="~/Images/check.png"  height="20" width="20"/>
-                                }
-                            </td>
-                             <td>@Html.ActionLink(Model.course.Name, "Course", new { id = Model.course.ID })</td>
-                             <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID } ) </td>
-                             <td>@project.Deadline</td>
-                             <td>@project.Graded</td><!--not finished, check again after Graded has been written-->
-                            @if (@project.isGroupProject == true)
-                            {
-                                <td><img alt="Solo" src="~/Images/group.png" width="20" height="20" /></td>
-                            }
-                            @if (@project.isGroupProject == false)
-                            {
-                                <td><img alt="Group" src="~/Images/solo.png" width="20" height="20" /></td>
-=======
+                    <tr>
+                        <th>Visability</th>
+                        <th>Course</th>
+                        <th>Assignment</th>
+                        <th>Deadline</th>
+                        <th>Graded</th>
+                        <th>Group</th>
+                    </tr>
                 </thead>
                 <tbody>
                 @foreach(var project in Model.courseProjects) {
@@ -51,22 +27,21 @@
                         <td>
                             @if(project.Visibility == true) {
                                 <img alt="Visible" src="~/Images/check.png" height="20px" width="20px"/>
->>>>>>> 963b1c1164051b14dff9f95125d0a41d46706ddd
                             }
                         </td>
-                        <td>@Html.ActionLink(Model.course.Name, "Course", new { id = Model.course.ID })</td>
+                        <td>@Model.course.Name</td>
                         <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID }) </td>
                         <td>@project.Deadline</td>
                         <td>@project.Graded</td><!--not finished, check again after Graded has been written-->
-                        @*@if(project.isGroupProject == true) {
+
+                        @if(project.isGroupProject == true) {
                             <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px"/></td>
                         }
                         @if(project.isGroupProject == false) {
                             <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px"/></td>
-                        }*@
+                        }
                     </tr>
                 }
-
                 </tbody>
             </table>
         </div>
