@@ -201,8 +201,7 @@ namespace Mooshark2.Services
 
         public int createSubmission(Submission submission)
         {
-            if (submission != null)
-            {
+            if(submission != null) {
                 db.Submissions.Add(submission);
                 db.SaveChanges();
             }
@@ -213,7 +212,22 @@ namespace Mooshark2.Services
         public Submission getMostRecentSubmission(ApplicationUser user)
         {
 
-            return null; 
+            return null;
+        }
+
+        public IEnumerable<Submission> getStudentsSubmissionsForSubproject(string studentID)
+        {
+            IEnumerable<Submission> submissions = (from x in db.Users
+                                                   join y in db.StudentSubmissions on x.Id equals y.UserID
+                                                   join z in db.Submissions on y.SubmissionID equals z.ID
+                                                   where x.Id == studentID
+                                                   select y.Submission) as IEnumerable<Submission>;  // OMG
+
+            if(submissions != null) {
+                return submissions;
+            }
+
+            return Enumerable.Empty<Submission>();
         }
     }
 }

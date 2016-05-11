@@ -22,10 +22,10 @@
                             <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
                             <td>@project.Deadline</td>
                             @if (@project.isGroupProject == true) {
-                                <td><img src="~/Images/group.png" width="15px" height="15px" /></td>
+                                <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px" /></td>
                             }
                             @if(@project.isGroupProject == false){ 
-                                <td><img src="~/Images/solo.png" width="15px" height="15px"/></td>
+                                <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px"/></td>
                             }
                         </tr>
                   }

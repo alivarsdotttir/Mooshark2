@@ -41,10 +41,23 @@
                 </div>
             </div>
             <div class="form-group">
+                @Html.LabelFor(model => model.inputoutput.Input, "Input", new { @class = "col-md-2 contorl-la" })
+                <div>
+                    @Html.TextAreaFor(model => model.inputoutput.Input, new { @class = "form-contole" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.inputoutput.Output, "Output", new { @class = "col-md-2 contorl-la" })
+                <div>
+                    @Html.TextAreaFor(model => model.inputoutput.Output, new { @class = "form-contole" })
+                </div>
+            </div>
+            <div class="form-group">
                 @Html.LabelFor(model => model.project.GroupSize, "Group Size", new { @class = "col-md-2 contorl-la" })
                 <div>
                     @Html.EditorFor(model => model.project.GroupSize, new { @class = "form-contole" })
                 </div>
+
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
