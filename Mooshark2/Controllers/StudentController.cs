@@ -89,18 +89,17 @@ namespace Mooshark2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit(int subprojectId, HttpPostedFileBase file)
-        {
-            //get user who is logged in
-            string userId = User.Identity.GetUserId();
-            var user = userService.getUserById(userId);
+        public ActionResult Submit(Subproject subproject, HttpPostedFileBase file)
+        {   
+             //get user who is logged in
+             string userId = User.Identity.GetUserId();
+             var user = userService.getUserById(userId);
 
             //get subproject, project and course
-            var subproject = projectService.getSubprojectById(subprojectId);
-            var projectId = subproject.ProjectID;
-            var project = projectService.getProjectById(projectId.Value); 
+            int projectId = subproject.ProjectID ?? default(int);
+            var project = projectService.getProjectById(projectId);
             var courseId = project.CourseID;
-            var course = courseService.getCourseById(courseId); 
+            var course = courseService.getCourseById(courseId);
 
             if (file.ContentLength > 0)
             {
@@ -108,17 +107,25 @@ namespace Mooshark2.Controllers
                 Submission submission = new Submission();
                 submission.Date = DateTime.Now;
                 submission.Accepted = true;  //Needs to change when test cases are implemented
-                submission.SubprojectID = subprojectId;
+                submission.SubprojectID = subproject.ID;
                 //TODO: Vista slóð með í database
 
                 int submissionID = projectService.createSubmission(submission);
 
                 var fileName = Path.GetFileName(file.FileName);
-                var filePath = string.Format("~/App_Data/{0}/{1}/{2}/{3}/{4}", course, project, subproject, user, fileName+submissionID);
-                System.IO.Directory.CreateDirectory(filePath);
+                var filePath = string.Format("~\\Submissions\\{0}\\{1}\\{2}\\{3}\\{4}", course.Name, project.Name, subproject.Name, user.UserName, "Submission" + submissionID);
+                
+                //File.SetAttributes(filePath, FileAttributes.Normal);
+                //System.IO.Directory.CreateDirectory(filePath);
+
                 var path = Path.Combine(Server.MapPath(filePath), fileName);
+                System.IO.Directory.CreateDirectory(path);
+                System.IO.FileInfo fileInfo = new System.IO.FileInfo(path);
+                fileInfo.IsReadOnly = false;
+
                 file.SaveAs(path);
 
+                return RedirectToAction("Details"); 
             }
 
             return RedirectToAction("Index");
