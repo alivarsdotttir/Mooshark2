@@ -58,6 +58,7 @@ h2 {
     width: 70px;
 }
 
+/*
 div.col-sm-5.sidenav {
     width: 82%;
     float: right;
@@ -75,7 +76,7 @@ table#studentTable.table.table-bordered.table-striped {
     height: 200px;
     overflow: auto;
 }
-
+*/
 
 .navbar {
     border-bottom: 6px solid #753bbd;
