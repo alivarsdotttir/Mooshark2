@@ -19,7 +19,8 @@ namespace Mooshark2.Migrations
 
         protected override void Seed(Mooshark2.Models.DAL.ApplicationDbContext context)
         {
-
+            //context.StudentSubmissions.AddOrUpdate(new StudentSubmission { SubmissionID = 1, UserID = "e4a87126-62a5-4904-8359-61d11732dd53" });
+            //context.Submissions.AddOrUpdate(new Submission { Date = new DateTime(2015, 09, 09), Accepted = true, CppFileName = "HelloWorld.cpp", Grade = 10, SubprojectID = 1, FilePath = "C:/anna/lab3/sub1", SubmissionNr = 5, Output = "allt rétt" });
             //context.Projects.AddOrUpdate(new Project { Name = "lab 2", CourseID = 1, Deadline = new DateTime(2013, 9, 20, 17, 45, 00), Graded = false, isGroupProject = false, Visibility = true, Grade = 10});
             //context.Projects.AddOrUpdate(new Project { Name = "lab 1", CourseID = 2, Deadline = new DateTime(2013, 9, 20, 17, 45, 00), Graded = false, isGroupProject = false, Visibility = true, Grade = 10 });
             //context.Projects.AddOrUpdate(new Project { Name = "lab 2", CourseID = 2, Deadline = new DateTime(2013, 9, 20, 17, 45, 00), Graded = false, isGroupProject = false, Visibility = true, Grade = 10 });
