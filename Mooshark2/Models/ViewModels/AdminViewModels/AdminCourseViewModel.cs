@@ -30,13 +30,12 @@ namespace Mooshark2.Models.ViewModels.AdminViewModels
         [Display(Name = "Students")]
         public List<AdminSelectStudentViewModel> StudentListCheck { get; set; }
 
-
-
-        public AdminCourseViewModel(Course c, IEnumerable<ApplicationUser> p, IEnumerable<ApplicationUser> t)
+        public AdminCourseViewModel(Course c, IEnumerable<ApplicationUser> p, IEnumerable<ApplicationUser> t, List<AdminSelectStudentViewModel> s)
         {
             Course = c;
             Teachers = p;
             StudentList = t;
+            StudentListCheck = s;
         }
 
 

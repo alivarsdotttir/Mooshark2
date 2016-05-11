@@ -78,3 +78,6 @@ table#studentTable.table.table-bordered.table-striped {
 }
 
 
+.navbar {
+    border-bottom: 6px solid #753bbd;
+}
