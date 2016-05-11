@@ -68,7 +68,7 @@ namespace Mooshark2.Controllers
             bool project = projectService.ServiceCreateProject(model);
 
             if (project) {
-                return RedirectToAction("CreateSubproject", model.ID);
+                return RedirectToAction("CreateSubproject", new {id = model.ID});
             }
             else {
 
@@ -80,10 +80,10 @@ namespace Mooshark2.Controllers
 
         //GET
         [HttpGet]
-        public ActionResult CreateSubproject(int id)
+        public ActionResult CreateSubproject(int? id)
         {
-            if(id != null) {
-                ViewBag.Course = id;
+            if(id.HasValue) {
+                ViewBag.Project = id;
 
                 return View();
             }
@@ -93,15 +93,16 @@ namespace Mooshark2.Controllers
         }
 
         //POST
-        [HttpGet]
+        [HttpPost]
         public ActionResult CreateSubproject(Subproject model)
         {
             bool subproject = projectService.ServiceCreateSubproject(model);
 
-            if (subproject)
-            {
-                return RedirectToAction("ProjectDetails", model.ProjectID);
+            if (subproject) {
+                return RedirectToAction("ProjectDetails", new { model.ProjectID });
+
             }
+            
             else {
 
                 ViewBag.Course = model.ProjectID;
@@ -109,7 +110,6 @@ namespace Mooshark2.Controllers
                 return View();
             }
         }
-
 
 
         //GET
@@ -147,7 +147,7 @@ namespace Mooshark2.Controllers
                 return View(model);
             }
             //Returns an error message, ID invalid 
-            return View();
+            return View("NotFound");
         }
 
         [HttpGet]
