@@ -12,7 +12,7 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
         public IEnumerable<Subproject> manySubprojects { get; set; }
         public Subproject subproject { get; set; }
         public Course course { get; set; }
-        //public InputOutput inputOutput;
+        public InputOutput inputoutput;
 
         public TeacherCreateViewModel(Course c)
         {

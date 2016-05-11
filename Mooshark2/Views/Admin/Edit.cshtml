@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        
+
         <h4>Edit</h4>
         <hr/>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -22,7 +22,7 @@
             <div class="row">
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Course.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Course.Name, htmlAttributes : new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.Course.Name, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Course.Name, "", new { @class = "text-danger" })
@@ -30,12 +30,20 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Course.Active, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Course.Active, htmlAttributes : new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <div class="checkbox">
                             @Html.EditorFor(model => model.Course.Active)
                             @Html.ValidationMessageFor(model => model.Course.Active, "", new { @class = "text-danger" })
                         </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-md-2">
+                        
+                    </div>
+                    <div class="col-md-10">
+                        <input type="submit" value="Save name & active changes" class="btn btn-primary AdminButtons" />
                     </div>
                 </div>
             </div>
@@ -136,82 +144,73 @@
 
             <div class="row">
                 <div class="pull-right">
-                    <input type="submit" value="Save" class="btn btn-default"/>
+                    @Html.ActionLink("Quit editing", "Index", null, new { @class = "btn btn-default" })
                 </div>
             </div>
 
         </div>
+    </div>
+    <!-- Modal for Student List CheckBox -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Select Students
+                    </h4>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+
+                    <form role="form">
+                        <div class="form-group">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>SSN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (var i = 0; i < Model.StudentListCheck.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.HiddenFor(m => m.StudentListCheck[i].Student.Id)
+                                                @Html.CheckBoxFor(m => m.StudentListCheck[i].Checked)
+                                                @Html.LabelFor(m => m.StudentListCheck[i].Student.FullName, Model.StudentListCheck[i].Student.FullName)
+                                            </td>
+                                            <td>@Model.StudentListCheck[i].Student.UserName</td>
+                                            <td>@Model.StudentListCheck[i].Student.Email</td>
+                                            <td>@Model.StudentListCheck[i].Student.SSN</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="submit" class="btn btn-default pull-right">Add to @Model.Course.Name</button>
+                    </form>
 
 
                 </div>
-                }
-<!-- Modal for Student List CheckBox -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close"
-                        data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    Select Students
-                </h4>
-            </div>
 
-            <!-- Modal Body -->
-            <div class="modal-body">
-
-                <form role="form">
-                    <div class="form-group">
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>SSN</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for (var i = 0; i < Model.StudentListCheck.Count; i++)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.HiddenFor(m => m.StudentListCheck[i].Student.Id)
-                                            @Html.CheckBoxFor(m => m.StudentListCheck[i].Checked)
-                                            @Html.LabelFor(m => m.StudentListCheck[i].Student.FullName, Model.StudentListCheck[i].Student.FullName)
-                                        </td>
-                                        <td>@Model.StudentListCheck[i].Student.UserName</td>
-                                        <td>@Model.StudentListCheck[i].Student.Email</td>
-                                        <td>@Model.StudentListCheck[i].Student.SSN</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                    <button type="submit" class="btn btn-default">Add to @Model.Course.Name</button>
-                </form>
-
-
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default"
-                        data-dismiss="modal">
-                    Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                    Save changes
-                </button>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
 
                 <div>
                     @Html.ActionLink("Back to List", "Index")

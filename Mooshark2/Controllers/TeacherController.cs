@@ -53,6 +53,7 @@ namespace Mooshark2.Controllers
                 var subproject = new Subproject();
                 //IEnumerable<Subproject> subprojects = new List<Subproject>();
                 var course = courseService.getCourseById(id.Value);
+                var inputoutput = new InputOutput();
 
                 TeacherCreateViewModel model = new TeacherCreateViewModel(course);
                 return View(model);

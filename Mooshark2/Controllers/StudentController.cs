@@ -12,6 +12,7 @@ using Mooshark2.Models.ViewModels.StudentViewModels;
 using System.Threading.Tasks;
 using System.IO;
 using System.Net;
+using System.Diagnostics;
 
 namespace Mooshark2.Controllers
 {
@@ -89,18 +90,18 @@ namespace Mooshark2.Controllers
         }
 
         [HttpPost]
-        public ActionResult Submit(Subproject subprojectId, HttpPostedFileBase file)
-        {
-            //get user who is logged in
-            string userId = User.Identity.GetUserId();
-            var user = userService.getUserById(userId);
+
+        public ActionResult Submit(Subproject subproject, HttpPostedFileBase file)
+        {   
+             //get user who is logged in
+             string userId = User.Identity.GetUserId();
+             var user = userService.getUserById(userId);
 
             //get subproject, project and course
-            var subproject = projectService.getSubprojectById(subprojectId.ID);
-            var projectId = subproject.ProjectID;
-            var project = projectService.getProjectById(projectId.Value); 
+            int projectId = subproject.ProjectID ?? default(int);
+            var project = projectService.getProjectById(projectId);
             var courseId = project.CourseID;
-            var course = courseService.getCourseById(courseId); 
+            var course = courseService.getCourseById(courseId);
 
             if (file.ContentLength > 0)
             {
@@ -108,17 +109,69 @@ namespace Mooshark2.Controllers
                 Submission submission = new Submission();
                 submission.Date = DateTime.Now;
                 submission.Accepted = true;  //Needs to change when test cases are implemented
-                submission.SubprojectID = subprojectId.ID;
+                submission.SubprojectID = subproject.ID;
                 //TODO: Vista slóð með í database
 
                 int submissionID = projectService.createSubmission(submission);
 
                 var fileName = Path.GetFileName(file.FileName);
-                var filePath = string.Format("~/App_Data/{0}/{1}/{2}/{3}/{4}", course, project, subproject, user, fileName+submissionID);
-                System.IO.Directory.CreateDirectory(filePath);
+                var filePath = string.Format("~\\Submissions\\{0}\\{1}\\{2}\\{3}\\{4}", course.Name, project.Name, subproject.Name, user.UserName, "Submission" + submissionID);
+                
+
                 var path = Path.Combine(Server.MapPath(filePath), fileName);
+                
+                System.IO.Directory.CreateDirectory(Server.MapPath(filePath));
+                
+
                 file.SaveAs(path);
 
+                /*
+                string exeFilePath = file.FileName.Remove(file.FileName.IndexOf(".")) + ".exe";
+                //C++ compiler folder path
+                var compilerFolder = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\bin\\";
+
+                //Executing the compiler:
+                Process compiler = new Process();
+                compiler.StartInfo.FileName = "cmd.exe";
+                compiler.StartInfo.WorkingDirectory = path;
+                compiler.StartInfo.RedirectStandardInput = true;
+                compiler.StartInfo.RedirectStandardOutput = true;
+                compiler.StartInfo.UseShellExecute = false;
+
+                compiler.Start();
+                compiler.StandardInput.WriteLine("\"" + compilerFolder + "vcvars32.bat" + "\"");
+                compiler.StandardInput.WriteLine("cl.exe /nologo /EHsc " + file.FileName);
+                compiler.StandardInput.WriteLine("exit");
+                string output = compiler.StandardOutput.ReadToEnd();
+                compiler.WaitForExit();
+                compiler.Close();
+
+                if (System.IO.File.Exists(exeFilePath))
+                {
+                    var processInfoExe = new ProcessStartInfo(exeFilePath, "");
+                    processInfoExe.UseShellExecute = false;
+                    processInfoExe.RedirectStandardOutput = true;
+                    processInfoExe.RedirectStandardError = true;
+                    processInfoExe.CreateNoWindow = true;
+                    using (var processExe = new Process())
+                    {
+                        processExe.StartInfo = processInfoExe;
+                        processExe.Start();
+                        
+                        // processExe.StandardInput.WriteLine()
+                        //should be used for input 
+
+                        // We then read the output of the program:
+                        var lines = new List<string>();
+                        while (!processExe.StandardOutput.EndOfStream)
+                        {
+                            lines.Add(processExe.StandardOutput.ReadLine());
+                        }
+
+                        ViewBag.Output = lines;
+                    }
+                    */
+                    
             }
 
             return RedirectToAction("Index");

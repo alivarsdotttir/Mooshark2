@@ -210,6 +210,11 @@ namespace Mooshark2.Services
             return lastSubmissionId; 
         }
 
+        public Submission getMostRecentSubmission(ApplicationUser user)
+        {
+
+            return null;
+        }
 
         public IEnumerable<Submission> getStudentsSubmissionsForSubproject(string studentID)
         {
