@@ -52,7 +52,7 @@ namespace Mooshark2.Controllers
                 return RedirectToAction("Index");
             }
             else {
-                ViewBag.Teachers = userService.GetAllTeachers();
+               ViewBag.Teachers = userService.GetAllTeachers();
                 var students = userService.GetAllStudentsUsers();
 
                 AdminCourseViewModel m = new AdminCourseViewModel(students);

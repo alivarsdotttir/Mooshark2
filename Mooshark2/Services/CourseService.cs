@@ -139,7 +139,5 @@ namespace Mooshark2.Services
 
             return Enumerable.Empty<Course>();
         }
-
-        
     }
 }
