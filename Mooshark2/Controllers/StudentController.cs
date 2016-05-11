@@ -148,13 +148,10 @@ namespace Mooshark2.Controllers
 
                 compiler.Start();
                 compiler.StandardInput.WriteLine("\"" + compilerFolder + "vcvars32.bat" + "\"");
-                Debug.WriteLine("\"" + compilerFolder + "vcvars32.bat" + "\"");
                 compiler.StandardInput.WriteLine("cl.exe /nologo /EHsc " + file.FileName);
-                Debug.WriteLine("cl.exe /nologo /EHsc " + file.FileName);
                 compiler.StandardInput.WriteLine("exit");
                 string output = compiler.StandardOutput.ReadToEnd();
-                Debug.WriteLine(output);
-                compiler.WaitForExit();
+                compiler.WaitForExit(10000);
                 compiler.Close();
 
                 if (System.IO.File.Exists(exeFilePath))
@@ -169,17 +166,20 @@ namespace Mooshark2.Controllers
                         processExe.StartInfo = processInfoExe;
                         processExe.Start();
 
-                        // processExe.StandardInput.WriteLine()
-                        //should be used for input 
+                        //Get InputOutput 
+                        var io = projectService.getIOBySubprojectId(subproject.ID);
+
+                        //Test input against code
+                        processExe.StandardInput.WriteLine(io.Input); 
 
                         // We then read the output of the program:
-                        var lines = new List<string>();
+                        var programOutput = new List<string>();
                         while (!processExe.StandardOutput.EndOfStream)
                         {
-                            lines.Add(processExe.StandardOutput.ReadLine());
+                            programOutput.Add(processExe.StandardOutput.ReadLine());
                         }
 
-                        ViewBag.Output = lines;
+                        ViewBag.Output = programOutput;
                     }
 
                 }
