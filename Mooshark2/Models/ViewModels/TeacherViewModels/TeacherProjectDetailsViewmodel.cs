@@ -8,15 +8,21 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
 {
     public class TeacherProjectDetailsViewmodel
     {
-        public Project currentProject;
-        public IEnumerable<Subproject> subprojects;
-        public Course currentCourse;
+        public Project currentProject
+        {
+            get;
+            set;
+        }
+        public List<Subproject> subprojects
+        {
+            get;
+            set;
+        }
 
-        public TeacherProjectDetailsViewmodel(Project cuPro, IEnumerable<Subproject> sub, Course cuCo)
+        public TeacherProjectDetailsViewmodel(Project cuPro, List<Subproject> sub)
         {
             currentProject = cuPro;
             subprojects = sub;
-            currentCourse = cuCo;
         }
             
     }
