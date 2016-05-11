@@ -1,9 +1,9 @@
 namespace Mooshark2.Migrations
 {
+    using Models.Entities;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models.DAL;
-    using Models.Entities;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -19,6 +19,16 @@ namespace Mooshark2.Migrations
 
         protected override void Seed(Mooshark2.Models.DAL.ApplicationDbContext context)
         {
+
+            //context.Projects.AddOrUpdate(new Project { Name = "lab 2", CourseID = 1, Deadline = new DateTime(2013, 9, 20, 17, 45, 00), Graded = false, isGroupProject = false, Visibility = true, Grade = 10});
+            //context.Projects.AddOrUpdate(new Project { Name = "lab 1", CourseID = 2, Deadline = new DateTime(2013, 9, 20, 17, 45, 00), Graded = false, isGroupProject = false, Visibility = true, Grade = 10 });
+            //context.Projects.AddOrUpdate(new Project { Name = "lab 2", CourseID = 2, Deadline = new DateTime(2013, 9, 20, 17, 45, 00), Graded = false, isGroupProject = false, Visibility = true, Grade = 10 });
+            //context.Projects.AddOrUpdate(new Project { Name = "lab 2", CourseID = 3, Deadline = new DateTime(2013, 9, 20, 17, 45, 00), Graded = false, isGroupProject = false, Visibility = true, Grade = 10 });
+            //context.Projects.AddOrUpdate(new Project { Name = "lab 1", CourseID = 3, Deadline = new DateTime(2013, 9, 20, 17, 45, 00), Graded = false, isGroupProject = false, Visibility = true, Grade = 10 });
+            //context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "7f69729b-0d97-4a86-9493-505fbf2e693e", CourseID =2 });
+            //context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "7f69729b - 0d97 - 4a86 - 9493 - 505fbf2e693e", CourseID = 2 });
+            //context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "7f69729b-0d97-4a86-9493-505fbf2e693e", CourseID = 3 });
+
             // add course-teacher connections
             //context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = , CourseID = });
 
@@ -81,10 +91,10 @@ namespace Mooshark2.Migrations
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             UserManager.AddToRole("e427af15-2cde-48cc-a976-2a1662a4a4bd", "Student");
             UserManager.AddToRole("842a4227-59b8-4ff2-9aeb-4c80fe22c797", "Teacher");
-            */
             
-            context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "3d08cbf7-7730-484c-9c02-3356f8cf2b1d", CourseID = 1 });
-            context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "3d08cbf7-7730-484c-9c02-3356f8cf2b1d", CourseID = 2 });
+            
+            /*context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "3d08cbf7-7730-484c-9c02-3356f8cf2b1d", CourseID = 1 });
+            context.CourseStudents.AddOrUpdate(new CourseStudent { UserID = "3d08cbf7-7730-484c-9c02-3356f8cf2b1d", CourseID = 2 });*/
             /*
             context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "842a4227-59b8-4ff2-9aeb-4c80fe22c797", CourseID = 1});
             context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "842a4227-59b8-4ff2-9aeb-4c80fe22c797", CourseID = 2});

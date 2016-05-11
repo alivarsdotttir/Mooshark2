@@ -47,11 +47,13 @@ namespace Mooshark2.Services
 
                 }
 
-                /*if (model.StudentList != null) {
-                    foreach(var i in model.StudentList) {
-                        db.CourseStudents.Add(new CourseStudent { CourseID = model.Course.ID, UserID = i.Id });
+                if (model.StudentListCheck != null) {
+                    foreach(var i in model.StudentListCheck) {
+                        if(i.Checked == true) {
+                            db.CourseStudents.Add(new CourseStudent { CourseID = model.Course.ID, UserID = i.Student.Id });
+                        }
                     }
-                }*/
+                }
                 /* foreach (var i in model.StudentList)
                     {
                         db.CourseStudents.AddOrUpdate(new CourseStudent { CourseID = model.Course.ID, UserID = i.Id });
@@ -60,6 +62,26 @@ namespace Mooshark2.Services
                 db.SaveChanges();
                 return true;
             }
+        }
+
+        public void ServiceEditCourse(AdminCourseViewModel model)
+        {
+            Course course = (from item in db.Courses
+                             where item.ID == model.Course.ID
+                             select item).SingleOrDefault();
+
+            model.Course.Name = course.Name;
+            model.Course.Active = course.Active;
+
+            if (model.Teacher.Id != null)
+            {
+
+                db.CourseTeachers.Add(new CourseTeacher { CourseID = model.Course.ID, UserID = model.Teacher.Id });
+
+            }
+
+            db.SaveChanges();
+
         }
 
 
@@ -83,7 +105,11 @@ namespace Mooshark2.Services
                            join y in db.CourseTeachers on x.ID equals y.CourseID
                            where y.UserID == teacherID
                            select x) as IEnumerable<Course>;
-            return courses;
+            if(courses != null) {
+                return courses;
+            }
+
+            return Enumerable.Empty<Course>();
         }
 
         public Course getCourseById(int id)
@@ -91,7 +117,8 @@ namespace Mooshark2.Services
             Course course = (from x in db.Courses
                              where id == x.ID
                              select x).SingleOrDefault();
-            return course; 
+            
+            return course;
         }
 
         public IEnumerable<ApplicationUser> getTeachersForCourse(int courseId)
@@ -100,7 +127,11 @@ namespace Mooshark2.Services
                             join y in db.CourseTeachers on x.Id equals y.UserID
                             where y.CourseID == courseId
                             select x) as IEnumerable<ApplicationUser>;
-            return teachers; 
+            if(teachers != null) {
+                return teachers;
+            }
+
+            return Enumerable.Empty<ApplicationUser>();
         }
 
         public IEnumerable<Course> getCoursesForMultipleProjects(IEnumerable<Project> projects)
@@ -121,9 +152,12 @@ namespace Mooshark2.Services
                                              select x) as IEnumerable<Course>;
                 }
             }
-            return courses; 
-        }
 
-        
+            if(courses != null) {
+                return courses;
+            }
+
+            return Enumerable.Empty<Course>();
+        }
     }
 }

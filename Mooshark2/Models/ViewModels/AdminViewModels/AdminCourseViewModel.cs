@@ -11,31 +11,50 @@ namespace Mooshark2.Models.ViewModels.AdminViewModels
 {
     public class AdminCourseViewModel
     {
+        private List<ApplicationUser> students;
+        private List<ApplicationUser> studentsNotInCourse;
+
         [Required]
         [Display(Name = "Course name")]
         public Course Course { get; set; }
+
 
 
         [Display(Name = "Teacher")]
         public ApplicationUser Teacher { get; set; }
 
         [Display(Name = "Teachers")]
-        public IEnumerable<ApplicationUser> Teachers
-        {
-            get;
-            set;
-        }
+        public IEnumerable<ApplicationUser> Teachers { get; set; }
 
-        [Display(Name = "Students")]
+
+
         public IEnumerable<ApplicationUser> StudentList { get; set; }
 
-        public AdminCourseViewModel(Course c, IEnumerable<ApplicationUser> p, IEnumerable<ApplicationUser> t)
+        [Display(Name = "Students")]
+        public List<AdminSelectStudentViewModel> StudentListCheck { get; set; }
+
+        public AdminCourseViewModel(Course c, IEnumerable<ApplicationUser> p, IEnumerable<ApplicationUser> t, List<AdminSelectStudentViewModel> s)
         {
             Course = c;
             Teachers = p;
             StudentList = t;
+            StudentListCheck = s;
+        }
+
+
+        public AdminCourseViewModel(List<AdminSelectStudentViewModel> s)
+        {
+            StudentListCheck = s;
+        }
+
+
+        public AdminCourseViewModel()
+        {
+            
         }
 
     }
+
+  
 
 }

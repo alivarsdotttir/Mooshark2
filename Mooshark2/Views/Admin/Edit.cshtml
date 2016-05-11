@@ -1,6 +1,4 @@
 ﻿@model Mooshark2.Models.ViewModels.AdminViewModels.AdminCourseViewModel
-@*@using Mooshark2.Models.Entities
-@model Mooshark2.Models.Entities.Course*@
 
 @{
     ViewBag.Title = "Edit";
@@ -70,62 +68,145 @@
                                     </td>
                                 </tr>
                             }
-                                
+
 
                             </tbody>
                         </table>
+
                     </div>
                 </div>
 
                 <div class="col-sm-1 sidenav">
                 </div>
 
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <table class="table table-bordered table-striped">
-                                    <caption>Students in course</caption>
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>SSN</th>
-                                            <th>Remove</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        @foreach (var student in Model.StudentList)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @student.FullName
-                                                </td>
-                                                <td>
-                                                    @student.Email
-                                                </td>
-                                                <td>
-                                                    @student.SSN
-                                                </td>
-                                                <td>
-                                                    <a href=""><img alt="Edit" src="@Url.Content("~/Images/remove.png")" width="20" height="20" />
-                                                </td>
-                                            </tr>
-                                        }
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-
+                <div class="col-sm-6">
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Save" class="btn btn-default" />
-                        </div>
+                        <table class="table table-bordered table-striped">
+                            <caption>Students in course</caption>
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>SSN</th>
+                                <th>Remove</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @foreach(var student in Model.StudentList) {
+                                <tr>
+                                    <td>
+                                        @student.FullName
+                                    </td>
+                                    <td>
+                                        @student.Email
+                                    </td>
+                                    <td>
+                                        @student.SSN
+                                    </td>
+                                    <td>
+                                        <a href=""><img alt="Edit" src="@Url.Content("~/Images/remove.png")" width="20" height="20"/>
+                                    </td>
+                                </tr>
+                            }
+
+                            </tbody>
+                        </table>
                     </div>
+                    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 pull-left">
+                    @Html.DropDownListFor(m => m.Teacher.Id, (IEnumerable<SelectListItem>)ViewBag.TeachersNotInCourse, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
+                    <input type="submit" value="Add" onclick="window.location = '/admin/edit/@Model.Course.ID'" class="btn btn-primary AdminButtons "/>
+                </div>
+                <div class="col-sm-6 pull-left">
+                    <button class="btn btn-primary AdminButtons" data-toggle="modal" data-target="#myModal">
+                        Add more students
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="pull-right">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+
+            </div>
+
+
                 </div>
                 }
+<!-- Modal for Student List CheckBox -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Select Students
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+                <form role="form">
+                    <div class="form-group">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>SSN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (var i = 0; i < Model.StudentListCheck.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.HiddenFor(m => m.StudentListCheck[i].Student.Id)
+                                            @Html.CheckBoxFor(m => m.StudentListCheck[i].Checked)
+                                            @Html.LabelFor(m => m.StudentListCheck[i].Student.FullName, Model.StudentListCheck[i].Student.FullName)
+                                        </td>
+                                        <td>@Model.StudentListCheck[i].Student.UserName</td>
+                                        <td>@Model.StudentListCheck[i].Student.Email</td>
+                                        <td>@Model.StudentListCheck[i].Student.SSN</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="submit" class="btn btn-default">Add to @Model.Course.Name</button>
+                </form>
+
+
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <div>
                     @Html.ActionLink("Back to List", "Index")

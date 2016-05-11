@@ -1,4 +1,5 @@
-﻿@model Mooshark2.Models.ViewModels.AdminViewModels.AdminCourseViewModel
+﻿@using Microsoft.Ajax.Utilities
+@model Mooshark2.Models.ViewModels.AdminViewModels.AdminCourseViewModel
 
 @{
     ViewBag.Title = "CreateCourse";
@@ -11,116 +12,60 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Create Course</h4>
+        <!--<h4>Create Course</h4>-->
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Course.Name, htmlAttributes : new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Course.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Course.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Course.Name, "", new { @class = "text-danger" })
             </div>
-        <!--</div>-->
-
-       <!-- <div class="form-group">-->
-            @*<div class="col-md-10" >
-                <div id="duplicater" class="dropdown">*@
-                    @Html.LabelFor(model => model.Teacher, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10" class="dropdown">
-                @*@Html.DropDownList("Teacher", (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })*@
-            </div>
-            @Html.DropDownListFor(m => m.Teacher.Id, (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
-
-                @*<button id ="button" class="btn btn-primary" data-toggle="button" onclick="duplicate()">
-                    Add another
-                </button>*@
-            @*</div>*@
         </div>
-        @*    <script type="text/javascript">
 
-            document.getElementById('button').onclick = duplicate;
-
-
-            var i = 0;
-            var original = document.getElementById('duplicater');
-
-            function duplicate() {
-                var clone = original.cloneNode(true); // "deep" clone
-                clone.id = "duplicetor" + ++i; // there can only be one element with an ID
-                original.parentNode.appendChild(clone);
-            }
-
-        </script>*@
-
-
-
-
-        @*<div class="form-group">
-            @Html.LabelFor(m => m.TeacherList, new { @class = "col-md-2 control-label" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Teacher, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
-                <select>
-
-                    MODELIÐ ER ÞAÐ SEM VIÐ ERUM AÐ FARA SETJA INNÍ EKKI DATABASEINN :-) - unnur
-                    @foreach(var teacher in Model.TeacherList) {
-                        <option value="name">i.FullName</option>
-                    }
-                </select>
-
-                @* @Html.DropDownList("TeacherList", (IEnumerable<SelectListItem>)ViewBag.Teachers, "Select ...");
-
+                @Html.DropDownListFor(m => m.Teacher.Id, (IEnumerable<SelectListItem>)ViewBag.Teachers, "- Select a Teacher -", new { @class = "btn btn-default dropdown-toggle" })
             </div>
-        </div>*@
+        </div>
 
-
-
-        @*<div class="form-group">
-            <a class="btn btn-primary AdminButtons" data-toggle="modal" data-target=".bootstrapmodal"><span></span>Select students</a>
-
-            <div class="modal fade bootstrapmodal">
-                <div class="modal-dialog">
-
-                    <div class="modal-content">
-
-                        <div class="modal-header">
-                            Select students
-                        </div>
-                        <div class="modal-body">
-
-                            <table>
-                                <thead>
+        <div class="container-fluid">
+            <div class="row content">
+                <div class="col-md-10">
+                    <div class="form-group" id="studentTable">
+                        @Html.LabelFor(model => model.StudentListCheck, new { @class = "col-md-2 control-label" })
+                        <table class="table table-bordered table-striped" id="studentTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>SSN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for(var i = 0; i < Model.StudentListCheck.Count; i++) {
                                     <tr>
-                                        <th></th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>SSN</th>
+                                        <td>
+                                            @Html.HiddenFor(m => m.StudentListCheck[i].Student.Id)
+                                            @Html.CheckBoxFor(m => m.StudentListCheck[i].Checked)
+                                            @Html.LabelFor(m => m.StudentListCheck[i].Student.FullName, Model.StudentListCheck[i].Student.FullName)
+                                        </td>
+                                        <td>@Model.StudentListCheck[i].Student.UserName</td>
+                                        <td>@Model.StudentListCheck[i].Student.Email</td>
+                                        <td>@Model.StudentListCheck[i].Student.SSN</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var i in ViewBag.Students)
-                                    {
-                                        <tr>
-                                            <td>@Html.CheckBox("StudentList", new { Value = i, @class = "checkbox" })</td>
-                                            <td>@i.FullName</td>
-                                            <td>@i.Email</td>
-                                            <td>@i.SSN</td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            @Html.ActionLink("Cancel", "CreateCourse", new { @class = "btn btn-default" });
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-                        </div>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        </div>*@
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Course.Active, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -134,7 +79,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" id="create" value="Create" class="btn btn-default AdminButtons"  />
             </div>
         </div>
     </div>

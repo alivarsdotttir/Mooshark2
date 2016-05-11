@@ -1,4 +1,9 @@
-﻿body {
+﻿@font-face {
+    font-family: 'keepcalm-medium';
+    src: url('../fonts/keepcalm-medium.ttf') format('truetype');
+}
+
+body {
     padding-top: 100px;
     padding-bottom: 20px;
 }
@@ -30,8 +35,7 @@ h2 {
 .AdminButtons {
     color: white;
     background-color: #753bbd;
-    border-color: black;
-    margin: 4px;   
+    border-color: black;  
 }
 
 .AdminButtons:hover {
@@ -40,4 +44,39 @@ h2 {
     
 #buttons {
     float: left; 
+}
+
+#Mooshark {
+    font-family: keepcalm-medium;
+    font-size: 40px;
+
+}
+
+.navbar-main img {
+    vertical-align: text-top;
+    height: 70px;
+    width: 70px;
+}
+
+div.col-sm-5.sidenav {
+    width: 82%;
+    float: right;
+}
+
+label.col-md-2.control-label {
+    text-align: right;
+}
+
+div.col-md-10 {
+    width: 83.33333333333334%;
+}
+
+table#studentTable.table.table-bordered.table-striped {
+    height: 200px;
+    overflow: auto;
+}
+
+
+.navbar {
+    border-bottom: 6px solid #753bbd;
 }

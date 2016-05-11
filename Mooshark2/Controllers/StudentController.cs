@@ -89,6 +89,7 @@ namespace Mooshark2.Controllers
         }
 
         [HttpPost]
+
         public ActionResult Submit(Subproject subproject, HttpPostedFileBase file)
         {   
              //get user who is logged in
@@ -120,10 +121,11 @@ namespace Mooshark2.Controllers
 
                 var path = Path.Combine(Server.MapPath(filePath), fileName);
                 System.IO.Directory.CreateDirectory(path);
-                System.IO.FileInfo fileInfo = new System.IO.FileInfo(path);
-                fileInfo.IsReadOnly = false;
+                
 
                 file.SaveAs(path);
+
+
 
                 return RedirectToAction("Details"); 
             }

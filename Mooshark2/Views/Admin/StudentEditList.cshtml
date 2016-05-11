@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Mooshark2.Models.DAL.ApplicationUser>
+
+@{
+    ViewBag.Title = "StudentEditList";
+}
+
+<h2>All Students</h2>
+
+    <table class="table table-bordered table-striped">
+        <caption></caption>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>SSN</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="/Admin/EditStudent/@student.Id"><img alt="Edit" src="@Url.Content("~/Images/edit.png")" width="20" height="20"/></a>
+                        @student.FullName
+                    </td>
+                    <td>
+                        @student.Email
+                    </td>
+                    <td>
+                        @student.SSN
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
