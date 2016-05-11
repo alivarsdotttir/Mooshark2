@@ -1,44 +1,50 @@
-﻿@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherIndexViewmodel
+﻿@using Mooshark2.Models.Entities
+@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherIndexViewmodel
 @{ 
     ViewBag.Title = "Index";
 }
-<h2>Teacher View</h2>
+<div class="jumbotron">
+    <h2>Welcome to teacher's main page</h2>
+    <p>Create projects, grade and update!</p>
+</div>
 <div class="row">
     <div class="col-md-8">
+        <h4>Ungraded Assignments</h4>
         <table class="table table-bordered table-striped">
-             <caption>Ungraded Assignments</caption>
-             <thead>
-                     <tr>
-                         <th>Course</th>
-                         <th>Assignment</th>
-                         <th>Deadline</th>
-                         <th>Group</th>
-                     </tr>
-             </thead>
-             <tbody>
-                   @foreach (var project in Model.ungradedProjects) { 
-                        <tr>
-                            <td>@Html.ActionLink(Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name, "Course", new { id = project.CourseID })</td>                            {
-                            <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
-                            <td>@project.Deadline</td>
-                            @if (@project.isGroupProject == true) {
-                                <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px" /></td>
-                            }
-                            @if(@project.isGroupProject == false){ 
-                                <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px"/></td>
-                            }
-                        </tr>
-                  }
-             </tbody>
+            <caption></caption>
+            <thead>
+            <tr>
+                <th>Course</th>
+                <th>Assignment</th>
+                <th>Deadline</th>
+                <th>Group</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach(var project in Model.ungradedProjects) {
+                <tr>
+                    <td>@Html.ActionLink(Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name, "Course", new { id = project.CourseID })</td> {
+                    <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
+                    <td>@project.Deadline</td>
+                    @if(@project.isGroupProject == true) {
+                        <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px"/></td>
+                    }
+                    @if(@project.isGroupProject == false) {
+                        <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px"/></td>
+                    }
+                </tr>
+            }
+            </tbody>
         </table>
     </div>
 
     <div class="col-md-4">
-          <h8>Courses</h8>
-           <ul>
-           @foreach (var course in Model.coursesForTeacher) {
-               <li>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</li>
-           }
-         </ul>
-    </div>
+          <h4>My courses</h4>
+            <div class="list-group">
+            @foreach (var course in Model.coursesForTeacher)
+            {
+                <a class="list-group-item" href="/Teacher/Course/@course.ID">@course.Name</a>
+            }
+            </div>
+        </div>
 </div>

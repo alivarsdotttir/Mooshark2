@@ -7,11 +7,11 @@
 }
 
 <link href="~/Content/Site.css" rel="stylesheet" />
-<h2>Course</h2>
+<h2>@Model.course.Name</h2>
 <div>
     <div class="col-md-8">
         <table class="table table-bordered table-striped">
-            <caption class="left">@Model.course.Name</caption>
+            <caption class="left"></caption>
             <thead>
                 <tr>
                     <th>Visability</th>
@@ -50,9 +50,9 @@
          </table>
     </div>
     <div class="col-md-4">
-        @Html.ActionLink("Create new project", "CreateProject", new { id = Model.course.ID }, new { @class = "btn btn-primary btn-lg AdminButtons" })    
+        @Html.ActionLink("Create new project", "CreateProject", new { id = Model.course.ID }, new { @class = "btn btn-primary btn-lg AdminButtons", @id="Adminbutt" })    
     </div>
     <div class="col-md-4">
-        @Html.ActionLink("Back to Main Page", "Index", "Teacher", null, new { @class = "btn btn-primary btn-lg AdminButtons" })
+        @Html.ActionLink("Back to Main Page", "Index", "Teacher", null, new { @class = "btn btn-primary btn-lg AdminButtons", @id = "Adminbutt"})
     </div>
 </div>

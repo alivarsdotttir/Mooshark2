@@ -38,8 +38,8 @@ namespace Mooshark2.Controllers
                 TeacherCourseViewModel model = new TeacherCourseViewModel(course, courseProjects);
                  return View(model);
             }
-            //Returns an error message, ID invalid 
-            return View();
+            else 
+                return View("NotFound");
            
         }
 
@@ -58,8 +58,8 @@ namespace Mooshark2.Controllers
                 TeacherCreateViewModel model = new TeacherCreateViewModel(course);
                 return View(model);
             }
-
-            return View();
+            else
+                return View("NotFound");
             
         }
 
