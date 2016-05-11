@@ -15,57 +15,65 @@
 
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <form id="myform">
             <div class="form-group">
                 @Html.HiddenFor(m => m.course.ID)
-                @Html.LabelFor(model => model.project.Name, "Project Name", new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(model => model.project.Name, "Project Name", new { @class = "control-label col-md-2" })
                 <div>
-                    @Html.TextBoxFor(model => model.project.Name, new { @class = "form-controle" })
+                    @Html.TextBoxFor(model => model.project.Name, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.project.Deadline, "Deadline", new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(model => model.project.Deadline, "Deadline", new { @class = "control-label col-md-2" })
                 <div>
-                    @Html.EditorFor(model => model.project.Deadline, new { @class = "form-controle" })
+                    @Html.EditorFor(model => model.project.Deadline, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.subproject.Name, "Part name", new { @class = "col-md-2 contorl-la" })
+                @Html.LabelFor(model => model.subproject.Name, "Part name", new { @class = "control-label col-md-2" })
                 <div>
-                    @Html.TextBoxFor(model => model.subproject.Name, new { @class = "form-contole" })
+                    @Html.TextBoxFor(model => model.subproject.Name, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.subproject.Description, "Description", new { @class = "col-md-2 contorl-la" })
+                @Html.LabelFor(model => model.subproject.Description, "Description", new { @class = "control-label col-md-2" })
                 <div>
-                    @Html.TextAreaFor(model => model.subproject.Description, new { @class = "form-contole" })
+                    @Html.TextAreaFor(model => model.subproject.Description, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.inputoutput.Input, "Input", new { @class = "col-md-2 contorl-la" })
+                @Html.LabelFor(model => model.inputoutput.Input, "Input", new { @class = "control-label col-md-2" })
                 <div>
-                    @Html.TextAreaFor(model => model.inputoutput.Input, new { @class = "form-contole" })
+                    @Html.TextAreaFor(model => model.inputoutput.Input, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.inputoutput.Output, "Output", new { @class = "col-md-2 contorl-la" })
+                @Html.LabelFor(model => model.inputoutput.Output, "Output", new { @class = "control-label col-md-2" })
                 <div>
-                    @Html.TextAreaFor(model => model.inputoutput.Output, new { @class = "form-contole" })
+                    @Html.TextAreaFor(model => model.inputoutput.Output, new { @class = "form-control" })
                 </div>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.project.GroupSize, "Group Size", new { @class = "col-md-2 contorl-la" })
-                <div>
-                    @Html.EditorFor(model => model.project.GroupSize, new { @class = "form-contole" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.project.GroupSize, "Group Size", new { @class = "control-label col-md-2" })
+            <div>
+                @Html.EditorFor(model => model.project.GroupSize, new { @class = "form-control" })
+            </div>
+        </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.project.Visibility, htmlAttributes : new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.project.Visibility)
+                    @Html.ValidationMessageFor(model => model.project.Visibility, "", new { @class = "text-danger" })
+                </div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                    <input type="submit"  value="Create" class="btn btn-default" />
                 </div>
             </div>
-        </form>
         <div>
             @Html.ActionLink("Back to Course", "Course", new { id = Model.course.ID }, new { @class = "btn btn-default" })
         </div>

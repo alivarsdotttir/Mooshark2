@@ -55,7 +55,7 @@ namespace Mooshark2.Controllers
             {
                 var project = projectService.getProjectById(id.Value);
                 var subprojects = projectService.getSubprojects(id.Value);
-                var courseID = project.CourseID;
+                var courseID = 1; //LAGA ÞETTA ÞVÍ TENGITAFLA VAR SETT INN
                 var course = courseService.getCourseById(courseID);
 
                 IEnumerable<Submission> submissions = null; 
@@ -100,7 +100,7 @@ namespace Mooshark2.Controllers
             //get subproject, project and course
             int projectId = subproject.ProjectID ?? default(int);
             var project = projectService.getProjectById(projectId);
-            var courseId = project.CourseID;
+            var courseId = 1; //LAGA ÞETTA LÍKA KIDZZZZZ OG ÞÁ SÉRSTAKLEGA ÞÚ UNNUR
             var course = courseService.getCourseById(courseId);
 
             if (file.ContentLength > 0)

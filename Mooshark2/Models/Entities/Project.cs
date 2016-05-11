@@ -16,7 +16,8 @@ namespace Mooshark2.Models.Entities
         public bool Visibility { get; set; }
         public int GroupSize { get; set; }
         public bool isGroupProject { get; set; }
-        public int CourseID { get; set; }
+
+        public int? CourseID { get; set; }
 
         [ForeignKey("CourseID")]
         public Course Course { get; set; }

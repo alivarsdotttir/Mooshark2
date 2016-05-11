@@ -2,6 +2,7 @@
 using Mooshark2.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Razor.Parser.SyntaxTree;
@@ -58,6 +59,7 @@ namespace Mooshark2.Services
             else
             {
                 db.Projects.Add(model.project);
+                db.CourseProjects.Add(new CourseProject { CourseID = model.course.ID, ProjectID = model.project.ID});
                 db.SaveChanges();
                 return true;
             }
