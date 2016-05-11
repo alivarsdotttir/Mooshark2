@@ -35,8 +35,7 @@ h2 {
 .AdminButtons {
     color: white;
     background-color: #753bbd;
-    border-color: black;
-    margin: 4px;   
+    border-color: black;  
 }
 
 .AdminButtons:hover {
@@ -45,11 +44,6 @@ h2 {
     
 #buttons {
     float: left; 
-}
-
-table#studentTable.table.table-bordered.table-striped {
-      margin-right: -15px;
-      margin-left: 210px;
 }
 
 #Mooshark {
@@ -63,6 +57,25 @@ table#studentTable.table.table-bordered.table-striped {
     height: 70px;
     width: 70px;
 }
+
+div.col-sm-5.sidenav {
+    width: 82%;
+    float: right;
+}
+
+label.col-md-2.control-label {
+    text-align: right;
+}
+
+div.col-md-10 {
+    width: 83.33333333333334%;
+}
+
+table#studentTable.table.table-bordered.table-striped {
+    height: 200px;
+    overflow: auto;
+}
+
 
 .navbar {
     border-bottom: 6px solid #753bbd;

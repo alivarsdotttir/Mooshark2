@@ -64,6 +64,26 @@ namespace Mooshark2.Services
             }
         }
 
+        public void ServiceEditCourse(AdminCourseViewModel model)
+        {
+            Course course = (from item in db.Courses
+                             where item.ID == model.Course.ID
+                             select item).SingleOrDefault();
+
+            model.Course.Name = course.Name;
+            model.Course.Active = course.Active;
+
+            if (model.Teacher.Id != null)
+            {
+
+                db.CourseTeachers.Add(new CourseTeacher { CourseID = model.Course.ID, UserID = model.Teacher.Id });
+
+            }
+
+            db.SaveChanges();
+
+        }
+
 
         public IEnumerable<Course> getCoursesForStudent(string studentID)
         {
