@@ -11,6 +11,9 @@ namespace Mooshark2.Models.ViewModels.AdminViewModels
 {
     public class AdminCourseViewModel
     {
+        private List<ApplicationUser> students;
+        private List<ApplicationUser> studentsNotInCourse;
+
         [Required]
         [Display(Name = "Course name")]
         public Course Course { get; set; }

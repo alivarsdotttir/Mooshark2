@@ -143,12 +143,12 @@ namespace Mooshark2.Services
             return allStudentsInCourse;
         }
 
-        public List<ApplicationUser> GetAllStudentsNotInCourse(int courseId)
+        public List<AdminSelectStudentViewModel> GetAllStudentsNotInCourse(int courseId)
         {
             var allStudentsNotInCourse = (from user in db.Users
                                        join c in db.CourseStudents on user.Id equals c.UserID
                                        where c.CourseID != courseId
-                                       select user).ToList();
+                                       select user).ToList().Select(y => new AdminSelectStudentViewModel { Student = y, Checked = false }).ToList();
 
             return allStudentsNotInCourse;
         }

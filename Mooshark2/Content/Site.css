@@ -35,8 +35,7 @@ h2 {
 .AdminButtons {
     color: white;
     background-color: #753bbd;
-    border-color: black;
-    margin: 4px;   
+    border-color: black;  
 }
 
 .AdminButtons:hover {
