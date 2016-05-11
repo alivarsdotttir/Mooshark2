@@ -215,9 +215,9 @@ namespace Mooshark2.Services
             Submission submission = (from x in db.Submissions
                                      join y in db.StudentSubmissions on x.ID equals y.SubmissionID
                                      where user.Id == y.UserID
-                                     orderby x.SubmissionNr ascending
-                                     select x).LastOrDefault();
-            return null;
+                                     orderby x.SubmissionNr descending
+                                     select x).FirstOrDefault();
+            return submission;
         }
 
         public IEnumerable<Submission> getStudentsSubmissionsForSubproject(string studentID)
