@@ -57,6 +57,11 @@ namespace Mooshark2.Services
                 return false;
             }
             else {
+
+                if(model.GroupSize > 1) {
+                    model.IsGroupProject = true;
+                }
+
                 int CID = model.CourseID.Value;
                 db.Projects.Add(model);
                 db.CourseProjects.Add(new CourseProject { CourseID = CID, ProjectID = model.ID });
@@ -100,16 +105,13 @@ namespace Mooshark2.Services
             }
         }
 
-       public IEnumerable<Subproject> getSubprojects(int projectID)
+       public List<Subproject> getSubprojects(int projectID)
         {
-            IEnumerable<Subproject> subprojects = (from x in db.Subprojects
+            List<Subproject> subprojects = (from x in db.Subprojects
                                                    where projectID == x.ProjectID
-                                                   select x) as IEnumerable<Subproject>;
-           if(subprojects != null) {
-               return subprojects;
-           }
+                                                   select x).ToList();
 
-           return Enumerable.Empty<Subproject>();
+           return subprojects;
         }
 
         public IEnumerable<Submission> getSubmissions(int subprojectID)
@@ -235,6 +237,14 @@ namespace Mooshark2.Services
             }
 
             return Enumerable.Empty<Submission>();
+        }
+
+        public InputOutput getIOBySubprojectId(int subprojectId)
+        {
+            InputOutput io = (from x in db.InputOutputs
+                              where x.SubprojectID == subprojectId
+                              select x).FirstOrDefault();
+            return io; 
         }
     }
 }

@@ -125,7 +125,7 @@ namespace Mooshark2.Controllers
 
                 Submission submission = new Submission();
                 submission.Date = DateTime.Now;
-                submission.Accepted = true;  //Needs to change when test cases are implemented
+                submission.Accepted = false;
                 submission.SubprojectID = subproject.ID;
                 submission.SubmissionNr = submissionNumber;
                 submission.FilePath = Server.MapPath(filePath);
@@ -148,13 +148,10 @@ namespace Mooshark2.Controllers
 
                 compiler.Start();
                 compiler.StandardInput.WriteLine("\"" + compilerFolder + "vcvars32.bat" + "\"");
-                Debug.WriteLine("\"" + compilerFolder + "vcvars32.bat" + "\"");
                 compiler.StandardInput.WriteLine("cl.exe /nologo /EHsc " + file.FileName);
-                Debug.WriteLine("cl.exe /nologo /EHsc " + file.FileName);
                 compiler.StandardInput.WriteLine("exit");
                 string output = compiler.StandardOutput.ReadToEnd();
-                Debug.WriteLine(output);
-                compiler.WaitForExit();
+                compiler.WaitForExit(10000);
                 compiler.Close();
 
                 if (System.IO.File.Exists(exeFilePath))
@@ -169,17 +166,31 @@ namespace Mooshark2.Controllers
                         processExe.StartInfo = processInfoExe;
                         processExe.Start();
 
-                        // processExe.StandardInput.WriteLine()
-                        //should be used for input 
+                        //Get InputOutput 
+                        var io = projectService.getIOBySubprojectId(subproject.ID);
+
+                        //Test input against code
+                        processExe.StandardInput.WriteLine(io.Input);
 
                         // We then read the output of the program:
-                        var lines = new List<string>();
+                        StreamReader reader = processExe.StandardOutput;
+                        string programOutput = reader.ReadToEnd();
+                        
+                        /*var programOutput = new List<string>();
                         while (!processExe.StandardOutput.EndOfStream)
                         {
-                            lines.Add(processExe.StandardOutput.ReadLine());
-                        }
+                            programOutput.Add(processExe.StandardOutput.ReadLine());
+                        }*/
 
-                        ViewBag.Output = lines;
+                        //Create ViewModel, to be sent to SubmissionDetails view
+                        submission.Output = programOutput;
+
+                        if(programOutput == io.Output)
+                        {
+                            submission.Accepted = true;
+                        }
+                        StudentSubmissionDetailsViewModel model = new StudentSubmissionDetailsViewModel(course, project, subproject, submission, io);
+                        return RedirectToAction("SubmissionDetails", model);
                     }
 
                 }
@@ -189,14 +200,9 @@ namespace Mooshark2.Controllers
         }
 
 
-        public ActionResult SubmisssionDetails(int? id)
+        public ActionResult SubmisssionDetails(StudentSubmissionDetailsViewModel model)
         {
-            if(id != null)
-            {
-                var submission = projectService.getSubmissionById(id.Value);
-                return View(submission); 
-            }
-            return View();
+            return View(model);
         }
     }
 }

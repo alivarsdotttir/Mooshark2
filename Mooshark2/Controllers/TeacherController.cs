@@ -99,7 +99,7 @@ namespace Mooshark2.Controllers
             bool subproject = projectService.ServiceCreateSubproject(model);
 
             if (subproject) {
-                return RedirectToAction("ProjectDetails", new { model.ProjectID });
+                return RedirectToAction("ProjectDetails", new { id = model.ProjectID });
 
             }
             
@@ -135,15 +135,37 @@ namespace Mooshark2.Controllers
             return View(project);
         }
 
+        //GET
+        [HttpGet]
+        public ActionResult EditSubproject(int? id)
+        {
+            Subproject project = db.Subprojects.Find(id.Value);
+            return View(project);
+        }
+
+
+        //POST
+        [HttpPost]
+        public ActionResult EditSubproject(Project project)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(project).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(project);
+        }
+
         public ActionResult ProjectDetails(int? id)
         {
             if(id != null)
             {
                 var project = projectService.getProjectById(id.Value);
                 var subprojects = projectService.getSubprojects(id.Value);
-                var currentCourse = courseService.getCourseById(id.Value);
 
-                TeacherProjectDetailsViewmodel model = new TeacherProjectDetailsViewmodel(project, subprojects, currentCourse);
+                TeacherProjectDetailsViewmodel model = new TeacherProjectDetailsViewmodel(project, subprojects);
                 return View(model);
             }
             //Returns an error message, ID invalid 

@@ -34,10 +34,10 @@
                         <td>@project.Deadline</td>
                         <td>@project.Graded</td><!--not finished, check again after Graded has been written-->
 
-                        @if(project.isGroupProject == true) {
+                        @if(project.IsGroupProject == true) {
                             <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px"/></td>
                         }
-                        @if(project.isGroupProject == false) {
+                        @if(project.IsGroupProject == false) {
                             <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px"/></td>
                         }
                     </tr>

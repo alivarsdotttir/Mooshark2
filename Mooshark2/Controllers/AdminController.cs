@@ -30,12 +30,6 @@ namespace Mooshark2.Controllers
             ViewBag.Teachers = userService.GetAllTeachers();
             var students = userService.GetAllStudentsUsers();
 
-            //Course course = new Course(); 
-            //var teachers = userService.GetAllTeachers();
-            //var students = userService.GetAllStudents();
-
-            //AdminCourseViewModel model = new AdminCourseViewModel(course, teachers, students);
-
             AdminCourseViewModel model = new AdminCourseViewModel(students);
 
             return View(model); 
@@ -65,11 +59,11 @@ namespace Mooshark2.Controllers
         public ActionResult Edit(int? id)
         {
 
-                        if (id.HasValue)
+            if (id.HasValue)
             {
                 
                 Course course = (from item in db.Courses
-                   where item.ID == id.Value
+                    where item.ID == id.Value
                     select item).SingleOrDefault();
                 
                 if (course == null)
@@ -84,12 +78,12 @@ namespace Mooshark2.Controllers
 
                 AdminCourseViewModel model = new AdminCourseViewModel(course, teachers, students, StudentsNotInCourse);
                 
-                                return View(model);
-                            }
-                        else
-             {
-                                return View("NotFound");
-                            }
+                    return View(model);
+            }
+            else
+            {
+                return View("NotFound");
+            }
         }
 
         [HttpPost]
