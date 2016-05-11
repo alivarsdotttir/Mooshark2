@@ -72,6 +72,15 @@ namespace Mooshark2.Services
 
         }
 
+        public List<ApplicationUser> GetAllUsers()
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var allUsers = (from x in db.Users
+                            select x).ToList();
+
+            return allUsers;   
+        }
+
         /*public List<SelectListItem> GetAllTeachersNotInCourse(int courseId)
         {
             var allTeachersNotInCourse = (from user in db.Users
@@ -83,6 +92,7 @@ namespace Mooshark2.Services
 
             return allTeachersNotInCourse;
         }*/
+
 
         public List<SelectListItem> GetAllTeachersNotInCourse(int courseId)
         {

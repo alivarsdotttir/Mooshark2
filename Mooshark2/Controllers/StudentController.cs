@@ -56,7 +56,7 @@ namespace Mooshark2.Controllers
                 var project = projectService.getProjectById(id.Value);
                 var subprojects = projectService.getSubprojects(id.Value);
                 var courseID = project.CourseID;
-                var course = courseService.getCourseById(courseID);
+                var course = courseService.getCourseById(courseID.Value);
 
                 IEnumerable<Submission> submissions = null; 
                 foreach(Subproject sub in subprojects)
@@ -101,7 +101,7 @@ namespace Mooshark2.Controllers
             int projectId = subproject.ProjectID ?? default(int);
             var project = projectService.getProjectById(projectId);
             var courseId = project.CourseID;
-            var course = courseService.getCourseById(courseId);
+            var course = courseService.getCourseById(courseId.Value);
 
             if (file.ContentLength > 0)
             {
@@ -148,9 +148,12 @@ namespace Mooshark2.Controllers
 
                 compiler.Start();
                 compiler.StandardInput.WriteLine("\"" + compilerFolder + "vcvars32.bat" + "\"");
+                Debug.WriteLine("\"" + compilerFolder + "vcvars32.bat" + "\"");
                 compiler.StandardInput.WriteLine("cl.exe /nologo /EHsc " + file.FileName);
+                Debug.WriteLine("cl.exe /nologo /EHsc " + file.FileName);
                 compiler.StandardInput.WriteLine("exit");
                 string output = compiler.StandardOutput.ReadToEnd();
+                Debug.WriteLine(output);
                 compiler.WaitForExit();
                 compiler.Close();
 
@@ -184,23 +187,6 @@ namespace Mooshark2.Controllers
 
             return RedirectToAction("Index");
         }
-
-        /*[HttpPost]
-        public ActionResult Submit(HttpPostedFileBase file)
-        {
-            string userId = User.Identity.GetUserId();
-            var user = userService.getUserById(userId);
-            
-
-            if (file.ContentLength > 0)
-            {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
-                file.SaveAs(path);
-            }
-
-            return RedirectToAction("Index");
-        }*/
 
 
         public ActionResult SubmisssionDetails(int? id)

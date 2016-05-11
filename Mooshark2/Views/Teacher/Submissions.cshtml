@@ -12,11 +12,9 @@
     <tr>
         <th>Submission number</th>
         <th>Name</th>
-        <th>Language</th>
-        <th>Result</th>
+        <th>Date</th>   
+        <th>Accepted</th>
         <th>Grade</th>
-        <th>Tests passed</th>
-        <th>Graded by</th>
     </tr>
     </thead>
     <tbody>
@@ -24,12 +22,17 @@
         @foreach (var students in Model.studentsThatHaveSubmitted) {
             foreach(var submission in Model.bestSubmissions) {
                 <td>@submission.SubmissionNr</td>
-                <td>@students.FullName</td>
-                <td>C++</td>
-                <td>@submission.Accepted</td>
-                <td>@submission.Subproject.Grade</td>
-                <td></td>
-                <td></td>
+                <td>@Html.ActionLink(students.FullName, "SubmissionDetails")</td>
+                <td>@submission.Date</td>
+                <td>
+                    @if(submission.Accepted == true) { 
+                        @Html.ActionLink("Accepted", "Graded")
+                    }
+                    @if(submission.Accepted == false) {
+                        @Html.ActionLink("Wrong Answer", "Graded")
+                    }
+                </td>
+                <td>@submission.Grade</td>
             }
         }
     </tr>
