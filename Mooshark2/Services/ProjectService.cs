@@ -200,20 +200,24 @@ namespace Mooshark2.Services
             return Enumerable.Empty<ApplicationUser>();
         }
 
-        public int createSubmission(Submission submission)
+        public void createSubmission(Submission submission, ApplicationUser user)
         {
-            if(submission != null) {
+            if(submission != null && user != null) {
                 db.Submissions.Add(submission);
                 db.SaveChanges();
+
+                db.StudentSubmissions.Add(new StudentSubmission { UserID = user.Id, SubmissionID = submission.ID });
             }
-            int lastSubmissionId = db.Submissions.Max(sub => sub.ID); 
-            return lastSubmissionId; 
         }
 
         public Submission getMostRecentSubmission(ApplicationUser user)
         {
-
-            return null;
+            Submission submission = (from x in db.Submissions
+                                     join y in db.StudentSubmissions on x.ID equals y.SubmissionID
+                                     where user.Id == y.UserID
+                                     orderby x.SubmissionNr descending
+                                     select x).FirstOrDefault();
+            return submission;
         }
 
         public IEnumerable<Submission> getStudentsSubmissionsForSubproject(string studentID)
