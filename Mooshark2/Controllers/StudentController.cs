@@ -55,8 +55,8 @@ namespace Mooshark2.Controllers
             {
                 var project = projectService.getProjectById(id.Value);
                 var subprojects = projectService.getSubprojects(id.Value);
-                var courseID = 1; //LAGA ÞETTA ÞVÍ TENGITAFLA VAR SETT INN
-                var course = courseService.getCourseById(courseID);
+                var courseID = project.CourseID;
+                var course = courseService.getCourseById(courseID.Value);
 
                 IEnumerable<Submission> submissions = null; 
                 foreach(Subproject sub in subprojects)
@@ -100,8 +100,8 @@ namespace Mooshark2.Controllers
             //get subproject, project and course
             int projectId = subproject.ProjectID ?? default(int);
             var project = projectService.getProjectById(projectId);
-            var courseId = 1; //LAGA ÞETTA LÍKA KIDZZZZZ OG ÞÁ SÉRSTAKLEGA ÞÚ UNNUR
-            var course = courseService.getCourseById(courseId);
+            var courseId = project.CourseID;
+            var course = courseService.getCourseById(courseId.Value);
 
             if (file.ContentLength > 0)
             {
@@ -187,23 +187,6 @@ namespace Mooshark2.Controllers
 
             return RedirectToAction("Index");
         }
-
-        /*[HttpPost]
-        public ActionResult Submit(HttpPostedFileBase file)
-        {
-            string userId = User.Identity.GetUserId();
-            var user = userService.getUserById(userId);
-            
-
-            if (file.ContentLength > 0)
-            {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
-                file.SaveAs(path);
-            }
-
-            return RedirectToAction("Index");
-        }*/
 
 
         public ActionResult SubmisssionDetails(int? id)
