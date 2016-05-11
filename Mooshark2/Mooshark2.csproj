@@ -232,7 +232,7 @@
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherCreateViewModel.cs" />
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherCourseViewModel.cs" />
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherProjectDetailsViewmodel.cs" />
-    <Compile Include="Models\ViewModels\TeacherViewModels\TeacherGradeStudentViewmodel.cs" />
+    <Compile Include="Models\ViewModels\TeacherViewModels\TeacherGradeStudentViewModel.cs" />
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherIndexViewmodel.cs" />
     <Compile Include="Models\ViewModels\TeacherViewModels\TeacherSubmissionsViewmodel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

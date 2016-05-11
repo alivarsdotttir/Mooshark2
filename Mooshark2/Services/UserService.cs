@@ -83,7 +83,7 @@ namespace Mooshark2.Services
             return allTeachersNotInCourse;
         }
 
-
+        // wat is dis??
         private bool User(string id, string v)
         {
             throw new NotImplementedException();
