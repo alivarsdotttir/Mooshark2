@@ -72,7 +72,7 @@ namespace Mooshark2.Services
 
         }
 
-        public List<SelectListItem> GetAllTeachersNotInCourse(int courseId)
+        /*public List<SelectListItem> GetAllTeachersNotInCourse(int courseId)
         {
             var allTeachersNotInCourse = (from user in db.Users
                 join c in db.CourseTeachers on user.Id equals c.UserID
@@ -82,6 +82,31 @@ namespace Mooshark2.Services
                 .ToList();
 
             return allTeachersNotInCourse;
+        }*/
+
+        public List<SelectListItem> GetAllTeachersNotInCourse(int courseId)
+        {
+            var allTeachersInCourse = GetAllTeachersInCourse(courseId).ToList();
+
+            var allTeachersNotInCourse = (from l2 in db.Users
+                                          select l2).ToList().ToList();
+
+            var result = (from l1 in allTeachersInCourse
+                          from l2 in allTeachersNotInCourse
+                          where l1.FullName != l2.FullName
+                          select l2).ToList()
+                                    .Select(x => new SelectListItem { Value = x.Id, Text = x.FullName })
+                                    .ToList();
+
+
+            /*var allTeachersNotInCourse = (from user in db.Users
+                join c in db.CourseTeachers on user.Id equals c.UserID
+                where c.CourseID != courseId
+                select user).ToList().Select(
+                    x => new SelectListItem { Value = x.Id, Text = x.FullName })
+                .ToList();*/
+
+            return result;
         }
 
 
