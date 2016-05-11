@@ -118,9 +118,11 @@ namespace Mooshark2.Controllers
         public ActionResult Submissions(int? subprojectID)
         {
             if(subprojectID != null) {
-                string userId = User.Identity.GetUserId();
                 var students = projectService.getStudentsThatHaveSubmitted(subprojectID.Value);
-                var bestSubmissions = projectService.getStudentsBestSubmission(userId);
+                List<Submission> bestSubmissions = new List<Submission>();
+                foreach (var student in students) {
+                    bestSubmissions.Add(projectService.getStudentsBestSubmission(student.Id));
+                }
                 var allSubmissionsForSubproject = projectService.getSubmissions(subprojectID.Value);
                 var subprojectName = projectService.getSubprojectById(subprojectID.Value);
 
@@ -131,7 +133,7 @@ namespace Mooshark2.Controllers
                 return View(model);
             }
 
-            return View();
+            return View("NotFound");
         }
 
         public ActionResult SubmissionDetails(int? id)

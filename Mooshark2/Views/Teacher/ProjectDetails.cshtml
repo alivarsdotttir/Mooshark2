@@ -23,7 +23,7 @@
     <div>
         <h3>@subproject.Name</h3>
         <p>@subproject.Description</p>
-        @Html.ActionLink("Submits", "Submissions", new { id = Model.currentProject.ID })
+        @Html.ActionLink("Submits", "Submissions")
         <div>
             <p>Deadline: @Model.currentProject.Deadline</p>
             <p>Time until deadline: @((Model.currentProject.Deadline)-DateTime.Now)</p>

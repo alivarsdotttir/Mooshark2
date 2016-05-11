@@ -96,6 +96,16 @@ namespace Mooshark2.Migrations
             context.Subprojects.AddOrUpdate(new Subproject { Name = "1st part", Description = "This is the first part", ProjectID = 1, Weight = 50 });
             context.Subprojects.AddOrUpdate(new Subproject { Name = "2nd part", Description = "This is the second part", ProjectID = 2, Weight = 50 });
             */
+
+            //context.Submissions.AddOrUpdate(new Submission { Date = new DateTime(2016, 7, 7), Accepted = true, SubprojectID = 1, SubmissionNr = 1 });
+            //context.Submissions.AddOrUpdate(new Submission { Date = new DateTime(2016, 6, 7), Accepted = false, SubprojectID = 1, SubmissionNr = 2 });
+            //context.Submissions.AddOrUpdate(new Submission { Date = new DateTime(2016, 5, 7), Accepted = true, SubprojectID = 2, SubmissionNr = 1 });
+            //context.Submissions.AddOrUpdate(new Submission { Date = new DateTime(2016, 5, 8), Accepted = true, SubprojectID = 2, SubmissionNr = 2 });
+
+            //context.StudentSubmissions.AddOrUpdate(new StudentSubmission { UserID = "f9c37f8b-7133-4f32-ab2d-d85676d5eb90", SubmissionID = 1 });
+            //context.StudentSubmissions.AddOrUpdate(new StudentSubmission { UserID = "f9c37f8b-7133-4f32-ab2d-d85676d5eb90", SubmissionID = 2 });
+            //context.StudentSubmissions.AddOrUpdate(new StudentSubmission { UserID = "f9c37f8b-7133-4f32-ab2d-d85676d5eb90", SubmissionID = 3 });
+            //context.StudentSubmissions.AddOrUpdate(new StudentSubmission { UserID = "f9c37f8b-7133-4f32-ab2d-d85676d5eb90", SubmissionID = 4 });
         }
     }
 }
