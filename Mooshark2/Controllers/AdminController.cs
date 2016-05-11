@@ -114,30 +114,30 @@ namespace Mooshark2.Controllers
             }
         }
 
-        public ActionResult StudentEditList()
+        public ActionResult UserEditList()
         {
-            var allStudents = userService.GetAllStudents();
+            var allUsers = userService.GetAllUsers();
 
-            return View(allStudents);
+            return View(allUsers);
         }
 
 
         [HttpGet]
-        public ActionResult EditStudent(string id)
+        public ActionResult EditUser(string id)
         {
             if (id != null)
             {
 
-                ApplicationUser student = (from item in db.Users
+                ApplicationUser user = (from item in db.Users
                                  where item.Id == id
                                  select item).SingleOrDefault();
 
-                if (student == null)
+                if (user == null)
                 {
                     return View("NotFound");
                 }
 
-                return View(student);
+                return View(user);
             }
             else
             {
@@ -146,14 +146,14 @@ namespace Mooshark2.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditStudent(ApplicationUser student)
+        public ActionResult EditUser(ApplicationUser user)
         {
-            if (student != null)
+            if (user != null)
             {
                 ApplicationUser model = (from item in db.Users
-                                where item.Id == student.Id
+                                where item.Id == user.Id
                                 select item).SingleOrDefault();
-
+               
              //   model. = course.Name;
             //    model.Active = course.Active;
 

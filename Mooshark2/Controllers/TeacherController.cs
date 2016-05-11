@@ -38,8 +38,8 @@ namespace Mooshark2.Controllers
                 TeacherCourseViewModel model = new TeacherCourseViewModel(course, courseProjects);
                  return View(model);
             }
-            //Returns an error message, ID invalid 
-            return View();
+            else 
+                return View("NotFound");
            
         }
 
@@ -48,38 +48,69 @@ namespace Mooshark2.Controllers
         [HttpGet]
         public ActionResult CreateProject(int? id)
         {
-            if(id != null) { 
-                var project = new Project();
-                var subproject = new Subproject();
-                //IEnumerable<Subproject> subprojects = new List<Subproject>();
-                var course = courseService.getCourseById(id.Value);
-                var inputoutput = new InputOutput();
+            if(id.HasValue) {
 
-                TeacherCreateViewModel model = new TeacherCreateViewModel(course);
-                return View(model);
+                ViewBag.Course = id;
+
+                return View();
+            }
+            else {
+                return View("NotFound");
             }
 
-            return View();
-            
         }
 
 
         //POST
         [HttpPost]
-        public ActionResult CreateProject(TeacherCreateViewModel model)
+        public ActionResult CreateProject(Project model)
         {
-            if (projectService.ServiceCreateProject(model)) {
-                return RedirectToAction("Index");
+            bool project = projectService.ServiceCreateProject(model);
+
+            if (project) {
+                return RedirectToAction("CreateSubproject", model.ID);
             }
             else {
 
-                var course = courseService.getCourseById(model.course.ID);
-                TeacherCreateViewModel m = new TeacherCreateViewModel(course);
+                ViewBag.Course = model.CourseID;
 
-                return View(m);
+                return View();
             }
-
         }
+
+        //GET
+        [HttpGet]
+        public ActionResult CreateSubproject(int id)
+        {
+            if(id != null) {
+                ViewBag.Course = id;
+
+                return View();
+            }
+            else {
+                return View("NotFound");
+            }
+        }
+
+        //POST
+        [HttpGet]
+        public ActionResult CreateSubproject(Subproject model)
+        {
+            bool subproject = projectService.ServiceCreateSubproject(model);
+
+            if (subproject)
+            {
+                return RedirectToAction("ProjectDetails", model.ProjectID);
+            }
+            else {
+
+                ViewBag.Course = model.ProjectID;
+
+                return View();
+            }
+        }
+
+
 
         //GET
         [HttpGet]
@@ -88,6 +119,7 @@ namespace Mooshark2.Controllers
             Project project = db.Projects.Find(id.Value);
             return View(project);
         }
+
 
         //POST
         [HttpPost]
