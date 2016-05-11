@@ -23,7 +23,7 @@
             <tbody>
             @foreach(var project in Model.ungradedProjects) {
                 <tr>
-                    <td>@Html.ActionLink(Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name, "Course", new { id = project.CourseID })</td> {
+                    <td>@Html.ActionLink(Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name, "Course", new { id = project.CourseID })</td> 
                     <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
                     <td>@project.Deadline</td>
                     @if(@project.isGroupProject == true) {
