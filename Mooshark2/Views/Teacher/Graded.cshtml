@@ -3,7 +3,7 @@
     ViewBag.Title = "Graded";
 }
 
-<h2>@Model.currentProject</h2>
+<h2>@Model.currentProject.Name</h2>
 
-@Model.currentStudent
-@Model.currentProject.Grade
+@Model.currentStudent.FullName
+@Model.currentProject.Grade.ToString()

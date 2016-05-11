@@ -89,28 +89,17 @@ namespace Mooshark2.Services
             var allTeachersInCourse = GetAllTeachersInCourse(courseId).ToList();
 
 
-
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var teacherRole = roleManager.FindByName("Teacher");
             var allTeachers = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();                
                 
-                /*(from l2 in db.Users
-                                          select l2).ToList();*/
-
             var result = (from l1 in allTeachersInCourse
                           from l2 in allTeachers
-                          where l1.FullName != l2.FullName
+                          where l2.FullName != l1.FullName
                           select l2).ToList()
                                     .Select(x => new SelectListItem { Value = x.Id, Text = x.FullName })
                                     .ToList();
 
-
-            /*var allTeachersNotInCourse = (from user in db.Users
-                join c in db.CourseTeachers on user.Id equals c.UserID
-                where c.CourseID != courseId
-                select user).ToList().Select(
-                    x => new SelectListItem { Value = x.Id, Text = x.FullName })
-                .ToList();*/
 
             return result;
         }
@@ -123,14 +112,6 @@ namespace Mooshark2.Services
 
         public List<ApplicationUser> GetAllStudents()
         {
-            /*var allStudents = (from user in db.Users
-                               join rid in db.Roles on user.Id equals rid.Id
-                               where rid.Name.ToString() == "Student"
-                               select user).ToList();*/
-
-            /*var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
-            var studentRole = roleManager.FindByName("Student");
-            var allStudents = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).ToList();*/
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var studentRole = roleManager.FindByName("Student");
@@ -176,12 +157,17 @@ namespace Mooshark2.Services
 
         public List<AdminSelectStudentViewModel> GetAllStudentsNotInCourse(int courseId)
         {
-            var allStudentsNotInCourse = (from user in db.Users
-                                       join c in db.CourseStudents on user.Id equals c.UserID
-                                       where c.CourseID != courseId
-                                       select user).ToList().Select(y => new AdminSelectStudentViewModel { Student = y, Checked = false }).ToList();
+            var allStudentsInCourse = GetAllStudentsInCourse(courseId);
+            var allStudents = GetAllStudents();
+
+            var allStudentsNotInCourse = (from l1 in allStudentsInCourse
+                                          from l2 in allStudents
+                                          where l2.Id != l1.Id
+                                          select l2).ToList()
+                                          .Select(y => new AdminSelectStudentViewModel { Student = y, Checked = false }).ToList();
 
             return allStudentsNotInCourse;
+
         }
 
     }
