@@ -210,6 +210,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entities\Course.cs" />
+    <Compile Include="Models\Entities\CourseProject.cs" />
     <Compile Include="Models\Entities\CourseStudent.cs" />
     <Compile Include="Models\Entities\CourseTeacher.cs" />
     <Compile Include="Models\Entities\Group.cs" />

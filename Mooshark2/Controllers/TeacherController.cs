@@ -49,8 +49,8 @@ namespace Mooshark2.Controllers
         public ActionResult CreateProject(int? id)
         {
             if(id != null) { 
-                var project = new Project();
-                var subproject = new Subproject();
+                //var project = new Project();
+                //var subproject = new Subproject();
                 //IEnumerable<Subproject> subprojects = new List<Subproject>();
                 var course = courseService.getCourseById(id.Value);
                 var inputoutput = new InputOutput();
@@ -68,7 +68,9 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult CreateProject(TeacherCreateViewModel model)
         {
-            if (projectService.ServiceCreateProject(model)) {
+            bool project = projectService.ServiceCreateProject(model);
+
+            if (project) {
                 return RedirectToAction("Index");
             }
             else {
