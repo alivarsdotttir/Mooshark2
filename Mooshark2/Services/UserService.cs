@@ -88,11 +88,17 @@ namespace Mooshark2.Services
         {
             var allTeachersInCourse = GetAllTeachersInCourse(courseId).ToList();
 
-            var allTeachersNotInCourse = (from l2 in db.Users
-                                          select l2).ToList().ToList();
+
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+            var teacherRole = roleManager.FindByName("Teacher");
+            var allTeachers = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();                
+                
+                /*(from l2 in db.Users
+                                          select l2).ToList();*/
 
             var result = (from l1 in allTeachersInCourse
-                          from l2 in allTeachersNotInCourse
+                          from l2 in allTeachers
                           where l1.FullName != l2.FullName
                           select l2).ToList()
                                     .Select(x => new SelectListItem { Value = x.Id, Text = x.FullName })
