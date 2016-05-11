@@ -148,9 +148,12 @@ namespace Mooshark2.Controllers
 
                 compiler.Start();
                 compiler.StandardInput.WriteLine("\"" + compilerFolder + "vcvars32.bat" + "\"");
+                Debug.WriteLine("\"" + compilerFolder + "vcvars32.bat" + "\"");
                 compiler.StandardInput.WriteLine("cl.exe /nologo /EHsc " + file.FileName);
+                Debug.WriteLine("cl.exe /nologo /EHsc " + file.FileName);
                 compiler.StandardInput.WriteLine("exit");
                 string output = compiler.StandardOutput.ReadToEnd();
+                Debug.WriteLine(output);
                 compiler.WaitForExit();
                 compiler.Close();
 
