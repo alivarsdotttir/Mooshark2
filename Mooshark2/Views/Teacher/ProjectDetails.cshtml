@@ -19,28 +19,10 @@
             @Html.ActionLink("Add new subproject", "CreateSubproject", new { id = Model.currentProject.ID }, new { @class = "btn btn-primary AdminButtons" })
         </div>
         <div id="Adminbutt">
-            @Html.ActionLink("Edit project", "EditProject", new { id = Model.currentProject.ID }, new { @class = "btn btn-primary AdminButtons" })
+            @Html.ActionLink("Edit project", "EditProject", new { id = Model.currentProject.ID }, new { @class = "btn btn-default" })
         </div>
     </div>
 </div>
-
-
-@*<ul class="nav nav-pills">
-    @for (int i = 1; i < Model.subprojects.Count() + 1; i++)
-    {
-        <li class="active"><a data-toggle="tab" href="#tab">Tab @i</a></li>
-    }
-</ul>
-
-
-@foreach(var subproject in Model.subprojects) {
-    <div>
-        <h3>@subproject.Name</h3>
-        <p>@subproject.Description</p>
-        @Html.ActionLink("Submits", "Submissions")
-        
-    </div>
-}*@
 
 <div class="container">
     <ul class="nav nav-tabs">
@@ -64,13 +46,13 @@
                             <h3>@Model.subprojects[i].Name</h3>
                         </div>
                         <p>@Model.subprojects[i].Description</p>
-                        <p>This is another text.</p>
                     </div>
                     <div id="Adminbutt">
-                        @Html.ActionLink("Edit subproject", "EditSubproject", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-primary AdminButtons" })
+                        @Html.ActionLink("Student's submissions", "Submissions", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-default AdminButtons" })
+                        @Html.ActionLink("Edit subproject", "EditSubproject", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-default" })
                     </div>
                     <div>
-                        
+                        <!-- SUBMISSION TABLE -->
                     </div>
                 </div>
             }
