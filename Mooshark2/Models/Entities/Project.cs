@@ -23,7 +23,7 @@ namespace Mooshark2.Models.Entities
         [Range(1, int.MaxValue, ErrorMessage = "The group size must be at least 1")]
         [Display(Name = "Group size")]
         public int GroupSize { get; set; }
-        public bool isGroupProject { get; set; }
+        public bool IsGroupProject { get; set; }
         public int? CourseID { get; set; }
 
         [ForeignKey("CourseID")]
