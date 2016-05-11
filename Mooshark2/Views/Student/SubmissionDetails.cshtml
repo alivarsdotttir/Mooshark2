@@ -1,0 +1,19 @@
+﻿@model Mooshark2.Models.ViewModels.StudentViewModels.StudentSubmissionDetailsViewModel
+@{
+    ViewBag.Title = "SubmissionDetails";
+}
+
+<h2>SubmissionDetails</h2>
+
+<h2>@Model.project.Name</h2>
+<h3>@Model.subproject.Name</h3>
+
+<p>Input: <br /> 
+    @Model.inputOutput.Input</p>
+
+<p>Your output: <br />
+    @Model.submission.Output</p>
+
+<p>Expected output: <br />
+    @Model.inputOutput.Output</p>
+

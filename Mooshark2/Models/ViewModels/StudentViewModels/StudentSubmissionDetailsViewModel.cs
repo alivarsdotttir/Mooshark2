@@ -9,7 +9,19 @@ namespace Mooshark2.Models.ViewModels.StudentViewModels
 {
     public class StudentSubmissionDetailsViewModel
     {
-        public Project currentProject;
-        public Submission currentSubmission;
+        public Course course;
+        public Project project;
+        public Subproject subproject;
+        public Submission submission;
+        public InputOutput inputOutput; 
+
+        public StudentSubmissionDetailsViewModel(Course c, Project p, Subproject subp, Submission subm, InputOutput io)
+        {
+            course = c;
+            project = p;
+            subproject = subp;
+            submission = subm;
+            inputOutput = io; 
+        }
     }
 }
