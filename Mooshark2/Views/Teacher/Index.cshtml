@@ -1,11 +1,7 @@
-﻿@using System.Activities.Statements
-@using Microsoft.Ajax.Utilities
-@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherIndexViewmodel
-@{
+﻿@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherIndexViewmodel
+@{ 
     ViewBag.Title = "Index";
 }
-
-
 <h2>Teacher View</h2>
 <div class="row">
     <div class="col-md-8">
@@ -20,16 +16,16 @@
                      </tr>
              </thead>
              <tbody>
-                   @foreach (var project in Model.ungradedProjects) {
+                   @foreach (var project in Model.ungradedProjects) { 
                         <tr>
                             <td>@Html.ActionLink(Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name, "Course", new { id = project.CourseID })</td>                            {
                             <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
                             <td>@project.Deadline</td>
                             @if (@project.isGroupProject == true) {
-                                <td><img src="~/Images/group.png" width="15px" height="15px" /></td>
+                                <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px" /></td>
                             }
                             @if(@project.isGroupProject == false){ 
-                                <td><img src="~/Images/solo.png" width="15px" height="15px"/></td>
+                                <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px"/></td>
                             }
                         </tr>
                   }

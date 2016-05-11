@@ -8,7 +8,8 @@
 
 <link href="~/Content/Site.css" rel="stylesheet" />
 <h2>Course</h2>
-    <div>
+<div>
+    <div class="col-md-8">
         <table class="table table-bordered table-striped">
             <caption class="left">@Model.course.Name</caption>
             <thead>
@@ -24,21 +25,34 @@
             <tbody>
                 @foreach (var project in Model.courseProjects) {
                         <tr>
-                             <td>@project.Visibility</td>
+                            <td>
+                                @if (@project.Visibility == true)
+                                {
+                                    <img alt="Visible" src="~/Images/check.png"  height="20px" width="20px"/>
+                                }
+                            </td>
                              <td>@Html.ActionLink(Model.course.Name, "Course", new { id = Model.course.ID })</td>
                              <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID } ) </td>
                              <td>@project.Deadline</td>
                              <td>@project.Graded</td><!--not finished, check again after Graded has been written-->
-                             <td><!--veit ekki hvernig ég á að ná í groups þarf ég að gera nýtt thing í courseVieweModel--></td>
+                            @if (@project.isGroupProject == true)
+                            {
+                                <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px" /></td>
+                            }
+                            @if (@project.isGroupProject == false)
+                            {
+                                <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px" /></td>
+                            }
                          </tr>
                 }
                
             </tbody>
          </table>
     </div>
-    <div>
+    <div class="col-md-4">
         @Html.ActionLink("Create new project", "CreateProject", new { id = Model.course.ID }, new { @class = "btn btn-primary btn-lg TeacherButtons" })    
     </div>
-    <div>
+    <div class="col-md-4">
         @Html.ActionLink("Back to Main Page", "Index", "Teacher", null, new { @class = "btn btn-primary btn-lg TeacherButtons" })
     </div>
+</div>
