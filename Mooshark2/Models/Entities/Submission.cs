@@ -17,5 +17,11 @@ namespace Mooshark2.Models.Entities
         public Subproject Subproject { get; set; }
 
         public int SubmissionNr { get; set; }
+
+        public int Grade { get; set; }
+
+        public string CppFileName { get; set; }
+
+        public string FilePath { get; set; }
     }
 }
