@@ -4,7 +4,6 @@ namespace Mooshark2.Migrations
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models.DAL;
-    using Models.Entities;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
