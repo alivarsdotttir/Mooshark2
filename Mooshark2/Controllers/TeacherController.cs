@@ -149,18 +149,13 @@ namespace Mooshark2.Controllers
 
 
         [HttpGet]
-        public ActionResult Graded(int? id)
+        public ActionResult Graded(string UserId)
         {
-            if(id != null) {
-                // var currentStudentID = User.Identity.GetUserId();
-                //var currentStudent = userService.getUserById(currentStudentID);
-                var currentProject = projectService.getProjectById(id.Value);
-               // var studentSubmissions;
+            if(UserId != null) {
+                ApplicationUser currentStudent = userService.getUserById(UserId);
+                var submissions = projectService.getStudentsSubmissionsForSubproject(UserId); // OMG
 
-                //TeacherGradeStudentViewModel model = new TeacherGradeStudentViewModel(currentStudent, currentProject);
-                //TeacherGradeStudentViewModel model = new TeacherGradeStudentViewModel(currentStudent, currentProject);
-
-                //return View(model);
+                //TeacherGradeStudentViewModel model = new TeacherGradeStudentViewModel();
             }
 
             return View();
