@@ -170,5 +170,13 @@ namespace Mooshark2.Services
 
             return Enumerable.Empty<Course>();
         }
+
+
+        public void RemoveTeacherFromCourse(string id)
+        {
+            var teacherToRemove = db.CourseTeachers.SingleOrDefault(x => x.UserID == id);
+            db.CourseTeachers.Remove(teacherToRemove);
+            db.SaveChanges();
+        }
     }
 }
