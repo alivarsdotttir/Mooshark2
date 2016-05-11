@@ -11,32 +11,6 @@
     <div class="col-md-8">
         <h4>Ungraded Projects</h4>
         <table class="table table-bordered table-striped">
-<<<<<<< HEAD
-             <caption>Ungraded Assignments</caption>
-             <thead>
-                     <tr>
-                         <th>Course</th>
-                         <th>Assignment</th>
-                         <th>Deadline</th>
-                         <th>Group</th>
-                     </tr>
-             </thead>
-             <tbody>
-                   @foreach (var project in Model.ungradedProjects) { 
-                        <tr>
-                            <td>@Html.ActionLink(Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name, "Course", new { id = project.CourseID })</td>                            
-                            <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
-                            <td>@project.Deadline</td>
-                            @if (project.isGroupProject == true) {
-                                <td><img alt="Solo" src="~/Images/group.png" width="20" height="20" /></td>
-                            }
-                            @if(project.isGroupProject == false) { 
-                                <td><img alt="Group" src="~/Images/solo.png" width="20" height="20"/></td>
-                            }
-                        </tr>
-                  }
-             </tbody>
-=======
             <caption></caption>
             <thead>
             <tr>
@@ -61,7 +35,6 @@
                 </tr>
             }
             </tbody>
->>>>>>> 963b1c1164051b14dff9f95125d0a41d46706ddd
         </table>
     </div>
 
