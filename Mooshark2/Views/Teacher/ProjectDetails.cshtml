@@ -23,7 +23,7 @@
     <div>
         <h3>@subproject.Name</h3>
         <p>@subproject.Description</p>
-        @Html.ActionLink("Submits", "Submissions", new { id = Model.currentProject.ID })
+        @Html.ActionLink("Submits", "Submissions")
         <div>
             <p>Deadline: @Model.currentProject.Deadline</p>
             <p>Time until deadline: @((Model.currentProject.Deadline)-DateTime.Now)</p>
@@ -31,4 +31,4 @@
     </div>
 }
 
-@Html.ActionLink("Back to Course", "Course", new { id = Model.currentCourse.ID }) <!--doesn't seem to work right-->
+@Html.ActionLink("Back to Course", "Course", new { id = Model.currentCourse.ID }, new { @class="btn btn-default" }) <!--doesn't seem to work right-->

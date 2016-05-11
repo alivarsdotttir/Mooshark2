@@ -67,16 +67,15 @@ namespace Mooshark2.Controllers
 
                         if (id.HasValue)
             {
-                int realID = id.Value;
                 
                 Course course = (from item in db.Courses
                    where item.ID == id.Value
                     select item).SingleOrDefault();
                 
-                                if (course == null)
+                if (course == null)
                 {
-                                        return View("NotFound");
-                                    }
+                    return View("NotFound");
+                }
                 
                 ViewBag.TeachersNotInCourse = userService.GetAllTeachersNotInCourse(course.ID);
                 var StudentsNotInCourse = userService.GetAllStudentsNotInCourse(course.ID);

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Razor.Parser.SyntaxTree;
 using Mooshark2.Models.DAL;
 using Mooshark2.Models.ViewModels.TeacherViewModels;
 
@@ -165,20 +166,14 @@ namespace Mooshark2.Services
             return projectsFromCourse;
         }
 
-        public IEnumerable<Submission> getStudentsBestSubmission(string userID)
+        public Submission getStudentsBestSubmission(string userID)
         {
-            IEnumerable<Submission> bestSubmission = (from x in db.Groups
-                                                        join y in db.ProjectGroups on x.ID equals y.GroupID
-                                                        join z in db.ProjectSubprojects on y.ProjectID equals z.ProjectID
-                                                        join w in db.Submissions on z.SubprojectID equals w.SubprojectID
-                                                        where x.UserID == userID && w.Accepted == true || x.UserID == userID
-                                                        select x).Last() as IEnumerable<Submission>;
-
-            if(bestSubmission != null) {
-                return bestSubmission;
-            }
-
-            return Enumerable.Empty<Submission>();
+            Submission bestSubmission = (from x in db.StudentSubmissions
+                                        join y in db.Submissions on x.SubmissionID equals y.ID
+                                        where y.Accepted == true
+                                        orderby y.Date ascending
+                                        select y).LastOrDefault();
+                                        return bestSubmission;
         }
 
         public IEnumerable<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)
