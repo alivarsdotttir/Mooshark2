@@ -61,7 +61,6 @@ namespace Mooshark2.Services
                 if(model.GroupSize > 1) {
                     model.IsGroupProject = true;
                 }
-
                 int CID = model.CourseID.Value;
                 db.Projects.Add(model);
                 db.CourseProjects.Add(new CourseProject { CourseID = CID, ProjectID = model.ID });
