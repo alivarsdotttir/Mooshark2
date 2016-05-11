@@ -12,12 +12,13 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
     {
         public ApplicationUser currentStudent;
         public Project currentProject;
-        // public IEnumerable<Submission> studentSubmissions;
+        public IEnumerable<Submission> currentStudentsSubmissions;
 
-        public TeacherGradeStudentViewModel(ApplicationUser c, Project p)
+        public TeacherGradeStudentViewModel(ApplicationUser c, Project p, IEnumerable<Submission> s)
         {
             currentStudent = c;
             currentProject = p;
+            currentStudentsSubmissions = s;
         }
     }
 }
