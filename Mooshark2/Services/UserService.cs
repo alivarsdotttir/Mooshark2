@@ -87,9 +87,7 @@ namespace Mooshark2.Services
         public List<SelectListItem> GetAllTeachersNotInCourse(int courseId)
         {
             var allTeachersInCourse = GetAllTeachersInCourse(courseId).ToList();
-
-
-
+ 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var teacherRole = roleManager.FindByName("Teacher");
             var allTeachers = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();                
@@ -97,13 +95,15 @@ namespace Mooshark2.Services
                 /*(from l2 in db.Users
                                           select l2).ToList();*/
 
-            var result = (from l1 in allTeachersInCourse
+            /*var result = (from l1 in allTeachersInCourse
                           from l2 in allTeachers
-                          where l1.FullName != l2.FullName
+                          where l2.Id != l1.Id
+                          || l1.Id == null
                           select l2).ToList()
                                     .Select(x => new SelectListItem { Value = x.Id, Text = x.FullName })
-                                    .ToList();
+                                    .ToList();*/
 
+            var result = allTeachers.Where(x => !allTeachersInCourse.Contains(x)).ToList().Select(y => new SelectListItem { Value = y.Id, Text = y.FullName}).ToList();
 
             /*var allTeachersNotInCourse = (from user in db.Users
                 join c in db.CourseTeachers on user.Id equals c.UserID
