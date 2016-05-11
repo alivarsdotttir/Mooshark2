@@ -4,9 +4,8 @@
 }
 <link href="~/Content/Site.css" rel="stylesheet"/>
 
-<h2>Main Page - Admin</h2>
 <div class="row">
-
+    <h2>Welcome to admin's main page</h2>
     <div class="container-fluid">
         <div class="row content">
             <div class="col-sm-3 sidenav">
@@ -20,39 +19,38 @@
                 </div>
 
                 <div>
-                    @Html.ActionLink("Edit", "Edit", "Admin", null, new { @class = "btn btn-default btn-lg" })
+                    @Html.ActionLink("Edit Students", "StudentEditList", "Admin", null, new { @class = "btn btn-default btn-lg" })
                 </div>
 
             </div>
 
             <div class="col-sm-9">
+                
 
                 <table class="table table-bordered table-striped">
                     <!--<caption></caption>-->
                     <thead>
-                        <tr>
-                            <th>Course</th>
-                            <th>Active</th>
-                        </tr>
+                    <tr>
+                        <th>Course</th>
+                        <th>Active</th>
+                    </tr>
                     </thead>
                     <tbody>
 
-                        @foreach (var course in Model )
-                        { 
-                            <tr>
-                                <td>
-                                    <a href="/Admin/Edit/@course.ID"><img alt="Edit" src="@Url.Content("~/Images/edit.png")" width="20" height="20" /></a>
-                                    @Html.ActionLink(course.Name, "Edit", new {id = @course.ID })
-                                </td>
-                                <td>
-                                    @if (course.Active == true)
-                                    {
-                                        <img alt="Check" src="@Url.Content("~/Images/check.png")" width="20" height="20" />
-                                    }
-                                </td>
-                            </tr>
-                            
-                        }
+                    @foreach(var course in Model) {
+                        <tr>
+                            <td>
+                                <a href="/Admin/Edit/@course.ID"><img alt="Edit" src="@Url.Content("~/Images/edit.png")" width="20" height="20"/></a>
+                                @Html.ActionLink(course.Name, "Edit", new { id = @course.ID })
+                            </td>
+                            <td>
+                                @if(course.Active == true) {
+                                    <img alt="Check" src="@Url.Content("~/Images/check.png")" width="20" height="20"/>
+                                }
+                            </td>
+                        </tr>
+
+                    }
                     </tbody>
                 </table>
 

@@ -45,5 +45,6 @@ namespace Mooshark2.Models.DAL
         {
             return new ApplicationDbContext();
         }
+
     }
 }

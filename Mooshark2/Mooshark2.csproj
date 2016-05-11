@@ -223,7 +223,6 @@
     <Compile Include="Models\DAL\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\AdminViewModels\AdminCourseViewModel.cs" />
-    <Compile Include="Models\ViewModels\AdminViewModels\AdminIndexViewModel.cs" />
     <Compile Include="Models\ViewModels\AdminViewModels\AdminSelectStudentViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentViewModels\StudentCourseViewModel.cs" />
     <Compile Include="Models\ViewModels\StudentViewModels\StudentDetailsViewModel.cs" />
@@ -256,6 +255,8 @@
     <Content Include="Images\edit.png" />
     <Content Include="Images\group.png" />
     <Content Include="Images\moo.jpg" />
+    <Content Include="Images\mooo.png" />
+    <Content Include="Images\Mooshark.png" />
     <Content Include="Images\remove.png" />
     <Content Include="Images\solo.png" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
@@ -266,6 +267,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="fonts\KeepCalm-Medium.ttf" />
+    <Content Include="fonts\Minecrafter.Reg.ttf" />
+    <Content Include="fonts\Digital-Desolation-Alternate.ttf" />
+    <Content Include="fonts\Minecrafter.Alt.ttf" />
+    <Content Include="fonts\Digital-Desolation.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -338,7 +344,9 @@
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Admin\SelectStudent.cshtml" />
     <Content Include="Views\Teacher\ProjectDetails.cshtml" />
+    <Content Include="Views\Admin\StudentEditList.cshtml" />
     <Content Include="Views\Teacher\Submissions.cshtml" />
+    <Content Include="Views\Admin\EditStudent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
