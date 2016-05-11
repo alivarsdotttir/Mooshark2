@@ -10,15 +10,15 @@
         <div class="row content">
             <div class="col-sm-3 sidenav">
 
-                <div>
-                    @Html.ActionLink("Create course", "CreateCourse", "Admin", null, new { @class = "btn btn-primary btn-lg AdminButtons" })
+                <div id="Adminbutt">
+                    @Html.ActionLink("Create course", "CreateCourse", "Admin", null, new { @class = "btn btn-primary btn-lg AdminButtons", @type="button" })
                 </div>
 
-                <div>
+                <div id="Adminbutt">
                     @Html.ActionLink("Create user", "register", "Account", null, new { @class = "btn btn-primary btn-lg AdminButtons" })
                 </div>
 
-                <div>
+                <div id="Adminbutt">
                     @Html.ActionLink("Edit Students", "StudentEditList", "Admin", null, new { @class = "btn btn-default btn-lg" })
                 </div>
 

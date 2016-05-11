@@ -99,7 +99,14 @@ namespace Mooshark2.Controllers
             if (model.Course != null) {
                 courseService.ServiceEditCourse(model);
 
-                return RedirectToAction("Index");
+                ViewBag.TeachersNotInCourse = userService.GetAllTeachersNotInCourse(model.Course.ID);
+                var StudentsNotInCourse = userService.GetAllStudentsNotInCourse(model.Course.ID);
+                var teachers = userService.GetAllTeachersInCourse(model.Course.ID);
+                var students = userService.GetAllStudentsInCourse(model.Course.ID);
+
+                AdminCourseViewModel newModel = new AdminCourseViewModel(model.Course, teachers, students, StudentsNotInCourse);
+
+                return View(newModel);
             }
             else
             {
