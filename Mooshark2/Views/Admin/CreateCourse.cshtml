@@ -35,9 +35,9 @@
 
         <div class="container-fluid">
             <div class="row content">
-                <div class="col-sm-5 sidenav">
+                <div class="col-md-10">
                     <div class="form-group" id="studentTable">
-                        @Html.LabelFor(model => model.StudentListCheck,"Select Students", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.StudentListCheck, new { @class = "col-md-2 control-label" })
                         <table class="table table-bordered table-striped" id="studentTable">
                             <thead>
                                 <tr>
@@ -79,7 +79,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" id="create" value="Create" class="btn btn-default" />
+                <input type="submit" id="create" value="Create" class="btn btn-default AdminButtons"  />
             </div>
         </div>
     </div>

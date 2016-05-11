@@ -47,11 +47,6 @@ h2 {
     float: left; 
 }
 
-table#studentTable.table.table-bordered.table-striped {
-      margin-right: -15px;
-      margin-left: 210px;
-}
-
 #Mooshark {
     font-family: keepcalm-medium;
     font-size: 40px;
@@ -63,3 +58,23 @@ table#studentTable.table.table-bordered.table-striped {
     height: 70px;
     width: 70px;
 }
+
+div.col-sm-5.sidenav {
+    width: 82%;
+    float: right;
+}
+
+label.col-md-2.control-label {
+    text-align: right;
+}
+
+div.col-md-10 {
+    width: 83.33333333333334%;
+}
+
+table#studentTable.table.table-bordered.table-striped {
+    height: 200px;
+    overflow: auto;
+}
+
+
