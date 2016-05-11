@@ -55,7 +55,7 @@ namespace Mooshark2.Controllers
                 var course = courseService.getCourseById(id.Value);
                 var inputoutput = new InputOutput();
 
-                TeacherCreateViewModel model = new TeacherCreateViewModel(project, subproject, course);
+                TeacherCreateViewModel model = new TeacherCreateViewModel(course);
                 return View(model);
             }
 
@@ -66,16 +66,19 @@ namespace Mooshark2.Controllers
 
         //POST
         [HttpPost]
-        public ActionResult CreateProject(Project project)
+        public ActionResult CreateProject(TeacherCreateViewModel model)
         {
-            /*if (projectService.ServiceCreateProject(project)) {
+            if (projectService.ServiceCreateProject(model)) {
                 return RedirectToAction("Index");
             }
             else {
-                return View(project);
-            }*/
 
-            return View();
+                var course = courseService.getCourseById(model.course.ID);
+                TeacherCreateViewModel m = new TeacherCreateViewModel(course);
+
+                return View(m);
+            }
+
         }
 
         //GET
