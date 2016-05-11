@@ -50,16 +50,16 @@ namespace Mooshark2.Services
         }
 
 
-        public bool ServiceCreateProject(TeacherCreateViewModel model)
+        public bool ServiceCreateProject(Project model)
         {
-            if (db.Projects.Any(x => x.Name == model.project.Name))
+            if (db.Projects.Any(x => x.Name == model.Name))
             { 
                 return false;
             }
-            else
-            {
-                db.Projects.Add(model.project);
-                db.CourseProjects.Add(new CourseProject { CourseID = model.course.ID, ProjectID = model.project.ID});
+            else {
+                int CID = model.CourseID.Value;
+                db.Projects.Add(model);
+                db.CourseProjects.Add(new CourseProject { CourseID = CID, ProjectID = model.ID });
                 db.SaveChanges();
                 return true;
             }
@@ -86,15 +86,15 @@ namespace Mooshark2.Services
             return project; 
         }
 
-        public bool ServiceCreateSubproject(TeacherCreateViewModel model)
+        public bool ServiceCreateSubproject(Subproject model)
         {
-            if (db.Subprojects.Any(x => x.Name == model.subproject.Name))
+            if (db.Subprojects.Any(x => x.Name == model.Name))
             {
                 return false;
             }
             else
             {
-                db.Subprojects.Add(model.subproject);
+                db.Subprojects.Add(model);
                 db.SaveChanges();
                 return true;
             }

@@ -337,13 +337,15 @@
     <Content Include="Views\Admin\CreateCourse.cshtml" />
     <Content Include="Views\Teacher\Course.cshtml" />
     <Content Include="Views\Teacher\Graded.cshtml" />
-    <Content Include="Views\Teacher\CreateProject.cshtml" />
+    <Content Include="Views\TeacherLOL\CreateProject.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Admin\SelectStudent.cshtml" />
     <Content Include="Views\Teacher\ProjectDetails.cshtml" />
     <Content Include="Views\Admin\StudentEditList.cshtml" />
     <Content Include="Views\Teacher\Submissions.cshtml" />
     <Content Include="Views\Admin\EditStudent.cshtml" />
+    <Content Include="Views\Teacher\CreateProject.cshtml" />
+    <Content Include="Views\Teacher\CreateSubproject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
