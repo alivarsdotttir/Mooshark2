@@ -11,14 +11,16 @@ namespace Mooshark2.Models.ViewModels.StudentViewModels
     {
         public Course course;
         public Project project;
+        public Subproject subproject;
         public Submission submission;
         public InputOutput inputOutput; 
 
-        public StudentSubmissionDetailsViewModel(Course c, Project p, Submission s, InputOutput io)
+        public StudentSubmissionDetailsViewModel(Course c, Project p, Subproject subp, Submission subm, InputOutput io)
         {
             course = c;
             project = p;
-            submission = s;
+            subproject = subp;
+            submission = subm;
             inputOutput = io; 
         }
     }

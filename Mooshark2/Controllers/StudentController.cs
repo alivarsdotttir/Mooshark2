@@ -125,7 +125,7 @@ namespace Mooshark2.Controllers
 
                 Submission submission = new Submission();
                 submission.Date = DateTime.Now;
-                submission.Accepted = true;  //Needs to change when test cases are implemented
+                submission.Accepted = false;
                 submission.SubprojectID = subproject.ID;
                 submission.SubmissionNr = submissionNumber;
                 submission.FilePath = Server.MapPath(filePath);
@@ -170,16 +170,27 @@ namespace Mooshark2.Controllers
                         var io = projectService.getIOBySubprojectId(subproject.ID);
 
                         //Test input against code
-                        processExe.StandardInput.WriteLine(io.Input); 
+                        processExe.StandardInput.WriteLine(io.Input);
 
                         // We then read the output of the program:
-                        var programOutput = new List<string>();
+                        StreamReader reader = processExe.StandardOutput;
+                        string programOutput = reader.ReadToEnd();
+                        
+                        /*var programOutput = new List<string>();
                         while (!processExe.StandardOutput.EndOfStream)
                         {
                             programOutput.Add(processExe.StandardOutput.ReadLine());
-                        }
+                        }*/
 
-                        ViewBag.Output = programOutput;
+                        //Create ViewModel, to be sent to SubmissionDetails view
+                        submission.Output = programOutput;
+
+                        if(programOutput == io.Output)
+                        {
+                            submission.Accepted = true;
+                        }
+                        StudentSubmissionDetailsViewModel model = new StudentSubmissionDetailsViewModel(course, project, subproject, submission, io);
+                        return RedirectToAction("SubmissionDetails", model);
                     }
 
                 }
@@ -189,14 +200,9 @@ namespace Mooshark2.Controllers
         }
 
 
-        public ActionResult SubmisssionDetails(int? id)
+        public ActionResult SubmisssionDetails(StudentSubmissionDetailsViewModel model)
         {
-            if(id != null)
-            {
-                var submission = projectService.getSubmissionById(id.Value);
-                return View(submission); 
-            }
-            return View();
+            return View(model);
         }
     }
 }
