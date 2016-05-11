@@ -48,6 +48,7 @@ namespace Mooshark2.Services
             return Enumerable.Empty<Project>();
         }
 
+
         public bool ServiceCreateProject(TeacherCreateViewModel model)
         {
             if (db.Projects.Any(x => x.Name == model.project.Name))
