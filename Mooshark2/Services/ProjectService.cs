@@ -67,7 +67,11 @@ namespace Mooshark2.Services
             IEnumerable<Project> projects = (from x in db.Projects
                                              where x.CourseID == courseID && x.Visibility == true && DateTime.Now < x.Deadline
                                              select x) as IEnumerable<Project>;
-            return projects; 
+            if(projects != null) {
+                return projects;
+            }
+
+            return Enumerable.Empty<Project>();
         }
 
         public Project getProjectById(int projectID)
@@ -97,7 +101,11 @@ namespace Mooshark2.Services
             IEnumerable<Subproject> subprojects = (from x in db.Subprojects
                                                    where projectID == x.ProjectID
                                                    select x) as IEnumerable<Subproject>;
-            return subprojects; 
+           if(subprojects != null) {
+               return subprojects;
+           }
+
+           return Enumerable.Empty<Subproject>();
         }
 
         public IEnumerable<Submission> getSubmissions(int subprojectID)
@@ -105,7 +113,11 @@ namespace Mooshark2.Services
             IEnumerable<Submission> submissions = (from x in db.Submissions
                                                    where subprojectID == x.SubprojectID
                                                    select x) as IEnumerable<Submission>;
-            return submissions; 
+            if(submissions != null) {
+                return submissions;
+            }
+
+            return Enumerable.Empty<Submission>();
         }
 
 
@@ -138,7 +150,11 @@ namespace Mooshark2.Services
                                                   join y in db.CourseTeachers on x.CourseID equals y.CourseID
                                                   where y.UserID == teacherID && x.Graded == false
                                                   select x) as IEnumerable<Project>;
-            return ungradedProjects;
+            if(ungradedProjects != null) {
+                return ungradedProjects;
+            }
+
+            return Enumerable.Empty<Project>();
         }
 
         public IEnumerable<Project> getProjectsFromCourse(int courseID)
@@ -156,9 +172,13 @@ namespace Mooshark2.Services
                                                         join z in db.ProjectSubprojects on y.ProjectID equals z.ProjectID
                                                         join w in db.Submissions on z.SubprojectID equals w.SubprojectID
                                                         where x.UserID == userID && w.Accepted == true || x.UserID == userID
-                                                        select x).Last() as IEnumerable<Submission>;   
+                                                        select x).Last() as IEnumerable<Submission>;
 
-            return bestSubmission;
+            if(bestSubmission != null) {
+                return bestSubmission;
+            }
+
+            return Enumerable.Empty<Submission>();
         }
 
         public IEnumerable<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)
@@ -177,7 +197,11 @@ namespace Mooshark2.Services
                                                         where x.UserID == userID && w.ID != 0
                                                         select x) as IEnumerable<ApplicationUser>;*/
 
-            return submittedStudents;
+            if(submittedStudents != null) {
+                return submittedStudents;
+            }
+
+            return Enumerable.Empty<ApplicationUser>();
         }
 
         public int createSubmission(Submission submission)

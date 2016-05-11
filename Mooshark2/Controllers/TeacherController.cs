@@ -114,7 +114,7 @@ namespace Mooshark2.Controllers
             return View();
         }
 
-
+        [HttpGet]
         public ActionResult Submissions(int? subprojectID)
         {
             if(subprojectID != null) {
@@ -136,13 +136,31 @@ namespace Mooshark2.Controllers
 
         public ActionResult SubmissionDetails(int? id)
         {
-            if (id != null)
-            {
+            if (id != null) {
                 var submission = projectService.getSubmissionById(id.Value);
                 return View(submission);
             }
+
+            return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult Graded(int? id)
+        {
+            if(id != null) {
+                var currentStudentID = User.Identity.GetUserId();
+                var currentStudent = userService.getUserById(currentStudentID);
+                var currentProject = projectService.getProjectById(id.Value);
+               // var studentSubmissions;
+
+                TeacherGradeStudentViewModel model = new TeacherGradeStudentViewModel(currentStudent, currentProject);
+                //TeacherGradeStudentViewModel model = new TeacherGradeStudentViewModel(currentStudent, currentProject);
+
+                return View(model);
+            }
+
             return View();
         }
     }
-
 }
