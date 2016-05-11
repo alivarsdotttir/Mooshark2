@@ -5,13 +5,16 @@
 <link href="~/Content/Site.css" rel="stylesheet"/>
 
 <div class="row">
-    <h2>Welcome to admin's main page</h2>
+    <div class="jumbotron">
+        <h2>Welcome to admin's main page</h2>
+        <p>Create courses, users and update!</p>
+    </div>
     <div class="container-fluid">
         <div class="row content">
             <div class="col-sm-3 sidenav">
 
                 <div id="Adminbutt">
-                    @Html.ActionLink("Create course", "CreateCourse", "Admin", null, new { @class = "btn btn-primary btn-lg AdminButtons", @type="button" })
+                    @Html.ActionLink("Create course", "CreateCourse", "Admin", null, new { @class = "btn btn-primary btn-lg AdminButtons", @type = "button" })
                 </div>
 
                 <div id="Adminbutt">
@@ -25,7 +28,7 @@
             </div>
 
             <div class="col-sm-9">
-                
+
 
                 <table class="table table-bordered table-striped">
                     <!--<caption></caption>-->

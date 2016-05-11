@@ -55,7 +55,7 @@ namespace Mooshark2.Controllers
             {
                 var project = projectService.getProjectById(id.Value);
                 var subprojects = projectService.getSubprojects(id.Value);
-                var courseID = project.CourseID;
+                var courseID = 1; //LAGA ÞETTA ÞVÍ TENGITAFLA VAR SETT INN
                 var course = courseService.getCourseById(courseID);
 
                 IEnumerable<Submission> submissions = null; 
@@ -100,40 +100,48 @@ namespace Mooshark2.Controllers
             //get subproject, project and course
             int projectId = subproject.ProjectID ?? default(int);
             var project = projectService.getProjectById(projectId);
-            var courseId = project.CourseID;
+            var courseId = 1; //LAGA ÞETTA LÍKA KIDZZZZZ OG ÞÁ SÉRSTAKLEGA ÞÚ UNNUR
             var course = courseService.getCourseById(courseId);
 
             if (file.ContentLength > 0)
             {
 
-                Submission submission = new Submission();
-                submission.Date = DateTime.Now;
-                submission.Accepted = true;  //Needs to change when test cases are implemented
-                submission.SubprojectID = subproject.ID;
-                //TODO: Vista slóð með í database
-
-                int submissionID = projectService.createSubmission(submission);
+                int submissionNumber = 1;
+                var mostRecentSubmission = projectService.getMostRecentSubmission(user);
+                if (mostRecentSubmission != null)
+                {
+                    submissionNumber = mostRecentSubmission.SubmissionNr + 1;
+                }
 
                 var fileName = Path.GetFileName(file.FileName);
-                var filePath = string.Format("~\\Submissions\\{0}\\{1}\\{2}\\{3}\\{4}", course.Name, project.Name, subproject.Name, user.UserName, "Submission" + submissionID);
+                var filePath = string.Format("~\\Submissions\\{0}\\{1}\\{2}\\{3}\\{4}", course.Name, project.Name, subproject.Name, user.UserName, "Submission" + submissionNumber);
                 
 
                 var path = Path.Combine(Server.MapPath(filePath), fileName);
                 
                 System.IO.Directory.CreateDirectory(Server.MapPath(filePath));
                 
-
                 file.SaveAs(path);
 
-                /*
-                string exeFilePath = file.FileName.Remove(file.FileName.IndexOf(".")) + ".exe";
+                Submission submission = new Submission();
+                submission.Date = DateTime.Now;
+                submission.Accepted = true;  //Needs to change when test cases are implemented
+                submission.SubprojectID = subproject.ID;
+                submission.SubmissionNr = submissionNumber;
+                submission.FilePath = Server.MapPath(filePath);
+                submission.CppFileName = fileName; 
+
+                projectService.createSubmission(submission, user);
+
+                
+                string exeFilePath = Server.MapPath(filePath) + "\\" + fileName.Remove(fileName.IndexOf(".")) + ".exe";
                 //C++ compiler folder path
                 var compilerFolder = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\bin\\";
 
                 //Executing the compiler:
                 Process compiler = new Process();
                 compiler.StartInfo.FileName = "cmd.exe";
-                compiler.StartInfo.WorkingDirectory = path;
+                compiler.StartInfo.WorkingDirectory = Server.MapPath(filePath);
                 compiler.StartInfo.RedirectStandardInput = true;
                 compiler.StartInfo.RedirectStandardOutput = true;
                 compiler.StartInfo.UseShellExecute = false;
@@ -157,7 +165,7 @@ namespace Mooshark2.Controllers
                     {
                         processExe.StartInfo = processInfoExe;
                         processExe.Start();
-                        
+
                         // processExe.StandardInput.WriteLine()
                         //should be used for input 
 
@@ -170,8 +178,8 @@ namespace Mooshark2.Controllers
 
                         ViewBag.Output = lines;
                     }
-                    */
-                    
+
+                }
             }
 
             return RedirectToAction("Index");

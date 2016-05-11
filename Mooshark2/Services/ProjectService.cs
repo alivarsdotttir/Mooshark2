@@ -2,6 +2,7 @@
 using Mooshark2.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Razor.Parser.SyntaxTree;
@@ -49,15 +50,16 @@ namespace Mooshark2.Services
         }
 
 
-        public bool ServiceCreateProject(TeacherCreateViewModel model)
+        public bool ServiceCreateProject(Project model)
         {
-            if (db.Projects.Any(x => x.Name == model.project.Name))
+            if (db.Projects.Any(x => x.Name == model.Name))
             { 
                 return false;
             }
-            else
-            {
-                db.Projects.Add(model.project);
+            else {
+                int CID = model.CourseID.Value;
+                db.Projects.Add(model);
+                db.CourseProjects.Add(new CourseProject { CourseID = CID, ProjectID = model.ID });
                 db.SaveChanges();
                 return true;
             }
@@ -84,15 +86,15 @@ namespace Mooshark2.Services
             return project; 
         }
 
-        public bool ServiceCreateSubproject(TeacherCreateViewModel model)
+        public bool ServiceCreateSubproject(Subproject model)
         {
-            if (db.Subprojects.Any(x => x.Name == model.subproject.Name))
+            if (db.Subprojects.Any(x => x.Name == model.Name))
             {
                 return false;
             }
             else
             {
-                db.Subprojects.Add(model.subproject);
+                db.Subprojects.Add(model);
                 db.SaveChanges();
                 return true;
             }
@@ -200,20 +202,24 @@ namespace Mooshark2.Services
             return Enumerable.Empty<ApplicationUser>();
         }
 
-        public int createSubmission(Submission submission)
+        public void createSubmission(Submission submission, ApplicationUser user)
         {
-            if(submission != null) {
+            if(submission != null && user != null) {
                 db.Submissions.Add(submission);
                 db.SaveChanges();
+
+                db.StudentSubmissions.Add(new StudentSubmission { UserID = user.Id, SubmissionID = submission.ID });
             }
-            int lastSubmissionId = db.Submissions.Max(sub => sub.ID); 
-            return lastSubmissionId; 
         }
 
         public Submission getMostRecentSubmission(ApplicationUser user)
         {
-
-            return null;
+            Submission submission = (from x in db.Submissions
+                                     join y in db.StudentSubmissions on x.ID equals y.SubmissionID
+                                     where user.Id == y.UserID
+                                     orderby x.SubmissionNr descending
+                                     select x).FirstOrDefault();
+            return submission;
         }
 
         public IEnumerable<Submission> getStudentsSubmissionsForSubproject(string studentID)

@@ -1,18 +1,18 @@
-﻿@using System.Activities.Statements
-@using Microsoft.Ajax.Utilities
-@using Mooshark2.Models.Entities
+﻿
 @model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherCourseViewModel
 @{
     ViewBag.Title = "Course";
 }
 
 <link href="~/Content/Site.css" rel="stylesheet" />
-<h2>Course</h2>
-<div>
-    <div class="col-md-8">
-        <table class="table table-bordered table-striped">
-            <caption class="left">@Model.course.Name</caption>
-            <thead>
+<h2>@Model.course.Name</h2>
+<div class="container-fluid">
+    <div class="row content">
+
+        <div class="col-md-8">
+            <table class="table table-bordered table-striped">
+                <caption class="left"></caption>
+                <thead>
                 <tr>
                     <th>Visability</th>
                     <th>Course</th>
@@ -21,6 +21,7 @@
                     <th>Graded</th>
                     <th>Group</th>
                 </tr>
+<<<<<<< HEAD
             </thead>
             <tbody>
                 @foreach (var project in Model.courseProjects) {
@@ -42,17 +43,40 @@
                             @if (@project.isGroupProject == false)
                             {
                                 <td><img alt="Group" src="~/Images/solo.png" width="20" height="20" /></td>
+=======
+                </thead>
+                <tbody>
+                @foreach(var project in Model.courseProjects) {
+                    <tr>
+                        <td>
+                            @if(project.Visibility == true) {
+                                <img alt="Visible" src="~/Images/check.png" height="20px" width="20px"/>
+>>>>>>> 963b1c1164051b14dff9f95125d0a41d46706ddd
                             }
-                         </tr>
+                        </td>
+                        <td>@Html.ActionLink(Model.course.Name, "Course", new { id = Model.course.ID })</td>
+                        <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID }) </td>
+                        <td>@project.Deadline</td>
+                        <td>@project.Graded</td><!--not finished, check again after Graded has been written-->
+                        @*@if(project.isGroupProject == true) {
+                            <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px"/></td>
+                        }
+                        @if(project.isGroupProject == false) {
+                            <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px"/></td>
+                        }*@
+                    </tr>
                 }
-               
-            </tbody>
-         </table>
-    </div>
-    <div class="col-md-4">
-        @Html.ActionLink("Create new project", "CreateProject", new { id = Model.course.ID }, new { @class = "btn btn-primary btn-lg AdminButtons" })    
-    </div>
-    <div class="col-md-4">
-        @Html.ActionLink("Back to Main Page", "Index", "Teacher", null, new { @class = "btn btn-primary btn-lg AdminButtons" })
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <div id="Adminbutt">
+                @Html.ActionLink("Create new project", "CreateProject", new { id = Model.course.ID }, new { @class = "btn btn-primary btn-lg AdminButtons" })
+            </div>
+            <div id="Adminbutt">
+                @Html.ActionLink("Back to Main Page", "Index", "Teacher", null, new { @class = "btn btn-primary btn-lg AdminButtons" })
+            </div>
+        </div>
     </div>
 </div>
