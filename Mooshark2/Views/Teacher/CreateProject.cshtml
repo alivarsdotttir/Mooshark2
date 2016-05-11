@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.project.Deadline, "Dedline", new { @class = "col-md-2 control-label" })
+                @Html.LabelFor(model => model.project.Deadline, "Deadline", new { @class = "col-md-2 control-label" })
                 <div>
                     @Html.EditorFor(model => model.project.Deadline, new { @class = "form-controle" })
                 </div>
@@ -54,7 +54,7 @@
             </div>
         </form>
         <div>
-            @Html.ActionLink("Get Back ", "Course", new { id = Model.course.ID }, new { @class = "btn btn-default" });
+            @Html.ActionLink("Back to Course", "Course", new { id = Model.course.ID }, new { @class = "btn btn-default" })
         </div>
 
     </div>
