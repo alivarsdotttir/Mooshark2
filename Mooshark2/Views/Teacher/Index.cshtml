@@ -26,17 +26,10 @@
                     <td>@Html.ActionLink(Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name, "Course", new { id = project.CourseID })</td> 
                     <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
                     <td>@project.Deadline</td>
-<<<<<<< HEAD
-                    @if(project.isGroupProject == true) {
+                    @if(project.IsGroupProject == true) {
                         <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px"/></td>
                     }
-                    @if(project.isGroupProject == false) {
-=======
-                    @if(@project.IsGroupProject == true) {
-                        <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px"/></td>
-                    }
-                    @if(@project.IsGroupProject == false) {
->>>>>>> 16eb948f6d14a27bba5db577bfc5707f093f0bd5
+                    @if(project.IsGroupProject == false) {
                         <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px"/></td>
                     }
                 </tr>
