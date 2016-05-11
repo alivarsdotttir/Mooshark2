@@ -240,5 +240,13 @@ namespace Mooshark2.Services
 
             return Enumerable.Empty<Submission>();
         }
+
+        public InputOutput getIOBySubprojectId(int subprojectId)
+        {
+            InputOutput io = (from x in db.InputOutputs
+                              where x.SubprojectID == subprojectId
+                              select x).FirstOrDefault();
+            return io; 
+        }
     }
 }

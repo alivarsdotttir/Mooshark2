@@ -13,7 +13,7 @@ namespace Mooshark2.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
             AutomaticMigrationDataLossAllowed = false; 
         }
 
@@ -55,9 +55,10 @@ namespace Mooshark2.Migrations
             context.Courses.AddOrUpdate(new Course { Active = false, Name = "Vefforritun" });
             */
             /*
-            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2017, 3, 9, 0, 0, 0), Graded = false, Visibility = true, CourseID = 1 });
-            context.Projects.AddOrUpdate(new Project { Name = "Project 2", Deadline = new DateTime(2017, 3, 9, 0, 0, 0), Graded = false, Visibility = true, CourseID = 2 });
-            */
+            context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2017, 3, 9, 0, 0, 0), Graded = false, Visibility = true, CourseID = 1 });*/
+            
+            context.Projects.AddOrUpdate(new Project { Name = "The Answer", Deadline = new DateTime(2017, 3, 9, 0, 0, 0), Graded = false, Visibility = true, CourseID = 1, isGroupProject = false, Grade = 0, GroupSize = 0 });
+            
             /*
             context.Users.AddOrUpdate(new ApplicationUser
             {
@@ -99,10 +100,11 @@ namespace Mooshark2.Migrations
             context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "842a4227-59b8-4ff2-9aeb-4c80fe22c797", CourseID = 1});
             context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "842a4227-59b8-4ff2-9aeb-4c80fe22c797", CourseID = 2});
             */
-            /*
-            context.Subprojects.AddOrUpdate(new Subproject { Name = "First part", Description = "This is the first part", ProjectID = 1, Weight = 50 });
+            
+            /*context.Subprojects.AddOrUpdate(new Subproject { Name = "The AnswerAnswer", Description = "This is the ANSWER", ProjectID = 1, Weight = 50 });
+            
             context.Subprojects.AddOrUpdate( new Subproject { Name = "Second part", Description = "This is the second part", ProjectID = 2, Weight = 50 });
-
+            
             context.Subprojects.AddOrUpdate(new Subproject { Name = "1st part", Description = "This is the first part", ProjectID = 1, Weight = 50 });
             context.Subprojects.AddOrUpdate(new Subproject { Name = "2nd part", Description = "This is the second part", ProjectID = 2, Weight = 50 });
             */
