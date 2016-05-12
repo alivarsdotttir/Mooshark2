@@ -5,12 +5,108 @@
     ViewBag.Title = "Details";
 }
 
-<link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
-<script type="text/javascript" src="../../scripts/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
-<script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+<div class="jumbotron row">
+    <div class="col-sm-8">
+        <h2>@Model.currentProject.Name</h2>
+        <p>Here you can read the description and submit your solution!</p>
+        <div>
+            <p>Deadline: @Model.currentProject.Deadline</p>
+            @*<div id="countdown">@((Model.currentProject.Deadline) - DateTime.Now)</div>*@
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="Adminbutt">
+            @Html.ActionLink("Add new subproject", "CreateSubproject", new { id = Model.currentProject.ID }, new { @class = "btn btn-primary AdminButtons" })
+        </div>
+        <div id="Adminbutt">
+            @Html.ActionLink("Edit project", "EditProject", new { id = Model.currentProject.ID }, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>
 
-<h2>@Model.currentProject.Name</h2>
+<div class="container">
+    <ul class="nav nav-tabs">
+        @if (Model.subprojects != null && Model.subprojects.Count != 0)
+        {
+            <li class="active"><a href="#menu-1">Part 1</a></li>
+            for (int i = 2; i < Model.subprojects.Count + 1; i++)
+            {
+                <li><a href="#menu-@i">Part @i</a></li>
+            }
+        }
+    </ul>
+
+    <div class="tab-content">
+        @if (Model.subprojects != null)
+        {
+            for (int i = 0; i < Model.subprojects.Count; i++)
+            {
+                <div id="menu-@(i+1)" class="tab-pane fade in active">
+                    <div class="container">
+                        <div class="page-header">
+                            <h3>@Model.subprojects[i].Name</h3>
+                        </div>
+                        <p>@Model.subprojects[i].Description</p>
+                    </div>
+                    <div id="Adminbutt">
+                        @Html.ActionLink("Student's submissions", "Submissions", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-default AdminButtons" })
+                        @Html.ActionLink("Edit subproject", "EditSubproject", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-default" })
+                    </div>
+                    <div>
+                        <!-- SUBMISSION TABLE -->
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<script>
+    $(document)
+        .ready(function() {
+            $(".nav-tabs a")
+                .click(function() {
+                    $(this).tab('show');
+                });
+        });
+</script>
+
+<div class="row top-buffer">
+    @Html.ActionLink("Back to Course", "Course", new { id = Model.currentProject.CourseID }, new { @class = "btn btn-default" })
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<h2>@Model.currentProject.Name</h2>
 
 <div id='jqxTabs'>
     <ul style='margin-left: 20px;'>
@@ -43,4 +139,4 @@
         .ready(function() {
             $('#jqxTabs').jqxTabs({ width: 550, height: 150 });
         });
-</script>
+</script>*@
