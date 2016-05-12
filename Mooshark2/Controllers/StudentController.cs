@@ -169,17 +169,17 @@ namespace Mooshark2.Controllers
                         processExe.Start();
 
                         //Get InputOutput 
-                        var io = projectService.getIOBySubprojectId(subproject.ID);
-
+                        //var io = projectService.getIOBySubprojectId(subproject.ID);
+                        
                         //Test input against code
                         //processExe.StandardInput.WriteLine(io.Input);
                         StreamWriter inputWriter = processExe.StandardInput;
-                        inputWriter.WriteLine(io.Input);
+                        inputWriter.WriteLine(subproject.Input.ToString());
 
                         // We then read the output of the program:
                         StreamReader outputReader = processExe.StandardOutput;
                         string programOutput = outputReader.ReadToEnd().ToString();
-                        string correctOutput = io.Output.ToString();
+                        string correctOutput = subproject.Output.ToString();
                         /*var programOutput = new List<string>();
                         while (!processExe.StandardOutput.EndOfStream)
                         {
@@ -208,7 +208,6 @@ namespace Mooshark2.Controllers
         {
             if(submissionID != null) {
                 Submission submission = projectService.getSubmissionById(submissionID.Value);
-                //Subproject subproject = submission.Subproject;
                 int subprojectID = submission.SubprojectID;
                 Subproject subproject = projectService.getSubprojectById(subprojectID);
                 InputOutput inputOutput = projectService.getIOBySubprojectId(subprojectID);
