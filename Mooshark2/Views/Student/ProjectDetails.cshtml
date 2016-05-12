@@ -44,7 +44,7 @@
                         <p>@Model.subprojects[i].Description</p>
                     </div>
                     <div id="Adminbutt">
-                        
+                        @Html.ActionLink("Submit", "Submit", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-success" })
                     </div>
                     <div>
                         <!-- SUBMISSION TABLE -->
@@ -68,34 +68,6 @@
 <div class="row top-buffer">
     @Html.ActionLink("Back to Course", "Course", new { id = Model.currentProject.CourseID }, new { @class = "btn btn-default" })
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
