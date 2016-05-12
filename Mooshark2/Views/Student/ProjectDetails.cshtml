@@ -48,6 +48,33 @@
                     </div>
                     <div>
                         <!-- SUBMISSION TABLE -->
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>Result</td>
+                                    <td>Submission time</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var submission in Model.projectSubmissions){
+                                    if (submission.SubprojectID == Model.subprojects[i].ID){
+                                    <tr>
+                                        <td>@Html.ActionLink(submission.SubmissionNr.ToString(), "SubmissionDetails", new { submissionID = submission.ID })</td>
+                                        @if (submission.Accepted == true)
+                                        {
+                                            <td>@Html.ActionLink("Accepted", "SubmissionDetails", new { submissionID = submission.ID })</td>
+                                        }
+                                        @if (submission.Accepted == false)
+                                        {
+                                            <td>@Html.ActionLink("Wrong answer", "SubmissionDetails", new { submissionID = submission.ID })</td>
+                                        }
+                                        <td>@submission.Date</td>
+                                    </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             }

@@ -14,6 +14,7 @@
 <p>Your output: <br />
     @Model.submission.Output</p>
 
+
 <p>Expected output: <br/>
     @Model.subproject.Output</p>
 
@@ -27,4 +28,5 @@
 
 @Html.ActionLink("Back to project", "ProjectDetails", new { id = Model.project.ID }, new { @class="btn btn-default" })
 @Html.ActionLink("Back to course", "Course", new { id = Model.course.ID }, new { @class ="btn btn-default"})
+
 
