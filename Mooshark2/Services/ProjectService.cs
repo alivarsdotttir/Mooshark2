@@ -231,11 +231,11 @@ namespace Mooshark2.Services
             }
         }
 
-        public Submission getMostRecentSubmission(ApplicationUser user)
+        public Submission getMostRecentSubmission(ApplicationUser user, int subprojectID)
         {
             Submission submission = (from x in db.Submissions
                                      join y in db.StudentSubmissions on x.ID equals y.SubmissionID
-                                     where user.Id == y.UserID
+                                     where user.Id == y.UserID && x.SubprojectID == subprojectID
                                      orderby x.SubmissionNr descending
                                      select x).FirstOrDefault();
             return submission;
