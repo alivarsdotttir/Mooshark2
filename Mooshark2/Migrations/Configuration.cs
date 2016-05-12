@@ -109,7 +109,7 @@ namespace Mooshark2.Migrations
             context.CourseTeachers.AddOrUpdate(new CourseTeacher { UserID = "842a4227-59b8-4ff2-9aeb-4c80fe22c797", CourseID = 2});
             */
 
-            //context.Subprojects.AddOrUpdate(new Subproject { Name = "The AnswerAnswer", Description = "This is the ANSWER", ProjectID = 3, Weight = 100 });
+            //context.Subprojects.AddOrUpdate(new Subproject { Name = "The AnswerAnswer", Description = "This is the ANSWER", ProjectID = 8, Weight = 100 });
             /*
             context.Subprojects.AddOrUpdate( new Subproject { Name = "Second part", Description = "This is the second part", ProjectID = 2, Weight = 50 });
             
