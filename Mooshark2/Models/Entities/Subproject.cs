@@ -18,5 +18,8 @@ namespace Mooshark2.Models.Entities
 
         public int Weight { get; set; }
         public int Grade { get; set; }
+
+        public string Input { get; set; }
+        public string Output { get; set; }
     }
 }
