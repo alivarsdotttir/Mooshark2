@@ -164,13 +164,35 @@ namespace Mooshark2.Services
 
         public Submission getStudentsBestSubmission(int subId)
         {
+
+
+            //List<Submission> bestSubmission = null;
+            //foreach (ApplicationUser student in students)
+            //{
+            //    bestSubmission = (from x in db.Submissions
+            //                      join y in db.StudentSubmissions on x.ID equals y.SubmissionID
+            //                      where y.UserID == student.Id && x.Accepted == true || y.UserID == student.Id && x.Accepted == false
+            //                      select x) as List<Submission>;
+
+
+            //}
+
+            //if (bestSubmission != null)
+            //{
+            //    return bestSubmission;
+            //}
+
+            //return new List<Submission>();
+
+
             Submission bestSubmission = (from x in db.Submissions
                                          join y in db.StudentSubmissions on x.ID equals y.SubmissionID
                                          join z in db.Users on y.UserID equals z.Id
                                          where subId == x.ID && x.Accepted == true || subId == x.ID && x.Accepted == false
                                          select x).SingleOrDefault();
-                   
+
             return bestSubmission;
+
         }
 
         public IEnumerable<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)
@@ -212,11 +234,11 @@ namespace Mooshark2.Services
             }
         }
 
-        public Submission getMostRecentSubmission(ApplicationUser user)
+        public Submission getMostRecentSubmission(ApplicationUser user, int subprojectID)
         {
             Submission submission = (from x in db.Submissions
                                      join y in db.StudentSubmissions on x.ID equals y.SubmissionID
-                                     where user.Id == y.UserID
+                                     where user.Id == y.UserID && x.SubprojectID == subprojectID
                                      orderby x.SubmissionNr descending
                                      select x).FirstOrDefault();
             return submission;

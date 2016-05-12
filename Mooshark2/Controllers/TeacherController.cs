@@ -178,6 +178,7 @@ namespace Mooshark2.Controllers
             if(id != null) {
                 var students = projectService.getStudentsThatHaveSubmitted(id.Value);
                 var bestSubmissions = projectService.getStudentsBestSubmission(id.Value);
+
                 var allSubmissionsForSubproject = projectService.getSubmissions(id.Value);
                 var subprojectName = projectService.getSubprojectById(id.Value);
 
