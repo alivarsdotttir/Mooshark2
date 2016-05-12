@@ -27,7 +27,7 @@
             @foreach(var project in Model.upcomingProjects) {
                 <tr>
                     <td>@Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name</td>
-                    <td>@Html.ActionLink(project.Name, "Details", new { id = project.ID })</td>
+                    <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
                     <td>@project.Deadline</td>
                     <td><!--project.isGroupProject--></td>
                 </tr>
