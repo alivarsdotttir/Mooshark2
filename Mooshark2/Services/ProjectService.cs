@@ -190,13 +190,13 @@ namespace Mooshark2.Services
         }
 
 
-        public Submission getStudentsBestSubmission(int subprojectID)
+        public IEnumerable<Submission> getStudentsBestSubmission(int subprojectID)
         {
-            Submission bestSubmission = (from x in db.Submissions
+            IEnumerable<Submission> bestSubmission = (from x in db.Submissions
                                          join y in db.StudentSubmissions on x.ID equals y.SubmissionID
                                          join z in db.Users on y.UserID equals z.Id
                                          where (subprojectID == x.ID && x.Accepted == true)
-                                         select x).SingleOrDefault();
+                                         select x)as IEnumerable<Submission>;
 
             /*if(bestSubmission == null) {
                 var lastSubmission = getLastSubmissionForStudents();
