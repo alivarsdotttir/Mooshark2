@@ -1,7 +1,7 @@
 ﻿@model Mooshark2.Models.ViewModels.StudentViewModels.StudentCourseViewModel
 
 <div class="row">
-    <div id="studentCourseProjectsTable" class="col-md-8">
+    <div class="col-md-8 table-scoll">
         <h3>Projects</h3>
         <table class="table table-bordered table-striped">
             <caption><caption>
@@ -18,7 +18,7 @@
                 foreach(var project in Model.projectsForCourse) {
                     <tr>
                         <td>@Model.course.Name</td>
-                        <td>@Html.ActionLink(project.Name, "Details", new { id = project.ID })</td>
+                        <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
                         <td>@project.Deadline</td>
                         <td>@*project.isGroupProject*@</td>
                     </tr>
