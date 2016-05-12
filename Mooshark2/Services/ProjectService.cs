@@ -201,7 +201,6 @@ namespace Mooshark2.Services
             /*if(bestSubmission == null) {
                 var lastSubmission = getLastSubmissionForStudents();
                 return lastSubmission;
-
             }*/
 
             return bestSubmission;
