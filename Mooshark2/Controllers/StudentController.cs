@@ -104,14 +104,18 @@ namespace Mooshark2.Controllers
             var course = courseService.getCourseById(courseId.Value);
 
             if(file == null) {
-                return RedirectToAction("Submit", subproject.ID); 
+                ModelState.AddModelError("", "Empty submission, please choose a file.");
+                return View(subproject); 
             }
 
             var fileName = Path.GetFileName(file.FileName);
             if(fileName.Substring(fileName.Length-4, 4) != ".cpp")
             {
-                return RedirectToAction("Submit", subproject.ID);
+                ModelState.AddModelError("", "Wrong file extension.");
+                return View(subproject);
             }
+
+
 
             if (file.ContentLength > 0) {
 
@@ -172,15 +176,16 @@ namespace Mooshark2.Controllers
                     processInfoExe.RedirectStandardError = true;
                     processInfoExe.CreateNoWindow = true;
                     processInfoExe.ErrorDialog = false;
-                    using (var processExe = new Process())
-                    {
+                    using (var processExe = new Process()) {
                         processExe.StartInfo = processInfoExe;
                         processExe.Start();
                         
-                        //Test input against code
+                        //It there is input, test it against code
                         StreamWriter inputWriter = processExe.StandardInput;
-                        inputWriter.WriteLine(subproject.Input.ToString());
-
+                        if(subproject.Input != null) {
+                            inputWriter.WriteLine(subproject.Input.ToString());
+                        }
+                        
                         // We then read the output of the program:
                         StreamReader outputReader = processExe.StandardOutput;
                         string programOutput = outputReader.ReadToEnd().ToString();
