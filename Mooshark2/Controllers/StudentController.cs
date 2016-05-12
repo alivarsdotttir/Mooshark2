@@ -44,12 +44,12 @@ namespace Mooshark2.Controllers
 
                 return View(model); 
             }
-            //Returns an error message, ID invalid 
-            return View();
+
+            return View("NotFound");
         }
 
 
-        public ActionResult Details(int? id)
+        public ActionResult ProjectDetails(int? id)
         {
             if(id != null)
             {
@@ -58,7 +58,7 @@ namespace Mooshark2.Controllers
                 var courseID = project.CourseID;
                 var course = courseService.getCourseById(courseID.Value);
 
-                IEnumerable<Submission> submissions = null; 
+                List<Submission> submissions = null; 
                 foreach(Subproject sub in subprojects)
                 {
                     if (submissions == null)
@@ -66,15 +66,15 @@ namespace Mooshark2.Controllers
                         submissions = projectService.getSubmissions(sub.ID);
                     }
                     else {
-                        submissions = submissions.Concat(projectService.getSubmissions(sub.ID));
+                        submissions.AddRange(projectService.getSubmissions(sub.ID));
                     }
                 }
 
                StudentDetailsViewModel model = new StudentDetailsViewModel(project, subprojects, submissions, course);
                return View(model); 
             }
-            //returns an error message, ID invalid, no project chosen
-            return View();
+
+            return View("NotFound");
         }
 
 
@@ -85,8 +85,8 @@ namespace Mooshark2.Controllers
                 var subproject = projectService.getSubprojectById(id.Value);
                 return View(subproject); 
             }
-            //error message, no subproject chosen, ID is invalid
-            return View();
+
+            return View("NotFound");
         }
 
         [HttpPost]
@@ -167,19 +167,15 @@ namespace Mooshark2.Controllers
                     {
                         processExe.StartInfo = processInfoExe;
                         processExe.Start();
-
-                        //Get InputOutput 
-                        var io = projectService.getIOBySubprojectId(subproject.ID);
-
+                        
                         //Test input against code
-                        //processExe.StandardInput.WriteLine(io.Input);
                         StreamWriter inputWriter = processExe.StandardInput;
-                        inputWriter.WriteLine(io.Input);
+                        inputWriter.WriteLine(subproject.Input.ToString());
 
                         // We then read the output of the program:
                         StreamReader outputReader = processExe.StandardOutput;
                         string programOutput = outputReader.ReadToEnd().ToString();
-                        string correctOutput = io.Output.ToString();
+                        string correctOutput = subproject.Output.ToString();
                         /*var programOutput = new List<string>();
                         while (!processExe.StandardOutput.EndOfStream)
                         {
@@ -189,25 +185,42 @@ namespace Mooshark2.Controllers
                         //Create ViewModel, to be sent to SubmissionDetails view
                         submission.Output = programOutput;
 
-                        if(string.Compare(programOutput, correctOutput) == 0)
-                        {
+                        if(string.Compare(programOutput, correctOutput) == 0) {
                             submission.Accepted = true;
+                            submission.Grade = 10;
                         }
                         projectService.saveSubmissionChanges(submission.ID);
-                        StudentSubmissionDetailsViewModel model = new StudentSubmissionDetailsViewModel(course, project, subproject, submission, io);
-                        return RedirectToAction("SubmissionDetails", model);
+                        // StudentSubmissionDetailsViewModel model = new StudentSubmissionDetailsViewModel(course, project, subproject, submission, io);
+                        return RedirectToAction("SubmissionDetails", new { submissionID = submission.ID });
                     }
-
                 }
             }
 
             return RedirectToAction("Index");
         }
 
-
-        public ActionResult SubmisssionDetails(StudentSubmissionDetailsViewModel model)
+        [HttpGet]
+        public ActionResult SubmissionDetails(int? submissionID)
         {
-            return View(model);
+            if(submissionID != null) {
+                Submission submission = projectService.getSubmissionById(submissionID.Value);
+                int subprojectID = submission.SubprojectID;
+                Subproject subproject = projectService.getSubprojectById(subprojectID);
+                InputOutput inputOutput = projectService.getIOBySubprojectId(subprojectID);
+                int projectID = subproject.ProjectID.Value;
+                Project project = projectService.getProjectById(projectID);
+                int courseID = project.CourseID.Value;
+                Course course = courseService.getCourseById(courseID);
+
+                StudentSubmissionDetailsViewModel model = new StudentSubmissionDetailsViewModel(course,
+                    project,
+                    subproject,
+                    submission);
+
+                return View(model);
+            }
+
+            return View("NotFound");
         }
     }
 }

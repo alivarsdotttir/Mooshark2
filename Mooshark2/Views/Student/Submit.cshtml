@@ -10,9 +10,22 @@
     @Html.HiddenFor(x => x.Description)
     @Html.HiddenFor(x => x.ProjectID)
     @Html.HiddenFor(x => x.Weight)
-    <input type="file" name="file" /><br />
+    @Html.HiddenFor(x => x.Input)
+    @Html.HiddenFor(x => x.Output)
 
-    <input type="submit" name="Submit" id="Submit" value="Upload" />
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Submit your solution to @Model.Name</h2>
+                <input type="file" name="file" class="btn btn-lg" /><br />
+            </div>
+            <div class="col-sm-4">
+                <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-lg AdminButtons" />
+            </div>
+        </div>
+    </div>
+
+    
 }
 
 @*

@@ -8,18 +8,18 @@
 <div class="container-fluid">
     <div class="row content">
 
-        <div class="col-md-8">
+        <div class="col-md-8 table-scoll">
             <table class="table table-bordered table-striped">
                 <caption class="left"></caption>
                 <thead>
-                    <tr>
-                        <th>Visability</th>
-                        <th>Course</th>
-                        <th>Assignment</th>
-                        <th>Deadline</th>
-                        <th>Graded</th>
-                        <th>Group</th>
-                    </tr>
+                <tr>
+                    <th>Visability</th>
+                    <th>Course</th>
+                    <th>Assignment</th>
+                    <th>Deadline</th>
+                    <th>Graded</th>
+                    <th>Group</th>
+                </tr>
                 </thead>
                 <tbody>
                 @foreach(var project in Model.courseProjects) {
@@ -49,9 +49,11 @@
             <div id="Adminbutt">
                 @Html.ActionLink("Create new project", "CreateProject", new { id = Model.course.ID }, new { @class = "btn btn-primary btn-lg AdminButtons" })
             </div>
-            <div id="Adminbutt">
-                @Html.ActionLink("Back to Main Page", "Index", "Teacher", null, new { @class = "btn btn-primary btn-lg AdminButtons" })
-            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="Adminbutt">
+            @Html.ActionLink("Back to main page", "Index", "Teacher", null, new { @class = "btn btn-default" })
         </div>
     </div>
 </div>

@@ -73,7 +73,7 @@ namespace Mooshark2.Services
         public IEnumerable<Project> getProjectsForCourse(int courseID)
         {
             IEnumerable<Project> projects = (from x in db.Projects
-                                             where x.CourseID == courseID && x.Visibility == true && DateTime.Now < x.Deadline
+                                             where x.CourseID == courseID && x.Visibility == true 
                                              select x) as IEnumerable<Project>;
             if(projects != null) {
                 return projects;
@@ -113,16 +113,13 @@ namespace Mooshark2.Services
            return subprojects;
         }
 
-        public IEnumerable<Submission> getSubmissions(int subprojectID)
+        public List<Submission> getSubmissions(int subprojectID)
         {
-            IEnumerable<Submission> submissions = (from x in db.Submissions
+            List<Submission> submissions = (from x in db.Submissions
                                                    where subprojectID == x.SubprojectID
-                                                   select x) as IEnumerable<Submission>;
-            if(submissions != null) {
-                return submissions;
-            }
+                                                   select x).ToList();
 
-            return Enumerable.Empty<Submission>();
+                return submissions;
         }
 
 
