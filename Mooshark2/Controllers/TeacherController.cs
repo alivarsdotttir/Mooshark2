@@ -173,20 +173,16 @@ namespace Mooshark2.Controllers
         }
 
         [HttpGet]
-        public ActionResult Submissions(int? subprojectID)
+        public ActionResult Submissions(int? id)
         {
-            if(subprojectID.Value != null) {
-                var students = projectService.getStudentsThatHaveSubmitted(subprojectID.Value);
-                List<Submission> bestSubmissions = new List<Submission>();
-                foreach (var student in students) {
-                    bestSubmissions.Add(projectService.getStudentsBestSubmission(student.Id));
-                }
-                var allSubmissionsForSubproject = projectService.getSubmissions(subprojectID.Value);
-                var subprojectName = projectService.getSubprojectById(subprojectID.Value);
+            if(id != null) {
+                var students = projectService.getStudentsThatHaveSubmitted(id.Value);
+                var bestSubmissions = projectService.getStudentsBestSubmission(students);
+                var allSubmissionsForSubproject = projectService.getSubmissions(id.Value);
+                var subprojectName = projectService.getSubprojectById(id.Value);
 
                 TeacherSubmissionsViewmodel model = new TeacherSubmissionsViewmodel(allSubmissionsForSubproject,
-                    students,
-                    bestSubmissions, subprojectName);
+                    students, subprojectName);
 
                 return View(model);
             }
