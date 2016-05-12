@@ -169,14 +169,7 @@ namespace Mooshark2.Services
 
         public List<Submission> getStudentsBestSubmission(List<ApplicationUser> students)
         {
-<<<<<<< HEAD
-            Submission bestSubmission = (from x in db.StudentSubmissions
-                                        join y in db.Submissions on x.SubmissionID equals y.ID
-                                        where y.Accepted == true && x.UserID == userID
-                                        orderby y.Date ascending
-                                        select y).LastOrDefault();
-                                        return bestSubmission;
-=======
+
             List<Submission> bestSubmission = null;
             foreach (ApplicationUser student in students) {
                     bestSubmission = (from x in db.Submissions
@@ -193,7 +186,7 @@ namespace Mooshark2.Services
             }
 
             return new List<Submission>();
->>>>>>> 0ffc0836f54cc66152a5e110c5d594ea77c65559
+
         }
 
         public List<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)

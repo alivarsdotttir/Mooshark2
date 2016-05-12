@@ -1,24 +1,10 @@
 ﻿@model Mooshark2.Models.Entities.Project
 
 @{
-    ViewBag.Title = "CreateProject";
+    ViewBag.Title = "Create Project";
 }
 
 <h2>Create Project</h2>
-
-<head>
-    <meta charset="utf-8">
-    <title>jQuery UI Datepicker - Default functionality</title>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <link rel="stylesheet" href="http://resources/demos/style.css">
-    <script>
-  $(function() {
-    $( "#datepicker" ).datepicker();
-  });
-    </script>
-</head>
 
 @using (Html.BeginForm()) 
 {
@@ -37,12 +23,13 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } }) *@
-                @Html.TextBoxFor(model => model.Deadline, new { @id = "datepicker" })
-                @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+            <label for="Deadline" class="col-md-2 control-label">Deadline</label>
+            <div class="input-group date form_datetime col-md-3" data-date="16/07/2016T05:25:07Z" data-date-format="dd/mm/yyyy hh:ii" data-link-field="dtp_input1">
+                <input class="form-control" size="16" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
             </div>
+            <input type="hidden" id="dtp_input1" value="Deadline" /><br />
         </div>
 
         <div class="form-group">
@@ -78,7 +65,37 @@
 </div>
 
 <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
+    $('.form_datetime')
+        .datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1
+    });
+    $('.form_date').datetimepicker({
+        language: 'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+    $('.form_time').datetimepicker({
+        language: 'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0
+    });
+
 </script>
