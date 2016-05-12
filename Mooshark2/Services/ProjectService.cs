@@ -162,14 +162,31 @@ namespace Mooshark2.Services
             return projectsFromCourse;
         }
 
-        public Submission getStudentsBestSubmission(int subId)
+
+        public Submission getLastSubmissionForStudent()
+        {
+            var lastSubmission = (from submission in db.Submissions
+                                  join submitstudent in db.StudentSubmissions on submission.ID equals submitstudent.SubmissionID
+                                  orderby submission.ID descending
+                                  select submission).FirstOrDefault();
+
+            return lastSubmission;
+        }
+
+        public Submission getStudentsBestSubmission(int subprojectID)
         {
             Submission bestSubmission = (from x in db.Submissions
                                          join y in db.StudentSubmissions on x.ID equals y.SubmissionID
                                          join z in db.Users on y.UserID equals z.Id
-                                         where subId == x.ID && x.Accepted == true || subId == x.ID && x.Accepted == false
+                                         where (subprojectID == x.ID && x.Accepted == true)
                                          select x).SingleOrDefault();
-                   
+
+            if(bestSubmission == null) {
+                var lastSubmission = getLastSubmissionForStudent();
+                return lastSubmission;
+
+            }
+
             return bestSubmission;
         }
 
