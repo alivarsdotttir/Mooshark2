@@ -146,16 +146,16 @@ namespace Mooshark2.Controllers
 
         //POST
         [HttpPost]
-        public ActionResult EditSubproject(Project project)
+        public ActionResult EditSubproject(Subproject subproject)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(project).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(subproject).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(project);
+            return View(subproject);
         }
 
         public ActionResult ProjectDetails(int? id)
