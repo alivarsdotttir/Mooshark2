@@ -189,15 +189,14 @@ namespace Mooshark2.Controllers
                         //Create ViewModel, to be sent to SubmissionDetails view
                         submission.Output = programOutput;
 
-                        if(string.Compare(programOutput, correctOutput) == 0)
-                        {
+                        if(string.Compare(programOutput, correctOutput) == 0) {
                             submission.Accepted = true;
+                            submission.Grade = 10;
                         }
                         projectService.saveSubmissionChanges(submission.ID);
                         // StudentSubmissionDetailsViewModel model = new StudentSubmissionDetailsViewModel(course, project, subproject, submission, io);
                         return RedirectToAction("SubmissionDetails", new { submissionID = submission.ID });
                     }
-
                 }
             }
 
