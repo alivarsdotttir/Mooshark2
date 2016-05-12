@@ -15,7 +15,12 @@
         </div>
     </div>
     <div class="col-sm-4">
-        @Html.ActionLink("Add new subproject", "CreateSubproject", new { id = Model.currentProject.ID }, new { @class = "btn btn-primary AdminButtons" })
+        <div id="Adminbutt">
+            @Html.ActionLink("Add new subproject", "CreateSubproject", new { id = Model.currentProject.ID }, new { @class = "btn btn-primary AdminButtons" })
+        </div>
+        <div id="Adminbutt">
+            @Html.ActionLink("Edit project", "EditProject", new { id = Model.currentProject.ID }, new { @class = "btn btn-primary AdminButtons" })
+        </div>
     </div>
 </div>
 
@@ -39,7 +44,7 @@
 
 <div class="container">
     <ul class="nav nav-tabs">
-        @if(Model.subprojects != null) {
+        @if(Model.subprojects != null && Model.subprojects.Count != 0) {
             <li class="active"><a href="#menu-1">Part 1</a></li>
             for(int i = 2; i < Model.subprojects.Count + 1; i++)
             {
@@ -63,6 +68,9 @@
                     </div>
                     <div id="Adminbutt">
                         @Html.ActionLink("Edit subproject", "EditSubproject", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-primary AdminButtons" })
+                    </div>
+                    <div>
+                        
                     </div>
                 </div>
             }
