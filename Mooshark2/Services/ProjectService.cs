@@ -73,7 +73,7 @@ namespace Mooshark2.Services
         public IEnumerable<Project> getProjectsForCourse(int courseID)
         {
             IEnumerable<Project> projects = (from x in db.Projects
-                                             where x.CourseID == courseID && x.Visibility == true && DateTime.Now < x.Deadline
+                                             where x.CourseID == courseID && x.Visibility == true 
                                              select x) as IEnumerable<Project>;
             if(projects != null) {
                 return projects;
