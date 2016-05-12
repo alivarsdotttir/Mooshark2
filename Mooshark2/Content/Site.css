@@ -86,3 +86,7 @@ table#studentTable.table.table-bordered.table-striped {
     margin: 4px;
     padding: 4px;
 }
+
+.top-buffer {
+     margin-top:80px;
+}
