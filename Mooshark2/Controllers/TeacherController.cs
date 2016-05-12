@@ -139,12 +139,8 @@ namespace Mooshark2.Controllers
         [HttpGet]
         public ActionResult EditSubproject(int? id)
         {
-            if (id.HasValue) { 
-                Subproject project = db.Subprojects.Find(id.Value);
-                return View(project);
-            }
-
-            return View("NotFound");
+            Subproject project = db.Subprojects.Find(id.Value);
+            return View(project);
         }
 
 
@@ -179,8 +175,9 @@ namespace Mooshark2.Controllers
         [HttpGet]
         public ActionResult Submissions(int? id)
         {
-            if(id.HasValue) {
+            if(id != null) {
                 var students = projectService.getStudentsThatHaveSubmitted(id.Value);
+<<<<<<< HEAD
                 List<Submission> bestSubmissions = new List<Submission>();
 
                 
@@ -189,12 +186,14 @@ namespace Mooshark2.Controllers
                     bestSubmissions.Add(projectService.getStudentsBestSubmission(student.Id));
                 }
 
+=======
+                var bestSubmissions = projectService.getStudentsBestSubmission(students);
+>>>>>>> 0ffc0836f54cc66152a5e110c5d594ea77c65559
                 var allSubmissionsForSubproject = projectService.getSubmissions(id.Value);
                 var subprojectName = projectService.getSubprojectById(id.Value);
 
                 TeacherSubmissionsViewmodel model = new TeacherSubmissionsViewmodel(allSubmissionsForSubproject,
-                    students,
-                    bestSubmissions, subprojectName);
+                    students, subprojectName);
 
                 return View(model);
             }

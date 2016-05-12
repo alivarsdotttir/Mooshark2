@@ -1,45 +1,48 @@
-﻿@using System.Activities.Statements
-@using Microsoft.Ajax.Utilities
-@model Mooshark2.Models.ViewModels.StudentViewModels.StudentIndexViewModel
+﻿@model Mooshark2.Models.ViewModels.StudentViewModels.StudentIndexViewModel
 @{
     ViewBag.Title = "Index";
 }
 
-
+<div class="jumbotron">
+    <h2>Welcome to student's main page</h2>
+    <p>Submit projects and get graded!</p>
+</div>
 <div class="row">
-    <div id="studentUpcomingProjectsTable" class="col-md-8">
-        <table class="table table-bordered table-striped">
-            <caption>Upcoming projects</caption>
+    <div class="col-md-8 table-scoll">
+        <h4>Upcoming Projects</h4>
+        <table class="table table-bordered table-striped ">
+            <caption></caption>
             <thead>
-                <tr>
-                    <th>Course</th>
-                    <th>Assignment</th>
-                    <th>Deadline</th>
-                    <th>Type</th>
-                </tr>
+            <tr>
+                <th>Course</th>
+                <th>Assignment</th>
+                <th>Deadline</th>
+                <th>Type</th>
+            </tr>
             </thead>
             <tbody>
 
-                @foreach (var project in Model.upcomingProjects) { 
-                    <tr>
-                        <td>@Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name</td>
-                        <td>@Html.ActionLink(project.Name, "Details", new { id = project.ID })</td>
-                        <td>@project.Deadline</td>
-                        <td><!--project.isGroupProject--></td>
-                    </tr>
-                    
-                }
+            @foreach(var project in Model.upcomingProjects) {
+                <tr>
+                    <td>@Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name</td>
+                    <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
+                    <td>@project.Deadline</td>
+                    <td><!--project.isGroupProject--></td>
+                </tr>
+
+            }
             </tbody>
         </table>
     </div>
 
     <div id="studentCourseList" class="col-md-4">
-        <h3>Courses</h3>
-        <ul>
-            @foreach(var course in Model.coursesForStudents) {
-                <li>@Html.ActionLink(course.Name, "Course", new { id = course.ID })</li>
+        <h4>My courses</h4>
+        <div class="list-group">
+            @foreach (var course in Model.coursesForStudents)
+            {
+                <a class="list-group-item" href="/Student/Course/@course.ID">@course.Name</a>
             }
-        </ul>
+        </div>
     </div>
 </div>
 

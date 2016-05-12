@@ -18,23 +18,25 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        @foreach (var students in Model.studentsThatHaveSubmitted) {
-            foreach(var submission in Model.bestSubmissions) {
-                <td>@submission.SubmissionNr</td>
-                <td>@Html.ActionLink(students.FullName, "SubmissionDetails")</td>
-                <td>@submission.Date</td>
-                <td>
-                    @if(submission.Accepted == true) { 
-                        @Html.ActionLink("Accepted", "Graded")
-                    }
-                    @if(submission.Accepted == false) {
-                        @Html.ActionLink("Wrong Answer", "Graded")
-                    }
-                </td>
-                <td>@submission.Grade</td>
-            }
+        @foreach (var students in Model.studentsThatHaveSubmitted)
+        {
+                <tr>
+                    <td>submission.SubmissionNr</td>
+                    <td>@Html.ActionLink(students.FullName, "SubmissionDetails")</td>
+                    <td>submission.Date</td>
+                    <td>
+                        if (submission.Accepted == true)
+                        {
+                            @Html.ActionLink("Accepted", "Graded")
+                        }
+                        if (submission.Accepted == false)
+                        {
+                            @Html.ActionLink("Wrong Answer", "Graded")
+                        }
+                    </td>
+                    <td>submission.Grade</td>
+                </tr>
+            
         }
-    </tr>
     </tbody>
 </table>

@@ -58,26 +58,6 @@ h2 {
     width: 70px;
 }
 
-/*
-div.col-sm-5.sidenav {
-    width: 82%;
-    float: right;
-}
-
-label.col-md-2.control-label {
-    text-align: right;
-}
-
-div.col-md-10 {
-    width: 83.33333333333334%;
-}
-
-table#studentTable.table.table-bordered.table-striped {
-    height: 200px;
-    overflow: auto;
-}
-*/
-
 .navbar {
     border-bottom: 6px solid #753bbd;
 }
@@ -97,4 +77,14 @@ table#studentTable.table.table-bordered.table-striped {
 
 div.modal-dialog {
     position: initial;
+}
+
+#teacher-list {
+    font-size: 18px;
+    margin-left: -40px;
+}
+
+.table-scoll {
+    overflow: auto;
+    height: 400px !important;
 }

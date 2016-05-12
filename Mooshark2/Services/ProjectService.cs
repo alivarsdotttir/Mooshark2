@@ -73,7 +73,7 @@ namespace Mooshark2.Services
         public IEnumerable<Project> getProjectsForCourse(int courseID)
         {
             IEnumerable<Project> projects = (from x in db.Projects
-                                             where x.CourseID == courseID && x.Visibility == true && DateTime.Now < x.Deadline
+                                             where x.CourseID == courseID && x.Visibility == true 
                                              select x) as IEnumerable<Project>;
             if(projects != null) {
                 return projects;
@@ -113,16 +113,13 @@ namespace Mooshark2.Services
            return subprojects;
         }
 
-        public IEnumerable<Submission> getSubmissions(int subprojectID)
+        public List<Submission> getSubmissions(int subprojectID)
         {
-            IEnumerable<Submission> submissions = (from x in db.Submissions
+            List<Submission> submissions = (from x in db.Submissions
                                                    where subprojectID == x.SubprojectID
-                                                   select x) as IEnumerable<Submission>;
-            if(submissions != null) {
-                return submissions;
-            }
+                                                   select x).ToList();
 
-            return Enumerable.Empty<Submission>();
+                return submissions;
         }
 
 
@@ -170,23 +167,42 @@ namespace Mooshark2.Services
             return projectsFromCourse;
         }
 
-        public Submission getStudentsBestSubmission(string userID)
+        public List<Submission> getStudentsBestSubmission(List<ApplicationUser> students)
         {
+<<<<<<< HEAD
             Submission bestSubmission = (from x in db.StudentSubmissions
                                         join y in db.Submissions on x.SubmissionID equals y.ID
                                         where y.Accepted == true && x.UserID == userID
                                         orderby y.Date ascending
                                         select y).LastOrDefault();
                                         return bestSubmission;
+=======
+            List<Submission> bestSubmission = null;
+            foreach (ApplicationUser student in students) {
+                    bestSubmission = (from x in db.Submissions
+                                      join y in db.StudentSubmissions on x.ID equals y.SubmissionID
+                                      where y.UserID == student.Id && x.Accepted == true || y.UserID == student.Id && x.Accepted == false
+                                      select x) as List<Submission>;
+              
+                                                          
+                }
+                   
+            if (bestSubmission != null)
+            {
+                return bestSubmission;
+            }
+
+            return new List<Submission>();
+>>>>>>> 0ffc0836f54cc66152a5e110c5d594ea77c65559
         }
 
-        public IEnumerable<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)
+        public List<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)
         {
-            IEnumerable<ApplicationUser> submittedStudents = (from x in db.Users
-                                                              join y in db.StudentSubmissions on x.Id equals y.UserID
-                                                              join z in db.Submissions on y.SubmissionID equals z.ID
-                                                              where z.SubprojectID == subprojectID
-                                                              select x) as IEnumerable<ApplicationUser>;
+            List<ApplicationUser> submittedStudents = (from x in db.Users
+                                                          join y in db.StudentSubmissions on x.Id equals y.UserID
+                                                          join z in db.Submissions on y.SubmissionID equals z.ID
+                                                          where z.SubprojectID == subprojectID 
+                                                          select x) as List<ApplicationUser>;
 
 
             /*IEnumerable<ApplicationUser>submitedStudents = ( from x in db.Groups
@@ -200,7 +216,7 @@ namespace Mooshark2.Services
                 return submittedStudents;
             }
 
-            return Enumerable.Empty<ApplicationUser>();
+            return new List<ApplicationUser>();
         }
 
         public void createSubmission(Submission submission, ApplicationUser user)

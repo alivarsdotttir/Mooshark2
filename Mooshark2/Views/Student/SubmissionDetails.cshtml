@@ -9,11 +9,24 @@
 <h3>@Model.subproject.Name</h3>
 
 <p>Input: <br /> 
-    @Model.inputOutput.Input</p>
+    @Model.subproject.Input</p>
 
 <p>Your output: <br />
     @Model.submission.Output</p>
 
-<p>Expected output: <br />
-    @Model.inputOutput.Output</p>
+
+<p>Expected output: <br/>
+    @Model.subproject.Output</p>
+
+<p>@if(Model.submission.Accepted == true) {
+       <a href="https://youtu.be/P0zVPZBykSE?t=20s"></a>
+   }ACCEPTED</p>
+
+<p>@if(Model.submission.Accepted == false) {
+       <a href="https://youtu.be/LmW3H-EXYS0?t=20s">Wrong answer</a>
+   }</p>
+
+@Html.ActionLink("Back to project", "ProjectDetails", new { id = Model.project.ID }, new { @class="btn btn-default" })
+@Html.ActionLink("Back to course", "Course", new { id = Model.course.ID }, new { @class ="btn btn-default"})
+
 
