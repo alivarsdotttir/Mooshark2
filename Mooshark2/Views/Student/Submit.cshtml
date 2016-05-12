@@ -14,12 +14,18 @@
     @Html.HiddenFor(x => x.Output)
 
     <div class="jumbotron">
-        <h2>Submit your solution to @Model.Name</h2>
-        <input type="file" name="file" class ="btn btn-primary btn-lg AdminButtons" /><br />
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Submit your solution to @Model.Name</h2>
+                <input type="file" name="file" class="btn btn-lg" /><br />
+            </div>
+            <div class="col-sm-4">
+                <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-lg AdminButtons" />
+            </div>
+        </div>
     </div>
-    
 
-    <input type="submit" name="Submit" id="Submit" value="Upload" />
+    
 }
 
 @*
