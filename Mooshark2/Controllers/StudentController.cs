@@ -167,12 +167,8 @@ namespace Mooshark2.Controllers
                     {
                         processExe.StartInfo = processInfoExe;
                         processExe.Start();
-
-                        //Get InputOutput 
-                        //var io = projectService.getIOBySubprojectId(subproject.ID);
                         
                         //Test input against code
-                        //processExe.StandardInput.WriteLine(io.Input);
                         StreamWriter inputWriter = processExe.StandardInput;
                         inputWriter.WriteLine(subproject.Input.ToString());
 
@@ -219,8 +215,7 @@ namespace Mooshark2.Controllers
                 StudentSubmissionDetailsViewModel model = new StudentSubmissionDetailsViewModel(course,
                     project,
                     subproject,
-                    submission,
-                    inputOutput);
+                    submission);
 
                 return View(model);
             }

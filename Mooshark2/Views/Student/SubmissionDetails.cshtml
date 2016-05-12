@@ -14,9 +14,19 @@
 <p>Your output: <br />
     @Model.submission.Output</p>
 
-<p>Expected output: <br />
+
+<p>Expected output: <br/>
     @Model.subproject.Output</p>
 
+<p>@if(Model.submission.Accepted == true) {
+       <a href="https://youtu.be/P0zVPZBykSE?t=20s"></a>
+   }ACCEPTED</p>
 
-@Html.ActionLink("Back to Project", "ProjectDetails", new { id = Model.project.ID })
+<p>@if(Model.submission.Accepted == false) {
+       <a href="https://youtu.be/LmW3H-EXYS0?t=20s">Wrong answer</a>
+   }</p>
+
+@Html.ActionLink("Back to project", "ProjectDetails", new { id = Model.project.ID }, new { @class="btn btn-default" })
+@Html.ActionLink("Back to course", "Course", new { id = Model.course.ID }, new { @class ="btn btn-default"})
+
 
