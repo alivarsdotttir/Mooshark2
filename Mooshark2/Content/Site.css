@@ -98,3 +98,8 @@ table#studentTable.table.table-bordered.table-striped {
 div.modal-dialog {
     position: initial;
 }
+
+#teacher-list {
+    font-size: 18px;
+    margin-left: -40px;
+}

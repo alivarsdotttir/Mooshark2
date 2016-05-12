@@ -44,8 +44,8 @@ namespace Mooshark2.Controllers
 
                 return View(model); 
             }
-            //Returns an error message, ID invalid 
-            return View();
+
+            return View("NotFound");
         }
 
 
