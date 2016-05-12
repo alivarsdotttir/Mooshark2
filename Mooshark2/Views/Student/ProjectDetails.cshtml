@@ -11,16 +11,11 @@
         <p>Here you can read the description and submit your solution!</p>
         <div>
             <p>Deadline: @Model.currentProject.Deadline</p>
-            @*<div id="countdown">@((Model.currentProject.Deadline) - DateTime.Now)</div>*@
+            
         </div>
     </div>
     <div class="col-sm-4">
-        <div id="Adminbutt">
-            @Html.ActionLink("Add new subproject", "CreateSubproject", new { id = Model.currentProject.ID }, new { @class = "btn btn-primary AdminButtons" })
-        </div>
-        <div id="Adminbutt">
-            @Html.ActionLink("Edit project", "EditProject", new { id = Model.currentProject.ID }, new { @class = "btn btn-default" })
-        </div>
+        @*<div id="countdown">@((Model.currentProject.Deadline) - DateTime.Now)</div>*@
     </div>
 </div>
 
@@ -49,8 +44,7 @@
                         <p>@Model.subprojects[i].Description</p>
                     </div>
                     <div id="Adminbutt">
-                        @Html.ActionLink("Student's submissions", "Submissions", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-default AdminButtons" })
-                        @Html.ActionLink("Edit subproject", "EditSubproject", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-default" })
+                        
                     </div>
                     <div>
                         <!-- SUBMISSION TABLE -->
