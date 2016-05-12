@@ -77,7 +77,7 @@
                                         @teacher.SSN
                                     </td>
                                     <td>
-                                        <a href=""><img alt="Remove" src="@Url.Content("~/Images/remove.png")" width="20" height="20"/>
+                                        <a href="@Url.Action("RemoveTeacherFromCourse", "Admin", new { userId = teacher.Id, courseId = Model.Course.ID })"><img alt="Remove" src="@Url.Content("~/Images/remove.png")" width="20" height="20"/></a>
                                     </td>
                                 </tr>
                             }
@@ -118,7 +118,7 @@
                                         @student.SSN
                                     </td>
                                     <td>
-                                        <a href=""><img alt="Remove" src="@Url.Content("~/Images/remove.png")" width="20" height="20"/>
+                                        <a href="@Url.Action("RemoveStudentFromCourse", "Admin", new { userId = student.Id, courseId = Model.Course.ID })"><img alt="Remove" src="@Url.Content("~/Images/remove.png")" width="20" height="20"/></a>
                                     </td>
                                 </tr>
                             }

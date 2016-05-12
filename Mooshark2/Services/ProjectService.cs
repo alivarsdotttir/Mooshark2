@@ -174,7 +174,7 @@ namespace Mooshark2.Services
         {
             Submission bestSubmission = (from x in db.StudentSubmissions
                                         join y in db.Submissions on x.SubmissionID equals y.ID
-                                        where y.Accepted == true
+                                        where y.Accepted == true && x.UserID == userID
                                         orderby y.Date ascending
                                         select y).LastOrDefault();
                                         return bestSubmission;

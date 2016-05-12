@@ -182,9 +182,13 @@ namespace Mooshark2.Controllers
             if(id.HasValue) {
                 var students = projectService.getStudentsThatHaveSubmitted(id.Value);
                 List<Submission> bestSubmissions = new List<Submission>();
+
+                
+
                 foreach (var student in students) {
                     bestSubmissions.Add(projectService.getStudentsBestSubmission(student.Id));
                 }
+
                 var allSubmissionsForSubproject = projectService.getSubmissions(id.Value);
                 var subprojectName = projectService.getSubprojectById(id.Value);
 

@@ -108,6 +108,31 @@ namespace Mooshark2.Controllers
             }
         }
 
+
+        [HttpGet]
+        public ActionResult RemoveTeacherFromCourse(string userId, int courseId)
+        {
+            if(userId != null) {
+
+                courseService.RemoveTeacherFromCourse(userId, courseId);
+    
+            }
+            
+            return RedirectToAction("Edit", new { id = courseId });
+        }
+
+
+        [HttpGet]
+        public ActionResult RemoveStudentFromCourse(string userId, int courseId)
+        {
+            if(userId != null) {
+                courseService.RemoveStudentFromCourse(userId, courseId);
+            }
+
+            return RedirectToAction("Edit", new { id = courseId });
+
+        }
+
         public ActionResult UserEditList()
         {
             var allUsers = userService.GetAllUsers();
