@@ -161,8 +161,14 @@ namespace Mooshark2.Controllers
                 compiler.StandardInput.WriteLine("exit");
                 string output = compiler.StandardOutput.ReadToEnd();
                 compiler.WaitForExit(10000);
+                int compileTime = compiler.TotalProcessorTime.Milliseconds;
                 compiler.Close();
                 compiler.Dispose();
+
+                if(compileTime == 10000) {
+                    ModelState.AddModelError("", "Compile time error");
+                    return View(subproject);
+                }
 
                 if (System.IO.File.Exists(exeFilePath)) {
                     var processInfoExe = new ProcessStartInfo(exeFilePath, "");
