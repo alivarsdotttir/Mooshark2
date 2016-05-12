@@ -19,6 +19,19 @@ namespace Mooshark2.Migrations
 
         protected override void Seed(Mooshark2.Models.DAL.ApplicationDbContext context)
         {
+            /*context.StudentSubmissions.AddOrUpdate(new StudentSubmission { SubmissionID = 2, UserID = "e4a87126-62a5-4904-8359-61d11732dd53" });
+            context.StudentSubmissions.AddOrUpdate(new StudentSubmission { SubmissionID = 3, UserID = "e4a87126-62a5-4904-8359-61d11732dd53" });
+            context.StudentSubmissions.AddOrUpdate(new StudentSubmission { SubmissionID = 4, UserID = "cd9fa9da-33d1-46a8-adb1-bb159f2d1563" });
+            context.StudentSubmissions.AddOrUpdate(new StudentSubmission { SubmissionID = 5, UserID = "e72910df-2257-4810-925b-f9db055fbd61" });
+            context.StudentSubmissions.AddOrUpdate(new StudentSubmission { SubmissionID = 6, UserID = "e72910df-2257-4810-925b-f9db055fbd61" });
+            context.StudentSubmissions.AddOrUpdate(new StudentSubmission { SubmissionID = 7, UserID = "cd9fa9da-33d1-46a8-adb1-bb159f2d1563" });
+            */
+            //context.Submissions.AddOrUpdate(new Submission { Date = new DateTime(2015, 09, 08), Accepted = false, CppFileName = "HelloWorld.cpp", Grade = 0, SubprojectID = 1, FilePath = "C:/anna/lab3/sub1", SubmissionNr = 4, Output = "ekki rétt" });
+            //context.Submissions.AddOrUpdate(new Submission { Date = new DateTime(2015, 09, 08), Accepted = true, CppFileName = "HelloWorld.cpp", Grade = 10, SubprojectID = 1, FilePath = "C:/an/lab3/sub1", SubmissionNr = 1, Output = "rétt" });
+            //context.Submissions.AddOrUpdate(new Submission { Date = new DateTime(2015, 09, 08), Accepted = true, CppFileName = "HelloWorld.cpp", Grade = 10, SubprojectID = 1, FilePath = "C:/na/lab3/sub1", SubmissionNr = 2, Output = "rétt" });
+            //context.Submissions.AddOrUpdate(new Submission { Date = new DateTime(2015, 09, 08), Accepted = true, CppFileName = "HelloWorld.cpp", Grade = 10, SubprojectID = 1, FilePath = "C:/ana/lab3/sub1", SubmissionNr = 3, Output = " rétt" });
+            //context.Submissions.AddOrUpdate(new Submission { Date = new DateTime(2015, 09, 08), Accepted = false, CppFileName = "HelloWorld.cpp", Grade = 0, SubprojectID = 1, FilePath = "C:/aa/lab3/sub1", SubmissionNr = 1, Output = "ekki rétt" });
+            //context.Submissions.AddOrUpdate(new Submission { Date = new DateTime(2015, 09, 08), Accepted = false, CppFileName = "HelloWorld.cpp", Grade = 0, SubprojectID = 1, FilePath = "C:/a/lab3/sub1", SubmissionNr = 1, Output = "ekki rétt" });
 
             //context.Projects.AddOrUpdate(new Project { Name = "lab 2", CourseID = 1, Deadline = new DateTime(2013, 9, 20, 17, 45, 00), Graded = false, isGroupProject = false, Visibility = true, Grade = 10});
             //context.Projects.AddOrUpdate(new Project { Name = "lab 1", CourseID = 2, Deadline = new DateTime(2013, 9, 20, 17, 45, 00), Graded = false, isGroupProject = false, Visibility = true, Grade = 10 });
@@ -57,12 +70,12 @@ namespace Mooshark2.Migrations
             /*
 
             context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2017, 3, 9, 0, 0, 0), Graded = false, Visibility = true, CourseID = 1 });*/
-            
+
             //context.Projects.AddOrUpdate(new Project { Name = "The Answer", Deadline = new DateTime(2017, 3, 9), Graded = false, Visibility = true, CourseID = 1, IsGroupProject = false, Grade = 0, GroupSize = 0 });
             //context.Projects.AddOrUpdate(new Project { CourseID = 1, Deadline = new DateTime(2016, 7, 5), IsGroupProject = false, Grade = 10, Graded = false, GroupSize = 1, Name = "TheAnswer", Visibility = true });
 
             //context.Projects.AddOrUpdate(new Project { Name = "Project 1", Deadline = new DateTime(2017, 3, 9, 0, 0, 0), Graded = false, Visibility = true, CourseID = 1 });
-            
+
             //context.Projects.AddOrUpdate(new Project { Name = "The Answer", Deadline = new DateTime(2017, 3, 9), Graded = false, Visibility = true, CourseID = 1, IsGroupProject = false, Grade = 0, GroupSize = 0 });*/
             //context.Projects.AddOrUpdate(new Project { Name = "The Answer", Deadline = new DateTime(2017, 3, 9), Graded = false, Visibility = true, CourseID = 1, isGroupProject = false, Grade = 0, GroupSize = 0 });
             //context.Projects.AddOrUpdate(new Project { Name = "TheAnswer", GroupSize = 1, Grade = 10, isGroupProject = false, CourseID = 1, Deadline = new DateTime(2016, 7, 6), Graded = false, Visibility = true });
