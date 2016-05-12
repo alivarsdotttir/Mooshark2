@@ -44,12 +44,12 @@ namespace Mooshark2.Controllers
 
                 return View(model); 
             }
-            //Returns an error message, ID invalid 
-            return View();
+
+            return View("NotFound");
         }
 
 
-        public ActionResult Details(int? id)
+        public ActionResult ProjectDetails(int? id)
         {
             if(id != null)
             {
@@ -73,8 +73,8 @@ namespace Mooshark2.Controllers
                StudentDetailsViewModel model = new StudentDetailsViewModel(project, subprojects, submissions, course);
                return View(model); 
             }
-            //returns an error message, ID invalid, no project chosen
-            return View();
+
+            return View("NotFound");
         }
 
 
@@ -85,8 +85,8 @@ namespace Mooshark2.Controllers
                 var subproject = projectService.getSubprojectById(id.Value);
                 return View(subproject); 
             }
-            //error message, no subproject chosen, ID is invalid
-            return View();
+
+            return View("NotFound");
         }
 
         [HttpPost]
@@ -169,17 +169,17 @@ namespace Mooshark2.Controllers
                         processExe.Start();
 
                         //Get InputOutput 
-                        var io = projectService.getIOBySubprojectId(subproject.ID);
-
+                        //var io = projectService.getIOBySubprojectId(subproject.ID);
+                        
                         //Test input against code
                         //processExe.StandardInput.WriteLine(io.Input);
                         StreamWriter inputWriter = processExe.StandardInput;
-                        inputWriter.WriteLine(io.Input);
+                        inputWriter.WriteLine(subproject.Input.ToString());
 
                         // We then read the output of the program:
                         StreamReader outputReader = processExe.StandardOutput;
                         string programOutput = outputReader.ReadToEnd().ToString();
-                        string correctOutput = io.Output.ToString();
+                        string correctOutput = subproject.Output.ToString();
                         /*var programOutput = new List<string>();
                         while (!processExe.StandardOutput.EndOfStream)
                         {
@@ -208,7 +208,6 @@ namespace Mooshark2.Controllers
         {
             if(submissionID != null) {
                 Submission submission = projectService.getSubmissionById(submissionID.Value);
-                //Subproject subproject = submission.Subproject;
                 int subprojectID = submission.SubprojectID;
                 Subproject subproject = projectService.getSubprojectById(subprojectID);
                 InputOutput inputOutput = projectService.getIOBySubprojectId(subprojectID);
@@ -226,7 +225,7 @@ namespace Mooshark2.Controllers
                 return View(model);
             }
 
-            return View();
+            return View("NotFound");
         }
     }
 }

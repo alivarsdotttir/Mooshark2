@@ -2,8 +2,9 @@
 
 <div class="row">
     <div id="studentCourseProjectsTable" class="col-md-8">
-        <table class="table table-bordered table-striped" >
-            <caption>Upcoming projects</caption>
+        <h3>Projects</h3>
+        <table class="table table-bordered table-striped">
+            <caption><caption>
             <thead>
             <tr>
                 <th>Course</th>
@@ -13,10 +14,8 @@
             </tr>
             </thead>
             <tbody>
-            @if (Model.projectsForCourse != null)
-            {
-                foreach (var project in Model.projectsForCourse)
-                {
+            @if(Model.projectsForCourse != null && Model.projectsForCourse.Count() != 0) {
+                foreach(var project in Model.projectsForCourse) {
                     <tr>
                         <td>@Model.course.Name</td>
                         <td>@Html.ActionLink(project.Name, "Details", new { id = project.ID })</td>
@@ -29,15 +28,15 @@
         </table>
     </div>
 
-    <div id="studentCourseTeacherList" class="col-md-4">
-        <h3>Teacher</h3>
+    <div class="col-md-4">
+        <h3>Teachers</h3>
         <ul>
             @foreach(var teacher in Model.teacherForCourse) {
-                <li>@Html.DisplayNameFor(model => teacher.FullName)</li>
+                <li class="list-inline" id ="teacher-list">@teacher.FullName</li>
             }
         </ul>
     </div>
 </div>
-<div id="backToMainButton">
+<div id="Adminbutt">
     @Html.ActionLink("Back to Main", "Index", new { @class = "btn btn-default" })
 </div>
