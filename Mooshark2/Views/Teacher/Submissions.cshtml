@@ -6,7 +6,15 @@
 
 <h2>Submissions</h2>
 
-<table class="table table-bordered table-striped">
+<div class="col-xs-6">
+    <div class="right-inner-addon">
+        <i class="glyphicon glyphicon-search"></i>
+        <input id="search" type="search"
+               class="form-control"
+               placeholder="Search" />
+    </div>
+</div>
+<table class="table table-bordered table-striped" id="table">
     <caption class="left">Submissions for @Model.currentSubproject.Name</caption>
     <thead>
     <tr>
@@ -21,20 +29,20 @@
         @foreach (var students in Model.studentsThatHaveSubmitted)
         {
                 <tr>
-                    <td>submission.SubmissionNr</td>
+                    <td>@Model.bestSubmissions.SubmissionNr</td>
                     <td>@Html.ActionLink(students.FullName, "SubmissionDetails")</td>
-                    <td>submission.Date</td>
+                    <td>@Model.bestSubmissions.Date</td>
                     <td>
-                        if (submission.Accepted == true)
+                        @if (Model.bestSubmissions.Accepted == true)
                         {
                             @Html.ActionLink("Accepted", "Graded")
                         }
-                        if (submission.Accepted == false)
+                        @if (Model.bestSubmissions.Accepted == false)
                         {
                             @Html.ActionLink("Wrong Answer", "Graded")
                         }
                     </td>
-                    <td>submission.Grade</td>
+                    <td>@Model.bestSubmissions.Grade</td>
                 </tr>
             
         }

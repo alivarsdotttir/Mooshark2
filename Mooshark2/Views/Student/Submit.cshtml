@@ -3,7 +3,6 @@
 
 @using (Html.BeginForm("Submit", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <!--Html.EditorFor(m => m)-->
     
     @Html.HiddenFor(x => x.ID)
     @Html.HiddenFor(x => x.Name)
@@ -17,13 +16,20 @@
         <div class="row">
             <div class="col-sm-8">
                 <h2>Submit your solution to @Model.Name</h2>
+                @Html.ValidationSummary()
                 <input type="file" name="file" class="btn btn-lg" /><br />
+
+                @*<ajaxToolkit:AjaxFileUpload ID="AjaxFileUpload1"
+                                            AllowedFileTypes="cpp"
+                                            MaximumNumberOfFiles=1
+                                            runat="server" />*@
             </div>
             <div class="col-sm-4">
                 <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-lg AdminButtons" />
             </div>
         </div>
     </div>
+    
 
     
 }

@@ -5,11 +5,19 @@
 
 <link href="~/Content/Site.css" rel="stylesheet" />
 <h2>@Model.course.Name</h2>
+
+<div class="col-xs-6">
+    <div class="right-inner-addon">
+        <i class="glyphicon glyphicon-search"></i>
+        <input id="search" type="search"
+               class="form-control"
+               placeholder="Search" />
+    </div>
+</div>
 <div class="container-fluid">
     <div class="row content">
-
         <div class="col-md-8 table-scoll">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" id="table">
                 <caption class="left"></caption>
                 <thead>
                 <tr>

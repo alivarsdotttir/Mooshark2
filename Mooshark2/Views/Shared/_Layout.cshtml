@@ -3,16 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Mooshark</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-1.8.3.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/Scripts/modernizr")
+    @Scripts.Render("~/Scripts/modernizr-2.6.2.js")
     @Scripts.Render("~/bundles/modernizr")
 
 
@@ -54,3 +59,19 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+
+<script type="text/javascript">
+
+    // Write on keyup event of keyword input element
+    $("#search").keyup(function () {
+        _this = this;
+        // Show only matching TR, hide rest of them
+        $.each($("#table tbody tr"), function () {
+            if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+                $(this).hide();
+            else
+                $(this).show();
+        });
+    });
+</script>
