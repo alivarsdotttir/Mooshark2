@@ -103,17 +103,26 @@ namespace Mooshark2.Controllers
             var courseId = project.CourseID;
             var course = courseService.getCourseById(courseId.Value);
 
-            if (file.ContentLength > 0)
+            if(file == null) {
+                return RedirectToAction("Submit", subproject.ID); 
+            }
+
+            var fileName = Path.GetFileName(file.FileName);
+            if(fileName.Substring(fileName.Length-4, 4) != ".cpp")
             {
+                return RedirectToAction("Submit", subproject.ID);
+            }
+
+            if (file.ContentLength > 0) {
 
                 int submissionNumber = 1;
-                var mostRecentSubmission = projectService.getMostRecentSubmission(user);
+                var mostRecentSubmission = projectService.getMostRecentSubmission(user, subproject.ID);
                 if (mostRecentSubmission != null)
                 {
                     submissionNumber = mostRecentSubmission.SubmissionNr + 1;
                 }
 
-                var fileName = Path.GetFileName(file.FileName);
+                
                 var filePath = string.Format("~\\Submissions\\{0}\\{1}\\{2}\\{3}\\{4}", course.Name, project.Name, subproject.Name, user.UserName, "Submission" + submissionNumber);
                 
 
@@ -151,7 +160,7 @@ namespace Mooshark2.Controllers
                 compiler.StandardInput.WriteLine("cl.exe /nologo /EHsc " + file.FileName);
                 compiler.StandardInput.WriteLine("exit");
                 string output = compiler.StandardOutput.ReadToEnd();
-                compiler.WaitForExit(10000);
+                compiler.WaitForExit(10);
                 compiler.Close();
 
                 if (System.IO.File.Exists(exeFilePath))
@@ -176,6 +185,8 @@ namespace Mooshark2.Controllers
                         StreamReader outputReader = processExe.StandardOutput;
                         string programOutput = outputReader.ReadToEnd().ToString();
                         string correctOutput = subproject.Output.ToString();
+
+                        string programOutputCorrect = programOutput.Remove(programOutput.Length - 2);
                         /*var programOutput = new List<string>();
                         while (!processExe.StandardOutput.EndOfStream)
                         {
@@ -185,7 +196,7 @@ namespace Mooshark2.Controllers
                         //Create ViewModel, to be sent to SubmissionDetails view
                         submission.Output = programOutput;
 
-                        if(string.Compare(programOutput, correctOutput) == 0) {
+                        if(string.Compare(programOutputCorrect, correctOutput) == 0) {
                             submission.Accepted = true;
                             submission.Grade = 10;
                         }
@@ -196,7 +207,7 @@ namespace Mooshark2.Controllers
                 }
             }
 
-            return RedirectToAction("Index");
+            return View();
         }
 
         [HttpGet]
