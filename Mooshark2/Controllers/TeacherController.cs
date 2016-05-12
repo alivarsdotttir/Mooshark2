@@ -172,23 +172,27 @@ namespace Mooshark2.Controllers
             return View("NotFound");
         }
 
+
         [HttpGet]
-        public ActionResult Submissions(int? id)
+        public ActionResult Submissions(int? subprojectId)
         {
-            if(id != null) {
-                var students = projectService.getStudentsThatHaveSubmitted(id.Value);
-                var bestSubmissions = projectService.getStudentsBestSubmission(id.Value);
-                var allSubmissionsForSubproject = projectService.getSubmissions(id.Value);
-                var subprojectName = projectService.getSubprojectById(id.Value);
+            if(subprojectId != null) {
+
+                var studentsThatHaveSubmitted = projectService.getStudentsThatHaveSubmitted(subprojectId.Value);
+
+                var bestSubmissions = projectService.getStudentsBestSubmission(subprojectId.Value);
+                var allSubmissionsForSubproject = projectService.getSubmissions(subprojectId.Value);
+                var subprojectName = projectService.getSubprojectById(subprojectId.Value);
 
                 TeacherSubmissionsViewmodel model = new TeacherSubmissionsViewmodel(allSubmissionsForSubproject,
-                    students, bestSubmissions, subprojectName);
+                    studentsThatHaveSubmitted, bestSubmissions, subprojectName);
 
                 return View(model);
             }
 
             return View("NotFound");
         }
+
 
         public ActionResult SubmissionDetails(int? id)
         {

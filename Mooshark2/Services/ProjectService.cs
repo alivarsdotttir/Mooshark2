@@ -175,11 +175,11 @@ namespace Mooshark2.Services
 
         public IEnumerable<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)
         {
-            IEnumerable<ApplicationUser> submittedStudents = (from x in db.Users
-                                                          join y in db.StudentSubmissions on x.Id equals y.UserID
-                                                          join z in db.Submissions on y.SubmissionID equals z.ID
-                                                          where z.SubprojectID == subprojectID 
-                                                          select x) as IEnumerable<ApplicationUser>;
+            var submittedStudents = (from x in db.Users
+                                     join y in db.StudentSubmissions on x.Id equals y.UserID
+                                     join z in db.Submissions on y.SubmissionID equals z.ID
+                                     where z.SubprojectID == subprojectID
+                                     select x);
 
 
             /*IEnumerable<ApplicationUser>submitedStudents = ( from x in db.Groups
@@ -188,7 +188,7 @@ namespace Mooshark2.Services
                                                         join w in db.Submissions on z.SubprojectID equals w.SubprojectID
                                                         where x.UserID == userID && w.ID != 0
                                                         select x) as IEnumerable<ApplicationUser>;*/
-                return submittedStudents;
+            return submittedStudents;
         }
 
         public void createSubmission(Submission submission, ApplicationUser user)
