@@ -1,21 +1,21 @@
-﻿@model Mooshark2.Models.Entities.Subproject
+﻿@model Mooshark2.Models.ViewModels.StudentViewModels.StudentSubmitViewModel
 
 
 @using (Html.BeginForm("Submit", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     
-    @Html.HiddenFor(x => x.ID)
-    @Html.HiddenFor(x => x.Name)
-    @Html.HiddenFor(x => x.Description)
-    @Html.HiddenFor(x => x.ProjectID)
-    @Html.HiddenFor(x => x.Weight)
-    @Html.HiddenFor(x => x.Input)
-    @Html.HiddenFor(x => x.Output)
+    @Html.HiddenFor(x => x.subproject.ID)
+    @Html.HiddenFor(x => x.subproject.Name)
+    @Html.HiddenFor(x => x.subproject.Description)
+    @Html.HiddenFor(x => x.subproject.ProjectID)
+    @Html.HiddenFor(x => x.subproject.Weight)
+    @Html.HiddenFor(x => x.subproject.Input)
+    @Html.HiddenFor(x => x.subproject.Output)
 
     <div class="jumbotron">
         <div class="row">
             <div class="col-sm-8">
-                <h2>Submit your solution to @Model.Name</h2>
+                <h2>Submit your solution to @Model.subproject.Name</h2>
                 @Html.ValidationSummary()
                 <input type="file" name="file" class="btn btn-lg" /><br />
 
@@ -45,5 +45,5 @@
 *@
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Project", "ProjectDetails", new { id = Model.project.ID }, new { @class ="btn btn-default"})
 </div>

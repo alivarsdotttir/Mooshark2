@@ -83,7 +83,12 @@ namespace Mooshark2.Controllers
             if(id != null)
             {
                 var subproject = projectService.getSubprojectById(id.Value);
-                return View(subproject); 
+                var projectId = subproject.ProjectID;
+                var project = projectService.getProjectById(projectId.Value);
+
+                StudentSubmitViewModel model = new StudentSubmitViewModel(project, subproject); 
+
+                return View(model); 
             }
 
             return View("NotFound");
