@@ -4,16 +4,19 @@
     ViewBag.Title = "ProjectDetails";
 }
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-
-<div class="jumbotron">
-    <h2>@Model.currentProject.Name</h2>
-    <p>Here you can read the description and submit your solution!</p>
+<div class="jumbotron row">
+    <div class="col-sm-8">
+        <h2>@Model.currentProject.Name</h2>
+        <p>Here you can read the description and submit your solution!</p>
+        <div>
+            <p>Deadline: @Model.currentProject.Deadline</p>
+            @*<div id="countdown">@((Model.currentProject.Deadline) - DateTime.Now)</div>*@
+        </div>
+    </div>
+    <div class="col-sm-4">
+        @Html.ActionLink("Add new subproject", "CreateSubproject", new { id = Model.currentProject.ID }, new { @class = "btn btn-primary AdminButtons" })
+    </div>
 </div>
 
 
@@ -30,10 +33,7 @@
         <h3>@subproject.Name</h3>
         <p>@subproject.Description</p>
         @Html.ActionLink("Submits", "Submissions")
-        <div>
-            <p>Deadline: @Model.currentProject.Deadline</p>
-            <p>Time until deadline: @((Model.currentProject.Deadline)-DateTime.Now)</p>
-        </div>
+        
     </div>
 }*@
 
@@ -41,7 +41,7 @@
     <ul class="nav nav-tabs">
         @if(Model.subprojects != null) {
             <li class="active"><a href="#menu-1">Part 1</a></li>
-            for(int i = 2; i < Model.subprojects.Count() + 1; i++)
+            for(int i = 2; i < Model.subprojects.Count + 1; i++)
             {
                 <li><a href="#menu-@i">Part @i</a></li>
             }
@@ -49,11 +49,21 @@
     </ul>
 
     <div class="tab-content">
-        @if(Model.subprojects != null) { 
-            for(int i = 0; i < Model.subprojects.Count(); i++) {
+        @if (Model.subprojects != null)
+        {
+            for (int i = 0; i < Model.subprojects.Count; i++)
+            {
                 <div id="menu-@(i+1)" class="tab-pane fade in active">
-                    <h3>@Model.subprojects[i].Name</h3>
-                    <p>@Model.subprojects[i].Description</p>
+                    <div class="container">
+                        <div class="page-header">
+                            <h3>@Model.subprojects[i].Name</h3>
+                        </div>
+                        <p>@Model.subprojects[i].Description</p>
+                        <p>This is another text.</p>
+                    </div>
+                    <div id="Adminbutt">
+                        @Html.ActionLink("Edit subproject", "EditSubproject", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-primary AdminButtons" })
+                    </div>
                 </div>
             }
         }
@@ -70,6 +80,6 @@
         });
 </script>
 
-<div class="row">
+<div class="row top-buffer">
     @Html.ActionLink("Back to Course", "Course", new { id = Model.currentProject.CourseID }, new { @class = "btn btn-default" })
 </div>

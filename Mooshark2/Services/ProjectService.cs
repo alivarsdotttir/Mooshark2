@@ -59,7 +59,7 @@ namespace Mooshark2.Services
             else {
 
                 if(model.GroupSize > 1) {
-                    model.isGroupProject = true;
+                    model.IsGroupProject = true;
                 }
 
                 int CID = model.CourseID.Value;
