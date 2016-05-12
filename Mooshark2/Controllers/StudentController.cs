@@ -109,27 +109,19 @@ namespace Mooshark2.Controllers
             }
 
             var fileName = Path.GetFileName(file.FileName);
-            if(fileName.Substring(fileName.Length-4, 4) != ".cpp")
-            {
+            if(fileName.Substring(fileName.Length-4, 4) != ".cpp") {
                 ModelState.AddModelError("", "Wrong file extension.");
                 return View(subproject);
             }
 
-
-
             if (file.ContentLength > 0) {
-
                 int submissionNumber = 1;
                 var mostRecentSubmission = projectService.getMostRecentSubmission(user, subproject.ID);
-                if (mostRecentSubmission != null)
-                {
+                if (mostRecentSubmission != null) {
                     submissionNumber = mostRecentSubmission.SubmissionNr + 1;
                 }
-
                 
                 var filePath = string.Format("~\\Submissions\\{0}\\{1}\\{2}\\{3}\\{4}", course.Name, project.Name, subproject.Name, user.UserName, "Submission" + submissionNumber);
-                
-
                 var path = Path.Combine(Server.MapPath(filePath), fileName);
                 
                 System.IO.Directory.CreateDirectory(Server.MapPath(filePath));
@@ -145,7 +137,6 @@ namespace Mooshark2.Controllers
                 submission.CppFileName = fileName; 
 
                 projectService.createSubmission(submission, user);
-
                 
                 string exeFilePath = Server.MapPath(filePath) + "\\" + fileName.Remove(fileName.IndexOf(".")) + ".exe";
                 //C++ compiler folder path
@@ -164,11 +155,11 @@ namespace Mooshark2.Controllers
                 compiler.StandardInput.WriteLine("cl.exe /nologo /EHsc " + file.FileName);
                 compiler.StandardInput.WriteLine("exit");
                 string output = compiler.StandardOutput.ReadToEnd();
-                compiler.WaitForExit(10);
+                compiler.WaitForExit(10000);
                 compiler.Close();
+                compiler.Dispose();
 
-                if (System.IO.File.Exists(exeFilePath))
-                {
+                if (System.IO.File.Exists(exeFilePath)) {
                     var processInfoExe = new ProcessStartInfo(exeFilePath, "");
                     processInfoExe.UseShellExecute = false;
                     processInfoExe.RedirectStandardInput = true;
@@ -185,28 +176,28 @@ namespace Mooshark2.Controllers
                         if(subproject.Input != null) {
                             inputWriter.WriteLine(subproject.Input.ToString());
                         }
+                        inputWriter.Dispose();
                         
                         // We then read the output of the program:
                         StreamReader outputReader = processExe.StandardOutput;
                         string programOutput = outputReader.ReadToEnd().ToString();
+                        outputReader.Dispose();
+
                         string correctOutput = subproject.Output.ToString();
+                        //removing \n\r from the back of the input
+                        if(programOutput.Length > 2) {
+                            string programOutputCorrect = programOutput.Remove(programOutput.Length - 2);
 
-                        string programOutputCorrect = programOutput.Remove(programOutput.Length - 2);
-                        /*var programOutput = new List<string>();
-                        while (!processExe.StandardOutput.EndOfStream)
-                        {
-                            programOutput.Add(processExe.StandardOutput.ReadLine());
-                        }*/
+                            //Create ViewModel, to be sent to SubmissionDetails view
+                            submission.Output = programOutput;
 
-                        //Create ViewModel, to be sent to SubmissionDetails view
-                        submission.Output = programOutput;
-
-                        if(string.Compare(programOutputCorrect, correctOutput) == 0) {
-                            submission.Accepted = true;
-                            submission.Grade = 10;
+                            if(string.Compare(programOutputCorrect, correctOutput) == 0) {
+                                submission.Accepted = true;
+                                submission.Grade = 10;
+                            }
                         }
                         projectService.saveSubmissionChanges(submission.ID);
-                        // StudentSubmissionDetailsViewModel model = new StudentSubmissionDetailsViewModel(course, project, subproject, submission, io);
+                        
                         return RedirectToAction("SubmissionDetails", new { submissionID = submission.ID });
                     }
                 }
@@ -214,6 +205,7 @@ namespace Mooshark2.Controllers
 
             return View();
         }
+
 
         [HttpGet]
         public ActionResult SubmissionDetails(int? submissionID)
