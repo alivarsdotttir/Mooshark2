@@ -104,14 +104,18 @@ namespace Mooshark2.Controllers
             var course = courseService.getCourseById(courseId.Value);
 
             if(file == null) {
-                return RedirectToAction("Submit", subproject.ID); 
+                ModelState.AddModelError("", "Empty submission, please choose a file.");
+                return View(subproject); 
             }
 
             var fileName = Path.GetFileName(file.FileName);
             if(fileName.Substring(fileName.Length-4, 4) != ".cpp")
             {
-                return RedirectToAction("Submit", subproject.ID);
+                ModelState.AddModelError("", "Wrong file extension.");
+                return View(subproject);
             }
+
+
 
             if (file.ContentLength > 0) {
 
