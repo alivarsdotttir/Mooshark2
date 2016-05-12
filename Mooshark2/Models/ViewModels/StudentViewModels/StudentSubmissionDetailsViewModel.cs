@@ -23,5 +23,7 @@ namespace Mooshark2.Models.ViewModels.StudentViewModels
             submission = subm;
             inputOutput = io; 
         }
+
+        public StudentSubmissionDetailsViewModel() { }
     }
 }

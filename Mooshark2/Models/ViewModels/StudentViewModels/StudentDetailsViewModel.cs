@@ -20,6 +20,9 @@ namespace Mooshark2.Models.ViewModels.StudentViewModels
             subprojects = sp;
             projectSubmissions = sm;
             currentCourse = c;
-        } 
+        }
+
+
+        public StudentDetailsViewModel() { }
     }
 }

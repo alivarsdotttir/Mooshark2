@@ -194,8 +194,8 @@ namespace Mooshark2.Controllers
                             submission.Accepted = true;
                         }
                         projectService.saveSubmissionChanges(submission.ID);
-                        StudentSubmissionDetailsViewModel model = new StudentSubmissionDetailsViewModel(course, project, subproject, submission, io);
-                        return RedirectToAction("SubmissionDetails", model);
+                        // StudentSubmissionDetailsViewModel model = new StudentSubmissionDetailsViewModel(course, project, subproject, submission, io);
+                        return RedirectToAction("SubmissionDetails", new { submissionID = submission.ID });
                     }
 
                 }
@@ -204,10 +204,30 @@ namespace Mooshark2.Controllers
             return RedirectToAction("Index");
         }
 
-
-        public ActionResult SubmisssionDetails(StudentSubmissionDetailsViewModel model)
+        [HttpGet]
+        public ActionResult SubmissionDetails(int? submissionID)
         {
-            return View(model);
+            if(submissionID != null) {
+                Submission submission = projectService.getSubmissionById(submissionID.Value);
+                //Subproject subproject = submission.Subproject;
+                int subprojectID = submission.SubprojectID;
+                Subproject subproject = projectService.getSubprojectById(subprojectID);
+                InputOutput inputOutput = projectService.getIOBySubprojectId(subprojectID);
+                int projectID = subproject.ProjectID.Value;
+                Project project = projectService.getProjectById(projectID);
+                int courseID = project.CourseID.Value;
+                Course course = courseService.getCourseById(courseID);
+
+                StudentSubmissionDetailsViewModel model = new StudentSubmissionDetailsViewModel(course,
+                    project,
+                    subproject,
+                    submission,
+                    inputOutput);
+
+                return View(model);
+            }
+
+            return View();
         }
     }
 }
