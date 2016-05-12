@@ -6,7 +6,15 @@
 
 <h2>Submissions</h2>
 
-<table class="table table-bordered table-striped">
+<div class="col-xs-6">
+    <div class="right-inner-addon">
+        <i class="glyphicon glyphicon-search"></i>
+        <input id="search" type="search"
+               class="form-control"
+               placeholder="Search" />
+    </div>
+</div>
+<table class="table table-bordered table-striped" id="table">
     <caption class="left">Submissions for @Model.currentSubproject.Name</caption>
     <thead>
     <tr>

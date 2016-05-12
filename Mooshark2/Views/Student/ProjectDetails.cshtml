@@ -31,6 +31,7 @@
         }
     </ul>
 
+
     <div class="tab-content">
         @if (Model.subprojects != null)
         {
@@ -46,9 +47,19 @@
                     <div id="Adminbutt">
                         @Html.ActionLink("Submit", "Submit", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-success" })
                     </div>
+
+
+                    <div class="col-xs-6">
+                        <div class="right-inner-addon">
+                            <i class="glyphicon glyphicon-search"></i>
+                            <input id="search" type="search"
+                                   class="form-control"
+                                   placeholder="Search" />
+                        </div>
+                    </div>
                     <div>
                         <!-- SUBMISSION TABLE -->
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" id="table">
                             <thead>
                                 <tr>
                                     <td>#</td>
