@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -116,7 +117,7 @@ namespace Mooshark2.Services
 
         public List<ApplicationUser> GetAllStudents()
         {
-
+            
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var studentRole = roleManager.FindByName("Student");
             var allStudents = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).ToList();
