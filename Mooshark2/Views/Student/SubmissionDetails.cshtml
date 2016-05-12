@@ -9,11 +9,14 @@
 <h3>@Model.subproject.Name</h3>
 
 <p>Input: <br /> 
-    @Model.inputOutput.Input</p>
+    @Model.subproject.Input</p>
 
 <p>Your output: <br />
     @Model.submission.Output</p>
 
 <p>Expected output: <br />
-    @Model.inputOutput.Output</p>
+    @Model.subproject.Output</p>
+
+
+@Html.ActionLink("Back to Project", "ProjectDetails", new { id = Model.project.ID })
 
