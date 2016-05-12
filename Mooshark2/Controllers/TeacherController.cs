@@ -135,6 +135,29 @@ namespace Mooshark2.Controllers
             return View(project);
         }
 
+        //GET
+        [HttpGet]
+        public ActionResult EditSubproject(int? id)
+        {
+            Subproject project = db.Subprojects.Find(id.Value);
+            return View(project);
+        }
+
+
+        //POST
+        [HttpPost]
+        public ActionResult EditSubproject(Subproject subproject)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(subproject).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(subproject);
+        }
+
         public ActionResult ProjectDetails(int? id)
         {
             if(id != null)

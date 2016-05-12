@@ -17,18 +17,18 @@
         </thead>
         <tbody>
 
-            @foreach (var student in Model)
+            @foreach (var user in Model)
             {
                 <tr>
                     <td>
-                        <a href="/Admin/EditStudent/@student.Id"><img alt="Edit" src="@Url.Content("~/Images/edit.png")" width="20" height="20"/></a>
-                        @student.FullName
+                        <a href="/Admin/EditUser/@user.Id"><img alt="Edit" src="@Url.Content("~/Images/edit.png")" width="20" height="20"/></a>
+                        @user.FullName
                     </td>
                     <td>
-                        @student.Email
+                        @user.Email
                     </td>
                     <td>
-                        @student.SSN
+                        @user.SSN
                     </td>
                 </tr>
             }
