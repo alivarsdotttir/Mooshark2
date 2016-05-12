@@ -125,7 +125,7 @@ namespace Mooshark2.Controllers
 
                 Submission submission = new Submission();
                 submission.Date = DateTime.Now;
-                submission.Accepted = false;
+                //submission.Accepted = false;
                 submission.SubprojectID = subproject.ID;
                 submission.SubmissionNr = submissionNumber;
                 submission.FilePath = Server.MapPath(filePath);
@@ -158,9 +158,11 @@ namespace Mooshark2.Controllers
                 {
                     var processInfoExe = new ProcessStartInfo(exeFilePath, "");
                     processInfoExe.UseShellExecute = false;
+                    processInfoExe.RedirectStandardInput = true;
                     processInfoExe.RedirectStandardOutput = true;
                     processInfoExe.RedirectStandardError = true;
                     processInfoExe.CreateNoWindow = true;
+                    processInfoExe.ErrorDialog = false;
                     using (var processExe = new Process())
                     {
                         processExe.StartInfo = processInfoExe;
@@ -170,12 +172,14 @@ namespace Mooshark2.Controllers
                         var io = projectService.getIOBySubprojectId(subproject.ID);
 
                         //Test input against code
-                        processExe.StandardInput.WriteLine(io.Input);
+                        //processExe.StandardInput.WriteLine(io.Input);
+                        StreamWriter inputWriter = processExe.StandardInput;
+                        inputWriter.WriteLine(io.Input);
 
                         // We then read the output of the program:
-                        StreamReader reader = processExe.StandardOutput;
-                        string programOutput = reader.ReadToEnd();
-                        
+                        StreamReader outputReader = processExe.StandardOutput;
+                        string programOutput = outputReader.ReadToEnd().ToString();
+                        string correctOutput = io.Output.ToString();
                         /*var programOutput = new List<string>();
                         while (!processExe.StandardOutput.EndOfStream)
                         {
@@ -185,10 +189,11 @@ namespace Mooshark2.Controllers
                         //Create ViewModel, to be sent to SubmissionDetails view
                         submission.Output = programOutput;
 
-                        if(programOutput == io.Output)
+                        if(string.Compare(programOutput, correctOutput) == 0)
                         {
                             submission.Accepted = true;
                         }
+                        projectService.saveSubmissionChanges(submission.ID);
                         StudentSubmissionDetailsViewModel model = new StudentSubmissionDetailsViewModel(course, project, subproject, submission, io);
                         return RedirectToAction("SubmissionDetails", model);
                     }

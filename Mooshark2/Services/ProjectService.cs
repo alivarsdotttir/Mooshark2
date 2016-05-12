@@ -213,6 +213,17 @@ namespace Mooshark2.Services
             }
         }
 
+
+        public void saveSubmissionChanges(int? submissionID)
+        {
+            Submission submission = getSubmissionById(submissionID.Value);
+
+            if(submission != null) {
+                db.Submissions.AddOrUpdate(submission);
+                db.SaveChanges();
+            }
+        }
+
         public Submission getMostRecentSubmission(ApplicationUser user)
         {
             Submission submission = (from x in db.Submissions
