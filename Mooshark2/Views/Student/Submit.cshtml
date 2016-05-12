@@ -18,31 +18,13 @@
                 <h2>Submit your solution to @Model.subproject.Name</h2>
                 @Html.ValidationSummary()
                 <input type="file" name="file" class="btn btn-lg" /><br />
-
-                @*<ajaxToolkit:AjaxFileUpload ID="AjaxFileUpload1"
-                                            AllowedFileTypes="cpp"
-                                            MaximumNumberOfFiles=1
-                                            runat="server" />*@
             </div>
             <div class="col-sm-4">
                 <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-lg AdminButtons" />
             </div>
         </div>
-    </div>
-    
-
-    
+    </div>    
 }
-
-@*
-<form action="" method="post" enctype="multipart/form-data">
-
-    <label for="file">Filename:</label>
-    <input type="file" name="file" id="file" />
-    @*Html.ActionLink("Submit", "Submit", new { id = Model.ID })
-    <input type="submit" />
-</form>
-*@
 
 <div>
     @Html.ActionLink("Back to Project", "ProjectDetails", new { id = Model.project.ID }, new { @class ="btn btn-default"})
