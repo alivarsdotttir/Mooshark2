@@ -49,7 +49,7 @@ namespace Mooshark2.Controllers
         }
 
 
-        public ActionResult Details(int? id)
+        public ActionResult ProjectDetails(int? id)
         {
             if(id != null)
             {
@@ -73,8 +73,8 @@ namespace Mooshark2.Controllers
                StudentDetailsViewModel model = new StudentDetailsViewModel(project, subprojects, submissions, course);
                return View(model); 
             }
-            //returns an error message, ID invalid, no project chosen
-            return View();
+
+            return View("NotFound");
         }
 
 
@@ -85,8 +85,8 @@ namespace Mooshark2.Controllers
                 var subproject = projectService.getSubprojectById(id.Value);
                 return View(subproject); 
             }
-            //error message, no subproject chosen, ID is invalid
-            return View();
+
+            return View("NotFound");
         }
 
         [HttpPost]
@@ -226,7 +226,7 @@ namespace Mooshark2.Controllers
                 return View(model);
             }
 
-            return View();
+            return View("NotFound");
         }
     }
 }
