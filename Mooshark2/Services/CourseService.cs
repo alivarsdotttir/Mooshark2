@@ -172,10 +172,17 @@ namespace Mooshark2.Services
         }
 
 
-        public void RemoveTeacherFromCourse(string id)
+        public void RemoveTeacherFromCourse(string userId, int courseId)
         {
-            var teacherToRemove = db.CourseTeachers.SingleOrDefault(x => x.UserID == id);
+            var teacherToRemove = db.CourseTeachers.SingleOrDefault(x => x.UserID == userId && x.CourseID == courseId);
             db.CourseTeachers.Remove(teacherToRemove);
+            db.SaveChanges();
+        }
+
+        public void RemoveStudentFromCourse(string userId, int courseId)
+        {
+            var studentToRemove = db.CourseStudents.SingleOrDefault(x => x.UserID == userId && x.CourseID == courseId);
+            db.CourseStudents.Remove(studentToRemove);
             db.SaveChanges();
         }
     }
