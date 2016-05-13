@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Razor.Parser.SyntaxTree;
 using Mooshark2.Models.DAL;
 using Mooshark2.Models.ViewModels.TeacherViewModels;
+using Microsoft.Ajax.Utilities;
 
 namespace Mooshark2.Services
 {
@@ -163,7 +164,7 @@ namespace Mooshark2.Services
         }
 
 
-        public List<Submission> getLastSubmissionForStudents(int subprojectID)
+        public Submission getLastSubmissionForStudents(int subprojectID)
         {
 
             /*var groupByStudent = (from s in db.StudentSubmissions
@@ -193,7 +194,7 @@ namespace Mooshark2.Services
                                   join z in db.Users on y.UserID equals z.Id
                                   where subprojectID == x.SubprojectID
                                   orderby x.ID descending
-                                  select x) as List<Submission>;
+                                  select x).FirstOrDefault();
 
             return lastSubmission;
 
@@ -204,18 +205,20 @@ namespace Mooshark2.Services
         {
             var sub = new List<Submission>();
 
-            foreach(var student in getStudentsThatHaveSubmitted(subprojectID)) {
-                    var bestSubmission = (from x in db.Submissions
+            foreach (var student in getStudentsThatHaveSubmitted(subprojectID))
+            {
+                var bestSubmission = (from x in db.Submissions
                                       join y in db.StudentSubmissions on x.ID equals y.SubmissionID
                                       join z in db.Users on y.UserID equals z.Id
                                       where (subprojectID == x.SubprojectID && x.Accepted == true)
-                                      select x);
+                                      select x).FirstOrDefault();
 
-                if (bestSubmission.Any()) {
-                    sub.AddRange(bestSubmission);
+                if (bestSubmission == null)
+                {
+                    sub.Add(getLastSubmissionForStudents(subprojectID));
                 }
                 else {
-                    sub.AddRange(getLastSubmissionForStudents(subprojectID));
+                    sub.Add(bestSubmission);
                 }
             }
 
@@ -229,12 +232,25 @@ namespace Mooshark2.Services
 
         public IEnumerable<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)
         {
-            IEnumerable<ApplicationUser> submittedStudents = (from x in db.Users
-                                                             join y in db.StudentSubmissions on x.Id equals y.UserID
-                                                             join z in db.Submissions on y.SubmissionID equals z.ID
-                                                             where z.SubprojectID == subprojectID
-                                                             select x) as IEnumerable<ApplicationUser>;
+            var submittedStudents = (from x in db.Users
+                                     join y in db.StudentSubmissions on x.Id equals y.UserID
+                                     join z in db.Submissions on y.SubmissionID equals z.ID
+                                     where z.SubprojectID == subprojectID
+                                     select x).ToList().DistinctBy(d => d.Id);
 
+
+
+
+            /*var lastSubmission = db.StudentSubmissions.GroupBy(x => x.UserID).Select(s => s.Key);*/
+
+
+
+            /*IEnumerable<ApplicationUser>submitedStudents = ( from x in db.Groups
+                                                        join y in db.ProjectGroups on x.ID equals y.GroupID
+                                                        join z in db.ProjectSubprojects on y.ProjectID equals z.ProjectID
+                                                        join w in db.Submissions on z.SubprojectID equals w.SubprojectID
+                                                        where x.UserID == userID && w.ID != 0
+                                                        select x) as IEnumerable<ApplicationUser>;*/
             return submittedStudents;
         }
 
@@ -275,6 +291,7 @@ namespace Mooshark2.Services
                                                    join y in db.StudentSubmissions on x.Id equals y.UserID
                                                    join z in db.Submissions on y.SubmissionID equals z.ID
                                                    where x.Id == studentID
+                                                   orderby z.SubmissionNr descending
                                                    select y.Submission) as IEnumerable<Submission>;  // OMG
 
             if(submissions != null) {
@@ -290,6 +307,28 @@ namespace Mooshark2.Services
                               where x.SubprojectID == subprojectId
                               select x).FirstOrDefault();
             return io; 
+        }
+
+        public List<ApplicationUser> getStudentBySubmission(List<Submission> submissions)
+        {
+            List<ApplicationUser> users = new List<ApplicationUser>(); 
+            foreach(var sub in submissions){
+                var u = (from x in db.Users
+                         join y in db.StudentSubmissions on x.Id equals y.UserID
+                         where sub.ID == y.SubmissionID
+                         select x).FirstOrDefault();
+                users.Add(u); 
+            }
+            
+            return users; 
+        }
+
+        public void updateGrade(Submission submission)
+        {
+            if(submission != null)
+            {
+                db.Submissions.AddOrUpdate();
+            }
         }
     }
 }

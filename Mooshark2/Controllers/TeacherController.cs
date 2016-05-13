@@ -192,11 +192,12 @@ namespace Mooshark2.Controllers
                 var studentsThatHaveSubmitted = projectService.getStudentsThatHaveSubmitted(subprojectId.Value);
                 //var lastSubmission = projectService.getLastSubmissionForStudents(subprojectId.Value);
                 var bestSubmissions = projectService.getStudentsBestSubmission(subprojectId.Value);
+                var studentsForSubmissions = projectService.getStudentBySubmission(bestSubmissions);
                 var allSubmissionsForSubproject = projectService.getSubmissions(subprojectId.Value);
                 var subprojectName = projectService.getSubprojectById(subprojectId.Value);
 
                 TeacherSubmissionsViewmodel model = new TeacherSubmissionsViewmodel(allSubmissionsForSubproject,
-                    studentsThatHaveSubmitted, bestSubmissions, subprojectName);
+                    studentsThatHaveSubmitted, bestSubmissions, studentsForSubmissions, subprojectName);
 
                 return View(model);
             }
@@ -205,41 +206,44 @@ namespace Mooshark2.Controllers
         }
 
 
-        public ActionResult StudentSubmissions(int? id)
+        public ActionResult StudentSubmissions(string studentId, int? subprojectId)
         {
-            if (id != null) {
-                var submission = projectService.getSubmissionById(id.Value);
-                return View(submission);
+            if (studentId != null && subprojectId != null) {
+                var student = userService.getUserById(studentId); 
+                var submissions = projectService.getStudentsSubmissionsForSubproject(studentId);
+                var subproject = projectService.getSubprojectById(subprojectId.Value);
+
+                TeacherStudentSubmissionsViewModel model = new TeacherStudentSubmissionsViewModel(student, subproject, submissions);
+                return View(model);
             }
 
-            return View();
+            return View("NotFound");
         }
 
 
         [HttpGet]
-<<<<<<< HEAD
-        public ActionResult Graded(string userId, int subprojectId)
-=======
-        public ActionResult SubmissionDetail(string UserId)
->>>>>>> f62df9a8251ff8a9fc3c3039ec879fea6ebca96f
+        public ActionResult SubmissionDetail(int? submissionId, string studentId)
         {
-            if(userId != null) {
-                ApplicationUser currentStudent = userService.getUserById(userId);
-                var submissions = projectService.getStudentsSubmissionsForSubproject(userId); // OMG
+            if(submissionId != null && studentId != null)
+            {
+                var student = userService.getUserById(studentId);
+                var submission = projectService.getSubmissionById(submissionId.Value);
+                var subprojectId = submission.SubprojectID;
                 var subproject = projectService.getSubprojectById(subprojectId);
-                var projectId = subproject.ProjectID;
-                var project = projectService.getProjectById(projectId.Value);
 
-<<<<<<< HEAD
-                TeacherGradeStudentViewModel model = new TeacherGradeStudentViewModel(currentStudent, project, submissions);
+                TeacherSubmissionsDetailViewModel model = new TeacherSubmissionsDetailViewModel(student, subproject, submission);
 
                 return View(model); 
-=======
-                //TeacherSubmissionDetailStudentViewModel model = new TeacherSubmissionDetailStudentViewModel();
->>>>>>> f62df9a8251ff8a9fc3c3039ec879fea6ebca96f
             }
 
             return View("NotFound");
+        }
+
+        [HttpPost]
+        public ActionResult SubmissionDetail(TeacherSubmissionsDetailViewModel model)
+        {
+
+            return RedirectToAction("Submissions", model.currentSubproject.ID); 
         }
     }
 }

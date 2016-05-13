@@ -26,25 +26,27 @@
     </tr>
     </thead>
     <tbody>
-        @foreach (var last in Model.lastSubmissions)
+        @foreach (var last in Model.bestSubmissions)
         {
+            for (var i = 0; i < Model.usersForSubmissions.Count; i++)
+            {
                 <tr>
-                    <td>@Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).SubmissionNr</td>
-                    <td>@Html.ActionLink(Model.studentsThatHaveSubmitted.FirstOrDefault(p => p.Id == last.UserID).FullName, "SubmissionDetails")</td>
-                    <td>@Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).Date</td>
+                    <td>@last.SubmissionNr</td>
+                    <td>@Html.ActionLink(Model.usersForSubmissions[i].FullName, "StudentSubmissions", new { studentId = Model.usersForSubmissions[i].Id, subprojectId = Model.currentSubproject.ID })</td>
+                    <td>@last.Date</td>
                     <td>
-                        @if (Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).Accepted == true)
+                        @if (last.Accepted == true)
                         {
-                            @Html.ActionLink("Accepted", "Graded", new { userId = students.Id, subprojectId = Model.currentSubproject.ID})
+                            @Html.ActionLink("Accepted", "SubmissionDetail", new { submissionID = last.ID, studentId = Model.usersForSubmissions[i].Id })
                         }
-                        @if (Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).Accepted == false)
+                        @if (last.Accepted == false)
                         {
-                            @Html.ActionLink("Wrong Answer", "Graded", new { userId = students.Id, subprojectId = Model.currentSubproject.ID })
+                            @Html.ActionLink("Wrong Answer", "SubmissionDetail", new { submissionID = last.ID, studentId = Model.usersForSubmissions[i].Id })
                         }
                     </td>
-                    <td>@Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).Grade</td>
+                    <td>@last.Grade</td>
                 </tr>
-            
+            }
         }
     </tbody>
 </table>

@@ -6,3 +6,31 @@
 
 <h2>StudentSubmissions</h2>
 
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td>Submission number</td>
+            <td>Result</td>
+            <td>Date</td>
+            <td>Grade</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var sub in Model.submissions)
+        {
+            <tr>
+                <td>@sub.SubmissionNr</td>
+                @if(sub.Accepted == true)
+                {
+                    <td>@Html.ActionLink("Accepted", "SubmissionDetail", new { submissionId = sub.ID, studentId = Model.student.Id})</td>
+                }
+                @if(sub.Accepted == false)
+                {
+                    <td>@Html.ActionLink("Wrong Answer", "SubmissionDetail", new { submissionId = sub.ID, studentId = Model.student.Id })</td>
+                }
+                <td>@sub.Date</td>
+                <td>@sub.Grade</td>
+            </tr>
+        }
+    </tbody>
+</table>
