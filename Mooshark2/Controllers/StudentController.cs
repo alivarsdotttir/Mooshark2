@@ -88,10 +88,10 @@ namespace Mooshark2.Controllers
                 var subproject = projectService.getSubprojectById(id.Value);
                 var projectId = subproject.ProjectID;
                 var project = projectService.getProjectById(projectId.Value);
+                ViewBag.Students = userService.GetAllStudentsInCourseSelectList(project.CourseID.Value);
                 List<ApplicationUser> students = userService.GetAllStudentsInCourse(project.CourseID.Value);
 
                 StudentSubmitViewModel model = new StudentSubmitViewModel(project, subproject, students);
-                ViewBag.Students = userService.GetAllStudentsInCourseSelectList(project.CourseID.Value);
 
                 return View(model); 
             }

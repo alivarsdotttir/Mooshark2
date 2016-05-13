@@ -210,8 +210,8 @@ namespace Mooshark2.Services
             {
                 var bestSubmission = (from x in db.Submissions
                                       join y in db.StudentSubmissions on x.ID equals y.SubmissionID
-                                      join z in db.Users on y.UserID equals z.Id
-                                      where (subprojectID == x.SubprojectID && x.Accepted == true)
+                                      where (subprojectID == x.SubprojectID && x.Accepted == true && student.Id == y.UserID)
+                                      orderby x.SubmissionNr descending 
                                       select x).FirstOrDefault();
 
 
@@ -236,19 +236,6 @@ namespace Mooshark2.Services
                                      where z.SubprojectID == subprojectID
                                      select x).ToList().DistinctBy(d => d.Id);
 
-
-
-
-            /*var lastSubmission = db.StudentSubmissions.GroupBy(x => x.UserID).Select(s => s.Key);*/
-
-
-
-            /*IEnumerable<ApplicationUser>submitedStudents = ( from x in db.Groups
-                                                        join y in db.ProjectGroups on x.ID equals y.GroupID
-                                                        join z in db.ProjectSubprojects on y.ProjectID equals z.ProjectID
-                                                        join w in db.Submissions on z.SubprojectID equals w.SubprojectID
-                                                        where x.UserID == userID && w.ID != 0
-                                                        select x) as IEnumerable<ApplicationUser>;*/
             return submittedStudents;
         }
 
@@ -329,13 +316,8 @@ namespace Mooshark2.Services
                                where item.ID == model.ID
                                select item).SingleOrDefault();
 
-            //project.Course = model.Course;
-            //project.CourseID = model.CourseID;
             project.Deadline = model.Deadline;
-            //project.Grade = model.Grade;
-            //project.Graded = model.Graded;
             project.GroupSize = model.GroupSize;
-            //project.IsGroupProject = model.IsGroupProject;
             project.Name = model.Name;
             project.Visibility = model.Visibility;
             db.SaveChanges();
