@@ -12,33 +12,16 @@ namespace Mooshark2.Models.ViewModels.AdminViewModels
         public ApplicationUser Student { get; set; }
         public bool Checked { get; set; }
 
-
-        public AdminSelectStudentViewModel(ApplicationUser u)
+        public AdminSelectStudentViewModel(ApplicationUser student)
         {
-            Student = u;
+            Student = student;
             Checked = false;
         }
-
-
-        /*public IList<AdminSelectStudentViewModel> createAdminSelectStudents(List<ApplicationUser> list)
-        {
-            IList<AdminSelectStudentViewModel> returnList = new List<AdminSelectStudentViewModel>();
-            foreach(var student in list) {
-                returnList.Add(new AdminSelectStudentViewModel {
-                    Student = student, Checked = false
-                });
-
-            }
-
-            return returnList;
-        }*/
 
 
         public AdminSelectStudentViewModel()
         {
             Checked = false;
         }
-
-
     }
 }

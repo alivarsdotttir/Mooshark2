@@ -12,9 +12,14 @@
 
     </div>
 
+<<<<<<< HEAD
     <div class="row page-header">
         <div class="well well-lg"><h4>Input:</h4>@Model.subproject.Input</div>
     </div>
+=======
+<h2>@Model.currentProject.Name</h2>
+<h3>@Model.subproject.Name</h3>
+>>>>>>> 630a1c9ec2a2fb8494e12bcd2d6e3aba2b8ad8a6
 
     <div class="row ">
         <div class="col-sm-6">
@@ -45,5 +50,10 @@
     </div>
 </div>
 
+<<<<<<< HEAD
+=======
+@Html.ActionLink("Back to project", "ProjectDetails", new { id = Model.currentProject.ID }, new { @class="btn btn-default" })
+@Html.ActionLink("Back to course", "Course", new { id = Model.currentCourse.ID }, new { @class ="btn btn-default"})
+>>>>>>> 630a1c9ec2a2fb8494e12bcd2d6e3aba2b8ad8a6
 
 
