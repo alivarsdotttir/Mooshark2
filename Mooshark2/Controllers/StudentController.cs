@@ -149,7 +149,8 @@ namespace Mooshark2.Controllers
                 submission.SubprojectID = subproject.ID;
                 submission.SubmissionNr = submissionNumber;
                 submission.FilePath = Server.MapPath(filePath);
-                submission.CppFileName = fileName; 
+                submission.CppFileName = fileName;
+                submission.StudentId = userId;
 
                 projectService.createSubmission(submission, user);
                 
