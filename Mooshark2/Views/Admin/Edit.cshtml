@@ -40,29 +40,33 @@
                 </div>
                 <div class="form-group">
                     <div class="control-label col-md-2">
-                        
+
                     </div>
                     <div class="col-md-10">
-                        <input type="submit" value="Save name & active changes" class="btn btn-primary AdminButtons" />
+                        <input type="submit" value="Save name & active changes" class="btn btn-primary AdminButtons"/>
                     </div>
                 </div>
             </div>
 
-
-
-            <div class="col-xs-6">
-                <div class="right-inner-addon">
-                    <i class="glyphicon glyphicon-search"></i>
-                    <input id="search" type="search"
-                           class="form-control"
-                           placeholder="Search" />
+            <!-- SEARCH INPUT BOX FOR TABLE -->
+            <div class="row">
+                <div class="col-xs-9"></div>
+                <div class="col-xs-3">
+                    <div class="inner-addon right-addon pull-right">
+                        <i class="glyphicon glyphicon-search"></i>
+                        <input id="search" type="search"
+                               class="form-control"
+                               placeholder="Search" />
+                    </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-sm-5 sidenav">
 
+                    <!--  TEACHER'S TABLE  -->
                     <div class="form-group">
-                        <table class="table table-bordered table-striped" id="table">
+                        <table class="table table-bordered table-striped">
                             <caption>Teachers in course</caption>
                             <thead>
                             <tr>
@@ -103,7 +107,9 @@
 
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <table class="table table-bordered table-striped">
+
+                        <!--  STUDENT'S TABLE  -->
+                        <table class="table table-bordered table-striped" id="table">
                             <caption>Students in course</caption>
                             <thead>
                             <tr>
@@ -181,29 +187,41 @@
 
                     <form role="form">
                         <div class="form-group">
-                            <table class="table table-bordered table-striped">
+
+                            <!-- SEARCH INPUT BOX FOR TABLE -->
+                            <div class="row">
+                                <div class="col-xs-8"></div>
+                                <div class="col-xs-4">
+                                    <div class="inner-addon right-addon pull-right">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                        <input id="search" type="search"
+                                               class="form-control"
+                                               placeholder="Search" />
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-bordered table-striped" id="table">
                                 <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Username</th>
-                                        <th>Email</th>
-                                        <th>SSN</th>
-                                    </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>SSN</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    @for (var i = 0; i < Model.StudentListCheck.Count; i++)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @Html.HiddenFor(m => m.StudentListCheck[i].Student.Id)
-                                                @Html.CheckBoxFor(m => m.StudentListCheck[i].Checked)
-                                                @Html.LabelFor(m => m.StudentListCheck[i].Student.FullName, Model.StudentListCheck[i].Student.FullName)
-                                            </td>
-                                            <td>@Model.StudentListCheck[i].Student.UserName</td>
-                                            <td>@Model.StudentListCheck[i].Student.Email</td>
-                                            <td>@Model.StudentListCheck[i].Student.SSN</td>
-                                        </tr>
-                                    }
+                                @for(var i = 0; i < Model.StudentListCheck.Count; i++) {
+                                    <tr>
+                                        <td>
+                                            @Html.HiddenFor(m => m.StudentListCheck[i].Student.Id)
+                                            @Html.CheckBoxFor(m => m.StudentListCheck[i].Checked)
+                                            @Html.LabelFor(m => m.StudentListCheck[i].Student.FullName, Model.StudentListCheck[i].Student.FullName)
+                                        </td>
+                                        <td>@Model.StudentListCheck[i].Student.UserName</td>
+                                        <td>@Model.StudentListCheck[i].Student.Email</td>
+                                        <td>@Model.StudentListCheck[i].Student.SSN</td>
+                                    </tr>
+                                }
                                 </tbody>
                             </table>
                         </div>

@@ -34,7 +34,7 @@
                         <th>Course</th>
                         <th>Assignment</th>
                         <th>Deadline</th>
-                        <th>Type</th>
+                        <th>Group</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,7 +44,14 @@
                                 <td>@Model.currentCourse.Name</td>
                                 <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
                                 <td>@project.Deadline</td>
-                                <td>@*project.isGroupProject*@</td>
+                                @if (project.IsGroupProject == true)
+                                {
+                                    <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px" /></td>
+                                }
+                                @if (project.IsGroupProject == false)
+                                {
+                                    <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px" /></td>
+                                }
                             </tr>
                         }
                     }

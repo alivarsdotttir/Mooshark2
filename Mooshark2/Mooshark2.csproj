@@ -283,6 +283,7 @@
     <Content Include="fonts\Digital-Desolation-Alternate.ttf" />
     <Content Include="fonts\Minecrafter.Alt.ttf" />
     <Content Include="fonts\Digital-Desolation.ttf" />
+    <Content Include="fonts\Mochary_PERSONAL_USE_ONLY.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
