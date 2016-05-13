@@ -36,18 +36,16 @@ namespace Mooshark2.Controllers
 
         public ActionResult Course(int? id)
         {
-
-            if(id != null)
-            {
+            if(id != null) {
                 var course = courseService.getCourseById(id.Value); 
                 var courseProjects = projectService.getProjectsFromCourse(id.Value);
 
                 TeacherCourseViewModel model = new TeacherCourseViewModel(course, courseProjects);
                  return View(model);
             }
-            else 
+            else {
                 return View("NotFound");
-           
+            }
         }
 
    
@@ -63,7 +61,6 @@ namespace Mooshark2.Controllers
             else {
                 return View("NotFound");
             }
-
         }
 
 
@@ -79,17 +76,17 @@ namespace Mooshark2.Controllers
 
                 return View();
             }
-
+      
             if (project) {
                 return RedirectToAction("CreateSubproject", new {id = model.ID});
             }
             else {
-
                 ViewBag.Course = model.CourseID;
 
                 return View();
             }
         }
+
 
         //GET
         [HttpGet]
@@ -104,6 +101,7 @@ namespace Mooshark2.Controllers
                 return View("NotFound");
             }
         }
+
 
         //POST
         [HttpPost]
@@ -121,7 +119,6 @@ namespace Mooshark2.Controllers
             if (subproject) {
                 return RedirectToAction("ProjectDetails", new { id = model.ProjectID });
             }
-            
             else {
                 ViewBag.Course = model.ProjectID;
 
@@ -151,6 +148,7 @@ namespace Mooshark2.Controllers
             return View(project);
         }
 
+
         //GET
         [HttpGet]
         public ActionResult EditSubproject(int? id)
@@ -171,11 +169,11 @@ namespace Mooshark2.Controllers
 
             return View(subproject);
         }
+        
 
         public ActionResult ProjectDetails(int? id)
         {
-            if(id != null)
-            {
+            if(id != null) {
                 var project = projectService.getProjectById(id.Value);
                 var subprojects = projectService.getSubprojects(id.Value);
 
@@ -191,9 +189,7 @@ namespace Mooshark2.Controllers
         public ActionResult Submissions(int? subprojectId)
         {
             if(subprojectId != null) {
-
                 var studentsThatHaveSubmitted = projectService.getStudentsThatHaveSubmitted(subprojectId.Value);
-                //var lastSubmission = projectService.getLastSubmissionForStudents(subprojectId.Value);
                 var bestSubmissions = projectService.getStudentsBestSubmission(subprojectId.Value);
                 var studentsForSubmissions = projectService.getStudentBySubmission(bestSubmissions);
                 var allSubmissionsForSubproject = projectService.getSubmissions(subprojectId.Value);
@@ -204,7 +200,6 @@ namespace Mooshark2.Controllers
 
                 return View(model);
             }
-
             return View("NotFound");
         }
 
@@ -227,8 +222,7 @@ namespace Mooshark2.Controllers
         [HttpGet]
         public ActionResult SubmissionDetail(int? submissionId, string studentId)
         {
-            if(submissionId != null && studentId != null)
-            {
+            if(submissionId != null && studentId != null) {
                 var student = userService.getUserById(studentId);
                 var submission = projectService.getSubmissionById(submissionId.Value);
                 var subprojectId = submission.SubprojectID;
@@ -242,6 +236,7 @@ namespace Mooshark2.Controllers
             return View("NotFound");
         }
 
+
         [HttpPost]
         public ActionResult SubmissionDetail(int subprojectId, Submission currSub)
         {
@@ -250,10 +245,10 @@ namespace Mooshark2.Controllers
             return RedirectToAction("Submissions", subprojectId); 
         }
 
+
         public ActionResult Grades(int? projectId)
         {
-            if(projectId != null)
-            {
+            if(projectId != null) {
 
             }
             return View("NotFound"); 
