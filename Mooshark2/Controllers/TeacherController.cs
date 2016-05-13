@@ -49,7 +49,6 @@ namespace Mooshark2.Controllers
         public ActionResult CreateProject(int? id)
         {
             if(id.HasValue) {
-
                 ViewBag.Course = id;
 
                 return View();
@@ -66,6 +65,13 @@ namespace Mooshark2.Controllers
         public ActionResult CreateProject(Project model)
         {
             bool project = projectService.ServiceCreateProject(model);
+
+            if (model.Name == null || model.Deadline == DateTime.MinValue || model.GroupSize == 0) {
+                ModelState.AddModelError("", "You fill in all the input fields");
+                ViewBag.Course = model.CourseID;
+
+                return View();
+            }
 
             if (project) {
                 return RedirectToAction("CreateSubproject", new {id = model.ID});
@@ -97,14 +103,18 @@ namespace Mooshark2.Controllers
         public ActionResult CreateSubproject(Subproject model)
         {
             bool subproject = projectService.ServiceCreateSubproject(model);
+            if(model.Name == null || model.Description == null || model.Input == null || model.Output == null) {
+                ModelState.AddModelError("", "You must fill in all the input fields");
+                ViewBag.Course = model.ProjectID;
+
+                return View();
+            }
 
             if (subproject) {
                 return RedirectToAction("ProjectDetails", new { id = model.ProjectID });
-
             }
             
             else {
-
                 ViewBag.Course = model.ProjectID;
 
                 return View();
@@ -179,7 +189,6 @@ namespace Mooshark2.Controllers
             if(subprojectId != null) {
 
                 var studentsThatHaveSubmitted = projectService.getStudentsThatHaveSubmitted(subprojectId.Value);
-
                 var bestSubmissions = projectService.getStudentsBestSubmission(subprojectId.Value);
                 var allSubmissionsForSubproject = projectService.getSubmissions(subprojectId.Value);
                 var subprojectName = projectService.getSubprojectById(subprojectId.Value);
