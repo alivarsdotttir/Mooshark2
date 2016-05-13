@@ -57,17 +57,18 @@
     <div id="studentCourseList" class="col-md-4">
         <h4>My courses</h4>
         <div class="list-group">
-            @foreach (var course in Model.coursesForStudents)
-            {
+            @foreach(var course in Model.coursesForStudents) {
                 <a class="list-group-item" href="/Student/Course/@course.ID">@course.Name</a>
             }
         </div>
     </div>
-</div>
 
-<div id="StudentPepp">
-    <p>Welcome to MOOSHARK<br/>
-        May the odds be ever in you favour<br/>
-        If you need some extra motivation:<br/>
-    <a href="https://www.youtube.com/watch?v=qR3rK0kZFkg">#PEPP</a></p>
+    <div id="StudentPepp" class="row mooshark-pepp pull-right top-buffer">
+        <p>
+            Welcome to MOOSHARK<br />
+            May the odds be ever in you favour<br />
+            If you need some extra motivation:<br />
+            <a href="https://www.youtube.com/watch?v=qR3rK0kZFkg">#PEPP</a>
+        </p>
+    </div>
 </div>

@@ -16,6 +16,9 @@
     </div>
     <div class="col-sm-4">
         <div id="Adminbutt">
+            @Html.ActionLink("Add new subproject", "Grades", new { id = Model.currentProject.ID }, new { @class = "btn btn-primary AdminButtons" })
+        </div>
+        <div id="Adminbutt">
             @Html.ActionLink("Add new subproject", "CreateSubproject", new { id = Model.currentProject.ID }, new { @class = "btn btn-primary AdminButtons" })
         </div>
         <div id="Adminbutt">
