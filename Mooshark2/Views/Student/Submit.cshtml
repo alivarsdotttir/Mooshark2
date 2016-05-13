@@ -10,7 +10,7 @@
         <div class="row">
             <div class="jumbotron">
                 <div>
-                    <h2>Submit your solution to @Model.subproject.Name</h2>
+                    <h2>Submit your solution</h2>
                     @Html.ValidationSummary()
                     <h5>The code should be in c++</h5>
                     <input type="file" name="file" class="btn btn-lg" /><br />
@@ -18,7 +18,8 @@
             </div>
         </div>
         <div ="row">
-            <!--    GROUP DROPDOWN LIST    -->
+            <!-- GROUP DROPDOWN LIST -->
+            <!--This is not ready yet, but will be in the future :-)-->
             <div class="col-sm-10">
                 @if(Model.currentProject.IsGroupProject) {
                     <h3>Group members</h3>

@@ -156,8 +156,8 @@ namespace Mooshark2.Controllers
         //                                                                       REGISTER FOR ADMIN
         //----------------------------------------------------------------------------------------------------------------------------------------------------------------
         // GET: /Account/Register
-        //[Authorize(Roles = "Admin")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
+        //[AllowAnonymous]
         public ActionResult Register()
         {
             var roles = userService.GetRoleList();
@@ -168,8 +168,8 @@ namespace Mooshark2.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
-        //[Authorize(Roles = "Admin")]
+        //[AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
