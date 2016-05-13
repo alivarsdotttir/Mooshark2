@@ -1,0 +1,9 @@
+﻿@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherSubmissionsDetailViewModel
+@{
+    ViewBag.Title = "SubmissionDetail";
+}
+
+<h2>@Model.currentProject.Name</h2>
+
+@Model.currentStudent.FullName
+@Model.currentProject.Grade.ToString()
