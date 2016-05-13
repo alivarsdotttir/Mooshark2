@@ -13,9 +13,9 @@ namespace Mooshark2.Models.ViewModels.StudentViewModels
 {
     public class StudentSubmitViewModel
     {
-        public Project currentProject;
-        public Subproject subproject;
-        public List<ApplicationUser> students;
+        public Project currentProject { get; set; }
+        public Subproject subproject { get; set; }
+        public List<ApplicationUser> students { get; set; }
 
         public StudentSubmitViewModel(Project project, Subproject subp, List<ApplicationUser> us )
         {

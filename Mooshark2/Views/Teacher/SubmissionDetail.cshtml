@@ -2,56 +2,58 @@
 @{
     ViewBag.Title = "SubmissionDetail";
 }
-
-<div class="container-fluid">
-    <div class="row">
-        <h1>Submission Details</h1>
-        <h2>@Model.currentSubproject.Name</h2>
-        <h3>@Model.currentStudent.FullName</h3>
-    </div>
-
-    <div class="row page-header">
-        <div class="well well-lg"><h4>Input:</h4>@Model.currentSubproject.Input</div>
-    </div>
-
-    <div class="row ">
-        <div class="col-sm-6">
-            <h3>Your output:</h3>
-            <div class="well">@Model.currentSubmission.Output</div>
+@using (Html.BeginForm())
+{
+    <div class="container-fluid">
+        <div class="row">
+            <h1>Submission Details</h1>
+            <h2>@Model.currentSubproject.Name</h2>
+            <h3>@Model.currentStudent.FullName</h3>
         </div>
 
-        <div class="col-sm-6">
-            <h3>Expected output:</h3>
-            <div class="well">@Model.currentSubproject.Output</div>
+        <div class="row page-header">
+            <div class="well well-lg"><h4>Input:</h4>@Model.currentSubproject.Input</div>
         </div>
-    </div>
 
-    <div class="row">
+        <div class="row ">
+            <div class="col-sm-6">
+                <h3>Your output:</h3>
+                <div class="well">@Model.currentSubmission.Output</div>
+            </div>
 
-        @if (Model.currentSubmission.Accepted == true)
-        {
-            <span class="label accepted"><h2>ACCEPTED</h2></span>
-        }
+            <div class="col-sm-6">
+                <h3>Expected output:</h3>
+                <div class="well">@Model.currentSubproject.Output</div>
+            </div>
+        </div>
 
-        @if (Model.currentSubmission.Accepted == false)
-        {
-            <span class="label wrong-answer"><h3>Wrong answer</h3></span>
-        }
+        <div class="row">
 
-        <div class="row pull-right">
-            @using (Html.BeginForm())
+            @if (Model.currentSubmission.Accepted == true)
             {
-                @Html.HiddenFor(x => x.currentSubproject.ID)
+                <span class="label accepted"><h2>ACCEPTED</h2></span>
+            }
+
+            @if (Model.currentSubmission.Accepted == false)
+            {
+                <span class="label wrong-answer"><h3>Wrong answer</h3></span>
+            }
+
+            <div class="form-group row pull-right">
+
+                @Html.HiddenFor(model => model.currentSubproject.ID)
+                @Html.HiddenFor(model => model.currentSubmission.ID)
                 @Html.EditorFor(model => model.currentSubmission.Grade, new { htmlAttributes = new { @class = "form-control" } })
                 <div id="Adminbutt">
                     <input type="submit" name="Submit" id="Submit" value="Update Grade" class="btn btn-lg AdminButtons" />
                 </div>
-            }
+            
+            </div>
+
         </div>
 
+        <div class="row">
+            @Html.ActionLink("Back to submissions", "Submissions", "Teacher", new { @class = "btn btn-default" })
+        </div>
     </div>
-
-    <div class="row">
-        @Html.ActionLink("Back to submissions", "Submissions", "Teacher", new { @class = "btn btn-default" })
-    </div>
-</div>
+}

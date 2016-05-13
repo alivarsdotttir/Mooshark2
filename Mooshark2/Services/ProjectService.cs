@@ -333,12 +333,13 @@ namespace Mooshark2.Services
         }
 
         //Updates the grade of a subproject 
-        public void updateGrade(Submission submission)
+        public void updateGrade(TeacherSubmissionsDetailViewModel model)
         {
-            if(submission != null)
+            if(model.currentSubmission.Grade != null && model.currentSubmission.Grade > 0)
             {
-                Submission submissionToUpdate = db.Submissions.FirstOrDefault(x => x.ID == submission.ID);
-                submissionToUpdate.Grade = submission.Grade;
+                Submission submissionToUpdate = db.Submissions.Where(x => x.ID == model.currentSubmission.ID).FirstOrDefault();
+                if(submissionToUpdate != null)
+                    submissionToUpdate.Grade =model.currentSubmission.Grade;
                 db.SaveChanges(); 
             }
         }
