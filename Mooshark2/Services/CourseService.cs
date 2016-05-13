@@ -70,8 +70,8 @@ namespace Mooshark2.Services
                              where item.ID == model.Course.ID
                              select item).SingleOrDefault();
 
-            model.Course.Name = course.Name;
-            model.Course.Active = course.Active;
+            course.Name = model.Course.Name;
+            course.Active = model.Course.Active;
 
             if (model.Teacher.Id != null)
             {
