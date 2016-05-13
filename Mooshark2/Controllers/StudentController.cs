@@ -59,6 +59,7 @@ namespace Mooshark2.Controllers
         {
             if(id != null) {
                 var project = projectService.getProjectById(id.Value);
+                var userId = User.Identity.GetUserId();
                 var subprojects = projectService.getSubprojects(id.Value);
                 var courseID = project.CourseID;
                 var course = courseService.getCourseById(courseID.Value);
@@ -66,10 +67,10 @@ namespace Mooshark2.Controllers
                 List<Submission> submissions = null; 
                 foreach(Subproject sub in subprojects) {
                     if (submissions == null) {
-                        submissions = projectService.getSubmissions(sub.ID);
+                        submissions = projectService.getSubmissionsForStudents(sub.ID, userId);
                     }
                     else {
-                        submissions.AddRange(projectService.getSubmissions(sub.ID));
+                        submissions.AddRange(projectService.getSubmissionsForStudents(sub.ID, userId));
                     }
                 }
 

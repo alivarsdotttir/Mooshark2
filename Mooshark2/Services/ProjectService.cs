@@ -124,6 +124,14 @@ namespace Mooshark2.Services
                 return submissions;
         }
 
+        public List<Submission> getSubmissionsForStudents(int subprojectID, string userID)
+        {
+            List<Submission> submissions = (from x in db.Submissions
+                                            where subprojectID == x.SubprojectID && x.StudentId == userID
+                                            select x).ToList();
+
+            return submissions;
+        }
 
         public Subproject getSubprojectById(int subprojectID)
         {
