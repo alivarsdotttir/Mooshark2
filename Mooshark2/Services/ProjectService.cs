@@ -124,6 +124,14 @@ namespace Mooshark2.Services
                 return submissions;
         }
 
+        public List<Submission> getSubmissionsForStudents(int subprojectID, string userID)
+        {
+            List<Submission> submissions = (from x in db.Submissions
+                                            where subprojectID == x.SubprojectID && x.StudentId == userID
+                                            select x).ToList();
+
+            return submissions;
+        }
 
         public Subproject getSubprojectById(int subprojectID)
         {
@@ -316,13 +324,8 @@ namespace Mooshark2.Services
                                where item.ID == model.ID
                                select item).SingleOrDefault();
 
-            //project.Course = model.Course;
-            //project.CourseID = model.CourseID;
             project.Deadline = model.Deadline;
-            //project.Grade = model.Grade;
-            //project.Graded = model.Graded;
             project.GroupSize = model.GroupSize;
-            //project.IsGroupProject = model.IsGroupProject;
             project.Name = model.Name;
             project.Visibility = model.Visibility;
             db.SaveChanges();

@@ -59,6 +59,7 @@ namespace Mooshark2.Controllers
         {
             if(id != null) {
                 var project = projectService.getProjectById(id.Value);
+                var userId = User.Identity.GetUserId();
                 var subprojects = projectService.getSubprojects(id.Value);
                 var courseID = project.CourseID;
                 var course = courseService.getCourseById(courseID.Value);
@@ -66,10 +67,10 @@ namespace Mooshark2.Controllers
                 List<Submission> submissions = null; 
                 foreach(Subproject sub in subprojects) {
                     if (submissions == null) {
-                        submissions = projectService.getSubmissions(sub.ID);
+                        submissions = projectService.getSubmissionsForStudents(sub.ID, userId);
                     }
                     else {
-                        submissions.AddRange(projectService.getSubmissions(sub.ID));
+                        submissions.AddRange(projectService.getSubmissionsForStudents(sub.ID, userId));
                     }
                 }
 
@@ -88,10 +89,10 @@ namespace Mooshark2.Controllers
                 var subproject = projectService.getSubprojectById(id.Value);
                 var projectId = subproject.ProjectID;
                 var project = projectService.getProjectById(projectId.Value);
+                ViewBag.Students = userService.GetAllStudentsInCourseSelectList(project.CourseID.Value);
                 List<ApplicationUser> students = userService.GetAllStudentsInCourse(project.CourseID.Value);
 
                 StudentSubmitViewModel model = new StudentSubmitViewModel(project, subproject, students);
-                ViewBag.Students = userService.GetAllStudentsInCourseSelectList(project.CourseID.Value);
 
                 return View(model); 
             }
@@ -100,7 +101,6 @@ namespace Mooshark2.Controllers
         }
 
         [HttpPost]
-
         public ActionResult Submit(Subproject subproject, HttpPostedFileBase file)
         {   
             try { 
@@ -239,6 +239,7 @@ namespace Mooshark2.Controllers
                 return View();
 
             }
+
             return View();
         }
 

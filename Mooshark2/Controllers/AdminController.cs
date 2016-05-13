@@ -146,38 +146,22 @@ namespace Mooshark2.Controllers
         [HttpGet]
         public ActionResult EditUser(string id)
         {
-            if (id != null) {
-                ApplicationUser user = (from item in db.Users
-                                        where item.Id == id
-                                        select item).SingleOrDefault();
 
-                if (user == null) {
-                    return View("NotFound");
-                }
-
-                return View(user);
-            }
-            else {
-                return View("NotFound");
-            }
+            ApplicationUser user = db.Users.Find(id);
+            return View(user);
         }
 
 
         [HttpPost]
         public ActionResult EditUser(ApplicationUser user)
         {
-            if (user != null) {
-                ApplicationUser model = (from item in db.Users
-                                        where item.Id == user.Id
-                                        select item).SingleOrDefault();
-               
-                db.SaveChanges();
 
-                return RedirectToAction("Index");
+            if(ModelState.IsValid) {
+                ApplicationUser u = userService.ServiceEditUser(user);
+                return RedirectToAction("UserEditList");
             }
-            else {
-                return View("NotFound");
-            }
+
+            return View(user);
         }
     }
 }

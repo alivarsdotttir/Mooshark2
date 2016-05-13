@@ -12,7 +12,7 @@ namespace Mooshark2.Handlers
     {
         public override void OnException(ExceptionContext filterContext)
         {
-            /*
+            
             //Get the exception
             Exception ex = filterContext.Exception;
 
@@ -24,20 +24,6 @@ namespace Mooshark2.Handlers
             string currentController = (string)filterContext.RouteData.Values["controller"];
             string currentActionName = (string)filterContext.RouteData.Values["action"];
 
-            
-            if (ex is CustomApplicationException && currentController != "Book")
-            {
-                viewName = "ErrorCustom";
-            }
-            else if (ex is ArgumentException && currentController != "Movie")
-            {
-                viewName = "ErrorArgument";
-            }
-            else if (ex is Exception)
-            {
-                viewName = "Error";
-            }
-            
 
             //Create the error model information
             HandleErrorInfo model = new HandleErrorInfo(filterContext.Exception, currentController, currentActionName);
@@ -53,7 +39,7 @@ namespace Mooshark2.Handlers
 
             // Call the base class implementation:
             base.OnException(filterContext);
-            */
+            
         }
     }
 }

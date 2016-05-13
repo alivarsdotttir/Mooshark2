@@ -363,6 +363,7 @@
     <Content Include="Views\Teacher\StudentSubmissions.cshtml" />
     <Content Include="Views\Teacher\EditProject.cshtml" />
     <Content Include="Views\Teacher\Grades.cshtml" />
+    <Content Include="Views\Shared\PageNotFound.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

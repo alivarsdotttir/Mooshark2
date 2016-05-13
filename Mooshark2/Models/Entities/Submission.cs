@@ -7,6 +7,9 @@ using Mooshark2.Models.DAL;
 
 namespace Mooshark2.Models.Entities
 {
+    /// <summary>
+    /// The class Submission contains all the informations that are needed in the database table Submissions
+    /// </summary>
     public class Submission
     {
         public int ID { get; set; }

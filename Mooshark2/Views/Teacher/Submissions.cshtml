@@ -7,17 +7,17 @@
 <h2>Submissions</h2>
 
 <div class="container-fluid">
+    <!-- SEARCH INPUT BOX FOR TABLE -->
     <div class="row">
-        <div class="col-xs-5"></div>
-        <div class="col-xs-3">
+        <div class="col-xs-10"></div>
+        <div class="col-xs-2">
             <div class="inner-addon right-addon pull-right">
                 <i class="glyphicon glyphicon-search"></i>
                 <input id="search" type="search"
                        class="form-control"
-                       placeholder="Search" />
+                       placeholder="Search"/>
             </div>
         </div>
-        <div class="col-xs-4"></div>
     </div>
 </div>
 <table class="table table-bordered table-striped" id="table">
@@ -40,10 +40,10 @@
                 <td>@last.Date</td>
                 <td>
                 @if (last.Accepted == true){
-                    @Html.ActionLink("Accepted", "SubmissionDetail", new { submissionID = last.ID, studentId = last.StudentId })
+                    @Html.ActionLink("Accepted", "SubmissionDetail", new { submissionID = last.ID, studentId = last.StudentId }, new { @class = "accepted" })
                 }
                 @if (last.Accepted == false){
-                    @Html.ActionLink("Wrong Answer", "SubmissionDetail", new { submissionID = last.ID, studentId = last.StudentId })
+                    @Html.ActionLink("Wrong Answer", "SubmissionDetail", new { submissionID = last.ID, studentId = last.StudentId }, new { @class = "wrong-answer" })
                 }
                 </td>
                 <td>@last.Grade</td>

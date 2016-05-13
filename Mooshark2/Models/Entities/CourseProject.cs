@@ -6,6 +6,10 @@ using System.Web;
 
 namespace Mooshark2.Models.Entities
 {
+    /// <summary>
+    /// The class CourseProject conteins all the informations that are needed in the database join table CourseProjects,
+    /// wich conects the table Courses with the table Projects 
+    /// </summary>
     public class CourseProject
     {
         public int ID { get; set; }
