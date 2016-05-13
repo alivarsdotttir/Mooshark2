@@ -8,6 +8,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mooshark2.Models.Entities
 {
+    /// <summary>
+    /// The class Project conteins all the informations that are needed in the database table Projects
+    /// </summary>
     public class Project
     {
         public int ID { get; set; }
