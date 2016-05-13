@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Mooshark2.Models.Entities
 {
     /// <summary>
-    /// The class InputOutput conteins all the informations that are needed in the database table InputOutputs
+    /// The class InputOutput contains all the informations that are needed in the database table InputOutputs
     /// wich conects to the table Subprojects
     /// </summary>
     public class InputOutput

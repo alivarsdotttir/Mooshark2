@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+/// <summary>
+/// This class is a View Model for the Submissions View in Teacher Controller
+/// </summary>
+
 namespace Mooshark2.Models.ViewModels.TeacherViewModels
 {
     public class TeacherSubmissionsViewmodel

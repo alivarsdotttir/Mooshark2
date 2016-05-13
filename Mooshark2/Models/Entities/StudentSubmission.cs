@@ -10,7 +10,7 @@ namespace Mooshark2.Models.Entities
 {
     /// <summary>
     /// The class StudentSubmission contains all the informations that are needed in the database table StudentSubmissions,
-    /// wich connects the table Students with the table Submissions
+    /// which connects the table Students with the table Submissions
     /// </summary>
     public class StudentSubmission
     {

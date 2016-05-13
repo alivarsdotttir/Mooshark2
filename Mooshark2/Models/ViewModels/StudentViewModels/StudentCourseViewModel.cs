@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using Mooshark2.Models.DAL;
 
+/// <summary>
+/// This class is a View Model for the Course View in Student Controller
+/// </summary>
 
 namespace Mooshark2.Models.ViewModels.StudentViewModels
 {

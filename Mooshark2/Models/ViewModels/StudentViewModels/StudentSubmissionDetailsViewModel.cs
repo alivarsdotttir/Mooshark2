@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using Mooshark2.Models.Entities;
 
+/// <summary>
+/// This class is a View Model for the Submission Details View in Student Controller
+/// </summary>
 
 namespace Mooshark2.Models.ViewModels.StudentViewModels
 {

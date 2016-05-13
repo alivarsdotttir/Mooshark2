@@ -7,6 +7,9 @@ using Mooshark2.Models.DAL;
 using Mooshark2.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 
+/// <summary>
+/// This class is a View Model for the CourseView-view in Admin Controller
+/// </summary>
 namespace Mooshark2.Models.ViewModels.AdminViewModels
 {
     public class AdminCourseViewModel
