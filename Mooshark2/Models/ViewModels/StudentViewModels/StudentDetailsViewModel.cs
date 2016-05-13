@@ -14,12 +14,12 @@ namespace Mooshark2.Models.ViewModels.StudentViewModels
         public List<Submission> projectSubmissions;
         public Course currentCourse;
 
-        public StudentDetailsViewModel(Project p, List<Subproject> sp, List<Submission> sm, Course c)
+        public StudentDetailsViewModel(Project project, List<Subproject> subs, List<Submission> submissions, Course course)
         {
-            currentProject = p;
-            subprojects = sp;
-            projectSubmissions = sm;
-            currentCourse = c;
+            currentProject = project;
+            subprojects = subs;
+            projectSubmissions = submissions;
+            currentCourse = course;
         }
 
 

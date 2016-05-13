@@ -26,7 +26,7 @@
             @if(Model.projectsForCourse != null && Model.projectsForCourse.Count() != 0) {
                 foreach(var project in Model.projectsForCourse) {
                     <tr>
-                        <td>@Model.course.Name</td>
+                        <td>@Model.currentCourse.Name</td>
                         <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
                         <td>@project.Deadline</td>
                         <td>@*project.isGroupProject*@</td>
