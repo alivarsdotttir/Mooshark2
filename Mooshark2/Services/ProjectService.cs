@@ -9,7 +9,6 @@ using System.Web.Razor.Parser.SyntaxTree;
 using Microsoft.Ajax.Utilities;
 using Mooshark2.Models.DAL;
 using Mooshark2.Models.ViewModels.TeacherViewModels;
-using Microsoft.Ajax.Utilities;
 
 namespace Mooshark2.Services
 {
