@@ -17,7 +17,7 @@ namespace Mooshark2.Tests.services
             var service = new CourseService();
 
             // Act
-             var result = service.getCoursesForStudent(studentid);
+            var result = service.getCoursesForStudent(studentid);
 
             // Assert
             int cnt = 0;
