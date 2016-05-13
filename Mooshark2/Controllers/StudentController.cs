@@ -107,16 +107,17 @@ namespace Mooshark2.Controllers
             var project = projectService.getProjectById(projectId);
             var courseId = project.CourseID;
             var course = courseService.getCourseById(courseId.Value);
+            StudentSubmitViewModel model = new StudentSubmitViewModel(project, subproject);
 
             if(file == null) {
                 ModelState.AddModelError("", "Empty submission, please choose a file.");
-                return View(subproject); 
+                return View(model); 
             }
 
             var fileName = Path.GetFileName(file.FileName);
             if(fileName.Substring(fileName.Length-4, 4) != ".cpp") {
                 ModelState.AddModelError("", "Wrong file extension.");
-                return View(subproject);
+                return View(model);
             }
 
             if (file.ContentLength > 0) {
@@ -167,7 +168,7 @@ namespace Mooshark2.Controllers
 
                 if(compileTime == 10000) {
                     ModelState.AddModelError("", "Compile time error");
-                    return View(subproject);
+                    return View(model);
                 }
 
                 if (System.IO.File.Exists(exeFilePath)) {
