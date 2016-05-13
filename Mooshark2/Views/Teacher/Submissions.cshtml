@@ -35,11 +35,11 @@
                     <td>
                         @if (Model.bestSubmissions.Accepted == true)
                         {
-                            @Html.ActionLink("Accepted", "Graded")
+                            @Html.ActionLink("Accepted", "Graded", new { userId = students.Id, subprojectId = Model.currentSubproject.ID})
                         }
                         @if (Model.bestSubmissions.Accepted == false)
                         {
-                            @Html.ActionLink("Wrong Answer", "Graded")
+                            @Html.ActionLink("Wrong Answer", "Graded", new { userId = students.Id, subprojectId = Model.currentSubproject.ID })
                         }
                     </td>
                     <td>@Model.bestSubmissions.Grade</td>

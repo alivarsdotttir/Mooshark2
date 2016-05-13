@@ -206,16 +206,21 @@ namespace Mooshark2.Controllers
 
 
         [HttpGet]
-        public ActionResult Graded(string UserId)
+        public ActionResult Graded(string userId, int subprojectId)
         {
-            if(UserId != null) {
-                ApplicationUser currentStudent = userService.getUserById(UserId);
-                var submissions = projectService.getStudentsSubmissionsForSubproject(UserId); // OMG
+            if(userId != null) {
+                ApplicationUser currentStudent = userService.getUserById(userId);
+                var submissions = projectService.getStudentsSubmissionsForSubproject(userId); // OMG
+                var subproject = projectService.getSubprojectById(subprojectId);
+                var projectId = subproject.ProjectID;
+                var project = projectService.getProjectById(projectId.Value);
 
-                //TeacherGradeStudentViewModel model = new TeacherGradeStudentViewModel();
+                TeacherGradeStudentViewModel model = new TeacherGradeStudentViewModel(currentStudent, project, submissions);
+
+                return View(model); 
             }
 
-            return View();
+            return View("NotFound");
         }
     }
 }
