@@ -181,5 +181,22 @@ namespace Mooshark2.Services
 
         }
 
+
+        public ApplicationUser ServiceEditUser(ApplicationUser model)
+        {
+            ApplicationUser user = (from item in db.Users
+                                    where item.Id == model.Id
+                                    select item).SingleOrDefault();
+
+            user.FullName = model.FullName;
+            user.UserName = model.UserName;
+            user.SSN = model.SSN;
+            user.Email = model.Email;
+            db.SaveChanges();
+
+            return user;
+
+        }
+
     }
 }

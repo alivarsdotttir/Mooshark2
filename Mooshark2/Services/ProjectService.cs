@@ -211,7 +211,7 @@ namespace Mooshark2.Services
                 var bestSubmission = (from x in db.Submissions
                                       join y in db.StudentSubmissions on x.ID equals y.SubmissionID
                                       where (subprojectID == x.SubprojectID && x.Accepted == true && student.Id == y.UserID)
-                                      orderby x.SubmissionNr descending 
+                                      orderby x.SubmissionNr descending
                                       select x).FirstOrDefault();
 
 
@@ -343,7 +343,9 @@ namespace Mooshark2.Services
         {
             if(submission != null)
             {
-                db.Submissions.AddOrUpdate();
+                Submission submissionToUpdate = db.Submissions.FirstOrDefault(x => x.ID == submission.ID);
+                submissionToUpdate.Grade = submission.Grade;
+                db.SaveChanges(); 
             }
         }
     }

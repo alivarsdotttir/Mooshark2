@@ -100,7 +100,6 @@ namespace Mooshark2.Controllers
         }
 
         [HttpPost]
-
         public ActionResult Submit(Subproject subproject, HttpPostedFileBase file)
         {   
             try { 
@@ -149,7 +148,8 @@ namespace Mooshark2.Controllers
                 submission.SubprojectID = subproject.ID;
                 submission.SubmissionNr = submissionNumber;
                 submission.FilePath = Server.MapPath(filePath);
-                submission.CppFileName = fileName; 
+                submission.CppFileName = fileName;
+                submission.StudentId = userId;
 
                 projectService.createSubmission(submission, user);
                 
@@ -233,6 +233,7 @@ namespace Mooshark2.Controllers
                 return View();
 
             }
+
             return View();
         }
 

@@ -4,13 +4,7 @@
 @using (Html.BeginForm("Submit", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     
-    @Html.HiddenFor(x => x.subproject.ID)
-    @Html.HiddenFor(x => x.subproject.Name)
-    @Html.HiddenFor(x => x.subproject.Description)
-    @Html.HiddenFor(x => x.subproject.ProjectID)
-    @Html.HiddenFor(x => x.subproject.Weight)
-    @Html.HiddenFor(x => x.subproject.Input)
-    @Html.HiddenFor(x => x.subproject.Output)
+  
 
     <div class="container-fluid">
         <div class="row">
