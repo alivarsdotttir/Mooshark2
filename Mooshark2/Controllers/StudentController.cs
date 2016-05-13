@@ -113,7 +113,7 @@ namespace Mooshark2.Controllers
 
             var fileName = Path.GetFileName(file.FileName);
             if(fileName.Substring(fileName.Length-4, 4) != ".cpp") {
-                ModelState.AddModelError("", "Wrong file extension.");
+                ModelState.AddModelError("", "Wrong file extension, file must be of type cpp.");
                 return View(model);
             }
 
