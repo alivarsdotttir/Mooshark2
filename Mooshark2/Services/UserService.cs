@@ -160,6 +160,16 @@ namespace Mooshark2.Services
             return allStudentsInCourse;
         }
 
+        public List<SelectListItem> GetAllStudentsInCourseSelectList(int courseId)
+        {
+            var allStudentsInCourse = (from user in db.Users
+                                       join c in db.CourseStudents on user.Id equals c.UserID
+                                       where c.CourseID == courseId
+                                       select user).ToList().Select(y => new SelectListItem { Value = y.Id, Text = y.FullName }).ToList();
+
+            return allStudentsInCourse;
+        }
+
         public List<AdminSelectStudentViewModel> GetAllStudentsNotInCourse(int courseId)
         {
             var allStudentsInCourse = GetAllStudentsInCourse(courseId);

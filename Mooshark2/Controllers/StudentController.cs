@@ -81,8 +81,10 @@ namespace Mooshark2.Controllers
                 var subproject = projectService.getSubprojectById(id.Value);
                 var projectId = subproject.ProjectID;
                 var project = projectService.getProjectById(projectId.Value);
+                List<ApplicationUser> students = userService.GetAllStudentsInCourse(project.CourseID.Value);
 
-                StudentSubmitViewModel model = new StudentSubmitViewModel(project, subproject); 
+                StudentSubmitViewModel model = new StudentSubmitViewModel(project, subproject, students);
+                ViewBag.Students = userService.GetAllStudentsInCourseSelectList(project.CourseID.Value);
 
                 return View(model); 
             }
@@ -103,8 +105,10 @@ namespace Mooshark2.Controllers
             var project = projectService.getProjectById(projectId);
             var courseId = project.CourseID;
             var course = courseService.getCourseById(courseId.Value);
+            List<ApplicationUser> students = userService.GetAllStudentsInCourse(project.CourseID.Value);
+            ViewBag.Students = userService.GetAllStudentsInCourseSelectList(project.CourseID.Value);
 
-            StudentSubmitViewModel model = new StudentSubmitViewModel(project, subproject);
+            StudentSubmitViewModel model = new StudentSubmitViewModel(project, subproject, students);
 
             if(file == null) {
                 ModelState.AddModelError("", "Empty submission, please choose a file.");
