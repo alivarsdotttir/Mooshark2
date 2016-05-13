@@ -48,7 +48,7 @@
                         <p>@Model.subprojects[i].Description</p>
                     </div>
                     <div id="Adminbutt">
-                        @Html.ActionLink("Student's submissions", "Submissions", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-default AdminButtons" })
+                        @Html.ActionLink("Student's submissions", "Submissions", new { subprojectId = Model.subprojects[i].ID }, new { @class = "btn btn-default AdminButtons" })
                         @Html.ActionLink("Edit subproject", "EditSubproject", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-default" })
                     </div>
                     <div>
