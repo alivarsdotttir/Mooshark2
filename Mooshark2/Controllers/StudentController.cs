@@ -196,14 +196,14 @@ namespace Mooshark2.Controllers
                         outputReader.Dispose();
 
                         string correctOutput = subproject.Output.ToString();
-                        //removing \n\r from the back of the input
+                        //removing \n\r from the back of the input so that it's comparable
                         if(programOutput.Length > 2) {
-                            string programOutputCorrect = programOutput.Remove(programOutput.Length - 2);
+                            string programOutputCorrected = programOutput.Remove(programOutput.Length - 2);
 
                             //Create ViewModel, to be sent to SubmissionDetails view
                             submission.Output = programOutput;
 
-                            if(string.Compare(programOutputCorrect, correctOutput) == 0) {
+                            if(string.Compare(programOutputCorrected, correctOutput) == 0) {
                                 submission.Accepted = true;
                                 submission.Grade = 10;
                             }
