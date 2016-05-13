@@ -159,10 +159,9 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult EditSubproject(Subproject subproject)
         {
-            if (ModelState.IsValid)
-            {
-                
-                return RedirectToAction("Index");
+            if (ModelState.IsValid) {
+                Subproject sub = projectService.ServiceEditSubproject(subproject);
+                return RedirectToAction("ProjectDetails", new { id = sub.ProjectID });
             }
 
             return View(subproject);

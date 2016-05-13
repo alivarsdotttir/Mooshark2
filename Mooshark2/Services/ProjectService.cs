@@ -298,5 +298,20 @@ namespace Mooshark2.Services
                               select x).FirstOrDefault();
             return io; 
         }
+
+        public Subproject ServiceEditSubproject(Subproject model)
+        {
+            Subproject subproject = (from item in db.Subprojects
+                                     where item.ID == model.ID
+                                     select item).SingleOrDefault();
+            subproject.Name = model.Name;
+            subproject.Description = model.Description;
+            subproject.Grade = model.Grade;
+            subproject.Input = model.Input;
+            subproject.Output = model.Output;
+            db.SaveChanges();
+
+            return subproject;
+        }
     }
 }
