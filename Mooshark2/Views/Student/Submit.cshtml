@@ -12,20 +12,24 @@
     @Html.HiddenFor(x => x.subproject.Input)
     @Html.HiddenFor(x => x.subproject.Output)
 
-    <div class="jumbotron">
-        <div class="row">
-            <div class="col-sm-8">
+
+    <div class="row">
+        <div class="jumbotron">
+            <div>
                 <h2>Submit your solution to @Model.subproject.Name</h2>
                 @Html.ValidationSummary()
-                <input type="file" name="file" class="btn btn-lg" /><br />
-            </div>
-            <div class="col-sm-4">
-                <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-lg AdminButtons" />
+                <input type="file" name="file" class="btn btn-lg"/><br/>
             </div>
         </div>
-    </div>    
+    </div>
+    <div ="row">
+        <div class="col-sm-10"></div>
+        <div class="col-sm-2">
+            <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-lg AdminButtons"/>
+        </div>
+    </div>
 }
 
 <div>
-    @Html.ActionLink("Back to Project", "ProjectDetails", new { id = Model.project.ID }, new { @class ="btn btn-default"})
+    @Html.ActionLink("Back to Project", "ProjectDetails", new { id = Model.currentProject.ID }, new { @class ="btn btn-default"})
 </div>

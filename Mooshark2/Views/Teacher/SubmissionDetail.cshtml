@@ -3,7 +3,19 @@
     ViewBag.Title = "SubmissionDetail";
 }
 
-<h2>@Model.currentProject.Name</h2>
+<h2>@Model.currentSubproject.Name</h2>
 
-@Model.currentStudent.FullName
-@Model.currentProject.Grade.ToString()
+<p>Input: <br /> 
+    @Model.currentSubproject.Input</p>
+
+<p>Your output: <br />
+    @Model.currentSubproject.Output</p>
+
+
+<p>Expected output: <br/>
+    @Model.currentSubproject.Output</p>
+
+<form>
+    @Html.EditorFor(model => model.currentSubmission.Grade, new { htmlAttributes = new { @class = "form-control" } })
+    <input type="submit" name="Submit" id="Submit" value="Update Grade" class="btn btn-lg AdminButtons" />
+</form>

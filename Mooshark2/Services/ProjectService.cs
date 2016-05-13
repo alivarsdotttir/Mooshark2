@@ -9,6 +9,7 @@ using System.Web.Razor.Parser.SyntaxTree;
 using Microsoft.Ajax.Utilities;
 using Mooshark2.Models.DAL;
 using Mooshark2.Models.ViewModels.TeacherViewModels;
+using Microsoft.Ajax.Utilities;
 
 namespace Mooshark2.Services
 {
@@ -205,14 +206,17 @@ namespace Mooshark2.Services
         {
             var sub = new List<Submission>();
 
-            foreach(var student in getStudentsThatHaveSubmitted(subprojectID)) {
-                    var bestSubmission = (from x in db.Submissions
+            foreach (var student in getStudentsThatHaveSubmitted(subprojectID))
+            {
+                var bestSubmission = (from x in db.Submissions
                                       join y in db.StudentSubmissions on x.ID equals y.SubmissionID
                                       join z in db.Users on y.UserID equals z.Id
                                       where (subprojectID == x.SubprojectID && x.Accepted == true)
                                       select x).FirstOrDefault();
 
-                if (bestSubmission == null) {
+
+                if (bestSubmission == null)
+                {
                     sub.Add(getLastSubmissionForStudents(subprojectID));
                 }
                 else {
@@ -285,6 +289,7 @@ namespace Mooshark2.Services
                                                    join y in db.StudentSubmissions on x.Id equals y.UserID
                                                    join z in db.Submissions on y.SubmissionID equals z.ID
                                                    where x.Id == studentID
+                                                   orderby z.SubmissionNr descending
                                                    select y.Submission) as IEnumerable<Submission>;  // OMG
 
             if(submissions != null) {
@@ -300,6 +305,64 @@ namespace Mooshark2.Services
                               where x.SubprojectID == subprojectId
                               select x).FirstOrDefault();
             return io; 
+        }
+
+        public Subproject ServiceEditSubproject(Subproject model)
+        {
+            Subproject subproject = (from item in db.Subprojects
+                where item.ID == model.ID
+                select item).SingleOrDefault();
+            subproject.Name = model.Name;
+            subproject.Description = model.Description;
+            subproject.Grade = model.Grade;
+            subproject.Input = model.Input;
+            subproject.Output = model.Output;
+            db.SaveChanges();
+
+            return subproject;
+        }
+
+
+        public Project ServiceEditProject(Project model)
+        {
+            Project project = (from item in db.Projects
+                               where item.ID == model.ID
+                               select item).SingleOrDefault();
+
+            //project.Course = model.Course;
+            //project.CourseID = model.CourseID;
+            project.Deadline = model.Deadline;
+            //project.Grade = model.Grade;
+            //project.Graded = model.Graded;
+            project.GroupSize = model.GroupSize;
+            //project.IsGroupProject = model.IsGroupProject;
+            project.Name = model.Name;
+            project.Visibility = model.Visibility;
+            db.SaveChanges();
+
+            return project;
+        }
+
+        public List<ApplicationUser> getStudentBySubmission(List<Submission> submissions)
+        {
+            List<ApplicationUser> users = new List<ApplicationUser>(); 
+            foreach(var sub in submissions){
+                var u = (from x in db.Users
+                         join y in db.StudentSubmissions on x.Id equals y.UserID
+                         where sub.ID == y.SubmissionID
+                         select x).FirstOrDefault();
+                users.Add(u); 
+            }
+            
+            return users; 
+        }
+
+        public void updateGrade(Submission submission)
+        {
+            if(submission != null)
+            {
+                db.Submissions.AddOrUpdate();
+            }
         }
     }
 }

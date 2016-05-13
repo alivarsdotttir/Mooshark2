@@ -288,6 +288,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
+    <Content Include="Scripts\jquery.countdown.js" />
+    <Content Include="Scripts\jquery.countdown.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -358,6 +360,7 @@
     <Content Include="Views\Teacher\EditSubproject.cshtml" />
     <Content Include="Views\TeacherLOL\ViewPRUFA.cshtml" />
     <Content Include="Views\Teacher\StudentSubmissions.cshtml" />
+    <Content Include="Views\Teacher\EditProject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

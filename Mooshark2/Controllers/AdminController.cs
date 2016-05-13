@@ -46,7 +46,7 @@ namespace Mooshark2.Controllers
                 return RedirectToAction("Index");
             }
             else {
-               ViewBag.Teachers = userService.GetAllTeachers();
+                ViewBag.Teachers = userService.GetAllTeachers();
                 var students = userService.GetAllStudentsUsers();
 
                 AdminCourseViewModel m = new AdminCourseViewModel(students);
@@ -55,36 +55,34 @@ namespace Mooshark2.Controllers
             }
         }
 
+
         [HttpGet]
         public ActionResult Edit(int? id)
         {
 
-            if (id.HasValue)
-            {
-                
+            if (id.HasValue) {
                 Course course = (from item in db.Courses
-                    where item.ID == id.Value
-                    select item).SingleOrDefault();
+                                    where item.ID == id.Value
+                                    select item).SingleOrDefault();
                 
-                if (course == null)
-                {
+                if (course == null) {
                     return View("NotFound");
                 }
                 
                 ViewBag.TeachersNotInCourse = userService.GetAllTeachersNotInCourse(course.ID);
-                var StudentsNotInCourse = userService.GetAllStudentsNotInCourse(course.ID);
+                var studentsNotInCourse = userService.GetAllStudentsNotInCourse(course.ID);
                 var teachers = userService.GetAllTeachersInCourse(course.ID);
                 var students = userService.GetAllStudentsInCourse(course.ID);
 
-                AdminCourseViewModel model = new AdminCourseViewModel(course, teachers, students, StudentsNotInCourse);
+                AdminCourseViewModel model = new AdminCourseViewModel(course, teachers, students, studentsNotInCourse);
                 
-                    return View(model);
+                return View(model);
             }
-            else
-            {
+            else {
                 return View("NotFound");
             }
         }
+
 
         [HttpPost]
         public ActionResult Edit(AdminCourseViewModel model)
@@ -94,16 +92,15 @@ namespace Mooshark2.Controllers
                 courseService.ServiceEditCourse(model);
 
                 ViewBag.TeachersNotInCourse = userService.GetAllTeachersNotInCourse(model.Course.ID);
-                var StudentsNotInCourse = userService.GetAllStudentsNotInCourse(model.Course.ID);
+                var studentsNotInCourse = userService.GetAllStudentsNotInCourse(model.Course.ID);
                 var teachers = userService.GetAllTeachersInCourse(model.Course.ID);
                 var students = userService.GetAllStudentsInCourse(model.Course.ID);
 
-                AdminCourseViewModel newModel = new AdminCourseViewModel(model.Course, teachers, students, StudentsNotInCourse);
+                AdminCourseViewModel newModel = new AdminCourseViewModel(model.Course, teachers, students, studentsNotInCourse);
 
                 return View(newModel);
             }
-            else
-            {
+            else {
                 return View("NotFound");
             }
         }
@@ -113,9 +110,7 @@ namespace Mooshark2.Controllers
         public ActionResult RemoveTeacherFromCourse(string userId, int courseId)
         {
             if(userId != null) {
-
                 courseService.RemoveTeacherFromCourse(userId, courseId);
-    
             }
             
             return RedirectToAction("Edit", new { id = courseId });
@@ -130,8 +125,8 @@ namespace Mooshark2.Controllers
             }
 
             return RedirectToAction("Edit", new { id = courseId });
-
         }
+
 
         public ActionResult UserEditList()
         {
@@ -144,47 +139,38 @@ namespace Mooshark2.Controllers
         [HttpGet]
         public ActionResult EditUser(string id)
         {
-            if (id != null)
-            {
-
+            if (id != null) {
                 ApplicationUser user = (from item in db.Users
-                                 where item.Id == id
-                                 select item).SingleOrDefault();
+                                        where item.Id == id
+                                        select item).SingleOrDefault();
 
-                if (user == null)
-                {
+                if (user == null) {
                     return View("NotFound");
                 }
 
                 return View(user);
             }
-            else
-            {
+            else {
                 return View("NotFound");
             }
         }
+
 
         [HttpPost]
         public ActionResult EditUser(ApplicationUser user)
         {
-            if (user != null)
-            {
+            if (user != null) {
                 ApplicationUser model = (from item in db.Users
-                                where item.Id == user.Id
-                                select item).SingleOrDefault();
+                                        where item.Id == user.Id
+                                        select item).SingleOrDefault();
                
-             //   model. = course.Name;
-            //    model.Active = course.Active;
-
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
-            else
-            {
+            else {
                 return View("NotFound");
             }
         }
-
     }
 }

@@ -34,8 +34,7 @@ namespace Mooshark2.Controllers
 
         public ActionResult Course(int? id)
         {
-            if(id != null)
-            {
+            if(id != null) {
                 var course = courseService.getCourseById(id.Value); 
                 var projects = projectService.getProjectsForCourse(id.Value);
                 var teachers = courseService.getTeachersForCourse(id.Value);
@@ -51,18 +50,15 @@ namespace Mooshark2.Controllers
 
         public ActionResult ProjectDetails(int? id)
         {
-            if(id != null)
-            {
+            if(id != null) {
                 var project = projectService.getProjectById(id.Value);
                 var subprojects = projectService.getSubprojects(id.Value);
                 var courseID = project.CourseID;
                 var course = courseService.getCourseById(courseID.Value);
 
                 List<Submission> submissions = null; 
-                foreach(Subproject sub in subprojects)
-                {
-                    if (submissions == null)
-                    {
+                foreach(Subproject sub in subprojects) {
+                    if (submissions == null) {
                         submissions = projectService.getSubmissions(sub.ID);
                     }
                     else {
@@ -107,6 +103,7 @@ namespace Mooshark2.Controllers
             var project = projectService.getProjectById(projectId);
             var courseId = project.CourseID;
             var course = courseService.getCourseById(courseId.Value);
+
             StudentSubmitViewModel model = new StudentSubmitViewModel(project, subproject);
 
             if(file == null) {
@@ -116,7 +113,7 @@ namespace Mooshark2.Controllers
 
             var fileName = Path.GetFileName(file.FileName);
             if(fileName.Substring(fileName.Length-4, 4) != ".cpp") {
-                ModelState.AddModelError("", "Wrong file extension.");
+                ModelState.AddModelError("", "Wrong file extension, file must be of type cpp.");
                 return View(model);
             }
 

@@ -15,15 +15,18 @@
         </div>
     </div>
     <div class="col-sm-4">
-        @*<div id="countdown">@((Model.currentProject.Deadline) - DateTime.Now)</div>*@
+        <div id="clock"></div>
+        @*<div id="countdown">@(DateTime.Now - (Model.currentProject.Deadline))</div>*@
     </div>
 </div>
+
+<!--    Subproject's tabs    -->
 
 <div class="container">
     <ul class="nav nav-tabs">
         @if (Model.subprojects != null && Model.subprojects.Count != 0)
         {
-            <li class="active"><a href="#menu-1">Part 1</a></li>
+            <li><a href="#menu-1">Part 1</a></li>
             for (int i = 2; i < Model.subprojects.Count + 1; i++)
             {
                 <li><a href="#menu-@i">Part @i</a></li>
@@ -31,116 +34,96 @@
         }
     </ul>
 
-
     <div class="tab-content">
         @if (Model.subprojects != null)
-        {
-            for (int i = 0; i < Model.subprojects.Count; i++)
             {
-                <div id="menu-@(i+1)" class="tab-pane fade in active">
-                    <div class="container">
-                        <div class="page-header">
-                            <h3>@Model.subprojects[i].Name</h3>
+                for (int i = 0; i < Model.subprojects.Count; i++)
+                {
+                <div id="menu-@(i + 1)" class="tab-pane fade">
+                    <div class="container-fluid">
+                        <div class="row ">
+                            <!--    SUBPROJECT'S DESCRIPTION & SUBMIT BUTTON   -->
+                            <div class="container col-sm-9">
+                                <div class="page-header">
+                                    <h3>@Model.subprojects[i].Name</h3>
+                                </div>
+                                <p>@Model.subprojects[i].Description</p>
+                            </div>
+                            <div class="col-sm-3" id="Adminbutt">
+                                @Html.ActionLink("Submit", "Submit", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-default btn-lg AdminButtons" })
+                            </div>
                         </div>
-                        <p>@Model.subprojects[i].Description</p>
-                    </div>
-                    <div id="Adminbutt">
-                        @Html.ActionLink("Submit", "Submit", new { id = Model.subprojects[i].ID }, new { @class = "btn btn-success" })
-                    </div>
 
-
-                    <div class="col-xs-6">
-                        <div class="right-inner-addon">
-                            <i class="glyphicon glyphicon-search"></i>
-                            <input id="search" type="search"
-                                   class="form-control"
-                                   placeholder="Search" />
+                        <!--   SEARCH INPUT BOX FOR TABLE   -->
+                        <div class="row">
+                            <div class="col-xs-8"></div>
+                            <div class="col-xs-4">
+                                <div class="inner-addon right-addon pull-right">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                    <input id="search" type="search"
+                                           class="form-control"
+                                           placeholder="Search" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div>
+
                         <!-- SUBMISSION TABLE -->
-                        <table class="table table-bordered table-striped" id="table">
-                            <thead>
-                                <tr>
-                                    <td>#</td>
-                                    <td>Result</td>
-                                    <td>Submission time</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var submission in Model.projectSubmissions){
-                                    if (submission.SubprojectID == Model.subprojects[i].ID){
+                        <div class="">
+                            <table class="table table-bordered table-striped" id="table">
+                                <thead>
                                     <tr>
-                                        <td>@Html.ActionLink(submission.SubmissionNr.ToString(), "SubmissionDetails", new { submissionID = submission.ID })</td>
-                                        @if (submission.Accepted == true)
-                                        {
-                                            <td>@Html.ActionLink("Accepted", "SubmissionDetails", new { submissionID = submission.ID })</td>
-                                        }
-                                        @if (submission.Accepted == false)
-                                        {
-                                            <td>@Html.ActionLink("Wrong answer", "SubmissionDetails", new { submissionID = submission.ID })</td>
-                                        }
-                                        <td>@submission.Date</td>
+                                        <td>#</td>
+                                        <td>Result</td>
+                                        <td>Submission time</td>
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var submission in Model.projectSubmissions)
+                                    {
+                                        if (submission.SubprojectID == Model.subprojects[i].ID)
+                                        {
+                                            <tr>
+                                                <td>@Html.ActionLink(submission.SubmissionNr.ToString(), "SubmissionDetails", new { submissionID = submission.ID })</td>
+                                                @if (submission.Accepted == true)
+                                                {
+                                                    <td>@Html.ActionLink("Accepted", "SubmissionDetails", new { submissionID = submission.ID })</td>
+                                                }
+                                                @if (submission.Accepted == false)
+                                                {
+                                                    <td>@Html.ActionLink("Wrong answer", "SubmissionDetails", new { submissionID = submission.ID })</td>
+                                                }
+                                                <td>@submission.Date</td>
+                                            </tr>
+                                        }
                                     }
-                                }
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             }
         }
     </div>
+
+
+    <script type="text/javascript">
+        $('#clock').countdown(" @Model.currentProject.Deadline ", function (event) {
+        $(this).html(event.strftime('%w weeks %d days %H:%M:%S'));
+      });
+    </script>
+
+
+    <script>
+        $(document)
+            .ready(function () {
+                $(".nav-tabs a")
+                    .click(function () {
+                        $(this).tab('show');
+                    });
+            });
+    </script>
+
+    <div class="row top-buffer">
+        @Html.ActionLink("Back to Course", "Course", new { id = Model.currentProject.CourseID }, new { @class = "btn btn-default" })
+    </div>
 </div>
-
-<script>
-    $(document)
-        .ready(function() {
-            $(".nav-tabs a")
-                .click(function() {
-                    $(this).tab('show');
-                });
-        });
-</script>
-
-<div class="row top-buffer">
-    @Html.ActionLink("Back to Course", "Course", new { id = Model.currentProject.CourseID }, new { @class = "btn btn-default" })
-</div>
-
-
-
-
-@*<h2>@Model.currentProject.Name</h2>
-
-<div id='jqxTabs'>
-    <ul style='margin-left: 20px;'>
-    @for (int i = 1; i < Model.subprojects.Count()+1; i++) {
-        <li>Tab @i</li>
-    }
-    </ul>
-</div>
-
-    <div>
-        @foreach (var subproject in Model.subprojects) {
-            <div>
-                <h3>@subproject.Name</h3>
-                <p>@subproject.Description</p>
-                @Html.ActionLink("Submit", "Submit", new { id = subproject.ID }, new { @class="btn btn-success" })
-            </div>
-        }
-   </div>
-
-        <div>
-            <p>Deadline: @Model.currentProject.Deadline</p>
-            <p>Time until deadline: @((Model.currentProject.Deadline) - DateTime.Now)</p>
-        </div>
-
-        @Html.ActionLink("Back to course", "Course", new { id = Model.currentCourse.ID }, new { @class="btn btn-default" })
-
-
-<script type="text/javascript">
-    $(document)
-        .ready(function() {
-            $('#jqxTabs').jqxTabs({ width: 550, height: 150 });
-        });
-</script>*@
