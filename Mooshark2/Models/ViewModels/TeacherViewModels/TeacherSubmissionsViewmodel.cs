@@ -11,17 +11,17 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
     {
         public IEnumerable<Submission> allSubmissionsForSubproject;
         public IEnumerable<ApplicationUser> studentsThatHaveSubmitted;
-        public IEnumerable<StudentSubmission> lastSubmissions;
-        public IEnumerable<Submission> bestSubmissions;
+        //public IEnumerable<StudentSubmission> lastSubmissions;
+        public List<Submission> bestSubmissions;
         public Subproject currentSubproject;
 
-        public TeacherSubmissionsViewmodel(IEnumerable<Submission> all, IEnumerable<ApplicationUser> stuSub, IEnumerable<Submission> mReSub, Subproject subPro, IEnumerable<StudentSubmission> last)
+        public TeacherSubmissionsViewmodel(IEnumerable<Submission> all, IEnumerable<ApplicationUser> stuSub, List<Submission> best, Subproject subPro)
         {
             allSubmissionsForSubproject = all;
             studentsThatHaveSubmitted = stuSub;
-            bestSubmissions = mReSub;
+            bestSubmissions = best;
             currentSubproject = subPro;
-            lastSubmissions = last;
+            //lastSubmissions = last;
         }
     }
 }

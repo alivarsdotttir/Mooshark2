@@ -102,13 +102,14 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult CreateSubproject(Subproject model)
         {
-            bool subproject = projectService.ServiceCreateSubproject(model);
             if(model.Name == null || model.Description == null || model.Input == null || model.Output == null) {
                 ModelState.AddModelError("", "You must fill in all the input fields");
                 ViewBag.Course = model.ProjectID;
 
                 return View();
             }
+
+            bool subproject = projectService.ServiceCreateSubproject(model);
 
             if (subproject) {
                 return RedirectToAction("ProjectDetails", new { id = model.ProjectID });
@@ -189,13 +190,13 @@ namespace Mooshark2.Controllers
             if(subprojectId != null) {
 
                 var studentsThatHaveSubmitted = projectService.getStudentsThatHaveSubmitted(subprojectId.Value);
-                var lastSubmission = projectService.getLastSubmissionForStudents();
+                //var lastSubmission = projectService.getLastSubmissionForStudents(subprojectId.Value);
                 var bestSubmissions = projectService.getStudentsBestSubmission(subprojectId.Value);
                 var allSubmissionsForSubproject = projectService.getSubmissions(subprojectId.Value);
                 var subprojectName = projectService.getSubprojectById(subprojectId.Value);
 
                 TeacherSubmissionsViewmodel model = new TeacherSubmissionsViewmodel(allSubmissionsForSubproject,
-                    studentsThatHaveSubmitted, bestSubmissions, subprojectName, lastSubmission);
+                    studentsThatHaveSubmitted, bestSubmissions, subprojectName);
 
                 return View(model);
             }
