@@ -12,6 +12,13 @@ using Mooshark2.Models.Entities;
 
 namespace Mooshark2.Controllers
 {
+    /// <summary>
+    ///  The TeacherController handels all comunications between the teacher and the program.
+    ///  It provides the teacher with input by making tha right views shown in the right place on the screen.
+    ///  It recives the teacher output and translates it in to the appropriate message to pass to the views needed.
+    ///  It inherits from BaseController.cs
+    /// </summary>
+    
     public class TeacherController : BaseController
     {
 
@@ -238,7 +245,6 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult SubmissionDetail(TeacherSubmissionsDetailViewModel model)
         {
-
             return RedirectToAction("Submissions", model.currentSubproject.ID); 
         }
     }
