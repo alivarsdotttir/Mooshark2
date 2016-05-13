@@ -189,12 +189,13 @@ namespace Mooshark2.Controllers
             if(subprojectId != null) {
 
                 var studentsThatHaveSubmitted = projectService.getStudentsThatHaveSubmitted(subprojectId.Value);
+                var lastSubmission = projectService.getLastSubmissionForStudents();
                 var bestSubmissions = projectService.getStudentsBestSubmission(subprojectId.Value);
                 var allSubmissionsForSubproject = projectService.getSubmissions(subprojectId.Value);
                 var subprojectName = projectService.getSubprojectById(subprojectId.Value);
 
                 TeacherSubmissionsViewmodel model = new TeacherSubmissionsViewmodel(allSubmissionsForSubproject,
-                    studentsThatHaveSubmitted, bestSubmissions, subprojectName);
+                    studentsThatHaveSubmitted, bestSubmissions, subprojectName, lastSubmission);
 
                 return View(model);
             }
