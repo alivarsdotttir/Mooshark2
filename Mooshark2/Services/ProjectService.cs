@@ -352,12 +352,12 @@ namespace Mooshark2.Services
             return users; 
         }
 
-        public void updateGrade(Submission submission)
+        public void updateGrade(TeacherSubmissionsDetailViewModel model)
         {
-            if(submission != null)
+            if(model.currentSubmission != null)
             {
-                Submission submissionToUpdate = db.Submissions.FirstOrDefault(x => x.ID == submission.ID);
-                submissionToUpdate.Grade = submission.Grade;
+                Submission submissionToUpdate = db.Submissions.FirstOrDefault(x => x.ID == model.currentSubmission.ID);
+                submissionToUpdate.Grade =model.currentSubmission.Grade;
                 db.SaveChanges(); 
             }
         }

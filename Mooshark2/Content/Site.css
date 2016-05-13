@@ -108,7 +108,7 @@ div.modal-dialog {
     color: rgb(118, 210, 49);
 }
 
-#wrong-answer {
+.wrong-answer {
     color: red;
 }
 
