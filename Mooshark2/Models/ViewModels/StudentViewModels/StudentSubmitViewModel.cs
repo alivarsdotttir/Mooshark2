@@ -8,13 +8,13 @@ namespace Mooshark2.Models.ViewModels.StudentViewModels
 {
     public class StudentSubmitViewModel
     {
-        public Project project;
+        public Project currentProject;
         public Subproject subproject; 
 
-        public StudentSubmitViewModel(Project p, Subproject sp)
+        public StudentSubmitViewModel(Project project, Subproject subp)
         {
-            project = p;
-            subproject = sp; 
+            currentProject = project;
+            subproject = subp; 
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿@using Mooshark2.Models.Entities
-@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherIndexViewmodel
+﻿@model Mooshark2.Models.ViewModels.TeacherViewModels.TeacherIndexViewmodel
 @{ 
     ViewBag.Title = "Index";
 }
@@ -8,52 +7,63 @@
     <p>Create projects, grade and update!</p>
 </div>
 
-<div class="col-xs-6">
-    <div class="right-inner-addon">
-        <i class="glyphicon glyphicon-search"></i>
-        <input id="search" type="search"
-               class="form-control"
-               placeholder="Search" />
-    </div>
-</div>
+<!--   SEARCH INPUT BOX FOR TABLE   -->
 <div class="row">
-    <div class="col-md-8 table-scoll">
+    <div class="col-xs-5"></div>
+    <div class="col-xs-3">
+        <div class="inner-addon right-addon pull-right">
+            <i class="glyphicon glyphicon-search"></i>
+            <input id="search" type="search"
+                   class="form-control"
+                   placeholder="Search"/>
+        </div>
+    </div>
+    <div class="col-xs-4"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
         <h4>Ungraded Projects</h4>
-        <table class="table table-bordered table-striped" id="table">
-            <caption></caption>
-            <thead>
-            <tr>
-                <th>Course</th>
-                <th>Assignment</th>
-                <th>Deadline</th>
-                <th>Group</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach(var project in Model.ungradedProjects) {
-                <tr>
-                    <td>@Html.ActionLink(Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name, "Course", new { id = project.CourseID })</td> 
-                    <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
-                    <td>@project.Deadline</td>
-                    @if(project.IsGroupProject == true) {
-                        <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px"/></td>
+        <div class="table-scoll">
+            <table class="table table-bordered table-striped" id="table">
+                <caption></caption>
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Assignment</th>
+                        <th>Deadline</th>
+                        <th>Group</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var project in Model.ungradedProjects)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name, "Course", new { id = project.CourseID })</td>
+                            <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
+                            <td>@project.Deadline</td>
+                            @if (project.IsGroupProject == true)
+                            {
+                                <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px" /></td>
+                            }
+                            @if (project.IsGroupProject == false)
+                            {
+                                <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px" /></td>
+                            }
+                        </tr>
                     }
-                    @if(project.IsGroupProject == false) {
-                        <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px"/></td>
-                    }
-                </tr>
-            }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="col-md-4">
-          <h4>My courses</h4>
-            <div class="list-group">
+        <h4>My courses</h4>
+        <div class="list-group">
             @foreach (var course in Model.coursesForTeacher)
-            {
+        {
                 <a class="list-group-item" href="/Teacher/Course/@course.ID">@course.Name</a>
             }
-            </div>
         </div>
+    </div>
 </div>

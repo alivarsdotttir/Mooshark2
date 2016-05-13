@@ -1,10 +1,10 @@
 ﻿@model Mooshark2.Models.Entities.Project
 
 @{
-    ViewBag.Title = "Create Project";
+    ViewBag.Title = "CreateProject";
 }
 
-<h2>Create Project</h2>
+<h2>CreateProject</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -21,15 +21,13 @@
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
-            <label for="Deadline" class="col-md-2 control-label">Deadline</label>
-            <div class="input-group date form_datetime col-md-3" id="deadline" data-date="20/10/2016T13:37:30Z" data-date-format="dd/mm/yyyy hh:mm:ss" data-link-field="dtp_input1">
-                <input class="form-control" size="16" type="text" value="" readonly>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+            @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
             </div>
-            @Html.TextBoxFor(m => m.Deadline, new { style = "display: none;", id = "dtp_input1" })
-            <input type="hidden" id="dtp_input1" value="Deadline"/><br/>
         </div>
 
         <div class="form-group">
@@ -54,48 +52,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Next step" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-<div id="Adminbutt">
-    @Html.ActionLink("Back to main page", "Index", "Teacher", null, new { @class = "btn btn-default" })
+<div>
+    @Html.ActionLink("Back to List", "Index")
 </div>
-
-<script type="text/javascript">
-    $('.form_datetime')
-        .datetimepicker({
-            //language:  'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            forceParse: 0,
-            showMeridian: 1
-    });
-    $('.form_date').datetimepicker({
-        //language: 'fr',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-    });
-    $('.form_time').datetimepicker({
-        //language: 'fr',
-        weekStart: 1,
-        todayBtn: 1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 1,
-        minView: 0,
-        maxView: 1,
-        forceParse: 0
-    });
-
-</script>

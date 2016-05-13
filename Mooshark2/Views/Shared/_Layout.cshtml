@@ -13,9 +13,12 @@
     <script type="text/javascript" src="~/Scripts/jquery-1.8.3.min.js" charset="UTF-8"></script>
     <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/scripts/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="~/scripts/jquery.countdown.min.js" charset="UTF-8"></script>
+    <script src="~/scripts/jquery.countdown.js"></script>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-
+    
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/Scripts/modernizr-2.6.2.js")
     @Scripts.Render("~/bundles/modernizr")
@@ -48,19 +51,25 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        <hr/>
         <footer>
             <p>&copy; @DateTime.Now.Year - Mooshark</p>
         </footer>
     </div>
 
+    <script src="~/scripts/jquery.countdown.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
 
-
+<div id="getting-started"></div>
+<script type="text/javascript">
+  $('#getting-started').countdown('2015/01/01', function(event) {
+    $(this).html(event.strftime('%w weeks %d days %H:%M:%S'));
+  });
+</script>
 <script type="text/javascript">
 
     // Write on keyup event of keyword input element

@@ -13,11 +13,11 @@ namespace Mooshark2.Models.ViewModels.StudentViewModels
         public IEnumerable<Course> coursesForProjects;
         public IEnumerable<Course> coursesForStudents;
 
-        public StudentIndexViewModel(IEnumerable<Project> p, IEnumerable<Course> cfp, IEnumerable<Course> c)
+        public StudentIndexViewModel(IEnumerable<Project> projects, IEnumerable<Course> coursesForP, IEnumerable<Course> coursesForS)
         {
-            upcomingProjects = p;
-            coursesForProjects = cfp; 
-            coursesForStudents = c; 
+            upcomingProjects = projects;
+            coursesForProjects = coursesForP; 
+            coursesForStudents = coursesForS; 
         }
     }
 }
