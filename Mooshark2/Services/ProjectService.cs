@@ -210,8 +210,8 @@ namespace Mooshark2.Services
             {
                 var bestSubmission = (from x in db.Submissions
                                       join y in db.StudentSubmissions on x.ID equals y.SubmissionID
-                                      join z in db.Users on y.UserID equals z.Id
-                                      where (subprojectID == x.SubprojectID && x.Accepted == true)
+                                      where (subprojectID == x.SubprojectID && x.Accepted == true && student.Id == y.UserID)
+                                      orderby x.SubmissionNr descending
                                       select x).FirstOrDefault();
 
 
@@ -236,19 +236,6 @@ namespace Mooshark2.Services
                                      where z.SubprojectID == subprojectID
                                      select x).ToList().DistinctBy(d => d.Id);
 
-
-
-
-            /*var lastSubmission = db.StudentSubmissions.GroupBy(x => x.UserID).Select(s => s.Key);*/
-
-
-
-            /*IEnumerable<ApplicationUser>submitedStudents = ( from x in db.Groups
-                                                        join y in db.ProjectGroups on x.ID equals y.GroupID
-                                                        join z in db.ProjectSubprojects on y.ProjectID equals z.ProjectID
-                                                        join w in db.Submissions on z.SubprojectID equals w.SubprojectID
-                                                        where x.UserID == userID && w.ID != 0
-                                                        select x) as IEnumerable<ApplicationUser>;*/
             return submittedStudents;
         }
 
@@ -361,8 +348,28 @@ namespace Mooshark2.Services
         {
             if(submission != null)
             {
-                db.Submissions.AddOrUpdate();
+                Submission submissionToUpdate = db.Submissions.FirstOrDefault(x => x.ID == submission.ID);
+                submissionToUpdate.Grade = submission.Grade;
+                db.SaveChanges(); 
             }
+        }
+
+        public double getGrade(int projectId, ApplicationUser student) {
+            var subprojects = getSubprojects(projectId);
+            var combinedPoints = 0; 
+
+            foreach(var subp in subprojects) {
+                var bestSubmission = (from x in db.Submissions
+                                      join y in db.StudentSubmissions on x.ID equals y.SubmissionID
+                                      where (subp.ID == x.SubprojectID && x.Accepted == true && student.Id == y.UserID)
+                                      orderby x.SubmissionNr descending
+                                      select x).FirstOrDefault();
+
+                combinedPoints += bestSubmission.Grade;
+            }
+            var grade = combinedPoints / subprojects.Count;
+
+            return grade;
         }
     }
 }

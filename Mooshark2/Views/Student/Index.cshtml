@@ -34,7 +34,7 @@
                         <th>Course</th>
                         <th>Assignment</th>
                         <th>Deadline</th>
-                        <th>Type</th>
+                        <th>Group</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,7 +45,14 @@
                             <td>@Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name</td>
                             <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
                             <td>@project.Deadline</td>
-                            <td><!--project.isGroupProject--></td>
+                            @if (project.IsGroupProject == true)
+                            {
+                                <td><img alt="Solo" src="~/Images/group.png" width="20px" height="20px" /></td>
+                            }
+                            @if (project.IsGroupProject == false)
+                            {
+                                <td><img alt="Group" src="~/Images/solo.png" width="20px" height="20px" /></td>
+                            }
                         </tr>
 
                     }
@@ -57,17 +64,18 @@
     <div id="studentCourseList" class="col-md-4">
         <h4>My courses</h4>
         <div class="list-group">
-            @foreach (var course in Model.coursesForStudents)
-            {
+            @foreach(var course in Model.coursesForStudents) {
                 <a class="list-group-item" href="/Student/Course/@course.ID">@course.Name</a>
             }
         </div>
     </div>
-</div>
 
-<div id="StudentPepp">
-    <p>Welcome to MOOSHARK<br/>
-        May the odds be ever in you favour<br/>
-        If you need some extra motivation:<br/>
-    <a href="https://www.youtube.com/watch?v=qR3rK0kZFkg">#PEPP</a></p>
+    <div id="StudentPepp" class="row mooshark-pepp pull-right top-buffer">
+        <p>
+            Welcome to MOOSHARK<br />
+            May the odds be ever in you favour<br />
+            If you need some extra motivation:<br />
+            <a href="https://www.youtube.com/watch?v=qR3rK0kZFkg">#PEPP</a>
+        </p>
+    </div>
 </div>

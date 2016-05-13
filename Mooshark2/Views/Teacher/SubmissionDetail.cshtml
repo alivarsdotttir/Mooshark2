@@ -15,7 +15,8 @@
 <p>Expected output: <br/>
     @Model.currentSubproject.Output</p>
 
-<form>
+@using (Html.BeginForm()){
+    @Html.HiddenFor(x => x.currentSubproject.ID)
     @Html.EditorFor(model => model.currentSubmission.Grade, new { htmlAttributes = new { @class = "form-control" } })
     <input type="submit" name="Submit" id="Submit" value="Update Grade" class="btn btn-lg AdminButtons" />
-</form>
+}

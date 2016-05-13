@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
+using Mooshark2.Models.DAL;
 
 namespace Mooshark2.Models.Entities
 {
@@ -24,5 +25,8 @@ namespace Mooshark2.Models.Entities
 
         public string FilePath { get; set; }
         public string Output { get; set; }
+        public string StudentId { get; set; }
+        [ForeignKey("StudentId")]
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

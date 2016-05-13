@@ -17,6 +17,8 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
         public List<ApplicationUser> usersForSubmissions; 
         public Subproject currentSubproject;
 
+
+
         public TeacherSubmissionsViewmodel(IEnumerable<Submission> all, IEnumerable<ApplicationUser> stuSub, List<Submission> best, List<ApplicationUser> usersForSub, Subproject subPro)
         {
             allSubmissionsForSubproject = all;
@@ -25,6 +27,7 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
             usersForSubmissions = usersForSub;
             currentSubproject = subPro;
             //lastSubmissions = last;
+
         }
     }
 }

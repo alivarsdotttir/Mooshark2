@@ -12,24 +12,42 @@
     @Html.HiddenFor(x => x.subproject.Input)
     @Html.HiddenFor(x => x.subproject.Output)
 
+    <div class="container-fluid">
+        <div class="row">
+            <div class="jumbotron">
+                <div>
+                    <h2>Submit your solution to @Model.subproject.Name</h2>
+                    @Html.ValidationSummary()
+                    <h5>The code should be in c++</h5>
+                    <input type="file" name="file" class="btn btn-lg" /><br />
+                </div>
+            </div>
+        </div>
+        <div ="row">
+            <!--    GROUP DROPDOWN LIST    -->
+            <div class="col-sm-10">
+                @if(Model.currentProject.IsGroupProject) {
+                    <h3>Group members</h3>
 
-    <div class="row">
-        <div class="jumbotron">
+                    
+                    for(int i = 0; i < Model.currentProject.GroupSize - 1; i++) {
+                         <div class="col-md-10">
+                             Html.DropDownListFor(m => m.students[i].Id, (List<SelectListItem>)ViewBag.Students, "- Select a group member -", new { @class = "btn btn-default dropdown-toggle" })
+                         </div>
+                     }
+                }
+            </div>
+            <div class="col-sm-2">
+                <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-lg AdminButtons"/>
+            </div>
+        </div>
+        <div class="row top-buffer">
             <div>
-                <h2>Submit your solution to @Model.subproject.Name</h2>
-                @Html.ValidationSummary()
-                <input type="file" name="file" class="btn btn-lg"/><br/>
+                @Html.ActionLink("Back to Project", "ProjectDetails", new { id = Model.currentProject.ID }, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
-    <div ="row">
-        <div class="col-sm-10"></div>
-        <div class="col-sm-2">
-            <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-lg AdminButtons"/>
-        </div>
-    </div>
+
 }
 
-<div>
-    @Html.ActionLink("Back to Project", "ProjectDetails", new { id = Model.currentProject.ID }, new { @class ="btn btn-default"})
-</div>
+

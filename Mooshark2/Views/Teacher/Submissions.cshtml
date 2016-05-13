@@ -19,47 +19,6 @@
         </div>
         <div class="col-xs-4"></div>
     </div>
-<<<<<<< HEAD
-    <div class="row">
-        <h3>Submissions for @Model.currentSubproject.Name</h3>
-        <div class="table-scoll">
-            <table class="table table-bordered table-striped" id="table">
-                <thead>
-                    <tr>
-                        <th>Submission number</th>
-                        <th>Name</th>
-                        <th>Date</th>
-                        <th>Accepted</th>
-                        <th>Grade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var students in Model.studentsThatHaveSubmitted)
-                    {
-                        <tr>
-                            <td>@Model.bestSubmissions.SubmissionNr</td>
-                            <td>@Html.ActionLink(students.FullName, "SubmissionDetails")</td>
-                            <td>@Model.bestSubmissions.Date</td>
-                            <td>
-                                @if (Model.bestSubmissions.Accepted == true)
-                                {
-                                    @Html.ActionLink("Accepted", "Graded")
-                                }
-                                @if (Model.bestSubmissions.Accepted == false)
-                                {
-                                    @Html.ActionLink("Wrong Answer", "Graded")
-                                }
-                            </td>
-                            <td>@Model.bestSubmissions.Grade</td>
-                        </tr>
-
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-=======
 </div>
 <table class="table table-bordered table-striped" id="table">
     <caption class="left">Submissions for @Model.currentSubproject.Name</caption>
@@ -75,26 +34,23 @@
     <tbody>
         @foreach (var last in Model.bestSubmissions)
         {
-            for (var i = 0; i < Model.usersForSubmissions.Count; i++)
-            {
-                <tr>
-                    <td>@last.SubmissionNr</td>
-                    <td>@Html.ActionLink(Model.usersForSubmissions[i].FullName, "StudentSubmissions", new { studentId = Model.usersForSubmissions[i].Id, subprojectId = Model.currentSubproject.ID })</td>
-                    <td>@last.Date</td>
-                    <td>
-                        @if (last.Accepted == true)
-                        {
-                            @Html.ActionLink("Accepted", "SubmissionDetail", new { submissionID = last.ID, studentId = Model.usersForSubmissions[i].Id })
-                        }
-                        @if (last.Accepted == false)
-                        {
-                            @Html.ActionLink("Wrong Answer", "SubmissionDetail", new { submissionID = last.ID, studentId = Model.usersForSubmissions[i].Id })
-                        }
-                    </td>
-                    <td>@last.Grade</td>
-                </tr>
-            }
+            <tr>
+                <td>@last.SubmissionNr</td>
+                <td>@Html.ActionLink(Model.studentsThatHaveSubmitted.FirstOrDefault(model => model.Id == last.StudentId).FullName , "StudentSubmissions", new { studentId = last.StudentId, subprojectId = Model.currentSubproject.ID })</td>
+                <td>@last.Date</td>
+                <td>
+                @if (last.Accepted == true){
+                    @Html.ActionLink("Accepted", "SubmissionDetail", new { submissionID = last.ID, studentId = last.StudentId })
+                }
+                @if (last.Accepted == false){
+                    @Html.ActionLink("Wrong Answer", "SubmissionDetail", new { submissionID = last.ID, studentId = last.StudentId })
+                }
+                </td>
+                <td>@last.Grade</td>
+            </tr>
         }
     </tbody>
 </table>
->>>>>>> 665bcbca37ce11a0222cac4ae32ead8a936358e8
+
+
+

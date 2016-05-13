@@ -13,6 +13,11 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
         public Subproject currentSubproject;
         public Submission currentSubmission;
 
+
+        public TeacherSubmissionsDetailViewModel()
+        {
+
+        }
         public TeacherSubmissionsDetailViewModel(ApplicationUser c, Subproject p, Submission s)
         {
 

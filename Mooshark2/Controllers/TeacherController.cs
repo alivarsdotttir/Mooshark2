@@ -243,9 +243,20 @@ namespace Mooshark2.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmissionDetail(TeacherSubmissionsDetailViewModel model)
+        public ActionResult SubmissionDetail(int subprojectId, Submission currSub)
         {
-            return RedirectToAction("Submissions", model.currentSubproject.ID); 
+            projectService.updateGrade(currSub);
+
+            return RedirectToAction("Submissions", subprojectId); 
+        }
+
+        public ActionResult Grades(int? projectId)
+        {
+            if(projectId != null)
+            {
+
+            }
+            return View("NotFound"); 
         }
     }
 }
