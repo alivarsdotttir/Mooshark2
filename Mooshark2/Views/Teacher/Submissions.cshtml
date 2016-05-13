@@ -34,42 +34,23 @@
     <tbody>
         @foreach (var last in Model.bestSubmissions)
         {
-           /* for (var i = 0; i < Model.usersForSubmissions.Count; i++)
-            {*/
-                <tr>
-                    <td>@last.SubmissionNr</td>
-                   <!-- <td>Html.ActionLink(Model.usersForSubmissions[i].FullName, "StudentSubmissions", new { studentId = Model.usersForSubmissions[i].Id, subprojectId = Model.currentSubproject.ID })</td>-->
-                    <td>@last.Date</td>
-                    <td>
-                        @if (last.Accepted == true)
-                        {
-                            @Html.ActionLink("Accepted", "SubmissionDetail", new { submissionID = last.ID })
-                        }
-                        @if (last.Accepted == false)
-                        {
-                            @Html.ActionLink("Wrong Answer", "SubmissionDetail", new { submissionID = last.ID })
-                        }
-                    </td>
-                    <td>@last.Grade</td>
-                </tr>
-            
-        }
-    </tbody>
-</table>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var student in Model.testStudentsThatHaveSubmitted)
-        {
             <tr>
-        <td>@student.FullName</td>
+                <td>@last.SubmissionNr</td>
+                <td>@Html.ActionLink(Model.studentsThatHaveSubmitted.FirstOrDefault(model => model.Id == last.StudentId).FullName , "StudentSubmissions", new { studentId = last.StudentId, subprojectId = Model.currentSubproject.ID })</td>
+                <td>@last.Date</td>
+                <td>
+                @if (last.Accepted == true){
+                    @Html.ActionLink("Accepted", "SubmissionDetail", new { submissionID = last.ID, studentId = last.StudentId })
+                }
+                @if (last.Accepted == false){
+                    @Html.ActionLink("Wrong Answer", "SubmissionDetail", new { submissionID = last.ID, studentId = last.StudentId })
+                }
+                </td>
+                <td>@last.Grade</td>
             </tr>
         }
     </tbody>
 </table>
+
+
 
