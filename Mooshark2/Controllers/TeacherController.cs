@@ -21,7 +21,6 @@ namespace Mooshark2.Controllers
     
     public class TeacherController : BaseController
     {
-
         // GET: Teacher
         public ActionResult Index()
         {
@@ -33,6 +32,7 @@ namespace Mooshark2.Controllers
             TeacherIndexViewmodel model = new TeacherIndexViewmodel(ungradedProjects, coursesForProjects, teacherCourses);
             return View(model);
         }
+
 
         public ActionResult Course(int? id)
         {

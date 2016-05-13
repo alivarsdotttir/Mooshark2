@@ -104,8 +104,8 @@ div.modal-dialog {
     margin-left: -40px;
 }
 
-#accepted {
-    color: green;
+.accepted {
+    color: rgb(118, 210, 49);
 }
 
 #wrong-answer {
