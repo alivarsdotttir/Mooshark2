@@ -2,6 +2,10 @@
     font-family: 'keepcalm-medium';
     src: url('../fonts/keepcalm-medium.ttf') format('truetype');
 }
+@font-face {
+    font-family: 'mochary_personal_use_only';
+    src: url('../fonts/mochary_personal_use_only.ttf') format('truetype');
+}
 
 body {
     padding-top: 120px;
@@ -29,6 +33,15 @@ textarea {
 }
 
 /*         LAYOUT          */
+#main-header {
+    color: #753bbd;
+    font-family: 'mochary_personal_use_only';
+    font-size: 120px;
+}
+
+.mooshark-pepp {
+    font-size: 20px;
+}
 
 .AdminButtons {
     color: white;
