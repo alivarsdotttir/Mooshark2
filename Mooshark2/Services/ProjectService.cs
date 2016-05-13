@@ -196,7 +196,7 @@ namespace Mooshark2.Services
                                          join y in db.StudentSubmissions on x.ID equals y.SubmissionID
                                          join z in db.Users on y.UserID equals z.Id
                                          where (subprojectID == x.ID && x.Accepted == true)
-                                         select x)as IEnumerable<Submission>;
+                                         select x) as IEnumerable<Submission>;
 
             /*if(bestSubmission == null) {
                 var lastSubmission = getLastSubmissionForStudents();
