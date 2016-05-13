@@ -10,15 +10,15 @@ namespace Mooshark2.Models.ViewModels.TeacherViewModels
     public class TeacherSubmissionsDetailViewModel
     {
         public ApplicationUser currentStudent;
-        public Project currentProject;
-        public IEnumerable<Submission> currentStudentsSubmissions;
+        public Subproject currentSubproject;
+        public Submission currentSubmission;
 
-        public TeacherSubmissionsDetailViewModel(ApplicationUser c, Project p, IEnumerable<Submission> s)
+        public TeacherSubmissionsDetailViewModel(ApplicationUser c, Subproject p, Submission s)
         {
 
             currentStudent = c;
-            currentProject = p;
-            currentStudentsSubmissions = s;
+            currentSubproject = p;
+            currentSubmission = s;
         }
     }
 }

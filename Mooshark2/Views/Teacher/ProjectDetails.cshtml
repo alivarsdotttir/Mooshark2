@@ -27,7 +27,7 @@
 <div class="container">
     <ul class="nav nav-tabs">
         @if(Model.subprojects != null && Model.subprojects.Count != 0) {
-            <li class="active"><a href="#menu-1">Part 1</a></li>
+            <li><a href="#menu-1">Part 1</a></li>
             for(int i = 2; i < Model.subprojects.Count + 1; i++)
             {
                 <li><a href="#menu-@i">Part @i</a></li>
@@ -40,7 +40,7 @@
         {
             for (int i = 0; i < Model.subprojects.Count; i++)
             {
-                <div id="menu-@(i+1)" class="tab-pane fade in active">
+                <div id="menu-@(i+1)" class="tab-pane fade">
                     <div class="container">
                         <div class="page-header">
                             <h3>@Model.subprojects[i].Name</h3>

@@ -2,31 +2,48 @@
 @{
     ViewBag.Title = "SubmissionDetails";
 }
+<div class="container-fluid">
+    <div class="row">
+        <div class="jumbotron">
+            <h2>Submission Details</h2>
+            <h2>@Model.currentProject.Name</h2>
+            <h3>@Model.subproject.Name</h3>
+        </div>
 
-<h2>SubmissionDetails</h2>
+    </div>
 
-<h2>@Model.currentProject.Name</h2>
-<h3>@Model.subproject.Name</h3>
+    <div class="row page-header">
+        <div class="well well-lg"><h4>Input:</h4>@Model.subproject.Input</div>
+    </div>
 
-<p>Input: <br /> 
-    @Model.subproject.Input</p>
+    <div class="row ">
+        <div class="col-sm-6">
+            <h3>Your output:</h3>
+            <div class="well">@Model.submission.Output</div>
+        </div>
 
-<p>Your output: <br />
-    @Model.submission.Output</p>
+        <div class="col-sm-6">
+            <h3>Expected output:</h3>
+            <div class="well">@Model.subproject.Output</div>
+        </div>
+    </div>
 
+    <div class="row">
 
-<p>Expected output: <br/>
-    @Model.subproject.Output</p>
+        @if(Model.submission.Accepted == true) {
+            <span class="label"><a href="https://youtu.be/P0zVPZBykSE?t=20s" id="accepted"><h2>ACCEPTED</h2></a></span>
+        }
 
-<p>@if(Model.submission.Accepted == true) {
-       <a href="https://youtu.be/P0zVPZBykSE?t=20s">ACCEPTED</a>
-   }</p>
+        @if(Model.submission.Accepted == false) {
+            <span class="label"><a href="https://youtu.be/LmW3H-EXYS0?t=20s" id="wrong-answer"><h3>Wrong answer</h3></a></span>
+        }
 
-<p>@if(Model.submission.Accepted == false) {
-       <a href="https://youtu.be/LmW3H-EXYS0?t=20s">Wrong answer</a>
-   }</p>
+    </div>
 
-@Html.ActionLink("Back to project", "ProjectDetails", new { id = Model.currentProject.ID }, new { @class="btn btn-default" })
-@Html.ActionLink("Back to course", "Course", new { id = Model.currentCourse.ID }, new { @class ="btn btn-default"})
+    <div class="row">
+        @Html.ActionLink("Back to project", "ProjectDetails", new { id = Model.project.ID }, new { @class = "btn btn-default" })
+    </div>
+</div>
+
 
 

@@ -7,40 +7,51 @@
     <h2>Welcome to student's main page</h2>
     <p>Submit projects and get graded!</p>
 </div>
-<div class="col-xs-6">
-    <div class="right-inner-addon">
-        <i class="glyphicon glyphicon-search"></i>
-        <input id="search" type="search"
-               class="form-control"
-               placeholder="Search" />
-    </div>
-</div>
+
+<!--   SEARCH INPUT BOX FOR TABLE   -->
 <div class="row">
-    <div class="col-md-8 table-scoll">
+    <div class="col-xs-5"></div>
+    <div class="col-xs-3">
+        <div class="inner-addon right-addon pull-right">
+            <i class="glyphicon glyphicon-search"></i>
+            <input id="search" type="search"
+                   class="form-control"
+                   placeholder="Search"/>
+        </div>
+    </div>
+    <div class="col-xs-4"></div>
+</div>
+
+<!--   TABLE OF UPCOMING PROJECTS    -->
+<div class="row">
+    <div class="col-md-8 ">
         <h4>Upcoming Projects</h4>
-        <table class="table table-bordered table-striped " id="table"> 
-            <caption></caption>
-            <thead>
-            <tr>
-                <th>Course</th>
-                <th>Assignment</th>
-                <th>Deadline</th>
-                <th>Type</th>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="table-scoll">
+            <table class="table table-bordered table-striped " id="table">
+                <caption></caption>
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Assignment</th>
+                        <th>Deadline</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            @foreach(var project in Model.upcomingProjects) {
-                <tr>
-                    <td>@Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name</td>
-                    <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
-                    <td>@project.Deadline</td>
-                    <td><!--project.isGroupProject--></td>
-                </tr>
+                    @foreach (var project in Model.upcomingProjects)
+                    {
+                        <tr>
+                            <td>@Model.coursesForProjects.FirstOrDefault(p => p.ID == project.CourseID).Name</td>
+                            <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
+                            <td>@project.Deadline</td>
+                            <td><!--project.isGroupProject--></td>
+                        </tr>
 
-            }
-            </tbody>
-        </table>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div id="studentCourseList" class="col-md-4">
