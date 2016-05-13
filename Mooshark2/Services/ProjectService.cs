@@ -63,7 +63,7 @@ namespace Mooshark2.Services
                 }
                 int CID = model.CourseID.Value;
                 db.Projects.Add(model);
-                db.CourseProjects.Add(new CourseProject { CourseID = CID, ProjectID = model.ID });
+                db.CourseProjects.AddOrUpdate(new CourseProject { CourseID = CID, ProjectID = model.ID });
                 db.SaveChanges();
                 return true;
             }
