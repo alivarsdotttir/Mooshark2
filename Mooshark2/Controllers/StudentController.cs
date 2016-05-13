@@ -94,7 +94,8 @@ namespace Mooshark2.Controllers
 
         public ActionResult Submit(Subproject subproject, HttpPostedFileBase file)
         {   
-             //get user who is logged in
+            try { 
+            //get user who is logged in
              string userId = User.Identity.GetUserId();
              var user = userService.getUserById(userId);
 
@@ -168,7 +169,7 @@ namespace Mooshark2.Controllers
                     return View(model);
                 }
 
-                if (System.IO.File.Exists(exeFilePath)) {
+                if(System.IO.File.Exists(exeFilePath)) {
                     var processInfoExe = new ProcessStartInfo(exeFilePath, "");
                     processInfoExe.UseShellExecute = false;
                     processInfoExe.RedirectStandardInput = true;
@@ -176,23 +177,25 @@ namespace Mooshark2.Controllers
                     processInfoExe.RedirectStandardError = true;
                     processInfoExe.CreateNoWindow = true;
                     processInfoExe.ErrorDialog = false;
-                    using (var processExe = new Process()) {
+                    using(var processExe = new Process()) {
                         processExe.StartInfo = processInfoExe;
                         processExe.Start();
-                        
+
                         //It there is input, test it against code
                         StreamWriter inputWriter = processExe.StandardInput;
                         if(subproject.Input != null) {
                             inputWriter.WriteLine(subproject.Input.ToString());
                         }
                         inputWriter.Dispose();
-                        
+
                         // We then read the output of the program:
                         StreamReader outputReader = processExe.StandardOutput;
                         string programOutput = outputReader.ReadToEnd().ToString();
+                        outputReader.Close();
                         outputReader.Dispose();
 
                         string correctOutput = subproject.Output.ToString();
+
                         //removing \n\r from the back of the input so that it's comparable
                         if(programOutput.Length > 2) {
                             string programOutputCorrected = programOutput.Remove(programOutput.Length - 2);
@@ -206,12 +209,19 @@ namespace Mooshark2.Controllers
                             }
                         }
                         projectService.saveSubmissionChanges(submission.ID);
-                        
-                        return RedirectToAction("SubmissionDetails", new { submissionID = submission.ID });
+                        processExe.Dispose();
+
+                       return RedirectToAction("SubmissionDetails", new { submissionID = submission.ID });
                     }
                 }
             }
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("The process failed: {0}", e.ToString());
+                return View();
 
+            }
             return View();
         }
 
