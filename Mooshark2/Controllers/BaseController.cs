@@ -15,8 +15,5 @@ namespace Mooshark2.Controllers
         public CourseService courseService = new CourseService();
         public UserService userService = new UserService();
         public ProjectService projectService = new ProjectService();
-
-
-
     }
 }

@@ -20,8 +20,9 @@ namespace Mooshark2.Controllers
     ///  The StudentController handels all comunications between the student and the program.
     ///  It provides the student with input by making tha right views shown in the right place on the screen.
     ///  It recives the student output and translates it in to the appropriate message to pass to the views needed.
+    ///  It inherits from BaseController.cs
     /// </summary>
-    
+
     public class StudentController : BaseController
     {
         

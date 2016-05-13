@@ -11,10 +11,13 @@ using Mooshark2.Models.Entities;
 
 namespace Mooshark2.Controllers
 {
+    /// <summary>
+    /// It inherits from BaseController.cs
+    /// </summary>
+
     //[Authorize(Roles="Admin")]
     public class CoursesController : BaseController
     {
-
         // GET: Courses
         public ActionResult Index()
         {
@@ -24,13 +27,11 @@ namespace Mooshark2.Controllers
         // GET: Courses/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Course course = db.Courses.Find(id);
-            if (course == null)
-            {
+            if (course == null) {
                 return HttpNotFound();
             }
             return View(course);
@@ -50,10 +51,10 @@ namespace Mooshark2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Active")] Course course)
         {
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
                 db.Courses.Add(course);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -63,13 +64,11 @@ namespace Mooshark2.Controllers
         // GET: Courses/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Course course = db.Courses.Find(id);
-            if (course == null)
-            {
+            if (course == null) {
                 return HttpNotFound();
             }
             return View(course);
@@ -82,8 +81,7 @@ namespace Mooshark2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Name,Active")] Course course)
         {
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
                 db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -94,13 +92,11 @@ namespace Mooshark2.Controllers
         // GET: Courses/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
+            if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Course course = db.Courses.Find(id);
-            if (course == null)
-            {
+            if (course == null) {
                 return HttpNotFound();
             }
             return View(course);
@@ -119,8 +115,7 @@ namespace Mooshark2.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
+            if (disposing) {
                 db.Dispose();
             }
             base.Dispose(disposing);
