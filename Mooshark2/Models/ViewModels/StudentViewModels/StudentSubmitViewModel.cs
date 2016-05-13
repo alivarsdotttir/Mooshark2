@@ -20,5 +20,12 @@ namespace Mooshark2.Models.ViewModels.StudentViewModels
             subproject = subp;
             students = us;
         }
+
+
+        public StudentSubmitViewModel()
+        {
+            
+        }
+
     }
 }

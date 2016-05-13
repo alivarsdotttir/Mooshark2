@@ -324,13 +324,8 @@ namespace Mooshark2.Services
                                where item.ID == model.ID
                                select item).SingleOrDefault();
 
-            //project.Course = model.Course;
-            //project.CourseID = model.CourseID;
             project.Deadline = model.Deadline;
-            //project.Grade = model.Grade;
-            //project.Graded = model.Graded;
             project.GroupSize = model.GroupSize;
-            //project.IsGroupProject = model.IsGroupProject;
             project.Name = model.Name;
             project.Visibility = model.Visibility;
             db.SaveChanges();
