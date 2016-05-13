@@ -6,6 +6,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Razor.Parser.SyntaxTree;
+using Microsoft.Ajax.Utilities;
 using Mooshark2.Models.DAL;
 using Mooshark2.Models.ViewModels.TeacherViewModels;
 using Microsoft.Ajax.Utilities;
@@ -227,10 +228,6 @@ namespace Mooshark2.Services
         }
 
 
-
-
-
-
         public IEnumerable<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)
         {
             var submittedStudents = (from x in db.Users
@@ -295,6 +292,42 @@ namespace Mooshark2.Services
                               where x.SubprojectID == subprojectId
                               select x).FirstOrDefault();
             return io; 
+        }
+
+        public Subproject ServiceEditSubproject(Subproject model)
+        {
+            Subproject subproject = (from item in db.Subprojects
+                where item.ID == model.ID
+                select item).SingleOrDefault();
+            subproject.Name = model.Name;
+            subproject.Description = model.Description;
+            subproject.Grade = model.Grade;
+            subproject.Input = model.Input;
+            subproject.Output = model.Output;
+            db.SaveChanges();
+
+            return subproject;
+        }
+
+
+        public Project ServiceEditProject(Project model)
+        {
+            Project project = (from item in db.Projects
+                               where item.ID == model.ID
+                               select item).SingleOrDefault();
+
+            //project.Course = model.Course;
+            //project.CourseID = model.CourseID;
+            project.Deadline = model.Deadline;
+            //project.Grade = model.Grade;
+            //project.Graded = model.Graded;
+            project.GroupSize = model.GroupSize;
+            //project.IsGroupProject = model.IsGroupProject;
+            project.Name = model.Name;
+            project.Visibility = model.Visibility;
+            db.SaveChanges();
+
+            return project;
         }
 
         public List<ApplicationUser> getStudentBySubmission(List<Submission> submissions)
