@@ -43,7 +43,7 @@ namespace Mooshark2.Models.DAL
         public DbSet<CourseProject> CourseProjects { get; set; }
 
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("ServerConnection", throwIfV1Schema: false)
         {
         }
 
