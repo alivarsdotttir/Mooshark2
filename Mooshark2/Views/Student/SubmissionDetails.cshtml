@@ -5,7 +5,7 @@
 
 <h2>SubmissionDetails</h2>
 
-<h2>@Model.project.Name</h2>
+<h2>@Model.currentProject.Name</h2>
 <h3>@Model.subproject.Name</h3>
 
 <p>Input: <br /> 
@@ -26,7 +26,7 @@
        <a href="https://youtu.be/LmW3H-EXYS0?t=20s">Wrong answer</a>
    }</p>
 
-@Html.ActionLink("Back to project", "ProjectDetails", new { id = Model.project.ID }, new { @class="btn btn-default" })
-@Html.ActionLink("Back to course", "Course", new { id = Model.course.ID }, new { @class ="btn btn-default"})
+@Html.ActionLink("Back to project", "ProjectDetails", new { id = Model.currentProject.ID }, new { @class="btn btn-default" })
+@Html.ActionLink("Back to course", "Course", new { id = Model.currentCourse.ID }, new { @class ="btn btn-default"})
 
 

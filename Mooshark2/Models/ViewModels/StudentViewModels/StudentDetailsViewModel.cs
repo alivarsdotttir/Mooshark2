@@ -23,6 +23,9 @@ namespace Mooshark2.Models.ViewModels.StudentViewModels
         }
 
 
-        public StudentDetailsViewModel() { }
+        public StudentDetailsViewModel()
+        {
+
+        }
     }
 }
