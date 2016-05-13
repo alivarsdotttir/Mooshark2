@@ -362,6 +362,7 @@
     <Content Include="Views\TeacherLOL\ViewPRUFA.cshtml" />
     <Content Include="Views\Teacher\StudentSubmissions.cshtml" />
     <Content Include="Views\Teacher\EditProject.cshtml" />
+    <Content Include="Views\Teacher\Grades.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

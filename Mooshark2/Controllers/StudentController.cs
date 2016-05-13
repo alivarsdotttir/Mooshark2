@@ -193,17 +193,24 @@ namespace Mooshark2.Controllers
                     using(var processExe = new Process()) {
                         processExe.StartInfo = processInfoExe;
                         processExe.Start();
-
-                        //It there is input, test it against code
-                        StreamWriter inputWriter = processExe.StandardInput;
+                        processExe.WaitForExit(300000);
+                            //It there is input, test it against code
+                            StreamWriter inputWriter = processExe.StandardInput;
                         if(subproject.Input != null) {
                             inputWriter.WriteLine(subproject.Input.ToString());
                         }
                         inputWriter.Dispose();
 
-                        // We then read the output of the program:
+                        // We then read the output of the program for 30 seconds, or until end of the output:
                         StreamReader outputReader = processExe.StandardOutput;
-                        string programOutput = outputReader.ReadToEnd().ToString();
+                        char [] inputChars = null;
+
+                        do {
+                           inputChars = new char[10001];
+                            outputReader.Read(inputChars, 0, 10000);
+                        } while(outputReader.Peek() >= 0);
+                        
+                        string programOutput = new string(inputChars);
                         outputReader.Close();
                         outputReader.Dispose();
 
@@ -220,9 +227,14 @@ namespace Mooshark2.Controllers
                                 submission.Accepted = true;
                                 submission.Grade = 10;
                             }
+                            else {
+                                submission.Accepted = false;
+                                submission.Grade = 0;
+                            }
                         }
                         projectService.saveSubmissionChanges(submission.ID);
-                        processExe.Dispose();
+                            int runTime = processExe.TotalProcessorTime.Milliseconds;
+                            processExe.Dispose();
 
                        return RedirectToAction("SubmissionDetails", new { submissionID = submission.ID });
                     }

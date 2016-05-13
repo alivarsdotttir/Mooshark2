@@ -29,9 +29,13 @@
                 @if(Model.currentProject.IsGroupProject) {
                     <h3>Group members</h3>
 
+<<<<<<< HEAD
+=======
+                    
+>>>>>>> 51ead9fe641f2af726e7bb84a6a12220fea09125
                     for(int i = 0; i < Model.currentProject.GroupSize - 1; i++) {
                          <div class="col-md-10">
-                             @Html.DropDownListFor(m => m.students[i].Id, (List<SelectListItem>)ViewBag.Students, "- Select a group member -", new { @class = "btn btn-default dropdown-toggle" })
+                             Html.DropDownListFor(m => m.students[i].Id, (List<SelectListItem>)ViewBag.Students, "- Select a group member -", new { @class = "btn btn-default dropdown-toggle" })
                          </div>
                      }
                 }
