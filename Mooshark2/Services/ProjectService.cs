@@ -162,16 +162,55 @@ namespace Mooshark2.Services
             return projectsFromCourse;
         }
 
-        public Submission getStudentsBestSubmission(int subId)
+
+        public IEnumerable<StudentSubmission> getLastSubmissionForStudents()
+        {
+
+            /*var groupByStudent = (from s in db.StudentSubmissions
+                                  group s.SubmissionID by s.UserID
+                                  into g
+                                  select new { UserID = g.Key, Submissions = g.Max(x => x.) });
+
+            var groupByStudent2 = db.StudentSubmissions.GroupBy(g => g.UserID)
+
+            var lastSubmission = (from submission in groupByStudent
+                                  orderby submission.Submissions descending
+                                  select submission).FirstOrDefault();
+
+
+            var lastSubmission2 = (from submission in db.Submissions
+                                  join submitstudent in db.StudentSubmissions on submission.ID equals submitstudent.SubmissionID
+                                  orderby submission.ID descending
+                                  select submission).FirstOrDefault();*/
+
+            var lastSubmission = db.StudentSubmissions.GroupBy(x => x.UserID).Select(s => s.OrderByDescending(i => i.SubmissionID).FirstOrDefault());
+
+            return lastSubmission;
+
+        }
+
+
+        public Submission getStudentsBestSubmission(int subprojectID)
         {
             Submission bestSubmission = (from x in db.Submissions
                                          join y in db.StudentSubmissions on x.ID equals y.SubmissionID
                                          join z in db.Users on y.UserID equals z.Id
-                                         where subId == x.ID && x.Accepted == true || subId == x.ID && x.Accepted == false
+                                         where (subprojectID == x.ID && x.Accepted == true)
                                          select x).SingleOrDefault();
-                   
+
+            /*if(bestSubmission == null) {
+                var lastSubmission = getLastSubmissionForStudents();
+                return lastSubmission;
+
+            }*/
+
             return bestSubmission;
         }
+
+
+
+
+
 
         public IEnumerable<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)
         {

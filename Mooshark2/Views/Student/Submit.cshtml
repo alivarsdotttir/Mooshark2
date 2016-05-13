@@ -1,49 +1,31 @@
-﻿@model Mooshark2.Models.Entities.Subproject
+﻿@model Mooshark2.Models.ViewModels.StudentViewModels.StudentSubmitViewModel
 
 
 @using (Html.BeginForm("Submit", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     
-    @Html.HiddenFor(x => x.ID)
-    @Html.HiddenFor(x => x.Name)
-    @Html.HiddenFor(x => x.Description)
-    @Html.HiddenFor(x => x.ProjectID)
-    @Html.HiddenFor(x => x.Weight)
-    @Html.HiddenFor(x => x.Input)
-    @Html.HiddenFor(x => x.Output)
+    @Html.HiddenFor(x => x.subproject.ID)
+    @Html.HiddenFor(x => x.subproject.Name)
+    @Html.HiddenFor(x => x.subproject.Description)
+    @Html.HiddenFor(x => x.subproject.ProjectID)
+    @Html.HiddenFor(x => x.subproject.Weight)
+    @Html.HiddenFor(x => x.subproject.Input)
+    @Html.HiddenFor(x => x.subproject.Output)
 
     <div class="jumbotron">
         <div class="row">
             <div class="col-sm-8">
-                <h2>Submit your solution to @Model.Name</h2>
+                <h2>Submit your solution to @Model.subproject.Name</h2>
                 @Html.ValidationSummary()
                 <input type="file" name="file" class="btn btn-lg" /><br />
-
-                @*<ajaxToolkit:AjaxFileUpload ID="AjaxFileUpload1"
-                                            AllowedFileTypes="cpp"
-                                            MaximumNumberOfFiles=1
-                                            runat="server" />*@
             </div>
             <div class="col-sm-4">
                 <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-lg AdminButtons" />
             </div>
         </div>
-    </div>
-    
-
-    
+    </div>    
 }
 
-@*
-<form action="" method="post" enctype="multipart/form-data">
-
-    <label for="file">Filename:</label>
-    <input type="file" name="file" id="file" />
-    @*Html.ActionLink("Submit", "Submit", new { id = Model.ID })
-    <input type="submit" />
-</form>
-*@
-
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Project", "ProjectDetails", new { id = Model.project.ID }, new { @class ="btn btn-default"})
 </div>
