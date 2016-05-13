@@ -4,7 +4,7 @@
     ViewBag.Title = "StudentSubmissions";
 }
 
-<h2>StudentSubmissions</h2>
+<h2>@Model.student.FullName submits</h2>
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -22,11 +22,11 @@
                 <td>@sub.SubmissionNr</td>
                 @if(sub.Accepted == true)
                 {
-                    <td>@Html.ActionLink("Accepted", "SubmissionDetail", new { submissionId = sub.ID, studentId = Model.student.Id})</td>
+                    <td>@Html.ActionLink("Accepted", "SubmissionDetail", new { submissionId = sub.ID, studentId = Model.student.Id}, new { @class="accepted" })</td>
                 }
                 @if(sub.Accepted == false)
                 {
-                    <td>@Html.ActionLink("Wrong Answer", "SubmissionDetail", new { submissionId = sub.ID, studentId = Model.student.Id })</td>
+                    <td>@Html.ActionLink("Wrong Answer", "SubmissionDetail", new { submissionId = sub.ID, studentId = Model.student.Id }, new { @class = "wrong-answer" })</td>
                 }
                 <td>@sub.Date</td>
                 <td>@sub.Grade</td>
