@@ -6,45 +6,55 @@
 
 <h2>Submissions</h2>
 
-<div class="col-xs-6">
-    <div class="right-inner-addon">
-        <i class="glyphicon glyphicon-search"></i>
-        <input id="search" type="search"
-               class="form-control"
-               placeholder="Search" />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-5"></div>
+        <div class="col-xs-3">
+            <div class="inner-addon right-addon pull-right">
+                <i class="glyphicon glyphicon-search"></i>
+                <input id="search" type="search"
+                       class="form-control"
+                       placeholder="Search" />
+            </div>
+        </div>
+        <div class="col-xs-4"></div>
+    </div>
+    <div class="row">
+        <h3>Submissions for @Model.currentSubproject.Name</h3>
+        <div class="table-scoll">
+            <table class="table table-bordered table-striped" id="table">
+                <thead>
+                    <tr>
+                        <th>Submission number</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Accepted</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var students in Model.studentsThatHaveSubmitted)
+                    {
+                        <tr>
+                            <td>@Model.bestSubmissions.SubmissionNr</td>
+                            <td>@Html.ActionLink(students.FullName, "SubmissionDetails")</td>
+                            <td>@Model.bestSubmissions.Date</td>
+                            <td>
+                                @if (Model.bestSubmissions.Accepted == true)
+                                {
+                                    @Html.ActionLink("Accepted", "Graded")
+                                }
+                                @if (Model.bestSubmissions.Accepted == false)
+                                {
+                                    @Html.ActionLink("Wrong Answer", "Graded")
+                                }
+                            </td>
+                            <td>@Model.bestSubmissions.Grade</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-<table class="table table-bordered table-striped" id="table">
-    <caption class="left">Submissions for @Model.currentSubproject.Name</caption>
-    <thead>
-    <tr>
-        <th>Submission number</th>
-        <th>Name</th>
-        <th>Date</th>   
-        <th>Accepted</th>
-        <th>Grade</th>
-    </tr>
-    </thead>
-    <tbody>
-        @foreach (var students in Model.studentsThatHaveSubmitted)
-        {
-                <tr>
-                    <td>@Model.bestSubmissions.SubmissionNr</td>
-                    <td>@Html.ActionLink(students.FullName, "SubmissionDetails")</td>
-                    <td>@Model.bestSubmissions.Date</td>
-                    <td>
-                        @if (Model.bestSubmissions.Accepted == true)
-                        {
-                            @Html.ActionLink("Accepted", "Graded")
-                        }
-                        @if (Model.bestSubmissions.Accepted == false)
-                        {
-                            @Html.ActionLink("Wrong Answer", "Graded")
-                        }
-                    </td>
-                    <td>@Model.bestSubmissions.Grade</td>
-                </tr>
-            
-        }
-    </tbody>
-</table>

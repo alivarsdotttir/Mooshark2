@@ -1,51 +1,71 @@
 ﻿@model Mooshark2.Models.ViewModels.StudentViewModels.StudentCourseViewModel
 
-<div class="row">
-    <div class="col-md-8 table-scoll">
-        <h3>Projects</h3>
+<div class="container-fluid">
+    <div class="row">
+        <h2>@Model.course.Name</h2>
+    </div>
 
-        <div class="col-xs-6">
-            <div class="right-inner-addon">
+    <div class="row">
+        <div class="col-xs-5">
+            <h3>Projects</h3>
+        </div>
+
+        <!--   SEARCH INPUT BOX FOR TABLE   -->
+        <div class="col-xs-3">
+            <div class="inner-addon right-addon pull-right">
                 <i class="glyphicon glyphicon-search"></i>
                 <input id="search" type="search"
                        class="form-control"
-                       placeholder="Search" />
+                       placeholder="Search"/>
             </div>
         </div>
-        <table class="table table-bordered table-striped" id="table">
-            <caption><caption>
-            <thead>
-            <tr>
-                <th>Course</th>
-                <th>Assignment</th>
-                <th>Deadline</th>
-                <th>Type</th>
-            </tr>
-            </thead>
-            <tbody>
-            @if(Model.projectsForCourse != null && Model.projectsForCourse.Count() != 0) {
-                foreach(var project in Model.projectsForCourse) {
-                    <tr>
-                        <td>@Model.course.Name</td>
-                        <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
-                        <td>@project.Deadline</td>
-                        <td>@*project.isGroupProject*@</td>
-                    </tr>
-                }
-            }
-            </tbody>
-        </table>
+        <div class="col-xs-4"></div>
     </div>
 
-    <div class="col-md-4">
-        <h3>Teachers</h3>
-        <ul>
-            @foreach(var teacher in Model.teacherForCourse) {
-                <li class="list-inline" id ="teacher-list">@teacher.FullName</li>
-            }
-        </ul>
+    <div class="row">
+
+        <!-- TABLE OF PROJECTS IN COURSE -->
+        <div class="col-md-8">
+            <div class="row table-scoll">
+                <table class="table table-bordered table-striped" id="table">
+                    <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Assignment</th>
+                        <th>Deadline</th>
+                        <th>Type</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if(Model.projectsForCourse != null && Model.projectsForCourse.Count() != 0) {
+                        foreach(var project in Model.projectsForCourse) {
+                            <tr>
+                                <td>@Model.course.Name</td>
+                                <td>@Html.ActionLink(project.Name, "ProjectDetails", new { id = project.ID })</td>
+                                <td>@project.Deadline</td>
+                                <td>@*project.isGroupProject*@</td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+
+        <!-- LIST OF TEACHERS IN COURSE -->
+        <div class="col-md-3">
+            <h3>Teachers</h3>
+            <ul>
+                @foreach(var teacher in Model.teacherForCourse) {
+                    <li class="list-inline" id="teacher-list">@teacher.FullName</li>
+                    <li><a href="mailto:@teacher.Email">@teacher.Email</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="row" id="Adminbutt">
+        @Html.ActionLink("Back to Main", "Index", "Student", null, new { @class = "btn btn-default" })
     </div>
 </div>
-<div id="Adminbutt">
-    @Html.ActionLink("Back to Main", "Index", new { @class = "btn btn-default" })
-</div>
+

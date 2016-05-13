@@ -28,9 +28,7 @@ textarea {
     max-width: 280px;
 }
 
-h2 {
-
-}
+/*         LAYOUT          */
 
 .AdminButtons {
     color: white;
@@ -79,40 +77,52 @@ div.modal-dialog {
     position: initial;
 }
 
-#teacher-list {
-    font-size: 18px;
-    margin-left: -40px;
-}
-
 .table-scoll {
     overflow: auto;
     height: 400px !important;
 }
 
 
+
+/*      Student's CSS     */
+
+#teacher-list {
+    font-size: 18px;
+    margin-left: -40px;
+}
+
+
+
+
+
+/*      Teacher's CSS     */
+
+#deadline {
+    padding-left: 14px;
+}
+
+
+
+
+
 /*     SEARCH BOX CSS      */
 
-.left-inner-addon {
-    position: relative;
-}
-.left-inner-addon input {
-    padding-left: 30px;    
-}
-.left-inner-addon i {
-    position: absolute;
-    padding: 10px 12px;
-    pointer-events: none;
+.inner-addon { 
+    position: relative; 
 }
 
-.right-inner-addon {
-    position: relative;
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
 }
-.right-inner-addon input {
-    padding-right: 30px;    
-}
-.right-inner-addon i {
-    position: absolute;
-    right: 0px;
-    padding: 10px 12px;
-    pointer-events: none;
-}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
