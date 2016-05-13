@@ -23,6 +23,7 @@ namespace Mooshark2.Controllers
     ///  It inherits from BaseController.cs
     /// </summary>
 
+    [Authorize(Roles = "Student")]
     public class StudentController : BaseController
     {
         

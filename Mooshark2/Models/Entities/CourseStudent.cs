@@ -9,7 +9,7 @@ using Mooshark2.Models.DAL;
 namespace Mooshark2.Models.Entities
 {
     /// <summary>
-    /// The class CourseStudent conteins all the informations that are needed in the database join table CourseStudents,
+    /// The class CourseStudent contains all the informations that are needed in the database connection table CourseStudents,
     /// wich conects the table Courses with the students.
     /// </summary>
     public class CourseStudent

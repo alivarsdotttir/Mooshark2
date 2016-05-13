@@ -18,7 +18,8 @@ namespace Mooshark2.Controllers
     ///  It recives the teacher output and translates it in to the appropriate message to pass to the views needed.
     ///  It inherits from BaseController.cs
     /// </summary>
-    
+
+    [Authorize(Roles = "Teacher")]
     public class TeacherController : BaseController
     {
         // Returns the index view for teachers
@@ -241,11 +242,11 @@ namespace Mooshark2.Controllers
 
 
         [HttpPost]
-        public ActionResult SubmissionDetail(int subprojectId, Submission currSub)
+        public ActionResult SubmissionDetail(TeacherSubmissionsDetailViewModel model)
         {
-            projectService.updateGrade(currSub);
+            projectService.updateGrade(model);
 
-            return RedirectToAction("Submissions", subprojectId); 
+            return RedirectToAction("Submissions", new { subprojectId = model.currentSubproject.ID}); 
         }
 
 

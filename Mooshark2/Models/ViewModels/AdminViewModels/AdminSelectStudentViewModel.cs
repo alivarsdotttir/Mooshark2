@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using Mooshark2.Models.DAL;
 
-
+/// <summary>
+/// This class is a View Model for the SelectStudent View in Admin Controller
+/// </summary>
 namespace Mooshark2.Models.ViewModels.AdminViewModels
 {
     public class AdminSelectStudentViewModel

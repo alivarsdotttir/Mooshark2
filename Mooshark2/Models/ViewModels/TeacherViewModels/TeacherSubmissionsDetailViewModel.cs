@@ -5,13 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+/// <summary>
+/// This class is a View Model for the SubmissionDetails View in Teacher Controller
+/// </summary>
+
 namespace Mooshark2.Models.ViewModels.TeacherViewModels
 {
     public class TeacherSubmissionsDetailViewModel
     {
-        public ApplicationUser currentStudent;
-        public Subproject currentSubproject;
-        public Submission currentSubmission;
+        public ApplicationUser currentStudent { get; set; }
+        public Subproject currentSubproject { get; set; }
+
+        public Submission currentSubmission { get; set; }
 
 
         public TeacherSubmissionsDetailViewModel()

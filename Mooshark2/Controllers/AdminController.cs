@@ -20,9 +20,11 @@ namespace Mooshark2.Controllers
     ///  It inherits from BaseController.cs
     /// </summary>
 
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController :  BaseController
     {
+        //Returns the Index view for admin
+        //Where the admin can choose to create a course and  an user or edit them and sees a list of all the courses
         public ActionResult Index()
         {
             var viewModel = courseService.GetAllCourses();
@@ -31,6 +33,8 @@ namespace Mooshark2.Controllers
         }
 
 
+        //Returns the CreateCourse view for admin
+        //Where the admin can create a course
         [HttpGet]
         public ActionResult CreateCourse()
         {
@@ -43,6 +47,8 @@ namespace Mooshark2.Controllers
         }
 
 
+        //Updates the CreateCourse view for admin
+        //Where the changes that the admin has made are sent back to the database
         [HttpPost]
         public ActionResult CreateCourse(AdminCourseViewModel model)
         {
@@ -69,6 +75,7 @@ namespace Mooshark2.Controllers
         }
 
 
+        //Returns the Edit view for admin
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -95,7 +102,7 @@ namespace Mooshark2.Controllers
             }
         }
 
-
+        //Updates the Edit view for admin
         [HttpPost]
         public ActionResult Edit(AdminCourseViewModel model)
         {
@@ -117,6 +124,7 @@ namespace Mooshark2.Controllers
         }
 
 
+        //Returns the RemoveTeacherFromCourse view for admin
         [HttpGet]
         public ActionResult RemoveTeacherFromCourse(string userId, int courseId)
         {
@@ -128,6 +136,7 @@ namespace Mooshark2.Controllers
         }
 
 
+        //Updates the RemoveStudentFromCourse view for admin
         [HttpGet]
         public ActionResult RemoveStudentFromCourse(string userId, int courseId)
         {
@@ -139,6 +148,7 @@ namespace Mooshark2.Controllers
         }
 
 
+        //Returns the UserEditList view for admin
         public ActionResult UserEditList()
         {
             var allUsers = userService.GetAllUsers();
@@ -147,6 +157,7 @@ namespace Mooshark2.Controllers
         }
 
 
+        //Returns the EditUser view for admin
         [HttpGet]
         public ActionResult EditUser(string id)
         {
@@ -155,6 +166,7 @@ namespace Mooshark2.Controllers
         }
 
 
+        //Updates the EditUser view for admin
         [HttpPost]
         public ActionResult EditUser(ApplicationUser user)
         {
