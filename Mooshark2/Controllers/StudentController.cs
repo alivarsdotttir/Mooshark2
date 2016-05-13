@@ -107,16 +107,17 @@ namespace Mooshark2.Controllers
             var project = projectService.getProjectById(projectId);
             var courseId = project.CourseID;
             var course = courseService.getCourseById(courseId.Value);
+            StudentSubmitViewModel model = new StudentSubmitViewModel(project, subproject);
 
             if(file == null) {
                 ModelState.AddModelError("", "Empty submission, please choose a file.");
-                return View(subproject); 
+                return View(model); 
             }
 
             var fileName = Path.GetFileName(file.FileName);
             if(fileName.Substring(fileName.Length-4, 4) != ".cpp") {
                 ModelState.AddModelError("", "Wrong file extension.");
-                return View(subproject);
+                return View(model);
             }
 
             if (file.ContentLength > 0) {
@@ -161,8 +162,14 @@ namespace Mooshark2.Controllers
                 compiler.StandardInput.WriteLine("exit");
                 string output = compiler.StandardOutput.ReadToEnd();
                 compiler.WaitForExit(10000);
+                int compileTime = compiler.TotalProcessorTime.Milliseconds;
                 compiler.Close();
                 compiler.Dispose();
+
+                if(compileTime == 10000) {
+                    ModelState.AddModelError("", "Compile time error");
+                    return View(model);
+                }
 
                 if (System.IO.File.Exists(exeFilePath)) {
                     var processInfoExe = new ProcessStartInfo(exeFilePath, "");
@@ -189,14 +196,14 @@ namespace Mooshark2.Controllers
                         outputReader.Dispose();
 
                         string correctOutput = subproject.Output.ToString();
-                        //removing \n\r from the back of the input
+                        //removing \n\r from the back of the input so that it's comparable
                         if(programOutput.Length > 2) {
-                            string programOutputCorrect = programOutput.Remove(programOutput.Length - 2);
+                            string programOutputCorrected = programOutput.Remove(programOutput.Length - 2);
 
                             //Create ViewModel, to be sent to SubmissionDetails view
                             submission.Output = programOutput;
 
-                            if(string.Compare(programOutputCorrect, correctOutput) == 0) {
+                            if(string.Compare(programOutputCorrected, correctOutput) == 0) {
                                 submission.Accepted = true;
                                 submission.Grade = 10;
                             }

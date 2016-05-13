@@ -63,7 +63,7 @@ namespace Mooshark2.Services
                 }
                 int CID = model.CourseID.Value;
                 db.Projects.Add(model);
-                db.CourseProjects.Add(new CourseProject { CourseID = CID, ProjectID = model.ID });
+                db.CourseProjects.AddOrUpdate(new CourseProject { CourseID = CID, ProjectID = model.ID });
                 db.SaveChanges();
                 return true;
             }
@@ -162,16 +162,70 @@ namespace Mooshark2.Services
             return projectsFromCourse;
         }
 
-        public Submission getStudentsBestSubmission(int subId)
+
+        public List<Submission> getLastSubmissionForStudents(int subprojectID)
         {
-            Submission bestSubmission = (from x in db.Submissions
-                                         join y in db.StudentSubmissions on x.ID equals y.SubmissionID
-                                         join z in db.Users on y.UserID equals z.Id
-                                         where subId == x.ID && x.Accepted == true || subId == x.ID && x.Accepted == false
-                                         select x).SingleOrDefault();
-                   
-            return bestSubmission;
+
+            /*var groupByStudent = (from s in db.StudentSubmissions
+                                  group s.SubmissionID by s.UserID
+                                  into g
+                                  select new { UserID = g.Key, Submissions = g.Max(x => x.) });
+
+            var groupByStudent2 = db.StudentSubmissions.GroupBy(g => g.UserID)
+
+            var lastSubmission = (from submission in groupByStudent
+                                  orderby submission.Submissions descending
+                                  select submission).FirstOrDefault();
+
+
+            var lastSubmission2 = (from submission in db.Submissions
+                                  join submitstudent in db.StudentSubmissions on submission.ID equals submitstudent.SubmissionID
+                                  orderby submission.ID descending
+                                  select submission).FirstOrDefault();*/
+
+            /* var join = (from s in db.Submissions
+                         join x in db.StudentSubmissions on s.SubprojectID equals x.)
+
+             var lastSubmission = db.Submissions.Join(db.StudentSubmissions, y => y.SubprojectID == subprojectID).GroupBy(x => x.UserID).Select(s => s.OrderByDescending(i => i.SubmissionID).FirstOrDefault()));*/
+
+            var lastSubmission = (from x in db.Submissions
+                                  join y in db.StudentSubmissions on x.ID equals y.SubmissionID
+                                  join z in db.Users on y.UserID equals z.Id
+                                  where subprojectID == x.SubprojectID
+                                  orderby x.ID descending
+                                  select x) as List<Submission>;
+
+            return lastSubmission;
+
         }
+
+
+        public List<Submission> getStudentsBestSubmission(int subprojectID)
+        {
+            var sub = new List<Submission>();
+
+            foreach(var student in getStudentsThatHaveSubmitted(subprojectID)) {
+                    var bestSubmission = (from x in db.Submissions
+                                      join y in db.StudentSubmissions on x.ID equals y.SubmissionID
+                                      join z in db.Users on y.UserID equals z.Id
+                                      where (subprojectID == x.SubprojectID && x.Accepted == true)
+                                      select x);
+
+                if (bestSubmission.Any()) {
+                    sub.AddRange(bestSubmission);
+                }
+                else {
+                    sub.AddRange(getLastSubmissionForStudents(subprojectID));
+                }
+            }
+
+            return sub;
+        }
+
+
+
+
+
 
         public IEnumerable<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)
         {
