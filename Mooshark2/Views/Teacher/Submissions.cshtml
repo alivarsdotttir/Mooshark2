@@ -29,20 +29,20 @@
         @foreach (var last in Model.lastSubmissions)
         {
                 <tr>
-                    <td>Model.LastOrDefault(p => p.ID == last.SubmissionID).SubmissionNr</td>
+                    <td>@Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).SubmissionNr</td>
                     <td>@Html.ActionLink(Model.studentsThatHaveSubmitted.FirstOrDefault(p => p.Id == last.UserID).FullName, "SubmissionDetails")</td>
-                    <td>Model.bestSubmissions.LastOrDefault(p => p.ID == last.SubmissionID).Date</td>
+                    <td>@Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).Date</td>
                     <td>
-                        if (Model.bestSubmissions.FirstOrDefault(p => p.ID == last.SubmissionID).Accepted == true)
+                        @if (Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).Accepted == true)
                         {
                             @Html.ActionLink("Accepted", "Graded")
                         }
-                        if (Model.bestSubmissions.FirstOrDefault(p => p.ID == last.SubmissionID).Accepted == false)
+                        @if (Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).Accepted == false)
                         {
                             @Html.ActionLink("Wrong Answer", "Graded")
                         }
                     </td>
-                    <td>Model.bestSubmissions.LastOrDefault(p => p.ID == last.SubmissionID).Grade</td>
+                    <td>@Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).Grade</td>
                 </tr>
             
         }

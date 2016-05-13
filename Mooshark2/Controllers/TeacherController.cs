@@ -205,7 +205,7 @@ namespace Mooshark2.Controllers
         }
 
 
-        public ActionResult SubmissionDetails(int? id)
+        public ActionResult StudentSubmissions(int? id)
         {
             if (id != null) {
                 var submission = projectService.getSubmissionById(id.Value);
@@ -217,13 +217,13 @@ namespace Mooshark2.Controllers
 
 
         [HttpGet]
-        public ActionResult Graded(string UserId)
+        public ActionResult SubmissionDetail(string UserId)
         {
             if(UserId != null) {
                 ApplicationUser currentStudent = userService.getUserById(UserId);
                 var submissions = projectService.getStudentsSubmissionsForSubproject(UserId); // OMG
 
-                //TeacherGradeStudentViewModel model = new TeacherGradeStudentViewModel();
+                //TeacherSubmissionDetailStudentViewModel model = new TeacherSubmissionDetailStudentViewModel();
             }
 
             return View();
