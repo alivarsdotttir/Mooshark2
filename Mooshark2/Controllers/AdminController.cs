@@ -17,6 +17,7 @@ namespace Mooshark2.Controllers
     ///  The AdminController handels all comunications between the admin and the program.
     ///  It provides the admin with input by making tha right views shown on the right place on the screen.
     ///  It recives admin output and translates it in to the appropriate message to pass to the views needed.
+    ///  It inherits from BaseController.cs
     /// </summary>
 
     //[Authorize(Roles = "Admin")]

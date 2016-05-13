@@ -16,6 +16,7 @@ namespace Mooshark2.Controllers
     ///  The TeacherController handels all comunications between the teacher and the program.
     ///  It provides the teacher with input by making tha right views shown in the right place on the screen.
     ///  It recives the teacher output and translates it in to the appropriate message to pass to the views needed.
+    ///  It inherits from BaseController.cs
     /// </summary>
     
     public class TeacherController : BaseController
@@ -142,11 +143,9 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult EditProject(Project project)
         {
-            if(ModelState.IsValid)
-            {
-                db.Entry(project).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            if(ModelState.IsValid) {
+                Project proj = projectService.ServiceEditProject(project);
+                return RedirectToAction("ProjectDetails", new { id = proj.ID});
             }
 
             return View(project);
@@ -200,8 +199,10 @@ namespace Mooshark2.Controllers
                 var allSubmissionsForSubproject = projectService.getSubmissions(subprojectId.Value);
                 var subprojectName = projectService.getSubprojectById(subprojectId.Value);
 
+                var test = projectService.getStudentsThatHaveSubmitted(subprojectId.Value);
+
                 TeacherSubmissionsViewmodel model = new TeacherSubmissionsViewmodel(allSubmissionsForSubproject,
-                    studentsThatHaveSubmitted, bestSubmissions, studentsForSubmissions, subprojectName);
+                    studentsThatHaveSubmitted, bestSubmissions, studentsForSubmissions, subprojectName, test);
 
                 return View(model);
             }
@@ -246,6 +247,7 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult SubmissionDetail(TeacherSubmissionsDetailViewModel model)
         {
+            projectService.updateGrade(model.currentSubmission);
 
             return RedirectToAction("Submissions", model.currentSubproject.ID); 
         }
