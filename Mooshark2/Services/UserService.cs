@@ -10,13 +10,17 @@ using Microsoft.Owin.Security.Notifications;
 using Mooshark2.Models.DAL;
 using Mooshark2.Models.ViewModels.AdminViewModels;
 
-
+/// <summary>
+/// This class is a connection to the database. It mainly concerns the admins, teachers and students. 
+/// </summary>
+/// 
 namespace Mooshark2.Services
 {
     public class UserService
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        //Returns the roles that users can have, that is admin, teacher or student
         public List<SelectListItem> GetRoleList()
         {
             var allRoles = db.Roles.OrderBy(r => r.Name).ToList()
@@ -27,41 +31,18 @@ namespace Mooshark2.Services
             return allRoles;
         }
 
-
+        //Returns all existing teachers
         public List<SelectListItem> GetAllTeachers()
         {
-            /* var allTeachers = (from user in db.Users
-                                join rid in db.Roles on user.Id equals rid.Id 
-                                where rid.Name.ToString() == "Teacher"
-                                select user).ToList()
-                                .Select( x=> new SelectListItem {
-                                    Value = x.FullName.ToString(), Text = x.FullName
-                                }).ToList();*/
-            /*
-                        var allTeachers = db.Users.Where(x => x.Roles.Select(y => y.RoleId).Contains("6e2bd1f6 - 9e19 - 4202 - b90f - c9c9957b7ecc")).ToList().Select(x => new SelectListItem
-                        {
-                            Value = x.FullName.ToString(),
-                            Text = x.FullName
-                        }).ToList();
-            */
-            /*  var allUsers = db.Users.OrderBy(r => r.FullName).ToList().Where(x => User(x.Id, "Teacher"))
-                                              .Select(
-                                                  x => new SelectListItem { Value = x.FullName.ToString(), Text = x.FullName })
-                                              .ToList();*/
-
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var teacherRole = roleManager.FindByName("Teacher");
             var allTeachers = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList().Select(
                                                   x => new SelectListItem { Value = x.Id, Text = x.FullName })
                                               .ToList();
-
-            /*var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
-            var teacherRole = roleManager.FindByName("Teacher");
-            var allTeachers = db.Users.Where(x => x.Roles.Any(s => s.RoleId == teacherRole.Id)).ToList();*/
-
             return allTeachers;
         }
 
+        //Returns all teachers that manage a course
         public List<ApplicationUser> GetAllTeachersInCourse(int courseId)
         {
             var allTeachersInCourse = (from user in db.Users
@@ -73,6 +54,7 @@ namespace Mooshark2.Services
 
         }
 
+        //Returns all users in the database
         public List<ApplicationUser> GetAllUsers()
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
@@ -82,19 +64,8 @@ namespace Mooshark2.Services
             return allUsers;   
         }
 
-        /*public List<SelectListItem> GetAllTeachersNotInCourse(int courseId)
-        {
-            var allTeachersNotInCourse = (from user in db.Users
-                join c in db.CourseTeachers on user.Id equals c.UserID
-                where c.CourseID != courseId
-                select user).ToList().Select(
-                    x => new SelectListItem { Value = x.Id, Text = x.FullName })
-                .ToList();
-
-            return allTeachersNotInCourse;
-        }*/
-
-
+        //Returns all the teachers that are not currently managing a course.
+        //Required for adding teachers to a course
         public List<SelectListItem> GetAllTeachersNotInCourse(int courseId)
         {
             var allTeachersInCourse = GetAllTeachersInCourse(courseId).ToList();
@@ -109,15 +80,9 @@ namespace Mooshark2.Services
             return result;
         }
 
-
-        private bool User(string id, string v)
-        {
-            throw new NotImplementedException();
-        }
-
+        //Returns all existing students
         public List<ApplicationUser> GetAllStudents()
-        {
-            
+        {    
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
             var studentRole = roleManager.FindByName("Student");
             var allStudents = db.Users.Where(x => x.Roles.Any(s => s.RoleId == studentRole.Id)).ToList();
@@ -125,8 +90,8 @@ namespace Mooshark2.Services
 
             return allStudents;
         }
-
-
+            
+        //Returns all existing students, required for a select list
         public List<AdminSelectStudentViewModel> GetAllStudentsUsers()
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
@@ -140,7 +105,7 @@ namespace Mooshark2.Services
 
         }
 
-
+        //Returns a certain user, who'se ID matches the one passed in as a parameter
         public ApplicationUser getUserById(string userId)
         {
             ApplicationUser user = (from x in db.Users
@@ -150,6 +115,7 @@ namespace Mooshark2.Services
             return user;
         }
 
+        //Returns all the courses assigned to a certain course
         public List<ApplicationUser> GetAllStudentsInCourse(int courseId)
         {
             var allStudentsInCourse = (from user in db.Users
@@ -160,6 +126,7 @@ namespace Mooshark2.Services
             return allStudentsInCourse;
         }
 
+        //Returns all the students in course, required for a select list
         public List<SelectListItem> GetAllStudentsInCourseSelectList(int courseId)
         {
             var allStudentsInCourse = (from user in db.Users
@@ -170,6 +137,7 @@ namespace Mooshark2.Services
             return allStudentsInCourse;
         }
 
+        //Returns all the students currently not assigned to a certain course
         public List<AdminSelectStudentViewModel> GetAllStudentsNotInCourse(int courseId)
         {
             var allStudentsInCourse = GetAllStudentsInCourse(courseId);
@@ -181,7 +149,7 @@ namespace Mooshark2.Services
 
         }
 
-
+        //Updates an already existing user
         public ApplicationUser ServiceEditUser(ApplicationUser model)
         {
             ApplicationUser user = (from item in db.Users

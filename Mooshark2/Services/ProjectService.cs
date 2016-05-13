@@ -9,7 +9,10 @@ using System.Web.Razor.Parser.SyntaxTree;
 using Microsoft.Ajax.Utilities;
 using Mooshark2.Models.DAL;
 using Mooshark2.Models.ViewModels.TeacherViewModels;
-using Microsoft.Ajax.Utilities;
+
+/// <summary>
+/// This class is a connection to the database. It mainly concerns the projects, subprojects and submissions. 
+/// </summary>
 
 namespace Mooshark2.Services
 {
@@ -23,7 +26,7 @@ namespace Mooshark2.Services
             db = new ApplicationDbContext();
         }
 
-
+        //Returns the projects for which the deadline has not passed
         public IEnumerable<Project> getUpcomingProjects(IEnumerable<Course> studentCourses)
         {
             IEnumerable<Project> upcomingProjects = null;
@@ -51,7 +54,7 @@ namespace Mooshark2.Services
             return Enumerable.Empty<Project>();
         }
 
-
+        //Creates a new project in the database
         public bool ServiceCreateProject(Project model)
         {
             if (db.Projects.Any(x => x.Name == model.Name))
@@ -71,7 +74,7 @@ namespace Mooshark2.Services
             }
         }
 
-
+        //Returns all the projects for a certain course
         public IEnumerable<Project> getProjectsForCourse(int courseID)
         {
             IEnumerable<Project> projects = (from x in db.Projects
@@ -84,6 +87,7 @@ namespace Mooshark2.Services
             return Enumerable.Empty<Project>();
         }
 
+        //Returns a certain project, which has the same ID as the one passed in as a parameter
         public Project getProjectById(int projectID)
         {
             Project project = (from x in db.Projects
@@ -92,6 +96,7 @@ namespace Mooshark2.Services
             return project; 
         }
 
+        //Creates a subproject
         public bool ServiceCreateSubproject(Subproject model)
         {
             if (db.Subprojects.Any(x => x.Name == model.Name))
@@ -106,6 +111,7 @@ namespace Mooshark2.Services
             }
         }
 
+        //Returns all the subprojects linked to a project
        public List<Subproject> getSubprojects(int projectID)
         {
             List<Subproject> subprojects = (from x in db.Subprojects
@@ -115,6 +121,7 @@ namespace Mooshark2.Services
            return subprojects;
         }
 
+        //Returns all the submissions for a subproject
         public List<Submission> getSubmissions(int subprojectID)
         {
             List<Submission> submissions = (from x in db.Submissions
@@ -124,6 +131,7 @@ namespace Mooshark2.Services
                 return submissions;
         }
 
+        //Returns all the submissions for a certain user
         public List<Submission> getSubmissionsForStudents(int subprojectID, string userID)
         {
             List<Submission> submissions = (from x in db.Submissions
@@ -133,6 +141,7 @@ namespace Mooshark2.Services
             return submissions;
         }
 
+        //Returns a certain subrpoject, with the same ID as the one passed in as a parameter
         public Subproject getSubprojectById(int subprojectID)
         {
             Subproject subproject = (from x in db.Subprojects
@@ -142,6 +151,7 @@ namespace Mooshark2.Services
             return subproject;
         }
 
+        //Returns a certain submission, with the same ID as the one passed in as a parameter
         public Submission getSubmissionById(int submissionID)
         {
             Submission submission = (from x in db.Submissions
@@ -150,7 +160,7 @@ namespace Mooshark2.Services
             return submission;
         }
 
-
+        //Returns all the projects that have not been graded by the teacher
         public IEnumerable<Project> getUngradedProjects(string teacherID)
         {
             IEnumerable<Project> ungradedProjects = (from x in db.Projects
@@ -164,6 +174,7 @@ namespace Mooshark2.Services
             return Enumerable.Empty<Project>();
         }
 
+        //Returns all the projects linked to a course
         public IEnumerable<Project> getProjectsFromCourse(int courseID)
         {
             IEnumerable<Project> projectsFromCourse = (from x in db.Projects
@@ -172,31 +183,8 @@ namespace Mooshark2.Services
             return projectsFromCourse;
         }
 
-
-        public Submission getLastSubmissionForStudents(int subprojectID)
-        {
-
-            /*var groupByStudent = (from s in db.StudentSubmissions
-                                  group s.SubmissionID by s.UserID
-                                  into g
-                                  select new { UserID = g.Key, Submissions = g.Max(x => x.) });
-
-            var groupByStudent2 = db.StudentSubmissions.GroupBy(g => g.UserID)
-
-            var lastSubmission = (from submission in groupByStudent
-                                  orderby submission.Submissions descending
-                                  select submission).FirstOrDefault();
-
-
-            var lastSubmission2 = (from submission in db.Submissions
-                                  join submitstudent in db.StudentSubmissions on submission.ID equals submitstudent.SubmissionID
-                                  orderby submission.ID descending
-                                  select submission).FirstOrDefault();*/
-
-            /* var join = (from s in db.Submissions
-                         join x in db.StudentSubmissions on s.SubprojectID equals x.)
-
-             var lastSubmission = db.Submissions.Join(db.StudentSubmissions, y => y.SubprojectID == subprojectID).GroupBy(x => x.UserID).Select(s => s.OrderByDescending(i => i.SubmissionID).FirstOrDefault()));*/
+        //Returns all the last submission of a user
+        public Submission getLastSubmissionForStudents(int subprojectID) {         
 
             var lastSubmission = (from x in db.Submissions
                                   join y in db.StudentSubmissions on x.ID equals y.SubmissionID
@@ -209,7 +197,7 @@ namespace Mooshark2.Services
 
         }
 
-
+        //Returns the best submissions of all users who have submitted, that is, the most recent Accepted one, or the most recent non-Accepted one
         public List<Submission> getStudentsBestSubmission(int subprojectID)
         {
             var sub = new List<Submission>();
@@ -235,7 +223,7 @@ namespace Mooshark2.Services
             return sub;
         }
 
-
+        //Returns a list of the students that have made a submission
         public IEnumerable<ApplicationUser> getStudentsThatHaveSubmitted(int subprojectID)
         {
             var submittedStudents = (from x in db.Users
@@ -247,6 +235,7 @@ namespace Mooshark2.Services
             return submittedStudents;
         }
 
+        //Adds a new submission to the database
         public void createSubmission(Submission submission, ApplicationUser user)
         {
             if(submission != null && user != null) {
@@ -257,7 +246,7 @@ namespace Mooshark2.Services
             }
         }
 
-
+        //Updates the changes of a submission
         public void saveSubmissionChanges(int? submissionID)
         {
             Submission submission = getSubmissionById(submissionID.Value);
@@ -268,6 +257,7 @@ namespace Mooshark2.Services
             }
         }
 
+        //Returns the most recent submission by a student
         public Submission getMostRecentSubmission(ApplicationUser user, int subprojectID)
         {
             Submission submission = (from x in db.Submissions
@@ -278,6 +268,7 @@ namespace Mooshark2.Services
             return submission;
         }
 
+        //Returns a list of all the students who have submitted a certain subproject
         public IEnumerable<Submission> getStudentsSubmissionsForSubproject(string studentID)
         {
             IEnumerable<Submission> submissions = (from x in db.Users
@@ -285,7 +276,7 @@ namespace Mooshark2.Services
                                                    join z in db.Submissions on y.SubmissionID equals z.ID
                                                    where x.Id == studentID
                                                    orderby z.SubmissionNr descending
-                                                   select y.Submission) as IEnumerable<Submission>;  // OMG
+                                                   select y.Submission) as IEnumerable<Submission>;  
 
             if(submissions != null) {
                 return submissions;
@@ -294,14 +285,7 @@ namespace Mooshark2.Services
             return Enumerable.Empty<Submission>();
         }
 
-        public InputOutput getIOBySubprojectId(int subprojectId)
-        {
-            InputOutput io = (from x in db.InputOutputs
-                              where x.SubprojectID == subprojectId
-                              select x).FirstOrDefault();
-            return io; 
-        }
-
+        //Updates a subproject
         public Subproject ServiceEditSubproject(Subproject model)
         {
             Subproject subproject = (from item in db.Subprojects
@@ -317,7 +301,7 @@ namespace Mooshark2.Services
             return subproject;
         }
 
-
+        //Updates a project
         public Project ServiceEditProject(Project model)
         {
             Project project = (from item in db.Projects
@@ -333,6 +317,7 @@ namespace Mooshark2.Services
             return project;
         }
 
+        //Returns the creator of a submission
         public List<ApplicationUser> getStudentBySubmission(List<Submission> submissions)
         {
             List<ApplicationUser> users = new List<ApplicationUser>(); 
@@ -347,6 +332,7 @@ namespace Mooshark2.Services
             return users; 
         }
 
+        //Updates the grade of a subproject 
         public void updateGrade(Submission submission)
         {
             if(submission != null)
@@ -357,6 +343,7 @@ namespace Mooshark2.Services
             }
         }
 
+        //Returns the average grade for a project
         public double getGrade(int projectId, ApplicationUser student) {
             var subprojects = getSubprojects(projectId);
             var combinedPoints = 0; 

@@ -25,7 +25,8 @@ namespace Mooshark2.Controllers
 
     public class StudentController : BaseController
     {
-        
+        //Returns the Index view 
+        [HttpGet]
         public ActionResult Index()
         {
             string userId = User.Identity.GetUserId();
@@ -39,9 +40,12 @@ namespace Mooshark2.Controllers
         }
 
 
+        //Returns the Course view, a view for a course with the ID specified
+        [HttpGet]
         public ActionResult Course(int? id)
         {
             if(id != null) {
+
                 var course = courseService.getCourseById(id.Value); 
                 var projects = projectService.getProjectsForCourse(id.Value);
                 var teachers = courseService.getTeachersForCourse(id.Value);
@@ -54,7 +58,9 @@ namespace Mooshark2.Controllers
             return View("NotFound");
         }
 
-
+        
+        //Returns the ProjectDetails view, a view where the details of a project and its subprojects are displayed
+        [HttpGet]
         public ActionResult ProjectDetails(int? id)
         {
             if(id != null) {
@@ -81,7 +87,9 @@ namespace Mooshark2.Controllers
             return View("NotFound");
         }
 
-
+        
+        //Returns the Submit view, a view where the students can submit their solutions
+        [HttpGet]
         public ActionResult Submit(int? id)
         {
             if(id != null)
@@ -100,6 +108,8 @@ namespace Mooshark2.Controllers
             return View("NotFound");
         }
 
+        
+        //A function that compiles the code posted by the user
         [HttpPost]
         public ActionResult Submit(Subproject subproject, HttpPostedFileBase file)
         {   
@@ -116,19 +126,23 @@ namespace Mooshark2.Controllers
             List<ApplicationUser> students = userService.GetAllStudentsInCourse(project.CourseID.Value);
             ViewBag.Students = userService.GetAllStudentsInCourseSelectList(project.CourseID.Value);
 
+            //View Model for error check
             StudentSubmitViewModel model = new StudentSubmitViewModel(project, subproject, students);
-
+            
+            //Error check, empty submission
             if(file == null) {
                 ModelState.AddModelError("", "Empty submission, please choose a file.");
                 return View(model); 
             }
 
+            //Error check, wrong file extension
             var fileName = Path.GetFileName(file.FileName);
             if(fileName.Substring(fileName.Length-4, 4) != ".cpp") {
                 ModelState.AddModelError("", "Wrong file extension, file must be of type cpp.");
                 return View(model);
             }
 
+            //Checks if there is anything inside the file
             if (file.ContentLength > 0) {
                 int submissionNumber = 1;
                 var mostRecentSubmission = projectService.getMostRecentSubmission(user, subproject.ID);
@@ -136,25 +150,32 @@ namespace Mooshark2.Controllers
                     submissionNumber = mostRecentSubmission.SubmissionNr + 1;
                 }
                 
+                //Creates the name of the file path
                 var filePath = string.Format("~\\Submissions\\{0}\\{1}\\{2}\\{3}\\{4}", course.Name, project.Name, subproject.Name, user.UserName, "Submission" + submissionNumber);
+
+                //Creates the name of the the path where the submission will be stored, so filePath + name of file submitted
                 var path = Path.Combine(Server.MapPath(filePath), fileName);
                 
+                //Creates the file path
                 System.IO.Directory.CreateDirectory(Server.MapPath(filePath));
                 
+                //Creates the file itself
                 file.SaveAs(path);
-
+                
+                //Create the submission in the database
                 Submission submission = new Submission();
                 submission.Date = DateTime.Now;
-                //submission.Accepted = false;
                 submission.SubprojectID = subproject.ID;
                 submission.SubmissionNr = submissionNumber;
                 submission.FilePath = Server.MapPath(filePath);
                 submission.CppFileName = fileName;
                 submission.StudentId = userId;
-
+                
                 projectService.createSubmission(submission, user);
                 
+                //Creates the name of the exe file path
                 string exeFilePath = Server.MapPath(filePath) + "\\" + fileName.Remove(fileName.IndexOf(".")) + ".exe";
+                
                 //C++ compiler folder path
                 var compilerFolder = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\bin\\";
 
@@ -181,6 +202,7 @@ namespace Mooshark2.Controllers
                     return View(model);
                 }
 
+                //If the exe file exists, run the code 
                 if(System.IO.File.Exists(exeFilePath)) {
                     var processInfoExe = new ProcessStartInfo(exeFilePath, "");
                     processInfoExe.UseShellExecute = false;
@@ -193,8 +215,9 @@ namespace Mooshark2.Controllers
                         processExe.StartInfo = processInfoExe;
                         processExe.Start();
                         processExe.WaitForExit(300000);
-                            //It there is input, test it against code
-                            StreamWriter inputWriter = processExe.StandardInput;
+
+                        //It there is input, test it against code
+                        StreamWriter inputWriter = processExe.StandardInput;
                         if(subproject.Input != null) {
                             inputWriter.WriteLine(subproject.Input.ToString());
                         }
@@ -216,7 +239,8 @@ namespace Mooshark2.Controllers
 
                             //Create ViewModel, to be sent to SubmissionDetails view
                             submission.Output = programOutput;
-
+                            
+                            //Updates the grade and accepted of a submission
                             if(string.Compare(programOutputCorrected, correctOutput) == 0) {
                                 submission.Accepted = true;
                                 submission.Grade = 10;
@@ -227,9 +251,9 @@ namespace Mooshark2.Controllers
                             }
                         }
                     }
-                        projectService.saveSubmissionChanges(submission.ID);
+                    projectService.saveSubmissionChanges(submission.ID);
                             
-                       return RedirectToAction("SubmissionDetails", new { submissionID = submission.ID });
+                    return RedirectToAction("SubmissionDetails", new { submissionID = submission.ID });
                     }
                 }
             }
@@ -244,6 +268,7 @@ namespace Mooshark2.Controllers
         }
 
 
+        //Returns the SubmissionDetails view for a certain submission
         [HttpGet]
         public ActionResult SubmissionDetails(int? submissionID)
         {
@@ -251,7 +276,6 @@ namespace Mooshark2.Controllers
                 Submission submission = projectService.getSubmissionById(submissionID.Value);
                 int subprojectID = submission.SubprojectID;
                 Subproject subproject = projectService.getSubprojectById(subprojectID);
-                InputOutput inputOutput = projectService.getIOBySubprojectId(subprojectID);
                 int projectID = subproject.ProjectID.Value;
                 Project project = projectService.getProjectById(projectID);
                 int courseID = project.CourseID.Value;
