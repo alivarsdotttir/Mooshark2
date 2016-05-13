@@ -199,10 +199,8 @@ namespace Mooshark2.Controllers
                 var allSubmissionsForSubproject = projectService.getSubmissions(subprojectId.Value);
                 var subprojectName = projectService.getSubprojectById(subprojectId.Value);
 
-                var test = projectService.getStudentsThatHaveSubmitted(subprojectId.Value);
-
                 TeacherSubmissionsViewmodel model = new TeacherSubmissionsViewmodel(allSubmissionsForSubproject,
-                    studentsThatHaveSubmitted, bestSubmissions, studentsForSubmissions, subprojectName, test);
+                    studentsThatHaveSubmitted, bestSubmissions, studentsForSubmissions, subprojectName);
 
                 return View(model);
             }
@@ -245,11 +243,20 @@ namespace Mooshark2.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmissionDetail(TeacherSubmissionsDetailViewModel model)
+        public ActionResult SubmissionDetail(int subprojectId, Submission currSub)
         {
-            projectService.updateGrade(model.currentSubmission);
+            projectService.updateGrade(currSub);
 
-            return RedirectToAction("Submissions", model.currentSubproject.ID); 
+            return RedirectToAction("Submissions", subprojectId); 
+        }
+
+        public ActionResult Grades(int? projectId)
+        {
+            if(projectId != null)
+            {
+                
+            }
+            return View("NotFound"); 
         }
     }
 }

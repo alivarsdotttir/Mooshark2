@@ -4,12 +4,9 @@
 }
 <div class="container-fluid">
     <div class="row">
-        <div class="jumbotron">
-            <h2>Submission Details</h2>
+            <h1>Submission Details</h1>
             <h2>@Model.currentProject.Name</h2>
             <h3>@Model.subproject.Name</h3>
-        </div>
-
     </div>
 
     <div class="row page-header">
@@ -31,11 +28,11 @@
     <div class="row">
 
         @if(Model.submission.Accepted == true) {
-            <span class="label"><a href="https://youtu.be/P0zVPZBykSE?t=20s" id="accepted"><h2>ACCEPTED</h2></a></span>
+            <span class="label"><a href="https://youtu.be/P0zVPZBykSE?t=20s" class="accepted"><h2>ACCEPTED</h2></a></span>
         }
 
         @if(Model.submission.Accepted == false) {
-            <span class="label"><a href="https://youtu.be/LmW3H-EXYS0?t=20s" id="wrong-answer"><h3>Wrong answer</h3></a></span>
+            <span class="label"><a href="https://youtu.be/LmW3H-EXYS0?t=20s" class="wrong-answer"><h3>Wrong answer</h3></a></span>
         }
 
     </div>

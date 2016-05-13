@@ -3,19 +3,55 @@
     ViewBag.Title = "SubmissionDetail";
 }
 
-<h2>@Model.currentSubproject.Name</h2>
+<div class="container-fluid">
+    <div class="row">
+        <h1>Submission Details</h1>
+        <h2>@Model.currentSubproject.Name</h2>
+        <h3>@Model.currentStudent.FullName</h3>
+    </div>
 
-<p>Input: <br /> 
-    @Model.currentSubproject.Input</p>
+    <div class="row page-header">
+        <div class="well well-lg"><h4>Input:</h4>@Model.currentSubproject.Input</div>
+    </div>
 
-<p>Your output: <br />
-    @Model.currentSubproject.Output</p>
+    <div class="row ">
+        <div class="col-sm-6">
+            <h3>Your output:</h3>
+            <div class="well">@Model.currentSubmission.Output</div>
+        </div>
 
+        <div class="col-sm-6">
+            <h3>Expected output:</h3>
+            <div class="well">@Model.currentSubproject.Output</div>
+        </div>
+    </div>
 
-<p>Expected output: <br/>
-    @Model.currentSubproject.Output</p>
+    <div class="row">
 
-<form>
-    @Html.EditorFor(model => model.currentSubmission.Grade, new { htmlAttributes = new { @class = "form-control" } })
-    <input type="submit" name="Submit" id="Submit" value="Update Grade" class="btn btn-lg AdminButtons" />
-</form>
+        @if (Model.currentSubmission.Accepted == true)
+        {
+            <span class="label accepted"><h2>ACCEPTED</h2></span>
+        }
+
+        @if (Model.currentSubmission.Accepted == false)
+        {
+            <span class="label wrong-answer"><h3>Wrong answer</h3></span>
+        }
+
+        <div class="row pull-right">
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(x => x.currentSubproject.ID)
+                @Html.EditorFor(model => model.currentSubmission.Grade, new { htmlAttributes = new { @class = "form-control" } })
+                <div id="Adminbutt">
+                    <input type="submit" name="Submit" id="Submit" value="Update Grade" class="btn btn-lg AdminButtons" />
+                </div>
+            }
+        </div>
+
+    </div>
+
+    <div class="row">
+        @Html.ActionLink("Back to submissions", "Submissions", "Teacher", new { @class = "btn btn-default" })
+    </div>
+</div>

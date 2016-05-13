@@ -8,6 +8,9 @@ using Mooshark2.Models.DAL;
 
 namespace Mooshark2.Models.Entities
 {
+    /// <summary>
+    /// The class Course conteins all the informations that are needed in the database table Courses
+    /// </summary>
     public class CourseTeacher
     {
         public int ID { get; set; }

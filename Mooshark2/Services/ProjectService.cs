@@ -124,6 +124,14 @@ namespace Mooshark2.Services
                 return submissions;
         }
 
+        public List<Submission> getSubmissionsForStudents(int subprojectID, string userID)
+        {
+            List<Submission> submissions = (from x in db.Submissions
+                                            where subprojectID == x.SubprojectID && x.StudentId == userID
+                                            select x).ToList();
+
+            return submissions;
+        }
 
         public Subproject getSubprojectById(int subprojectID)
         {
@@ -347,6 +355,24 @@ namespace Mooshark2.Services
                 submissionToUpdate.Grade = submission.Grade;
                 db.SaveChanges(); 
             }
+        }
+
+        public double getGrade(int projectId, ApplicationUser student) {
+            var subprojects = getSubprojects(projectId);
+            var combinedPoints = 0; 
+
+            foreach(var subp in subprojects) {
+                var bestSubmission = (from x in db.Submissions
+                                      join y in db.StudentSubmissions on x.ID equals y.SubmissionID
+                                      where (subp.ID == x.SubprojectID && x.Accepted == true && student.Id == y.UserID)
+                                      orderby x.SubmissionNr descending
+                                      select x).FirstOrDefault();
+
+                combinedPoints += bestSubmission.Grade;
+            }
+            var grade = combinedPoints / subprojects.Count;
+
+            return grade;
         }
     }
 }

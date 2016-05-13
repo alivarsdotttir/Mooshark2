@@ -6,6 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mooshark2.Models.Entities
 {
+    /// <summary>
+    /// The class Subproject contains all the informations that are needed in the database table Subprojects
+    /// </summary>
     public class Subproject
     {
         public int ID { get; set; }

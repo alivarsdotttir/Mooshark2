@@ -7,17 +7,17 @@
 <h2>Submissions</h2>
 
 <div class="container-fluid">
+    <!-- SEARCH INPUT BOX FOR TABLE -->
     <div class="row">
-        <div class="col-xs-5"></div>
-        <div class="col-xs-3">
+        <div class="col-xs-10"></div>
+        <div class="col-xs-2">
             <div class="inner-addon right-addon pull-right">
                 <i class="glyphicon glyphicon-search"></i>
                 <input id="search" type="search"
                        class="form-control"
-                       placeholder="Search" />
+                       placeholder="Search"/>
             </div>
         </div>
-        <div class="col-xs-4"></div>
     </div>
 </div>
 <table class="table table-bordered table-striped" id="table">
@@ -34,42 +34,23 @@
     <tbody>
         @foreach (var last in Model.bestSubmissions)
         {
-           /* for (var i = 0; i < Model.usersForSubmissions.Count; i++)
-            {*/
-                <tr>
-                    <td>@last.SubmissionNr</td>
-                   <!-- <td>Html.ActionLink(Model.usersForSubmissions[i].FullName, "StudentSubmissions", new { studentId = Model.usersForSubmissions[i].Id, subprojectId = Model.currentSubproject.ID })</td>-->
-                    <td>@last.Date</td>
-                    <td>
-                        @if (last.Accepted == true)
-                        {
-                            @Html.ActionLink("Accepted", "SubmissionDetail", new { submissionID = last.ID })
-                        }
-                        @if (last.Accepted == false)
-                        {
-                            @Html.ActionLink("Wrong Answer", "SubmissionDetail", new { submissionID = last.ID })
-                        }
-                    </td>
-                    <td>@last.Grade</td>
-                </tr>
-            
-        }
-    </tbody>
-</table>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var student in Model.testStudentsThatHaveSubmitted)
-        {
             <tr>
-        <td>@student.FullName</td>
+                <td>@last.SubmissionNr</td>
+                <td>@Html.ActionLink(Model.studentsThatHaveSubmitted.FirstOrDefault(model => model.Id == last.StudentId).FullName , "StudentSubmissions", new { studentId = last.StudentId, subprojectId = Model.currentSubproject.ID })</td>
+                <td>@last.Date</td>
+                <td>
+                @if (last.Accepted == true){
+                    @Html.ActionLink("Accepted", "SubmissionDetail", new { submissionID = last.ID, studentId = last.StudentId }, new { @class = "accepted" })
+                }
+                @if (last.Accepted == false){
+                    @Html.ActionLink("Wrong Answer", "SubmissionDetail", new { submissionID = last.ID, studentId = last.StudentId }, new { @class = "wrong-answer" })
+                }
+                </td>
+                <td>@last.Grade</td>
             </tr>
         }
     </tbody>
 </table>
+
+
 

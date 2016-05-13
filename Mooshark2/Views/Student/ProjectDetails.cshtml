@@ -16,7 +16,6 @@
     </div>
     <div class="col-sm-4">
         <div id="clock"></div>
-        @*<div id="countdown">@(DateTime.Now - (Model.currentProject.Deadline))</div>*@
     </div>
 </div>
 
@@ -84,10 +83,10 @@
                                         <tr>
                                             <td>@Html.ActionLink(submission.SubmissionNr.ToString(), "SubmissionDetails", new { submissionID = submission.ID })</td>
                                             @if(submission.Accepted == true) {
-                                                <td>@Html.ActionLink("Accepted", "SubmissionDetails", new { submissionID = submission.ID })</td>
+                                                <td>@Html.ActionLink("Accepted", "SubmissionDetails", new { submissionID = submission.ID }, new { @class = "accepted" })</td>
                                             }
                                             @if(submission.Accepted == false) {
-                                                <td>@Html.ActionLink("Wrong answer", "SubmissionDetails", new { submissionID = submission.ID })</td>
+                                                <td>@Html.ActionLink("Wrong answer", "SubmissionDetails", new { submissionID = submission.ID }, new { @class = "wrong-answer" })</td>
                                             }
                                             <td>@submission.Date</td>
                                         </tr>
