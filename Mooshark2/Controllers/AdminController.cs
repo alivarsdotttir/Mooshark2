@@ -20,7 +20,7 @@ namespace Mooshark2.Controllers
     ///  It inherits from BaseController.cs
     /// </summary>
 
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController :  BaseController
     {
         public ActionResult Index()

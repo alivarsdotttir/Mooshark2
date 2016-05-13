@@ -18,7 +18,8 @@ namespace Mooshark2.Controllers
     ///  It recives the teacher output and translates it in to the appropriate message to pass to the views needed.
     ///  It inherits from BaseController.cs
     /// </summary>
-    
+
+    [Authorize(Roles = "Teacher")]
     public class TeacherController : BaseController
     {
         // GET: Teacher
@@ -242,7 +243,7 @@ namespace Mooshark2.Controllers
         {
             projectService.updateGrade(model);
 
-            return RedirectToAction("Submissions", model.currentSubproject.ID); 
+            return RedirectToAction("Submissions", new { subprojectId = model.currentSubproject.ID}); 
         }
 
 

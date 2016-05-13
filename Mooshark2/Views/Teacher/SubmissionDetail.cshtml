@@ -42,6 +42,7 @@
             <div class="form-group row pull-right">
 
                 @Html.HiddenFor(model => model.currentSubproject.ID)
+                @Html.HiddenFor(model => model.currentSubmission.ID)
                 @Html.EditorFor(model => model.currentSubmission.Grade, new { htmlAttributes = new { @class = "form-control" } })
                 <div id="Adminbutt">
                     <input type="submit" name="Submit" id="Submit" value="Update Grade" class="btn btn-lg AdminButtons" />
