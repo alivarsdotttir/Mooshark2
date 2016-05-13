@@ -19,6 +19,7 @@
         </div>
         <div class="col-xs-4"></div>
     </div>
+<<<<<<< HEAD
     <div class="row">
         <h3>Submissions for @Model.currentSubproject.Name</h3>
         <div class="table-scoll">
@@ -58,3 +59,40 @@
         </div>
     </div>
 </div>
+=======
+</div>
+<table class="table table-bordered table-striped" id="table">
+    <caption class="left">Submissions for @Model.currentSubproject.Name</caption>
+    <thead>
+    <tr>
+        <th>Submission number</th>
+        <th>Name</th>
+        <th>Date</th>   
+        <th>Accepted</th>
+        <th>Grade</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var last in Model.lastSubmissions)
+        {
+                <tr>
+                    <td>@Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).SubmissionNr</td>
+                    <td>@Html.ActionLink(Model.studentsThatHaveSubmitted.FirstOrDefault(p => p.Id == last.UserID).FullName, "SubmissionDetails")</td>
+                    <td>@Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).Date</td>
+                    <td>
+                        @if (Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).Accepted == true)
+                        {
+                            @Html.ActionLink("Accepted", "Graded")
+                        }
+                        @if (Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).Accepted == false)
+                        {
+                            @Html.ActionLink("Wrong Answer", "Graded")
+                        }
+                    </td>
+                    <td>@Model.allSubmissionsForSubproject.FirstOrDefault(p => p.ID == last.SubmissionID).Grade</td>
+                </tr>
+            
+        }
+    </tbody>
+</table>
+>>>>>>> 665bcbca37ce11a0222cac4ae32ead8a936358e8

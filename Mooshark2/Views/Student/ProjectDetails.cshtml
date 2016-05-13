@@ -15,7 +15,8 @@
         </div>
     </div>
     <div class="col-sm-4">
-        @*<div id="countdown">@((Model.currentProject.Deadline) - DateTime.Now)</div>*@
+        <div id="clock"></div>
+        @*<div id="countdown">@(DateTime.Now - (Model.currentProject.Deadline))</div>*@
     </div>
 </div>
 
@@ -23,9 +24,11 @@
 
 <div class="container">
     <ul class="nav nav-tabs">
-        @if(Model.subprojects != null && Model.subprojects.Count != 0) {
+        @if (Model.subprojects != null && Model.subprojects.Count != 0)
+        {
             <li><a href="#menu-1">Part 1</a></li>
-            for(int i = 2; i < Model.subprojects.Count + 1; i++) {
+            for (int i = 2; i < Model.subprojects.Count + 1; i++)
+            {
                 <li><a href="#menu-@i">Part @i</a></li>
             }
         }
@@ -103,19 +106,24 @@
     </div>
 
 
+    <script type="text/javascript">
+        $('#clock').countdown(" @Model.currentProject.Deadline ", function (event) {
+        $(this).html(event.strftime('%w weeks %d days %H:%M:%S'));
+      });
+    </script>
 
-    
 
-<script>
-    $(document)
-        .ready(function() {
-            $(".nav-tabs a")
-                .click(function() {
-                    $(this).tab('show');
-                });
-        });
-</script>
+    <script>
+        $(document)
+            .ready(function () {
+                $(".nav-tabs a")
+                    .click(function () {
+                        $(this).tab('show');
+                    });
+            });
+    </script>
 
-<div class="row top-buffer">
-    @Html.ActionLink("Back to Course", "Course", new { id = Model.currentProject.CourseID }, new { @class = "btn btn-default" })
+    <div class="row top-buffer">
+        @Html.ActionLink("Back to Course", "Course", new { id = Model.currentProject.CourseID }, new { @class = "btn btn-default" })
+    </div>
 </div>

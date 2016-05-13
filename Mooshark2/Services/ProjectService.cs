@@ -163,7 +163,7 @@ namespace Mooshark2.Services
         }
 
 
-        public IEnumerable<StudentSubmission> getLastSubmissionForStudents()
+        public List<Submission> getLastSubmissionForStudents(int subprojectID)
         {
 
             /*var groupByStudent = (from s in db.StudentSubmissions
@@ -183,28 +183,43 @@ namespace Mooshark2.Services
                                   orderby submission.ID descending
                                   select submission).FirstOrDefault();*/
 
-            var lastSubmission = db.StudentSubmissions.GroupBy(x => x.UserID).Select(s => s.OrderByDescending(i => i.SubmissionID).FirstOrDefault());
+            /* var join = (from s in db.Submissions
+                         join x in db.StudentSubmissions on s.SubprojectID equals x.)
+
+             var lastSubmission = db.Submissions.Join(db.StudentSubmissions, y => y.SubprojectID == subprojectID).GroupBy(x => x.UserID).Select(s => s.OrderByDescending(i => i.SubmissionID).FirstOrDefault()));*/
+
+            var lastSubmission = (from x in db.Submissions
+                                  join y in db.StudentSubmissions on x.ID equals y.SubmissionID
+                                  join z in db.Users on y.UserID equals z.Id
+                                  where subprojectID == x.SubprojectID
+                                  orderby x.ID descending
+                                  select x) as List<Submission>;
 
             return lastSubmission;
 
         }
 
 
-        public Submission getStudentsBestSubmission(int subprojectID)
+        public List<Submission> getStudentsBestSubmission(int subprojectID)
         {
-            Submission bestSubmission = (from x in db.Submissions
-                                         join y in db.StudentSubmissions on x.ID equals y.SubmissionID
-                                         join z in db.Users on y.UserID equals z.Id
-                                         where (subprojectID == x.ID && x.Accepted == true)
-                                         select x).SingleOrDefault();
+            var sub = new List<Submission>();
 
-            /*if(bestSubmission == null) {
-                var lastSubmission = getLastSubmissionForStudents();
-                return lastSubmission;
+            foreach(var student in getStudentsThatHaveSubmitted(subprojectID)) {
+                    var bestSubmission = (from x in db.Submissions
+                                      join y in db.StudentSubmissions on x.ID equals y.SubmissionID
+                                      join z in db.Users on y.UserID equals z.Id
+                                      where (subprojectID == x.SubprojectID && x.Accepted == true)
+                                      select x);
 
-            }*/
+                if (bestSubmission.Any()) {
+                    sub.AddRange(bestSubmission);
+                }
+                else {
+                    sub.AddRange(getLastSubmissionForStudents(subprojectID));
+                }
+            }
 
-            return bestSubmission;
+            return sub;
         }
 
 
