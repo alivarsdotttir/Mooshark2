@@ -13,6 +13,12 @@ using Mooshark2.Services;
 
 namespace Mooshark2.Controllers
 {
+    /// <summary>
+    ///  The AdminController handels all comunications between the admin and the program.
+    ///  It provides the admin with input by making tha right views shown on the right place on the screen.
+    ///  It recives admin output and translates it in to the appropriate message to pass to the views needed.
+    /// </summary>
+
     //[Authorize(Roles = "Admin")]
     public class AdminController :  BaseController
     {
