@@ -53,7 +53,13 @@ namespace Mooshark2.Controllers
         public ActionResult CreateCourse(AdminCourseViewModel model)
         {
             bool course = courseService.ServiceCreateCourse(model);
+            if(model.Teacher == null || model.Course == null) {
+                ModelState.AddModelError("", "You must fill in all the input fields");
 
+                ViewBag.Teachers = userService.GetAllTeachers();
+
+                return View();
+            }
             if (course) {
 
                 return RedirectToAction("Index");
@@ -73,7 +79,6 @@ namespace Mooshark2.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-
             if (id.HasValue) {
                 Course course = (from item in db.Courses
                                     where item.ID == id.Value
@@ -101,7 +106,6 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult Edit(AdminCourseViewModel model)
         {
-
             if (model.Course != null) {
                 courseService.ServiceEditCourse(model);
 
@@ -157,7 +161,6 @@ namespace Mooshark2.Controllers
         [HttpGet]
         public ActionResult EditUser(string id)
         {
-
             ApplicationUser user = db.Users.Find(id);
             return View(user);
         }
@@ -167,7 +170,6 @@ namespace Mooshark2.Controllers
         [HttpPost]
         public ActionResult EditUser(ApplicationUser user)
         {
-
             if(ModelState.IsValid) {
                 ApplicationUser u = userService.ServiceEditUser(user);
                 return RedirectToAction("UserEditList");

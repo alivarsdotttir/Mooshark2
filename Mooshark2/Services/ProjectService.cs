@@ -14,6 +14,7 @@ using Mooshark2.Models.ViewModels.TeacherViewModels;
 /// This class is a connection to the database. It mainly concerns the projects, subprojects and submissions. 
 /// </summary>
 
+
 namespace Mooshark2.Services
 {
     public class ProjectService

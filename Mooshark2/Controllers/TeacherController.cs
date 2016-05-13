@@ -13,7 +13,7 @@ using Mooshark2.Models.Entities;
 namespace Mooshark2.Controllers
 {
     /// <summary>
-    ///  The TeacherController handels all comunications between the teacher and the program.
+    ///  The TeacherController handles all communications between the teacher and the program.
     ///  It provides the teacher with input by making tha right views shown in the right place on the screen.
     ///  It recives the teacher output and translates it in to the appropriate message to pass to the views needed.
     ///  It inherits from BaseController.cs
@@ -22,7 +22,8 @@ namespace Mooshark2.Controllers
     [Authorize(Roles = "Teacher")]
     public class TeacherController : BaseController
     {
-        // GET: Teacher
+        // Returns the index view for teachers
+        [HttpGet]
         public ActionResult Index()
         {
             string userId = User.Identity.GetUserId();
@@ -35,6 +36,8 @@ namespace Mooshark2.Controllers
         }
 
 
+        // Returns the view for a single course
+        [HttpGet]
         public ActionResult Course(int? id)
         {
             if(id != null) {
@@ -50,7 +53,7 @@ namespace Mooshark2.Controllers
         }
 
    
-        //GET
+        // Returns the view for creating a project
         [HttpGet]
         public ActionResult CreateProject(int? id)
         {
@@ -65,7 +68,7 @@ namespace Mooshark2.Controllers
         }
 
 
-        //POST
+        // The post method for creating a project
         [HttpPost]
         public ActionResult CreateProject(Project model)
         {
@@ -89,7 +92,7 @@ namespace Mooshark2.Controllers
         }
 
 
-        //GET
+        // Returns the view for creating a subproject
         [HttpGet]
         public ActionResult CreateSubproject(int? id)
         {
@@ -104,7 +107,7 @@ namespace Mooshark2.Controllers
         }
 
 
-        //POST
+        // The post method for creating a subproject
         [HttpPost]
         public ActionResult CreateSubproject(Subproject model)
         {
@@ -128,7 +131,7 @@ namespace Mooshark2.Controllers
         }
 
 
-        //GET
+        // Returns the view for editing a project
         [HttpGet]
         public ActionResult EditProject(int? id)
         {
@@ -137,7 +140,7 @@ namespace Mooshark2.Controllers
         }
 
 
-        //POST
+        // The post method for editing a project
         [HttpPost]
         public ActionResult EditProject(Project project)
         {
@@ -150,7 +153,7 @@ namespace Mooshark2.Controllers
         }
 
 
-        //GET
+        // Returns the view for editing a subproject
         [HttpGet]
         public ActionResult EditSubproject(int? id)
         {
@@ -170,8 +173,8 @@ namespace Mooshark2.Controllers
 
             return View(subproject);
         }
-        
 
+        // The post method for editing a project
         public ActionResult ProjectDetails(int? id)
         {
             if(id != null) {
