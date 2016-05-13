@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using Mooshark2.Models.Entities;
 
+/// <summary>
+/// This class is a View model for the Index View in Student Controller
+/// </summary>
 
 namespace Mooshark2.Models.ViewModels.StudentViewModels
 {

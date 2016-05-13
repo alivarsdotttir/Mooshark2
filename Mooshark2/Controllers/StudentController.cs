@@ -203,16 +203,11 @@ namespace Mooshark2.Controllers
 
                         // We then read the output of the program for 30 seconds, or until end of the output:
                         StreamReader outputReader = processExe.StandardOutput;
-                        char [] inputChars = null;
-
-                        do {
-                           inputChars = new char[10001];
-                            outputReader.Read(inputChars, 0, 10000);
-                        } while(outputReader.Peek() >= 0);
                         
-                        string programOutput = new string(inputChars);
+                        string programOutput = outputReader.ReadToEnd();
                         outputReader.Close();
                         outputReader.Dispose();
+                        processExe.Dispose();
 
                         string correctOutput = subproject.Output.ToString();
 
@@ -232,14 +227,12 @@ namespace Mooshark2.Controllers
                                 submission.Grade = 0;
                             }
                         }
+                    }
                         projectService.saveSubmissionChanges(submission.ID);
-                            int runTime = processExe.TotalProcessorTime.Milliseconds;
-                            processExe.Dispose();
-
+                            
                        return RedirectToAction("SubmissionDetails", new { submissionID = submission.ID });
                     }
                 }
-            }
             }
             catch (Exception e)
             {

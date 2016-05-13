@@ -9,7 +9,7 @@ using Mooshark2.Models.DAL;
 namespace Mooshark2.Models.Entities
 {
     /// <summary>
-    /// The class Group conteins all the informations that are needed in the database table Groups
+    /// The class Group contains all the informations that are needed in the database table Groups
     /// </summary>
     public class Group
     {
