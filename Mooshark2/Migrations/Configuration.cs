@@ -78,7 +78,9 @@ namespace Mooshark2.Migrations
 
             //context.Projects.AddOrUpdate(new Project { Name = "The Answer", Deadline = new DateTime(2017, 3, 9), Graded = false, Visibility = true, CourseID = 1, IsGroupProject = false, Grade = 0, GroupSize = 0 });*/
             //context.Projects.AddOrUpdate(new Project { Name = "The Answer", Deadline = new DateTime(2017, 3, 9), Graded = false, Visibility = true, CourseID = 1, isGroupProject = false, Grade = 0, GroupSize = 0 });
-            //context.Projects.AddOrUpdate(new Project { Name = "TheAnswer", GroupSize = 1, Grade = 10, isGroupProject = false, CourseID = 1, Deadline = new DateTime(2016, 7, 6), Graded = false, Visibility = true });
+            //context.Projects.AddOrUpdate(new Project { Name = "Project 3", GroupSize = 1, Grade = 10, IsGroupProject = false, CourseID = 11, Deadline = new DateTime(2016, 7, 6), Graded = false, Visibility = true });
+
+            context.Subprojects.AddOrUpdate(new Subproject{ Name = "TheAnswer", Description = "Lorem Ipsum", Grade = 10, ProjectID = 10, Input = "2", Output ="The number you entered is 2", Weight = 100});
 
             /*
             context.Users.AddOrUpdate(new ApplicationUser

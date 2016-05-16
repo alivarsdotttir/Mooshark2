@@ -215,7 +215,7 @@ namespace Mooshark2.Controllers
                     using(var processExe = new Process()) {
                         processExe.StartInfo = processInfoExe;
                         processExe.Start();
-                        processExe.WaitForExit(300000);
+                        //processExe.WaitForExit(300000);
 
                         //It there is input, test it against code
                         StreamWriter inputWriter = processExe.StandardInput;

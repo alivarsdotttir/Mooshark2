@@ -10,6 +10,13 @@
         <div class="row">
             <div class="jumbotron">
                 <div>
+                    @Html.HiddenFor(x => x.subproject.ID)
+                    @Html.HiddenFor(x => x.subproject.Name)
+                    @Html.HiddenFor(x => x.subproject.Description)
+                    @Html.HiddenFor(x => x.subproject.ProjectID)
+                    @Html.HiddenFor(x => x.subproject.Weight)
+                    @Html.HiddenFor(x => x.subproject.Input)
+                    @Html.HiddenFor(x => x.subproject.Output)
                     <h2>Submit your solution</h2>
                     @Html.ValidationSummary()
                     <h5>The code should be in c++</h5>
@@ -21,7 +28,7 @@
             <!-- GROUP DROPDOWN LIST -->
             <!--This is not ready yet, but will be in the future :-)-->
             <div class="col-sm-10">
-                @if(Model.currentProject.IsGroupProject) {
+@*                @if(Model.currentProject.IsGroupProject) {
                     <h3>Group members</h3>
                     for(int i = 0; i < Model.currentProject.GroupSize - 1; i++) {
                          <div class="col-md-10">
@@ -29,6 +36,7 @@
                          </div>
                      }
                 }
+    *@
             </div>
             <div class="col-sm-2">
                 <input type="submit" name="Submit" id="Submit" value="Upload" class="btn btn-lg AdminButtons"/>
